@@ -82,12 +82,25 @@ export default function App() {
   const goTo = (kind) => {
     if (pending) return
     setPending(kind)
-
+  
     const url = kind === 'signup' ? SIGNUP_URL : SIGNIN_URL
+  
     window.setTimeout(() => {
       window.location.href = url
     }, 180)
   }
+
+  useEffect(() => {
+    const resetPending = () => setPending(null)
+  
+    window.addEventListener('pageshow', resetPending)
+    window.addEventListener('focus', resetPending)
+  
+    return () => {
+      window.removeEventListener('pageshow', resetPending)
+      window.removeEventListener('focus', resetPending)
+    }
+  }, [])
 
   return (
     <div className="landing-shell">
