@@ -1,5 +1,8 @@
 import './App.css'
 
+const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
+const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
+
 function App() {
   return (
     <div className="site-shell">
@@ -8,7 +11,7 @@ function App() {
         <nav className="nav">
           <a href="#features">Features</a>
           <a href="#why">Why Paddock</a>
-          <a href="https://app.getpaddock.com">Open app</a>
+          <a href={SIGNIN_URL}>Sign in</a>
         </nav>
       </header>
 
@@ -24,11 +27,11 @@ function App() {
             </p>
 
             <div className="hero-actions">
-              <a className="btn btn-primary" href="https://app.getpaddock.com">
-                Open app
+              <a className="btn btn-primary" href={SIGNUP_URL}>
+                Get started
               </a>
-              <a className="btn btn-secondary" href="mailto:hello@getpaddock.com">
-                Contact
+              <a className="btn btn-secondary" href={SIGNIN_URL}>
+                Sign in
               </a>
             </div>
 
@@ -59,7 +62,7 @@ function App() {
               </div>
               <div className="mini-card">
                 <span className="mini-label">Style</span>
-                <span className="mini-value">Calm & clear</span>
+                <span className="mini-value">Calm &amp; clear</span>
               </div>
             </div>
           </div>
@@ -131,8 +134,8 @@ function App() {
               Open the app and start building a clearer view of your financial future.
             </p>
             <div className="hero-actions">
-              <a className="btn btn-primary" href="https://app.getpaddock.com">
-                Open app
+              <a className="btn btn-primary" href={SIGNUP_URL}>
+                Create account
               </a>
             </div>
           </div>
@@ -142,7 +145,7 @@ function App() {
       <footer className="footer">
         <div>Paddock</div>
         <div className="footer-links">
-          <a href="https://app.getpaddock.com">App</a>
+          <a href={SIGNIN_URL}>Sign in</a>
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
           <a href="/security">Security</a>
