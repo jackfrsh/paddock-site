@@ -1,158 +1,455 @@
+import React, { useEffect, useRef, useState } from 'react'
 import './App.css'
+
+import homeShot from '/src/assets/landing/paddock-home.png'
+import outlookShot from '/src/assets/landing/paddock-outlook.png'
+import insightsShot from '/src/assets/landing/paddock-insights.png'
+import homeShotWebp from '/src/assets/landing/paddock-home.webp'
+import outlookShotWebp from '/src/assets/landing/paddock-outlook.webp'
+import insightsShotWebp from '/src/assets/landing/paddock-insights.webp'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
 
-function App() {
+function scrollToId(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+function SectionLabel({ children }) {
+  return <div className="section-label">{children}</div>
+}
+
+function useReveal() {
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = '1'
+          el.style.transform = 'translateY(0)'
+          obs.unobserve(el)
+        }
+      },
+      { threshold: 0.12 }
+    )
+
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return ref
+}
+
+function Reveal({ children, className = '' }) {
+  const ref = useReveal()
   return (
-    <div className="site-shell">
-      <header className="topbar">
-        <div className="brand">Paddock</div>
-        <nav className="nav">
-          <a href="#features">Features</a>
-          <a href="#why">Why Paddock</a>
-          <a href={SIGNIN_URL}>Sign in</a>
-        </nav>
+    <div
+      ref={ref}
+      className={className}
+      style={{
+        opacity: 0,
+        transform: 'translateY(16px)',
+        transition:
+          'opacity 0.6s cubic-bezier(0.2,0.8,0.2,1), transform 0.6s cubic-bezier(0.2,0.8,0.2,1)',
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+
+function Screenshot({ src, webp, alt, caption }) {
+  return (
+    <div className="shot-wrap">
+      <div className="shot-frame">
+        <picture>
+          {webp ? <source srcSet={webp} type="image/webp" /> : null}
+          <img src={src} alt={alt} className="shot-image" loading="lazy" />
+        </picture>
+      </div>
+      {caption ? <p className="shot-caption">{caption}</p> : null}
+    </div>
+  )
+}
+
+export default function App() {
+  const [pending, setPending] = useState(null)
+
+  const goTo = (kind) => {
+    if (pending) return
+    setPending(kind)
+
+    const url = kind === 'signup' ? SIGNUP_URL : SIGNIN_URL
+    window.setTimeout(() => {
+      window.location.href = url
+    }, 180)
+  }
+
+  return (
+    <div className="landing-shell">
+      <header className="landing-nav">
+        <div className="landing-nav-inner">
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="brand"
+          >
+            Paddock<span>.</span>
+          </button>
+
+          <nav className="nav-actions">
+            <button type="button" onClick={() => scrollToId('product')} className="nav-link subtle">
+              Product
+            </button>
+            <button type="button" onClick={() => scrollToId('pricing')} className="nav-link subtle">
+              Pricing
+            </button>
+
+            <div className="nav-divider" />
+
+            <button
+              type="button"
+              onClick={() => goTo('signin')}
+              className="nav-link"
+              disabled={!!pending}
+            >
+              {pending === 'signin' ? 'Opening…' : 'Sign in'}
+            </button>
+
+            <button
+              type="button"
+              onClick={() => goTo('signup')}
+              className="btn btn-primary nav-cta"
+              disabled={!!pending}
+            >
+              {pending === 'signup' ? 'Opening secure sign-in…' : 'Create account'}
+            </button>
+          </nav>
+        </div>
       </header>
 
-      <main>
-        <section className="hero">
+      <section className="hero-section">
+        <div className="container">
           <div className="hero-copy">
-            <p className="eyebrow">Wealth OS for high performers</p>
-            <h1>Know your number. Build your future.</h1>
-            <p className="subcopy">
-              A calm, premium net worth tracker for people who want clarity over chaos.
-              Track your wealth across accounts and currencies, understand progress, and
-              project your path forward.
+            <div className="hero-kicker">Personal wealth dashboard</div>
+
+            <h1>
+              Know your number.
+              <br />
+              Build your future.
+            </h1>
+
+            <p className="hero-sub">
+              A calm, premium net worth tracker for people building serious wealth. Track
+              progress across accounts and currencies, then plan your long-term future with
+              clarity.
+            </p>
+
+            <p className="hero-meta">
+              Multi-currency net worth tracking with visible assumptions, long-term
+              projections, and a cleaner view of the path ahead.
             </p>
 
             <div className="hero-actions">
-              <a className="btn btn-primary" href={SIGNUP_URL}>
-                Get started
-              </a>
-              <a className="btn btn-secondary" href={SIGNIN_URL}>
-                Sign in
-              </a>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => goTo('signup')}
+                disabled={!!pending}
+              >
+                {pending === 'signup' ? 'Opening secure sign-in…' : 'Get started'}
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => goTo('signin')}
+                disabled={!!pending}
+              >
+                {pending === 'signin' ? 'Opening…' : 'Sign in'}
+              </button>
             </div>
 
-            <p className="microcopy">
-              No ads. No bank-linking dependency. Just a private, intentional wealth dashboard.
+            <p className="hero-foot">
+              Free to start • No credit card required • Setup takes under 2 minutes
             </p>
-          </div>
 
-          <div className="hero-panel">
-            <div className="stat-card">
-              <span className="stat-label">Net worth</span>
-              <span className="stat-value">£248,400</span>
-              <span className="stat-delta positive">+£3,240 this month</span>
-            </div>
-
-            <div className="mini-grid">
-              <div className="mini-card">
-                <span className="mini-label">Projection</span>
-                <span className="mini-value">On track</span>
-              </div>
-              <div className="mini-card">
-                <span className="mini-label">Base currency</span>
-                <span className="mini-value">GBP</span>
-              </div>
-              <div className="mini-card">
-                <span className="mini-label">Accounts</span>
-                <span className="mini-value">Multi-account</span>
-              </div>
-              <div className="mini-card">
-                <span className="mini-label">Style</span>
-                <span className="mini-value">Calm &amp; clear</span>
-              </div>
+            <div className="hero-tags">
+              <span>Multi-currency portfolios</span>
+              <span>Snapshots</span>
+              <span>Manual input</span>
+              <span>No ads</span>
+              <span>No bank linking</span>
+              <span>Private by design</span>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section id="features" className="section">
-          <div className="section-heading">
-            <p className="section-eyebrow">Features</p>
-            <h2>Built for thoughtful wealth building</h2>
+      <section className="container section-tight">
+        <Reveal>
+        <Screenshot
+  src={homeShot}
+  webp={homeShotWebp}
+  alt="Paddock dashboard showing net worth, milestones and plan progress"
+  caption="Net worth dashboard with milestones, trajectory and plan progress."
+/>
+        </Reveal>
+      </section>
+
+      <section id="product" className="container section">
+        <Reveal>
+          <SectionLabel>Product</SectionLabel>
+          <h2>Everything that matters, in one place.</h2>
+          <p className="section-copy">
+            Built for clarity: one long-term goal, visible assumptions, and a dashboard
+            you’ll actually check.
+          </p>
+
+          <div className="split-columns">
+            <div>
+              <h3>One target. Always visible.</h3>
+              <div className="line" />
+              <p>
+                A single long-term goal anchors the model. Your projection evolves as your
+                net worth and contributions change.
+              </p>
+            </div>
+
+            <div>
+              <h3>Multi-currency portfolios.</h3>
+              <div className="line" />
+              <p>
+                Track ISAs, SIPPs, cash, property and more across currencies with a clear
+                base-currency view.
+              </p>
+            </div>
+
+            <div>
+              <h3>Assumptions in plain sight.</h3>
+              <div className="line" />
+              <p>
+                Contribution, return and time horizon sit next to the model — not buried in
+                menus or hidden settings.
+              </p>
+            </div>
           </div>
+        </Reveal>
+      </section>
 
-          <div className="cards three-up">
-            <article className="feature-card">
-              <h3>Track your full net worth</h3>
-              <p>
-                See investments, cash, property and liabilities in one place with a
-                clean, premium dashboard.
-              </p>
-            </article>
-
-            <article className="feature-card">
-              <h3>Multi-currency support</h3>
-              <p>
-                Monitor wealth across currencies with a clear base-currency view that
-                keeps the big picture readable.
-              </p>
-            </article>
-
-            <article className="feature-card">
-              <h3>Long-term projections</h3>
-              <p>
-                Model the road ahead with manual assumptions, contribution planning and
-                inflation-aware thinking.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section id="why" className="section">
-          <div className="section-heading">
-            <p className="section-eyebrow">Why Paddock</p>
-            <h2>Private by design. Intentional by default.</h2>
-          </div>
-
-          <div className="cards two-up">
-            <article className="feature-card">
-              <h3>Less noise, more clarity</h3>
-              <p>
-                Paddock is designed to feel calm and premium, not cluttered and
-                overwhelming.
-              </p>
-            </article>
-
-            <article className="feature-card">
-              <h3>Built for real progress</h3>
-              <p>
-                The goal is not just to show balances. It is to help you understand
-                momentum and make better long-term decisions.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section className="cta">
-          <div className="cta-card">
-            <p className="section-eyebrow">Start now</p>
-            <h2>A better way to track wealth.</h2>
-            <p>
-              Open the app and start building a clearer view of your financial future.
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>Projection</SectionLabel>
+            <h2>See where your wealth is heading.</h2>
+            <p className="section-copy">
+              A long-horizon model that shows both the gap and the path — so your progress
+              is easier to understand and easier to act on.
             </p>
-            <div className="hero-actions">
-              <a className="btn btn-primary" href={SIGNUP_URL}>
-                Create account
+          </Reveal>
+
+          <Reveal className="section-top-gap">
+          <Screenshot
+  src={outlookShot}
+  webp={outlookShotWebp}
+  alt="Paddock outlook view showing long-term wealth projection"
+  caption="Long-term projection with visible assumptions and trajectory."
+/>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-border">
+        <div className="container section two-col">
+          <Reveal>
+            <SectionLabel>Scenarios</SectionLabel>
+            <h2>See the impact before you commit.</h2>
+            <p className="section-copy narrow">
+              Adjust contributions, compare timelines, and understand the trade-offs before
+              you make the next move.
+            </p>
+
+            <div className="pill-links">
+              <a href="/guides/long-term-wealth-projection" className="pill-link">
+                Long-term projections
+              </a>
+              <a href="/guides/inflation-adjusted-net-worth" className="pill-link">
+                Inflation-adjusted views
               </a>
             </div>
-          </div>
-        </section>
-      </main>
+          </Reveal>
 
-      <footer className="footer">
-        <div>Paddock</div>
-        <div className="footer-links">
-          <a href={SIGNIN_URL}>Sign in</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
-          <a href="/security">Security</a>
+          <Reveal>
+          <Screenshot
+  src={insightsShot}
+  webp={insightsShotWebp}
+  alt="Paddock insights and scenario modelling view"
+  caption="Scenario modelling and deeper planning views."
+/>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>Trust</SectionLabel>
+            <h2>Private by default.</h2>
+            <p className="section-copy">
+              No ads. No trackers. No bank linking. Just a deliberate, premium space to
+              understand and build wealth.
+            </p>
+
+            <div className="trust-grid">
+              <div>
+                <h3>No ads. No ad tracking.</h3>
+                <p>The product is designed to stay focused, private and free from ad clutter.</p>
+              </div>
+              <div>
+                <h3>Secure sign-in.</h3>
+                <p>Password reset and account access are handled through Supabase Auth.</p>
+              </div>
+              <div>
+                <h3>Stripe billing.</h3>
+                <p>Subscriptions are managed securely, with a clean upgrade path when needed.</p>
+              </div>
+            </div>
+
+            <div className="pill-links section-top-gap-sm">
+              <a href="/terms" className="pill-link">Terms</a>
+              <a href="/privacy" className="pill-link">Privacy</a>
+              <a href="/security" className="pill-link">Security</a>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section id="pricing" className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>Pricing</SectionLabel>
+            <h2>Simple.</h2>
+            <p className="section-copy">
+              Start with structured tracking. Upgrade when you’re ready to plan decades ahead.
+            </p>
+          </Reveal>
+
+          <Reveal className="pricing-grid">
+            <div className="price-card">
+              <div className="price-tier">Free</div>
+              <div className="price-value">£0</div>
+              <p className="price-copy">Structured wealth tracking</p>
+
+              <div className="price-list">
+                <p>Net worth dashboard</p>
+                <p>Snapshots + milestones</p>
+                <p>Multi-currency accounts</p>
+                <p>Daily FX checking</p>
+                <p>Contribution modelling</p>
+                <p>1-year projection</p>
+                <p>Up to 3 accounts</p>
+              </div>
+
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => goTo('signup')}
+                disabled={!!pending}
+              >
+                {pending === 'signup' ? 'Opening secure sign-in…' : 'Create account'}
+              </button>
+            </div>
+
+            <div className="price-card price-card-featured">
+              <div className="price-toprow">
+                <div className="price-tier feature">Pro</div>
+                <div className="badge">Recommended</div>
+              </div>
+
+              <div className="price-row">
+                <span className="price-value">£6</span>
+                <span className="price-suffix">/month</span>
+              </div>
+
+              <p className="price-copy">
+                For serious wealth planning — longer horizons, deeper modelling, cleaner decisions.
+              </p>
+
+              <div className="price-list">
+                <p>Unlimited accounts</p>
+                <p>5–40 year projections</p>
+                <p>Trajectory modelling</p>
+                <p>Inflation-adjusted views</p>
+                <p>One-off deposit modelling</p>
+                <p>Required contribution optimiser</p>
+                <p>Deeper insights</p>
+              </div>
+
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => goTo('signup')}
+                disabled={!!pending}
+              >
+                {pending === 'signup' ? 'Opening secure sign-in…' : 'Start free trial'}
+              </button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-border">
+        <div className="container final-cta">
+          <Reveal>
+            <h2>Wealth isn’t built by accident.</h2>
+            <p className="section-copy center narrow-center">
+              It’s built with clarity, consistency and time. Paddock gives you a calmer way
+              to see the numbers and keep moving.
+            </p>
+
+            <div className="hero-actions center">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => goTo('signup')}
+                disabled={!!pending}
+              >
+                {pending === 'signup' ? 'Opening secure sign-in…' : 'Create account'}
+              </button>
+
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => goTo('signin')}
+                disabled={!!pending}
+              >
+                {pending === 'signin' ? 'Opening…' : 'Sign in'}
+              </button>
+            </div>
+
+            <p className="hero-foot">Free to start • No credit card required</p>
+          </Reveal>
+        </div>
+      </section>
+
+      <footer className="landing-footer">
+        <div className="landing-footer-inner">
+          <div className="footer-brand">
+            Paddock<span>.</span>
+          </div>
+
+          <div className="footer-links">
+            <a href="/terms">Terms</a>
+            <a href="/privacy">Privacy</a>
+            <a href="/security">Security</a>
+            <span>© 2026</span>
+          </div>
         </div>
       </footer>
     </div>
   )
 }
-
-export default App
