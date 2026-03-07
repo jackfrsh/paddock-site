@@ -118,6 +118,12 @@ export default function App() {
     }, 180)
   }
 
+  const navigateTo = (path) => {
+    window.history.pushState({}, '', path)
+    setRoute(getRoute())
+    window.scrollTo(0, 0)
+  }
+
   useEffect(() => {
     const resetPending = () => setPending(null)
 
@@ -144,6 +150,7 @@ export default function App() {
   if (route === 'terms') return <Terms />
 
   return (
+
     <div className="landing-shell">
       <header className="landing-nav">
         <div className="landing-nav-inner">
