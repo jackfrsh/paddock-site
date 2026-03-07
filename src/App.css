@@ -25,7 +25,7 @@ body,
 }
 
 body {
-  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--text);
   background:
     radial-gradient(1200px 700px at 15% 0%, rgba(75, 121, 168, 0.16), transparent 55%),
@@ -231,7 +231,11 @@ h3 {
   padding: 0 20px;
   border-radius: 18px;
   font-weight: 600;
-  transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    opacity 0.18s ease;
   cursor: pointer;
 }
 
@@ -317,72 +321,6 @@ h3 {
   height: auto;
 }
 
-.shot-topbar {
-  display: flex;
-  gap: 8px;
-  padding: 16px 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.shot-topbar span {
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.14);
-}
-
-.shot-body {
-  padding: 24px;
-}
-
-.shot-hero-card,
-.price-card,
-.pill-link,
-.trust-grid > div {
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.shot-hero-card {
-  border-radius: 24px;
-  padding: 24px;
-  margin-bottom: 16px;
-}
-
-.shot-label {
-  color: var(--muted);
-  font-size: 0.92rem;
-}
-
-.shot-value {
-  margin-top: 8px;
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-}
-
-.shot-delta {
-  margin-top: 10px;
-  color: #56b488;
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.shot-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
-.shot-mini {
-  border-radius: 18px;
-  padding: 18px;
-  border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.02);
-  color: var(--text-2);
-}
-
 .shot-caption {
   margin: 16px 0 0;
   color: rgba(241, 242, 243, 0.3);
@@ -436,6 +374,8 @@ h3 {
   padding: 0 16px;
   border-radius: 18px;
   color: var(--text);
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .pill-link:hover {
@@ -449,6 +389,8 @@ h3 {
 .trust-grid > div {
   border-radius: 24px;
   padding: 22px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .pricing-grid {
@@ -459,14 +401,19 @@ h3 {
   border-radius: 28px;
   padding: 28px;
   box-shadow: var(--shadow);
+  background: linear-gradient(145deg, #1e232b 0%, #1d2128 45%, #191d24 100%);
+  border: 1px solid var(--border);
 }
 
 .price-card-featured {
+  background: linear-gradient(145deg, #202630 0%, #1d2128 48%, #191d24 100%);
   border-color: rgba(75, 121, 168, 0.22);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 1px rgba(75, 121, 168, 0.06);
 }
 
-.price-toprow,
-.price-row {
+.price-toprow {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -500,19 +447,28 @@ h3 {
   letter-spacing: -0.04em;
 }
 
-.price-row .price-value {
+.price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  gap: 6px;
   margin-top: 14px;
+}
+
+.price-row .price-value {
+  margin-top: 0;
 }
 
 .price-suffix {
   color: rgba(241, 242, 243, 0.32);
   font-size: 0.9rem;
   font-weight: 600;
+  line-height: 1;
 }
 
 .price-copy {
   margin: 10px 0 0;
-  color: rgba(241, 242, 243, 0.36);
+  color: rgba(241, 242, 243, 0.4);
   line-height: 1.6;
 }
 
@@ -520,6 +476,12 @@ h3 {
   display: grid;
   gap: 8px;
   margin: 22px 0 28px;
+}
+
+.price-list p {
+  margin: 0;
+  color: rgba(241, 242, 243, 0.42);
+  line-height: 1.6;
 }
 
 .final-cta {
@@ -573,7 +535,204 @@ h3 {
     width: 100%;
   }
 
-  .shot-grid {
-    grid-template-columns: 1fr;
+  .nav-cta {
+    min-height: 36px;
+    padding-inline: 13px;
+    border-radius: 14px;
+    font-size: 0.92rem;
+    width: auto;
   }
+
+  .nav-guides {
+    display: none;
+  }
+}
+
+.guide-shell {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.guide-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(23, 26, 31, 0.72);
+  backdrop-filter: blur(18px);
+}
+
+.guide-topbar-inner {
+  width: min(760px, calc(100% - 40px));
+  margin: 0 auto;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.guide-topbar-spacer,
+.guide-close {
+  width: 40px;
+  height: 40px;
+}
+
+.guide-topbar-spacer {
+  flex: 0 0 40px;
+}
+
+.guide-topbar-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.guide-close {
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.guide-container {
+  width: min(760px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+.guide-card {
+  border-radius: 28px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  background: linear-gradient(145deg, #1e232b 0%, #1d2128 45%, #191d24 100%);
+  box-shadow: var(--shadow);
+}
+
+.guide-kicker {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(241, 242, 243, 0.42);
+}
+
+.guide-h1 {
+  margin: 14px 0 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.guide-h2 {
+  margin-top: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.guide-lead,
+.guide-p {
+  color: rgba(241, 242, 243, 0.6);
+  line-height: 1.7;
+}
+
+.guide-lead {
+  margin-top: 16px;
+  font-size: 1rem;
+}
+
+.guide-p {
+  margin-top: 12px;
+  font-size: 0.95rem;
+}
+
+.guide-divider {
+  height: 1px;
+  margin: 28px 0;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.guide-links {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.guide-link-card,
+.guide-done {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.guide-link-card {
+  justify-content: flex-start;
+}
+
+.guide-footer-action {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.guide-callout {
+  margin-top: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(75, 121, 168, 0.18);
+  background: rgba(75, 121, 168, 0.08);
+  padding: 18px 20px;
+}
+
+.guide-callout-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(241, 242, 243, 0.84);
+}
+
+.guide-protip {
+  margin-top: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 18px 20px;
+}
+
+.guide-protip-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(241, 242, 243, 0.36);
+}
+
+.guide-protip-text {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(241, 242, 243, 0.82);
+}
+
+.footer-links button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.pill-link {
+  appearance: none;
+  font: inherit;
+  cursor: pointer;
 }
