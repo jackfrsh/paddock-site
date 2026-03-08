@@ -15,105 +15,14 @@ import InflationAdjusted from './guides/InflationAdjusted'
 import Privacy from './pages/Privacy'
 import Security from './pages/Security'
 import Terms from './pages/Terms'
+import NetWorthTracker from './pages/NetWorthTracker'
+import TrackISAsPensionsSavings from './pages/TrackISAsPensionsSavings'
+import SpreadsheetAlternative from './pages/SpreadsheetAlternative'
+import HowToTrackNetWorth from './pages/HowToTrackNetWorth'
+import { PAGE_META } from './meta'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
-
-const PAGE_META = {
-  landing: {
-    title: 'Paddock — Personal Wealth Dashboard',
-    description: 'Track net worth, understand progress, and model your long-term future with multi-currency tracking, visible assumptions, and projections that show the path ahead.',
-    canonical: 'https://getpaddock.com/',
-    ogType: 'website',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      'name': 'Paddock',
-      'url': 'https://getpaddock.com',
-      'description': 'Personal wealth dashboard with multi-currency net worth tracking, long-term projections, and visible assumptions.',
-    },
-  },
-  guides_index: {
-    title: 'Guides — Wealth Tracking & Planning | Paddock',
-    description: 'Clear, practical guides on long-term wealth projections, multi-currency net worth tracking, and inflation-adjusted planning.',
-    canonical: 'https://getpaddock.com/guides',
-    ogType: 'website',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'CollectionPage',
-      'name': 'Paddock Guides',
-      'url': 'https://getpaddock.com/guides',
-      'description': 'Clear, practical guides on long-term wealth projections, multi-currency net worth tracking, and inflation-adjusted planning.',
-      'isPartOf': { '@type': 'WebSite', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
-    },
-  },
-  guide_multi_currency: {
-    title: 'Multi-Currency Net Worth Tracking Explained | Paddock',
-    description: 'How multi-currency net worth tracking works, why single-currency totals mislead, and how to keep your wealth dashboard accurate across GBP, USD, and EUR.',
-    canonical: 'https://getpaddock.com/guides/multi-currency-net-worth-tracker',
-    ogType: 'article',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      'headline': 'Multi-Currency Net Worth Tracking Explained',
-      'description': 'How multi-currency net worth tracking works, why single-currency totals mislead, and how to keep your wealth dashboard accurate across GBP, USD, and EUR.',
-      'url': 'https://getpaddock.com/guides/multi-currency-net-worth-tracker',
-      'inLanguage': 'en',
-      'isPartOf': { '@type': 'WebSite', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
-      'publisher': { '@type': 'Organization', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
-    },
-  },
-  guide_long_term_projection: {
-    title: 'How Long-Term Wealth Projections Work | Paddock',
-    description: 'How long-term wealth projections work, what drives them, and how to use compound growth and contribution modelling to plan 5–40 years ahead.',
-    canonical: 'https://getpaddock.com/guides/long-term-wealth-projection',
-    ogType: 'article',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      'headline': 'How Long-Term Wealth Projections Actually Work',
-      'description': 'How long-term wealth projections work, what drives them, and how to use compound growth and contribution modelling to plan 5–40 years ahead.',
-      'url': 'https://getpaddock.com/guides/long-term-wealth-projection',
-      'inLanguage': 'en',
-      'isPartOf': { '@type': 'WebSite', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
-      'publisher': { '@type': 'Organization', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
-    },
-  },
-  guide_inflation_adjusted: {
-    title: 'Inflation-Adjusted Net Worth: Real vs Nominal | Paddock',
-    description: 'Why inflation-adjusted net worth matters for long-term planning, with worked examples showing the difference between nominal and real-terms projections.',
-    canonical: 'https://getpaddock.com/guides/inflation-adjusted-net-worth',
-    ogType: 'article',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      'headline': 'Inflation-Adjusted Net Worth: Why Real Terms Matter',
-      'description': 'Why inflation-adjusted net worth matters for long-term planning, with worked examples showing the difference between nominal and real-terms projections.',
-      'url': 'https://getpaddock.com/guides/inflation-adjusted-net-worth',
-      'inLanguage': 'en',
-      'isPartOf': { '@type': 'WebSite', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
-      'publisher': { '@type': 'Organization', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
-    },
-  },
-  privacy: {
-    title: 'Privacy | Paddock',
-    description: 'How Paddock handles your data: no ads, no bank linking, no tracking. Privacy built into the product.',
-    canonical: 'https://getpaddock.com/privacy',
-    ogType: 'website',
-  },
-  security: {
-    title: 'Security | Paddock',
-    description: 'How Paddock keeps your data secure: industry-standard authentication, Stripe billing, encrypted connections.',
-    canonical: 'https://getpaddock.com/security',
-    ogType: 'website',
-  },
-  terms: {
-    title: 'Terms of Use | Paddock',
-    description: 'Terms of use for Paddock, the personal wealth dashboard.',
-    canonical: 'https://getpaddock.com/terms',
-    ogType: 'website',
-  },
-}
 
 function getRoute() {
   const path = (window.location.pathname || '/').toLowerCase()
@@ -126,6 +35,11 @@ function getRoute() {
   if (path.startsWith('/privacy')) return 'privacy'
   if (path.startsWith('/security')) return 'security'
   if (path.startsWith('/terms')) return 'terms'
+
+  if (path.startsWith('/net-worth-tracker')) return 'net_worth_tracker'
+  if (path.startsWith('/track-isas-pensions-savings')) return 'track_isas_pensions_savings'
+  if (path.startsWith('/spreadsheet-alternative-net-worth-tracking')) return 'spreadsheet_alternative'
+  if (path.startsWith('/how-to-track-your-net-worth')) return 'how_to_track_net_worth'
 
   return 'landing'
 }
@@ -244,7 +158,6 @@ export default function App() {
     setMeta('meta[name="twitter:title"]', 'content', meta.title)
     setMeta('meta[name="twitter:description"]', 'content', meta.description)
 
-    // Structured data (JSON-LD)
     const existingLd = document.getElementById('paddock-jsonld')
     if (existingLd) existingLd.remove()
 
@@ -287,9 +200,12 @@ export default function App() {
   if (route === 'privacy') return <Privacy navigateTo={navigateTo} />
   if (route === 'security') return <Security navigateTo={navigateTo} />
   if (route === 'terms') return <Terms navigateTo={navigateTo} />
+  if (route === 'net_worth_tracker') return <NetWorthTracker />
+  if (route === 'track_isas_pensions_savings') return <TrackISAsPensionsSavings />
+  if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative />
+  if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth />
 
   return (
-
     <div className="landing-shell">
       <header className="landing-nav">
         <div className="landing-nav-inner">
@@ -301,7 +217,6 @@ export default function App() {
             Paddock<span>.</span>
           </button>
 
-          {/* Desktop navigation */}
           <nav className="nav-actions nav-desktop">
             <button type="button" onClick={() => scrollToId('product')} className="nav-link subtle">
               Product
@@ -338,7 +253,6 @@ export default function App() {
             </button>
           </nav>
 
-          {/* Mobile navigation */}
           <div className="nav-mobile">
             <button
               type="button"
@@ -369,7 +283,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* Mobile menu panel */}
         {menuOpen && (
           <nav className="mobile-menu">
             <button type="button" onClick={() => { scrollToId('product'); setMenuOpen(false) }}>
@@ -398,14 +311,13 @@ export default function App() {
             <div className="hero-kicker">Personal wealth dashboard</div>
 
             <h1>
-              Know your number.
+              A net worth tracker.
               <br />
-              Build your future.
+              For long-term wealth.
             </h1>
 
             <p className="hero-sub">
-              A clear model of your wealth, built around one long-term goal — with visible assumptions and
-              projections that show the path ahead.
+              Track cash, investments, pensions and property in one calm dashboard — with multi-currency support, long-term projections, and privacy-first manual tracking.
             </p>
 
             <div className="hero-actions">
@@ -415,7 +327,7 @@ export default function App() {
                 onClick={() => goTo('signup')}
                 disabled={!!pending}
               >
-                {pending === 'signup' ? 'Opening…' : 'Get started — it\u2019s free'}
+                {pending === 'signup' ? 'Opening…' : 'Get started — it’s free'}
               </button>
 
               <button
@@ -431,9 +343,30 @@ export default function App() {
             <p className="hero-foot">Free to start • No credit card required • Setup takes under 2 minutes</p>
 
             <div className="hero-tags">
-              <span>Multi-currency</span>
-              <span>Manual input</span>
-              <span>Long-term projections</span>
+              <button
+                type="button"
+                className="hero-tag-link"
+                onClick={() => navigateTo('/net-worth-tracker')}
+              >
+                Net worth tracking
+              </button>
+
+              <button
+                type="button"
+                className="hero-tag-link"
+                onClick={() => navigateTo('/guides/multi-currency-net-worth-tracker')}
+              >
+                Multi-currency support
+              </button>
+
+              <button
+                type="button"
+                className="hero-tag-link"
+                onClick={() => navigateTo('/track-isas-pensions-savings')}
+              >
+                Track ISAs and pensions
+              </button>
+
               <span>No ads</span>
               <span>No bank linking</span>
               <span>Private by design</span>
@@ -452,6 +385,61 @@ export default function App() {
             loading="eager"
           />
         </Reveal>
+      </section>
+
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>Use Paddock for</SectionLabel>
+            <h2>Built for real wealth tracking.</h2>
+            <p className="section-copy">
+              Explore the core ways people use Paddock to track wealth more clearly and stay focused
+              on long-term progress.
+            </p>
+
+            <div className="use-links-grid">
+              <button
+                type="button"
+                className="use-link-item"
+                onClick={() => navigateTo('/net-worth-tracker')}
+              >
+                <h3>Net worth tracking</h3>
+                <div className="line" />
+                <p>See assets and liabilities together in one calm dashboard.</p>
+              </button>
+
+              <button
+                type="button"
+                className="use-link-item"
+                onClick={() => navigateTo('/track-isas-pensions-savings')}
+              >
+                <h3>Track ISAs and pensions</h3>
+                <div className="line" />
+                <p>Bring core UK wealth accounts into one clear long-term view.</p>
+              </button>
+
+              <button
+                type="button"
+                className="use-link-item"
+                onClick={() => navigateTo('/spreadsheet-alternative-net-worth-tracking')}
+              >
+                <h3>Replace spreadsheets</h3>
+                <div className="line" />
+                <p>Move from fragile tabs and formulas to a cleaner structured workflow.</p>
+              </button>
+
+              <button
+                type="button"
+                className="use-link-item"
+                onClick={() => navigateTo('/how-to-track-your-net-worth')}
+              >
+                <h3>How to track your net worth</h3>
+                <div className="line" />
+                <p>Learn what to include, how often to update, and what matters most.</p>
+              </button>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       <section id="product" className="container section">
@@ -564,7 +552,7 @@ export default function App() {
         <div className="container section">
           <Reveal>
             <SectionLabel>Trust</SectionLabel>
-            <h2>Private by default.</h2>
+            <h2>Private by design.</h2>
             <p className="section-copy">
               No ads. No trackers. No bank linking. Just a deliberate, premium space to understand and build
               wealth.
