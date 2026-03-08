@@ -1,79 +1,55 @@
 import React from 'react'
+import { GuideShell, H2, P } from '../components/GuideLayout'
 
-function TopBar({ title }) {
+export default function Security({ navigateTo }) {
   return (
-    <div className="guide-topbar">
-      <div className="guide-topbar-inner">
-        <div className="guide-topbar-spacer" />
-        <div className="guide-topbar-title">{title}</div>
-        <a href="/" className="guide-close" aria-label="Back to home" title="Back to home">
-          <span aria-hidden="true">×</span>
-        </a>
-      </div>
-    </div>
-  )
-}
+    <GuideShell title="Security" onClose={() => navigateTo('/')}>
+      <div className="guide-kicker">Security</div>
+      <h1 className="guide-h1">Security at Paddock</h1>
 
-function H2({ children }) {
-  return <h2 className="guide-h2">{children}</h2>
-}
+      <p className="guide-lead">
+        Paddock is designed to feel calm and simple on the surface, but the foundations are built
+        to be trustworthy. Security is part of the product, not an afterthought.
+      </p>
 
-function P({ children }) {
-  return <p className="guide-p">{children}</p>
-}
+      <H2>Secure authentication</H2>
+      <P>
+        Sign-in, password reset, and session management are handled through industry-standard
+        authentication infrastructure. Credentials are never stored in plain text, and sessions
+        are managed with modern security practices.
+      </P>
 
-export default function Security() {
-  return (
-    <div className="guide-shell">
-      <TopBar title="Security" />
+      <H2>Payments handled by Stripe</H2>
+      <P>
+        All billing and subscription management is processed by Stripe. Your card details are
+        handled entirely within Stripe's PCI-compliant environment — they never touch Paddock's
+        servers.
+      </P>
 
-      <div className="guide-container">
-        <article className="guide-card">
-          <div className="guide-kicker">Security</div>
-          <h1 className="guide-h1">Security at Paddock</h1>
+      <H2>Minimal data surface</H2>
+      <P>
+        Paddock is designed around manual input rather than mandatory bank linking. This means
+        fewer connected financial accounts, fewer integrations, and a smaller surface area
+        where trust needs to be extended.
+      </P>
 
-          <p className="guide-lead">
-            Paddock is intended to feel calm and simple on the surface, but that only works if the foundations
-            are trustworthy. Security is treated as part of the product, not an afterthought.
-          </p>
+      <H2>Encrypted in transit</H2>
+      <P>
+        All connections to Paddock are encrypted using HTTPS. Data is transmitted securely
+        between your browser and our servers at all times.
+      </P>
 
-          <H2>Secure sign-in</H2>
-          <P>
-            Authentication and password reset flows are handled through Supabase Auth. This gives Paddock a
-            modern account system without building custom login infrastructure from scratch.
-          </P>
+      <H2>Conservative by design</H2>
+      <P>
+        The product is deliberately built with fewer moving parts, fewer third-party integrations,
+        and fewer places where data is exposed. This is a deliberate design choice — simplicity
+        reduces risk.
+      </P>
 
-          <H2>Payments and subscriptions</H2>
-          <P>
-            Subscription handling is managed through Stripe. That keeps card and billing workflows within a
-            specialist payments platform rather than pushing that complexity into the core app.
-          </P>
-
-          <H2>Manual input reduces exposure</H2>
-          <P>
-            Because Paddock is designed around manual input rather than mandatory bank linking, the product can
-            remain simpler and more deliberate. That lowers the amount of connected financial surface area you
-            need to trust just to use the dashboard.
-          </P>
-
-          <H2>Practical product posture</H2>
-          <P>
-            The goal is a product that is calm, understandable, and conservative in its design choices. That
-            means fewer moving parts, fewer unnecessary integrations, and fewer places where trust can be
-            eroded.
-          </P>
-
-          <H2>Ongoing improvement</H2>
-          <P>
-            Security is not a box to tick once. As the product grows, controls, monitoring, and policies should
-            grow with it. This page should be treated as part of that ongoing trust posture.
-          </P>
-        </article>
-
-        <div className="guide-footer-action">
-          <a href="/" className="guide-done">Done</a>
-        </div>
-      </div>
-    </div>
+      <H2>Contact</H2>
+      <P>
+        If you have questions about security at Paddock, you can reach us at hello@getpaddock.com.
+      </P>
+    </GuideShell>
   )
 }

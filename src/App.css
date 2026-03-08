@@ -45,6 +45,33 @@ button {
   font: inherit;
 }
 
+/* ─── Focus ─── */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ─── Reduced motion ─── */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Layout ─── */
+
 .landing-shell {
   min-height: 100vh;
 }
@@ -53,6 +80,8 @@ button {
   width: min(var(--max), calc(100% - 40px));
   margin: 0 auto;
 }
+
+/* ─── Nav ─── */
 
 .landing-nav {
   position: sticky;
@@ -116,7 +145,8 @@ button {
 }
 
 .nav-link:hover,
-.footer-links a:hover {
+.footer-links a:hover,
+.footer-links button:hover {
   color: white;
 }
 
@@ -131,6 +161,59 @@ button {
   padding-inline: 16px;
   border-radius: 16px;
 }
+
+/* Mobile nav */
+
+.nav-mobile {
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.hamburger {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.hamburger:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: min(var(--max), calc(100% - 40px));
+  margin: 0 auto;
+  padding: 8px 0 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.mobile-menu button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 12px 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-menu button:hover {
+  color: var(--text);
+}
+
+/* ─── Hero ─── */
 
 .hero-section {
   padding: 96px 0 44px;
@@ -210,6 +293,7 @@ h3 {
 .hero-foot {
   margin-top: 16px;
   font-size: 0.85rem;
+  color: rgba(241, 242, 243, 0.35);
 }
 
 .hero-tags {
@@ -220,6 +304,8 @@ h3 {
   color: rgba(241, 242, 243, 0.28);
   font-size: 0.8rem;
 }
+
+/* ─── Buttons ─── */
 
 .btn {
   appearance: none;
@@ -249,6 +335,10 @@ h3 {
   cursor: default;
 }
 
+.btn:disabled:hover {
+  transform: none;
+}
+
 .btn-primary {
   background: var(--accent);
   color: white;
@@ -263,6 +353,13 @@ h3 {
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.02);
 }
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* ─── Sections ─── */
 
 .section-tight {
   padding: 0 0 36px;
@@ -303,6 +400,8 @@ h3 {
   margin-top: 24px;
 }
 
+/* ─── Screenshots ─── */
+
 .shot-wrap {
   width: 100%;
 }
@@ -326,6 +425,8 @@ h3 {
   color: rgba(241, 242, 243, 0.3);
   font-size: 0.9rem;
 }
+
+/* ─── Columns / Grids ─── */
 
 .split-columns,
 .trust-grid,
@@ -376,11 +477,16 @@ h3 {
   color: var(--text);
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.02);
+  appearance: none;
+  font: inherit;
+  cursor: pointer;
 }
 
 .pill-link:hover {
   background: rgba(255, 255, 255, 0.04);
 }
+
+/* ─── Trust ─── */
 
 .trust-grid {
   grid-template-columns: repeat(3, 1fr);
@@ -392,6 +498,8 @@ h3 {
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.02);
 }
+
+/* ─── Pricing ─── */
 
 .pricing-grid {
   grid-template-columns: repeat(2, 1fr);
@@ -484,10 +592,14 @@ h3 {
   line-height: 1.6;
 }
 
+/* ─── Final CTA ─── */
+
 .final-cta {
   padding: 76px 0;
   text-align: center;
 }
+
+/* ─── Footer ─── */
 
 .landing-footer {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -502,6 +614,22 @@ h3 {
   font-size: 0.85rem;
 }
 
+.footer-links button {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.footer-links button:hover {
+  color: rgba(241, 242, 243, 0.6);
+}
+
+/* ─── Responsive ─── */
+
 @media (max-width: 980px) {
   .split-columns,
   .trust-grid,
@@ -512,15 +640,18 @@ h3 {
 }
 
 @media (max-width: 760px) {
-  .landing-nav-inner,
+  .nav-desktop {
+    display: none;
+  }
+
+  .nav-mobile {
+    display: flex;
+  }
+
   .landing-footer-inner {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-  }
-
-  .nav-actions {
-    gap: 12px;
   }
 
   .hero-section {
@@ -542,11 +673,9 @@ h3 {
     font-size: 0.92rem;
     width: auto;
   }
-
-  .nav-guides {
-    display: none;
-  }
 }
+
+/* ─── Guide pages ─── */
 
 .guide-shell {
   min-height: 100vh;
@@ -588,12 +717,19 @@ h3 {
 }
 
 .guide-close {
+  appearance: none;
+  border: 0;
   display: grid;
   place-items: center;
   border-radius: 16px;
   border: 1px solid var(--border);
   color: var(--text);
   background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+}
+
+.guide-close:hover {
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .guide-container {
@@ -672,10 +808,23 @@ h3 {
   background: rgba(255, 255, 255, 0.02);
   color: var(--text);
   font-weight: 600;
+  cursor: pointer;
 }
 
 .guide-link-card {
   justify-content: flex-start;
+  text-decoration: none;
+}
+
+.guide-link-card:hover,
+.guide-done:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.guide-done {
+  appearance: none;
+  font: inherit;
+  font-weight: 600;
 }
 
 .guide-footer-action {
@@ -721,18 +870,98 @@ h3 {
   color: rgba(241, 242, 243, 0.82);
 }
 
-.footer-links button {
-  appearance: none;
-  border: 0;
-  background: transparent;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
+/* ─── Guide lists ─── */
+
+.guide-ul {
+  margin: 12px 0 0;
+  padding-left: 20px;
+  list-style: none;
 }
 
-.pill-link {
-  appearance: none;
-  font: inherit;
-  cursor: pointer;
+.guide-ul li {
+  position: relative;
+  padding-left: 12px;
+  margin-top: 8px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(241, 242, 243, 0.6);
+}
+
+.guide-ul li::before {
+  content: '•';
+  position: absolute;
+  left: -8px;
+  color: rgba(241, 242, 243, 0.25);
+}
+
+.guide-ul li strong {
+  color: rgba(241, 242, 243, 0.82);
+}
+
+/* ─── Guide worked examples ─── */
+
+.guide-example {
+  margin-top: 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.015);
+  padding: 18px 20px;
+}
+
+.guide-example-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(241, 242, 243, 0.28);
+}
+
+.guide-example-text {
+  margin-top: 10px;
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: rgba(241, 242, 243, 0.7);
+  font-variant-numeric: tabular-nums;
+}
+
+.guide-example-text strong {
+  color: rgba(241, 242, 243, 0.88);
+}
+
+/* ─── Guide CTA box ─── */
+
+.guide-cta-box {
+  margin-top: 28px;
+  border-radius: 24px;
+  border: 1px solid rgba(75, 121, 168, 0.18);
+  background: rgba(75, 121, 168, 0.06);
+  padding: 22px 24px;
+  text-align: center;
+}
+
+.guide-cta-text {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(241, 242, 243, 0.76);
+}
+
+.guide-cta-btn {
+  min-height: 46px;
+  padding: 0 24px;
+  border-radius: 16px;
+  font-size: 0.95rem;
+}
+
+/* ─── Guide inline links ─── */
+
+.guide-inline-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(75, 121, 168, 0.3);
+  transition: border-color 0.15s ease;
+}
+
+.guide-inline-link:hover {
+  border-color: var(--accent);
 }

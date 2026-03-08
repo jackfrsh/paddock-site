@@ -8,6 +8,7 @@ import homeShotWebp from '/src/assets/landing/paddock-home.webp'
 import outlookShotWebp from '/src/assets/landing/paddock-outlook.webp'
 import insightsShotWebp from '/src/assets/landing/paddock-insights.webp'
 
+import GuideIndex from './guides/GuideIndex'
 import MultiCurrency from './guides/MultiCurrency'
 import LongTermProjection from './guides/LongTermProjection'
 import InflationAdjusted from './guides/InflationAdjusted'
@@ -18,10 +19,100 @@ import Terms from './pages/Terms'
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
 
-const navigateTo = (path) => {
-  window.history.pushState({}, '', path)
-  setRoute(getRoute())
-  window.scrollTo({ top: 0, behavior: 'instant' })
+const PAGE_META = {
+  landing: {
+    title: 'Paddock — Personal Wealth Dashboard',
+    description: 'Track net worth, understand progress, and model your long-term future with multi-currency tracking, visible assumptions, and projections that show the path ahead.',
+    canonical: 'https://getpaddock.com/',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      'name': 'Paddock',
+      'url': 'https://getpaddock.com',
+      'description': 'Personal wealth dashboard with multi-currency net worth tracking, long-term projections, and visible assumptions.',
+    },
+  },
+  guides_index: {
+    title: 'Guides — Wealth Tracking & Planning | Paddock',
+    description: 'Clear, practical guides on long-term wealth projections, multi-currency net worth tracking, and inflation-adjusted planning.',
+    canonical: 'https://getpaddock.com/guides',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      'name': 'Paddock Guides',
+      'url': 'https://getpaddock.com/guides',
+      'description': 'Clear, practical guides on long-term wealth projections, multi-currency net worth tracking, and inflation-adjusted planning.',
+      'isPartOf': { '@type': 'WebSite', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
+    },
+  },
+  guide_multi_currency: {
+    title: 'Multi-Currency Net Worth Tracking Explained | Paddock',
+    description: 'How multi-currency net worth tracking works, why single-currency totals mislead, and how to keep your wealth dashboard accurate across GBP, USD, and EUR.',
+    canonical: 'https://getpaddock.com/guides/multi-currency-net-worth-tracker',
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      'headline': 'Multi-Currency Net Worth Tracking Explained',
+      'description': 'How multi-currency net worth tracking works, why single-currency totals mislead, and how to keep your wealth dashboard accurate across GBP, USD, and EUR.',
+      'url': 'https://getpaddock.com/guides/multi-currency-net-worth-tracker',
+      'inLanguage': 'en',
+      'isPartOf': { '@type': 'WebSite', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
+      'publisher': { '@type': 'Organization', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
+    },
+  },
+  guide_long_term_projection: {
+    title: 'How Long-Term Wealth Projections Work | Paddock',
+    description: 'How long-term wealth projections work, what drives them, and how to use compound growth and contribution modelling to plan 5–40 years ahead.',
+    canonical: 'https://getpaddock.com/guides/long-term-wealth-projection',
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      'headline': 'How Long-Term Wealth Projections Actually Work',
+      'description': 'How long-term wealth projections work, what drives them, and how to use compound growth and contribution modelling to plan 5–40 years ahead.',
+      'url': 'https://getpaddock.com/guides/long-term-wealth-projection',
+      'inLanguage': 'en',
+      'isPartOf': { '@type': 'WebSite', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
+      'publisher': { '@type': 'Organization', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
+    },
+  },
+  guide_inflation_adjusted: {
+    title: 'Inflation-Adjusted Net Worth: Real vs Nominal | Paddock',
+    description: 'Why inflation-adjusted net worth matters for long-term planning, with worked examples showing the difference between nominal and real-terms projections.',
+    canonical: 'https://getpaddock.com/guides/inflation-adjusted-net-worth',
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      'headline': 'Inflation-Adjusted Net Worth: Why Real Terms Matter',
+      'description': 'Why inflation-adjusted net worth matters for long-term planning, with worked examples showing the difference between nominal and real-terms projections.',
+      'url': 'https://getpaddock.com/guides/inflation-adjusted-net-worth',
+      'inLanguage': 'en',
+      'isPartOf': { '@type': 'WebSite', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
+      'publisher': { '@type': 'Organization', 'name': 'Paddock', 'url': 'https://getpaddock.com' },
+    },
+  },
+  privacy: {
+    title: 'Privacy | Paddock',
+    description: 'How Paddock handles your data: no ads, no bank linking, no tracking. Privacy built into the product.',
+    canonical: 'https://getpaddock.com/privacy',
+    ogType: 'website',
+  },
+  security: {
+    title: 'Security | Paddock',
+    description: 'How Paddock keeps your data secure: industry-standard authentication, Stripe billing, encrypted connections.',
+    canonical: 'https://getpaddock.com/security',
+    ogType: 'website',
+  },
+  terms: {
+    title: 'Terms of Use | Paddock',
+    description: 'Terms of use for Paddock, the personal wealth dashboard.',
+    canonical: 'https://getpaddock.com/terms',
+    ogType: 'website',
+  },
 }
 
 function getRoute() {
@@ -30,6 +121,7 @@ function getRoute() {
   if (path.startsWith('/guides/multi-currency-net-worth-tracker')) return 'guide_multi_currency'
   if (path.startsWith('/guides/long-term-wealth-projection')) return 'guide_long_term_projection'
   if (path.startsWith('/guides/inflation-adjusted-net-worth')) return 'guide_inflation_adjusted'
+  if (path === '/guides' || path === '/guides/') return 'guides_index'
 
   if (path.startsWith('/privacy')) return 'privacy'
   if (path.startsWith('/security')) return 'security'
@@ -52,6 +144,13 @@ function useReveal() {
   useEffect(() => {
     const el = ref.current
     if (!el) return
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReducedMotion) {
+      el.style.opacity = '1'
+      el.style.transform = 'none'
+      return
+    }
 
     const obs = new IntersectionObserver(
       ([entry]) => {
@@ -89,13 +188,13 @@ function Reveal({ children, className = '' }) {
   )
 }
 
-function Screenshot({ src, webp, alt, caption }) {
+function Screenshot({ src, webp, alt, caption, loading = 'lazy' }) {
   return (
     <div className="shot-wrap">
       <div className="shot-frame">
         <picture>
           {webp ? <source srcSet={webp} type="image/webp" /> : null}
-          <img src={src} alt={alt} className="shot-image" loading="lazy" />
+          <img src={src} alt={alt} className="shot-image" loading={loading} />
         </picture>
       </div>
       {caption ? <p className="shot-caption">{caption}</p> : null}
@@ -106,6 +205,7 @@ function Screenshot({ src, webp, alt, caption }) {
 export default function App() {
   const [pending, setPending] = useState(null)
   const [route, setRoute] = useState(getRoute)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const goTo = (kind) => {
     if (pending) return
@@ -121,8 +221,46 @@ export default function App() {
   const navigateTo = (path) => {
     window.history.pushState({}, '', path)
     setRoute(getRoute())
+    setMenuOpen(false)
     window.scrollTo(0, 0)
   }
+
+  // Per-route metadata: title, description, canonical, OG, Twitter, JSON-LD
+  useEffect(() => {
+    const meta = PAGE_META[route] || PAGE_META.landing
+    document.title = meta.title
+
+    const setMeta = (selector, attr, value) => {
+      const el = document.querySelector(selector)
+      if (el) el.setAttribute(attr, value)
+    }
+
+    setMeta('meta[name="description"]', 'content', meta.description)
+    setMeta('link[rel="canonical"]', 'href', meta.canonical)
+    setMeta('meta[property="og:title"]', 'content', meta.title)
+    setMeta('meta[property="og:description"]', 'content', meta.description)
+    setMeta('meta[property="og:url"]', 'content', meta.canonical)
+    setMeta('meta[property="og:type"]', 'content', meta.ogType || 'website')
+    setMeta('meta[name="twitter:title"]', 'content', meta.title)
+    setMeta('meta[name="twitter:description"]', 'content', meta.description)
+
+    // Structured data (JSON-LD)
+    const existingLd = document.getElementById('paddock-jsonld')
+    if (existingLd) existingLd.remove()
+
+    if (meta.jsonLd) {
+      const script = document.createElement('script')
+      script.id = 'paddock-jsonld'
+      script.type = 'application/ld+json'
+      script.textContent = JSON.stringify(meta.jsonLd)
+      document.head.appendChild(script)
+    }
+
+    return () => {
+      const ld = document.getElementById('paddock-jsonld')
+      if (ld) ld.remove()
+    }
+  }, [route])
 
   useEffect(() => {
     const resetPending = () => setPending(null)
@@ -142,12 +280,13 @@ export default function App() {
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
-  if (route === 'guide_multi_currency') return <MultiCurrency />
-  if (route === 'guide_long_term_projection') return <LongTermProjection />
-  if (route === 'guide_inflation_adjusted') return <InflationAdjusted />
-  if (route === 'privacy') return <Privacy />
-  if (route === 'security') return <Security />
-  if (route === 'terms') return <Terms />
+  if (route === 'guides_index') return <GuideIndex navigateTo={navigateTo} />
+  if (route === 'guide_multi_currency') return <MultiCurrency navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'guide_long_term_projection') return <LongTermProjection navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'guide_inflation_adjusted') return <InflationAdjusted navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'privacy') return <Privacy navigateTo={navigateTo} />
+  if (route === 'security') return <Security navigateTo={navigateTo} />
+  if (route === 'terms') return <Terms navigateTo={navigateTo} />
 
   return (
 
@@ -162,16 +301,21 @@ export default function App() {
             Paddock<span>.</span>
           </button>
 
-          <nav className="nav-actions">
+          {/* Desktop navigation */}
+          <nav className="nav-actions nav-desktop">
             <button type="button" onClick={() => scrollToId('product')} className="nav-link subtle">
               Product
             </button>
             <button type="button" onClick={() => scrollToId('pricing')} className="nav-link subtle">
               Pricing
             </button>
-            <a href="/guides/long-term-wealth-projection" className="nav-link subtle nav-guides">
+            <button
+              type="button"
+              onClick={() => navigateTo('/guides')}
+              className="nav-link subtle"
+            >
               Guides
-            </a>
+            </button>
 
             <div className="nav-divider" />
 
@@ -193,7 +337,59 @@ export default function App() {
               {pending === 'signup' ? 'Opening…' : 'Create account'}
             </button>
           </nav>
+
+          {/* Mobile navigation */}
+          <div className="nav-mobile">
+            <button
+              type="button"
+              onClick={() => goTo('signup')}
+              className="btn btn-primary nav-cta"
+              disabled={!!pending}
+            >
+              {pending === 'signup' ? 'Opening…' : 'Create account'}
+            </button>
+
+            <button
+              type="button"
+              className="hamburger"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? (
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M2 2l14 14M16 2L2 16" />
+                </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M2 4h14M2 9h14M2 14h14" />
+                </svg>
+              )}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile menu panel */}
+        {menuOpen && (
+          <nav className="mobile-menu">
+            <button type="button" onClick={() => { scrollToId('product'); setMenuOpen(false) }}>
+              Product
+            </button>
+            <button type="button" onClick={() => { scrollToId('pricing'); setMenuOpen(false) }}>
+              Pricing
+            </button>
+            <button type="button" onClick={() => { navigateTo('/guides'); setMenuOpen(false) }}>
+              Guides
+            </button>
+            <button
+              type="button"
+              onClick={() => { goTo('signin'); setMenuOpen(false) }}
+              disabled={!!pending}
+            >
+              {pending === 'signin' ? 'Opening…' : 'Sign in'}
+            </button>
+          </nav>
+        )}
       </header>
 
       <section className="hero-section">
@@ -212,11 +408,6 @@ export default function App() {
               projections that show the path ahead.
             </p>
 
-            <p className="hero-meta">
-              Multi-currency net worth tracking with visible assumptions, long-term projections, and a clearer
-              view of the path ahead. No ads. No bank connections.
-            </p>
-
             <div className="hero-actions">
               <button
                 type="button"
@@ -224,7 +415,7 @@ export default function App() {
                 onClick={() => goTo('signup')}
                 disabled={!!pending}
               >
-                {pending === 'signup' ? 'Opening…' : 'Get started'}
+                {pending === 'signup' ? 'Opening…' : 'Get started — it\u2019s free'}
               </button>
 
               <button
@@ -240,9 +431,9 @@ export default function App() {
             <p className="hero-foot">Free to start • No credit card required • Setup takes under 2 minutes</p>
 
             <div className="hero-tags">
-              <span>Multi-currency portfolios</span>
-              <span>Snapshots</span>
+              <span>Multi-currency</span>
               <span>Manual input</span>
+              <span>Long-term projections</span>
               <span>No ads</span>
               <span>No bank linking</span>
               <span>Private by design</span>
@@ -258,6 +449,7 @@ export default function App() {
             webp={homeShotWebp}
             alt="Paddock dashboard showing net worth, milestones and plan progress"
             caption="Net worth dashboard with milestones, trajectory and plan progress."
+            loading="eager"
           />
         </Reveal>
       </section>
@@ -267,7 +459,7 @@ export default function App() {
           <SectionLabel>Product</SectionLabel>
           <h2>Everything that matters, in one place.</h2>
           <p className="section-copy">
-            Built for clarity: one long-term goal, visible assumptions, and a dashboard you’ll actually check.
+            Built for clarity: one long-term goal, visible assumptions, and a dashboard you'll actually check.
           </p>
 
           <div className="split-columns">
@@ -333,12 +525,27 @@ export default function App() {
             </p>
 
             <div className="pill-links">
-              <a href="/guides/long-term-wealth-projection" className="pill-link">
+              <button
+                type="button"
+                onClick={() => navigateTo('/guides/long-term-wealth-projection')}
+                className="pill-link"
+              >
                 Long-term projections
-              </a>
-              <a href="/guides/inflation-adjusted-net-worth" className="pill-link">
+              </button>
+              <button
+                type="button"
+                onClick={() => navigateTo('/guides/multi-currency-net-worth-tracker')}
+                className="pill-link"
+              >
+                Multi-currency tracking
+              </button>
+              <button
+                type="button"
+                onClick={() => navigateTo('/guides/inflation-adjusted-net-worth')}
+                className="pill-link"
+              >
                 Inflation-adjusted views
-              </a>
+              </button>
             </div>
           </Reveal>
 
@@ -369,26 +576,26 @@ export default function App() {
                 <p>The product is designed to stay focused, private and free from ad clutter.</p>
               </div>
               <div>
-                <h3>Secure sign-in.</h3>
-                <p>Password reset and account access are handled through Supabase Auth.</p>
+                <h3>Secure authentication.</h3>
+                <p>Industry-standard sign-in with protected sessions and secure password management.</p>
               </div>
               <div>
-                <h3>Stripe billing.</h3>
-                <p>Subscriptions are managed securely, with a clean upgrade path when needed.</p>
+                <h3>Payments by Stripe.</h3>
+                <p>Card details are handled entirely by Stripe — they never touch our servers.</p>
               </div>
             </div>
 
             <div className="pill-links section-top-gap-sm">
-  <button type="button" onClick={() => navigateTo('/terms')} className="pill-link">
-    Terms
-  </button>
-  <button type="button" onClick={() => navigateTo('/privacy')} className="pill-link">
-    Privacy
-  </button>
-  <button type="button" onClick={() => navigateTo('/security')} className="pill-link">
-    Security
-  </button>
-</div>
+              <button type="button" onClick={() => navigateTo('/terms')} className="pill-link">
+                Terms
+              </button>
+              <button type="button" onClick={() => navigateTo('/privacy')} className="pill-link">
+                Privacy
+              </button>
+              <button type="button" onClick={() => navigateTo('/security')} className="pill-link">
+                Security
+              </button>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -399,7 +606,7 @@ export default function App() {
             <SectionLabel>Pricing</SectionLabel>
             <h2>Simple.</h2>
             <p className="section-copy">
-              Start with structured tracking. Upgrade when you’re ready to plan decades ahead.
+              Start with structured tracking. Upgrade when you're ready to plan decades ahead.
             </p>
           </Reveal>
 
@@ -446,11 +653,11 @@ export default function App() {
               <div className="price-list">
                 <p>Unlimited accounts</p>
                 <p>5–40 year projections</p>
-                <p>Net-worth trajectory modelling</p>
+                <p>Full trajectory chart: projected vs required path</p>
                 <p>Inflation-adjusted (real terms) view</p>
                 <p>One-off deposit modelling</p>
-                <p>Optimiser: required contribution to hit target</p>
-                <p>Deeper insights</p>
+                <p>Optimiser: calculates required monthly contribution</p>
+                <p>What-if scenario comparisons</p>
               </div>
 
               <button
@@ -469,9 +676,9 @@ export default function App() {
       <section className="section-border">
         <div className="container final-cta">
           <Reveal>
-            <h2>Wealth isn’t built by accident.</h2>
+            <h2>Wealth isn't built by accident.</h2>
             <p className="section-copy center narrow-center">
-              It’s built with clarity, consistency and time. Paddock gives you a calmer way to see the
+              It's built with clarity, consistency and time. Paddock gives you a calmer way to see the
               numbers and keep moving.
             </p>
 
@@ -507,20 +714,20 @@ export default function App() {
           </div>
 
           <div className="footer-links">
-  <button type="button" onClick={() => navigateTo('/guides/long-term-wealth-projection')}>
-    Guides
-  </button>
-  <button type="button" onClick={() => navigateTo('/terms')}>
-    Terms
-  </button>
-  <button type="button" onClick={() => navigateTo('/privacy')}>
-    Privacy
-  </button>
-  <button type="button" onClick={() => navigateTo('/security')}>
-    Security
-  </button>
-  <span>© 2026</span>
-</div>
+            <button type="button" onClick={() => navigateTo('/guides')}>
+              Guides
+            </button>
+            <button type="button" onClick={() => navigateTo('/terms')}>
+              Terms
+            </button>
+            <button type="button" onClick={() => navigateTo('/privacy')}>
+              Privacy
+            </button>
+            <button type="button" onClick={() => navigateTo('/security')}>
+              Security
+            </button>
+            <span>© 2026</span>
+          </div>
         </div>
       </footer>
     </div>

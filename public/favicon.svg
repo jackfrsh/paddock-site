@@ -1,10 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&amp;display=swap');
-    </style>
-  </defs>
   <rect width="32" height="32" rx="6" fill="#171A1F"/>
-  <text x="5" y="24" font-family="Inter, -apple-system, system-ui, sans-serif" font-weight="600" font-size="22" fill="#F0F0F2">P</text>
+  <path fill-rule="evenodd" d="M9 6.5h7.2c3.6 0 6 2.3 6 5.7 0 3.4-2.4 5.7-6 5.7H12.8V25H9V6.5zm3.8 3.2v5h3.4c1.6 0 2.6-1.1 2.6-2.5s-1-2.5-2.6-2.5h-3.4z" fill="#F0F0F2"/>
   <circle cx="24" cy="23" r="2.8" fill="#4B79A8"/>
 </svg>
