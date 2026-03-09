@@ -3,7 +3,7 @@ import { GuideShell, H2, P, UL, Example, ProTip, GuideCTA, Divider, GuideLink } 
 
 export default function MultiCurrencyGuide({ navigateTo, goTo }) {
   return (
-    <GuideShell title="Guide" onClose={() => navigateTo('/')}>
+    <GuideShell title="Guide" onBack={() => navigateTo('/guides')} navigateTo={navigateTo}>
       <div className="guide-kicker">Multi-currency net worth tracker</div>
 
       <h1 className="guide-h1">Multi-currency net worth tracking explained</h1>

@@ -3,7 +3,7 @@ import { GuideShell, H2, P, UL, Example, Callout, GuideCTA, Divider, GuideLink }
 
 export default function LongTermProjectionGuide({ navigateTo, goTo }) {
   return (
-    <GuideShell title="Guide" onClose={() => navigateTo('/')}>
+    <GuideShell title="Guide" onBack={() => navigateTo('/guides')} navigateTo={navigateTo}>
       <div className="guide-kicker">Long-term wealth projection</div>
 
       <h1 className="guide-h1">How long-term wealth projections actually work</h1>

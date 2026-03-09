@@ -1,10 +1,11 @@
 import React from 'react'
+import SiteFooter from '../components/SiteFooter'
 
 function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
 }
 
-export default function TrackISAsPensionsSavings() {
+export default function TrackISAsPensionsSavings({ navigateTo }) {
   return (
     <div className="landing-shell">
       <section className="hero-section hero-section-guide">
@@ -27,9 +28,13 @@ export default function TrackISAsPensionsSavings() {
               <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
                 Start tracking
               </a>
-              <a href="/" className="btn btn-secondary">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => navigateTo('/')}
+              >
                 Back to home
-              </a>
+              </button>
             </div>
 
             <div className="hero-tags">
@@ -122,27 +127,36 @@ export default function TrackISAsPensionsSavings() {
             Keep moving through the core ideas behind structured wealth tracking.
           </p>
 
-          <div className="use-grid">
-            <a href="/net-worth-tracker" className="use-card use-card-link">
+          <div className="use-links-grid use-links-grid-3">
+            <button
+              type="button"
+              className="use-link-item"
+              onClick={() => navigateTo('/net-worth-tracker')}
+            >
               <h3>Net worth tracking</h3>
               <div className="line" />
               <p>Bring assets and liabilities together in one clear long-term view.</p>
-            </a>
+            </button>
 
-            <a
-              href="/spreadsheet-alternative-net-worth-tracking"
-              className="use-card use-card-link"
+            <button
+              type="button"
+              className="use-link-item"
+              onClick={() => navigateTo('/spreadsheet-alternative-net-worth-tracking')}
             >
               <h3>Replace spreadsheets</h3>
               <div className="line" />
               <p>Move from fragile tabs and formulas to a cleaner structured workflow.</p>
-            </a>
+            </button>
 
-            <a href="/how-to-track-your-net-worth" className="use-card use-card-link">
+            <button
+              type="button"
+              className="use-link-item"
+              onClick={() => navigateTo('/how-to-track-your-net-worth')}
+            >
               <h3>How to track your net worth</h3>
               <div className="line" />
               <p>Learn what to include, how often to update, and what matters most.</p>
-            </a>
+            </button>
           </div>
         </div>
       </section>
@@ -200,12 +214,18 @@ export default function TrackISAsPensionsSavings() {
             <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
               Start tracking
             </a>
-            <a href="/net-worth-tracker" className="btn btn-secondary">
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={() => navigateTo('/net-worth-tracker')}
+            >
               View net worth page
-            </a>
+            </button>
           </div>
         </div>
       </section>
+
+      <SiteFooter navigateTo={navigateTo} />
     </div>
   )
 }

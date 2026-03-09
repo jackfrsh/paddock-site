@@ -3,7 +3,7 @@ import { GuideShell, GuideLink } from '../components/GuideLayout'
 
 export default function GuideIndex({ navigateTo }) {
   return (
-    <GuideShell title="Guides" onClose={() => navigateTo('/')}>
+    <GuideShell title="Guides" onBack={() => navigateTo('/')} navigateTo={navigateTo}>
       <h1 className="guide-h1">Guides</h1>
 
       <p className="guide-lead">
@@ -16,9 +16,11 @@ export default function GuideIndex({ navigateTo }) {
         <GuideLink to="/guides/long-term-wealth-projection" navigateTo={navigateTo}>
           How long-term wealth projections work →
         </GuideLink>
+
         <GuideLink to="/guides/multi-currency-net-worth-tracker" navigateTo={navigateTo}>
           Multi-currency net worth tracking explained →
         </GuideLink>
+
         <GuideLink to="/guides/inflation-adjusted-net-worth" navigateTo={navigateTo}>
           Inflation-adjusted net worth: real terms vs nominal →
         </GuideLink>

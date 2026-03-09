@@ -3,7 +3,7 @@ import { GuideShell, H2, P } from '../components/GuideLayout'
 
 export default function Privacy({ navigateTo }) {
   return (
-    <GuideShell title="Privacy" onClose={() => navigateTo('/')}>
+    <GuideShell title="Privacy" onBack={() => navigateTo('/')} navigateTo={navigateTo}>
       <div className="guide-kicker">Privacy</div>
       <h1 className="guide-h1">Privacy at Paddock</h1>
 

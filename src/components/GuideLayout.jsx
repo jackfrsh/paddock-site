@@ -1,25 +1,8 @@
 import React from 'react'
+import SiteFooter from './SiteFooter'
 
-export function TopBar({ title, onClose }) {
-  return (
-    <div className="guide-topbar">
-      <div className="guide-topbar-inner">
-        <div className="guide-topbar-spacer" />
-        <div className="guide-topbar-title">{title}</div>
-        <button
-          type="button"
-          onClick={onClose}
-          className="guide-close"
-          aria-label="Back to home"
-          title="Back to home"
-        >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-            <path d="M1 1l12 12M13 1L1 13" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  )
+function isModifiedEvent(e) {
+  return e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0
 }
 
 export function H2({ children }) {
@@ -75,33 +58,49 @@ export function GuideCTA({ children, onClick, buttonText }) {
   )
 }
 
-export function GuideShell({ title, onClose, children }) {
-  return (
-    <div className="guide-shell">
-      <TopBar title={title} onClose={onClose} />
-      <div className="guide-container">
-        <article className="guide-card">
-          {children}
-        </article>
-        <div className="guide-footer-action">
-          <button type="button" onClick={onClose} className="guide-done">
-            Done
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-export function GuideLink({ to, navigateTo, children }) {
+export function GuideLink({ to, navigateTo, children, className = '' }) {
   const handleClick = (e) => {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return
+    if (isModifiedEvent(e)) return
     e.preventDefault()
     navigateTo(to)
   }
+
   return (
-    <a href={to} onClick={handleClick} className="guide-link-card">
+    <a href={to} onClick={handleClick} className={`guide-link-card ${className}`.trim()}>
       {children}
     </a>
+  )
+}
+
+export function GuideShell({ title, onBack, navigateTo, children }) {
+  const backLabel = title === 'Guides' ? 'Back to Paddock' : 'Back to Guides'
+
+  return (
+    <div className="landing-shell">
+      <section className="hero-section hero-section-guide">
+        <div className="container">
+          <div className="hero-copy guide-hero-copy">
+            <button
+              type="button"
+              onClick={onBack}
+              className="guide-back-link"
+              aria-label={backLabel}
+            >
+              ← {backLabel}
+            </button>
+
+            <div className="hero-kicker">{title === 'Guides' ? 'Library' : 'Guide'}</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="container section guide-page-section">
+        <article className="guide-article">
+          {children}
+        </article>
+      </section>
+
+      <SiteFooter navigateTo={navigateTo} />
+    </div>
   )
 }

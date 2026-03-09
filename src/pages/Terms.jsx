@@ -3,7 +3,7 @@ import { GuideShell, H2, P } from '../components/GuideLayout'
 
 export default function Terms({ navigateTo }) {
   return (
-    <GuideShell title="Terms" onClose={() => navigateTo('/')}>
+    <GuideShell title="Terms" onBack={() => navigateTo('/')} navigateTo={navigateTo}>
       <div className="guide-kicker">Terms</div>
       <h1 className="guide-h1">Terms of use</h1>
 

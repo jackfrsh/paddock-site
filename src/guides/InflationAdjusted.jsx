@@ -3,7 +3,7 @@ import { GuideShell, H2, P, UL, Example, Callout, GuideCTA, Divider, GuideLink }
 
 export default function InflationAdjustedGuide({ navigateTo, goTo }) {
   return (
-    <GuideShell title="Guide" onClose={() => navigateTo('/')}>
+    <GuideShell title="Guide" onBack={() => navigateTo('/guides')} navigateTo={navigateTo}>
       <div className="guide-kicker">Inflation-adjusted net worth</div>
 
       <h1 className="guide-h1">Inflation-adjusted net worth: why real terms matter</h1>

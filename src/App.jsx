@@ -20,6 +20,7 @@ import TrackISAsPensionsSavings from './pages/TrackISAsPensionsSavings'
 import SpreadsheetAlternative from './pages/SpreadsheetAlternative'
 import HowToTrackNetWorth from './pages/HowToTrackNetWorth'
 import { PAGE_META } from './meta'
+import SiteFooter from './components/SiteFooter'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
@@ -200,22 +201,22 @@ export default function App() {
   if (route === 'privacy') return <Privacy navigateTo={navigateTo} />
   if (route === 'security') return <Security navigateTo={navigateTo} />
   if (route === 'terms') return <Terms navigateTo={navigateTo} />
-  if (route === 'net_worth_tracker') return <NetWorthTracker />
-  if (route === 'track_isas_pensions_savings') return <TrackISAsPensionsSavings />
-  if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative />
-  if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth />
+  if (route === 'net_worth_tracker') return <NetWorthTracker navigateTo={navigateTo} />
+  if (route === 'track_isas_pensions_savings') return <TrackISAsPensionsSavings navigateTo={navigateTo} />
+  if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative navigateTo={navigateTo} />
+  if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth navigateTo={navigateTo} />
 
   return (
     <div className="landing-shell">
       <header className="landing-nav">
         <div className="landing-nav-inner">
-          <button
-            type="button"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="brand"
-          >
-            Paddock<span>.</span>
-          </button>
+        <button
+  type="button"
+  onClick={() => navigateTo('/')}
+  className="brand"
+>
+  Paddock<span>.</span>
+</button>
 
           <nav className="nav-actions nav-desktop">
             <button type="button" onClick={() => scrollToId('product')} className="nav-link subtle">
@@ -695,29 +696,7 @@ export default function App() {
         </div>
       </section>
 
-      <footer className="landing-footer">
-        <div className="landing-footer-inner">
-          <div className="footer-brand">
-            Paddock<span>.</span>
-          </div>
-
-          <div className="footer-links">
-            <button type="button" onClick={() => navigateTo('/guides')}>
-              Guides
-            </button>
-            <button type="button" onClick={() => navigateTo('/terms')}>
-              Terms
-            </button>
-            <button type="button" onClick={() => navigateTo('/privacy')}>
-              Privacy
-            </button>
-            <button type="button" onClick={() => navigateTo('/security')}>
-              Security
-            </button>
-            <span>© 2026</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter navigateTo={navigateTo} />
     </div>
   )
 }
