@@ -5,11 +5,29 @@ function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
 }
 
-export default function NetWorthTracker({ navigateTo }) {
+export default function HowToTrackNetWorth({ navigateTo }) {
   return (
     <div className="landing-shell">
       <section className="hero-section hero-section-guide">
         <div className="container">
+          <div className="page-topbar">
+            <button
+              type="button"
+              onClick={() => navigateTo('/')}
+              className="brand page-brand page-brand-lg"
+              aria-label="Go to home"
+            >
+              Paddock<span>.</span>
+            </button>
+
+            <button
+              type="button"
+              className="guide-back-link"
+              onClick={() => navigateTo('/')}
+            >
+              Back to home
+            </button>
+          </div>
           <div className="hero-copy">
             <div className="hero-kicker">Net worth tracking</div>
 

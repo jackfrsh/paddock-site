@@ -10,6 +10,25 @@ export default function HowToTrackNetWorth({ navigateTo }) {
     <div className="landing-shell">
       <section className="hero-section hero-section-guide">
         <div className="container">
+          <div className="page-topbar">
+            <button
+              type="button"
+              onClick={() => navigateTo('/')}
+              className="brand page-brand page-brand-lg"
+              aria-label="Go to home"
+            >
+              Paddock<span>.</span>
+            </button>
+
+            <button
+              type="button"
+              className="guide-back-link"
+              onClick={() => navigateTo('/')}
+            >
+              Back to home
+            </button>
+          </div>
+
           <div className="hero-copy">
             <div className="hero-kicker">Guide</div>
 
@@ -28,12 +47,13 @@ export default function HowToTrackNetWorth({ navigateTo }) {
               <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
                 Try Paddock
               </a>
+
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => navigateTo('/')}
+                onClick={() => navigateTo('/net-worth-tracker')}
               >
-                Back to home
+                View net worth page
               </button>
             </div>
 

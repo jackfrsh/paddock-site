@@ -3,7 +3,11 @@ import { GuideShell, GuideLink } from '../components/GuideLayout'
 
 export default function GuideIndex({ navigateTo }) {
   return (
-    <GuideShell title="Guides" onBack={() => navigateTo('/')} navigateTo={navigateTo}>
+    <GuideShell
+  title="Guides"
+  onBack={() => navigateTo('/')}
+  navigateTo={navigateTo}
+>
       <h1 className="guide-h1">Guides</h1>
 
       <p className="guide-lead">

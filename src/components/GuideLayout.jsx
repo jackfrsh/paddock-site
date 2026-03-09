@@ -72,32 +72,48 @@ export function GuideLink({ to, navigateTo, children, className = '' }) {
   )
 }
 
-export function GuideShell({ title, onBack, navigateTo, children }) {
-  const backLabel = title === 'Guides' ? 'Back to Paddock' : 'Back to Guides'
+export function GuideShell({
+  title,
+  onBack,
+  navigateTo,
+  backLabel,
+  children,
+}) {
+  const resolvedBackLabel =
+    backLabel || (title === 'Guides' ? 'Back to Paddock' : 'Back to Guides')
 
   return (
     <div className="landing-shell">
       <section className="hero-section hero-section-guide">
         <div className="container">
-          <div className="hero-copy guide-hero-copy">
+          <div className="guide-page-header">
+            <button
+              type="button"
+              onClick={() => navigateTo('/')}
+              className="brand guide-brand"
+              aria-label="Go to home"
+            >
+              Paddock<span>.</span>
+            </button>
+
             <button
               type="button"
               onClick={onBack}
               className="guide-back-link"
-              aria-label={backLabel}
+              aria-label={resolvedBackLabel}
             >
-              ← {backLabel}
+              ← {resolvedBackLabel}
             </button>
+          </div>
 
-            <div className="hero-kicker">{title === 'Guides' ? 'Library' : 'Guide'}</div>
+          <div className="hero-copy guide-hero-copy">
+            <div className="hero-kicker">{title === 'Guides' ? 'Library' : title}</div>
           </div>
         </div>
       </section>
 
       <section className="container section guide-page-section">
-        <article className="guide-article">
-          {children}
-        </article>
+        <article className="guide-article">{children}</article>
       </section>
 
       <SiteFooter navigateTo={navigateTo} />
