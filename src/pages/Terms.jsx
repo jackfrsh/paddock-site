@@ -4,7 +4,7 @@ import { GuideShell, H2, P } from '../components/GuideLayout'
 export default function Terms({ navigateTo }) {
   return (
     <GuideShell
-  title="Privacy"
+  title="Terms"
   onBack={() => navigateTo('/')}
   navigateTo={navigateTo}
   backLabel="Back to Paddock"
