@@ -7,7 +7,7 @@ import accountsShot from '/src/assets/slides/PaddockAccounts.png'
 import homeShotWebp from '/src/assets/slides/PaddockHeroWebP.webp'
 import outlookShotWebp from '/src/assets/slides/PaddockOutlookWebP.webp'
 import insightsShotWebp from '/src/assets/slides/PaddockInsightsWebP.webp'
-import accountsShotWebp from '/src/assets/slides/PaddockAccountsWebp.webp'
+import accountsShotWebp from '/src/assets/slides/PaddockAccountsWebP.webp'
 
 const slides = [
   {
