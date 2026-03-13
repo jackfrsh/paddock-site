@@ -8,6 +8,8 @@ import homeShotWebp from '/src/assets/landing/paddock-home.webp'
 import outlookShotWebp from '/src/assets/landing/paddock-outlook.webp'
 import insightsShotWebp from '/src/assets/landing/paddock-insights.webp'
 
+import HeroSlideshow from './components/HeroSlideshow'
+
 import GuideIndex from './guides/GuideIndex'
 import MultiCurrency from './guides/MultiCurrency'
 import LongTermProjection from './guides/LongTermProjection'
@@ -376,17 +378,8 @@ export default function App() {
         </div>
       </section>
 
-      <section className="container section-tight">
-        <Reveal>
-          <Screenshot
-            src={homeShot}
-            webp={homeShotWebp}
-            alt="Paddock dashboard showing net worth, milestones and plan progress"
-            caption="Net worth dashboard with milestones, trajectory and plan progress."
-            loading="eager"
-          />
-        </Reveal>
-      </section>
+      <HeroSlideshow goTo={goTo} />
+
 
       <section className="section-border">
         <div className="container section">
