@@ -95,9 +95,10 @@ function Reveal({ children, className = '' }) {
       className={className}
       style={{
         opacity: 0,
-        transform: 'translateY(16px)',
+        transform: 'translateY(8px)',
         transition:
-          'opacity 0.6s cubic-bezier(0.2,0.8,0.2,1), transform 0.6s cubic-bezier(0.2,0.8,0.2,1)',
+          'opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1)',
+        willChange: 'opacity, transform',
       }}
     >
       {children}
@@ -123,6 +124,7 @@ export default function App() {
   const [pending, setPending] = useState(null)
   const [route, setRoute] = useState(getRoute)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [pageVisible, setPageVisible] = useState(true)
 
   const goTo = (kind) => {
     if (pending) return
@@ -136,10 +138,40 @@ export default function App() {
   }
 
   const navigateTo = (path) => {
-    window.history.pushState({}, '', path)
-    setRoute(getRoute())
-    setMenuOpen(false)
-    window.scrollTo(0, 0)
+    if (path === window.location.pathname) {
+      setMenuOpen(false)
+      return
+    }
+  
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  
+    const doNav = () => {
+      window.history.pushState({}, '', path)
+      setRoute(getRoute())
+      setMenuOpen(false)
+      window.scrollTo(0, 0)
+    }
+  
+    if (reduceMotion) {
+      doNav()
+      return
+    }
+  
+    setPageVisible(false)
+  
+    window.setTimeout(() => {
+      if (document.startViewTransition) {
+        document.startViewTransition(() => {
+          doNav()
+        })
+      } else {
+        doNav()
+      }
+  
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setPageVisible(true))
+      })
+    }, 180)
   }
 
   // Per-route metadata: title, description, canonical, OG, Twitter, JSON-LD
@@ -191,7 +223,27 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    const onPop = () => setRoute(getRoute())
+    const onPop = () => {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  
+      if (reduceMotion) {
+        setRoute(getRoute())
+        window.scrollTo(0, 0)
+        return
+      }
+  
+      setPageVisible(false)
+  
+      window.setTimeout(() => {
+        setRoute(getRoute())
+        window.scrollTo(0, 0)
+  
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => setPageVisible(true))
+        })
+      }, 120)
+    }
+  
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
   }, [])
@@ -209,7 +261,7 @@ export default function App() {
   if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth navigateTo={navigateTo} />
 
   return (
-    <div className="landing-shell">
+    <div className={`landing-shell page-shell ${pageVisible ? 'is-visible' : 'is-hidden'}`}>
       <header className="landing-nav">
         <div className="landing-nav-inner">
         <button

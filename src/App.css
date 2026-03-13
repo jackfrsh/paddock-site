@@ -367,20 +367,28 @@ h3 {
   background: rgba(255, 255, 255, 0.02);
 }
 
-.hero-showcase-image {
+.hero-showcase-screen,
+.shot-frame {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.hero-showcase-image,
+.shot-image {
   display: block;
   width: 100%;
   height: auto;
+  contain: paint;
 }
 
 .hero-showcase-fade {
-  animation: heroShowcaseFade 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  animation: heroShowcaseFade 460ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes heroShowcaseFade {
   from {
     opacity: 0;
-    transform: translateY(10px) scale(0.992);
+    transform: translateY(6px) scale(0.996);
   }
   to {
     opacity: 1;
@@ -448,6 +456,35 @@ h3 {
 
   .hero-showcase-screen {
     border-radius: 20px;
+  }
+}
+
+.page-shell {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.page-shell.is-hidden {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.page-shell.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-shell,
+  .page-shell.is-hidden,
+  .page-shell.is-visible {
+    transition: none;
+    opacity: 1;
+    transform: none;
   }
 }
 
