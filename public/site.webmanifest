@@ -1,0 +1,21 @@
+{
+    "name": "Paddock",
+    "short_name": "Paddock",
+    "description": "Personal wealth dashboard",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#171A1F",
+    "theme_color": "#171A1F",
+    "icons": [
+      {
+        "src": "/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/icon-512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }

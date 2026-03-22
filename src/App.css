@@ -1,23 +1,41 @@
 :root {
+  /* Backgrounds — midnight blue-black family */
   --bg: #171a1f;
   --bg-2: #1d2128;
   --bg-3: #252a33;
 
+  /* Text */
   --text: #f1f2f3;
   --text-2: #d2d5d9;
   --muted: #8d95a1;
 
+  /* Steel-blue accent */
   --accent: #4b79a8;
   --accent-dark: #3a628e;
 
+  /* Accent tints — tokenised to prevent drift */
+  --accent-tint-sm: rgba(75, 121, 168, 0.06);
+  --accent-tint-md: rgba(75, 121, 168, 0.16);
+  --accent-tint-lg: rgba(75, 121, 168, 0.22);
+  --accent-glow: rgba(75, 121, 168, 0.30);
+
+  /* Semantic colours — used only where they naturally belong */
+  --gold: #c4a35a;
+  --gold-soft: rgba(196, 163, 90, 0.14);
+  --green: #4e9e72;
+  --amber: #d4893a;
+
+  /* Borders */
   --border: rgba(255, 255, 255, 0.08);
   --border-soft: rgba(255, 255, 255, 0.05);
   --border-faint: rgba(255, 255, 255, 0.04);
 
+  /* Surfaces */
   --surface: rgba(255, 255, 255, 0.02);
   --surface-soft: rgba(255, 255, 255, 0.03);
   --surface-hover: rgba(255, 255, 255, 0.04);
 
+  /* Text opacity scale */
   --text-soft: rgba(241, 242, 243, 0.6);
   --text-faint: rgba(241, 242, 243, 0.42);
   --text-subtle: rgba(241, 242, 243, 0.32);
@@ -25,8 +43,17 @@
   --text-dim: rgba(241, 242, 243, 0.35);
   --text-kicker: rgba(241, 242, 243, 0.46);
 
+  /* Shadows */
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
   --shadow-lg: 0 28px 80px rgba(0, 0, 0, 0.36);
+
+  /* Backdrop overlays */
+  --nav-bg: rgba(23, 26, 31, 0.68);
+  --topbar-bg: rgba(23, 26, 31, 0.72);
+
+  /* Card gradients */
+  --card-gradient: linear-gradient(145deg, #1e232b 0%, #1d2128 45%, #191d24 100%);
+  --card-gradient-featured: linear-gradient(145deg, #202630 0%, #1d2128 48%, #191d24 100%);
 
   --radius-sm: 12px;
   --radius-md: 16px;
@@ -53,7 +80,7 @@ body {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: var(--text);
   background:
-    radial-gradient(1200px 700px at 15% 0%, rgba(75, 121, 168, 0.16), transparent 55%),
+    radial-gradient(1200px 700px at 15% 0%, var(--accent-tint-md), transparent 55%),
     radial-gradient(900px 500px at 85% 10%, rgba(255, 255, 255, 0.04), transparent 60%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 50%),
     var(--bg);
@@ -246,7 +273,7 @@ h3 {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 85% 20%, rgba(75, 121, 168, 0.16), transparent 26%),
+    radial-gradient(circle at 85% 20%, var(--accent-tint-md), transparent 26%),
     radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.05), transparent 25%);
   pointer-events: none;
 }
@@ -495,7 +522,7 @@ h3 {
   top: 0;
   z-index: 50;
   border-bottom: 1px solid var(--border-soft);
-  background: rgba(23, 26, 31, 0.68);
+  background: var(--nav-bg);
   backdrop-filter: blur(18px);
 }
 
@@ -738,7 +765,7 @@ h3 {
   overflow: hidden;
   border-radius: var(--radius-3xl);
   border: 1px solid var(--border);
-  background: linear-gradient(145deg, #1e232b 0%, #1d2128 45%, #191d24 100%);
+  background: var(--card-gradient);
   box-shadow: var(--shadow-lg);
 }
 
@@ -885,16 +912,16 @@ h3 {
   border-radius: var(--radius-2xl);
   padding: 28px;
   box-shadow: var(--shadow);
-  background: linear-gradient(145deg, #1e232b 0%, #1d2128 45%, #191d24 100%);
+  background: var(--card-gradient);
   border: 1px solid var(--border);
 }
 
 .price-card-featured {
-  background: linear-gradient(145deg, #202630 0%, #1d2128 48%, #191d24 100%);
-  border-color: rgba(75, 121, 168, 0.22);
+  background: var(--card-gradient-featured);
+  border-color: var(--accent-tint-lg);
   box-shadow:
     0 20px 48px rgba(0, 0, 0, 0.32),
-    inset 0 0 0 1px rgba(75, 121, 168, 0.06);
+    inset 0 0 0 1px var(--accent-tint-sm);
 }
 
 .price-toprow {
@@ -918,8 +945,8 @@ h3 {
   min-height: 28px;
   padding: 0 10px;
   border-radius: 999px;
-  background: rgba(75, 121, 168, 0.14);
-  color: var(--accent);
+  background: var(--gold-soft);
+  color: var(--gold);
   font-size: 0.75rem;
   font-weight: 700;
 }
@@ -1035,8 +1062,8 @@ h3 {
   position: sticky;
   top: 0;
   z-index: 40;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(23, 26, 31, 0.72);
+  border-bottom: 1px solid var(--border-soft);
+  background: var(--topbar-bg);
   backdrop-filter: blur(18px);
 }
 
@@ -1090,7 +1117,7 @@ h3 {
   border-radius: var(--radius-2xl);
   padding: 28px;
   border: 1px solid var(--border);
-  background: linear-gradient(145deg, #1e232b 0%, #1d2128 45%, #191d24 100%);
+  background: var(--card-gradient);
   box-shadow: var(--shadow);
 }
 
@@ -1159,7 +1186,7 @@ h3 {
 .guide-divider {
   height: 1px;
   margin: 28px 0;
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--border);
 }
 
 .guide-links {
@@ -1173,8 +1200,8 @@ h3 {
   border-radius: 18px;
   text-decoration: none;
   color: var(--text);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
   transition:
     transform 0.18s ease,
     border-color 0.18s ease,
@@ -1210,8 +1237,8 @@ h3 {
 .guide-example {
   padding: 18px 18px;
   border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
 }
 
 .guide-callout-text,
@@ -1245,8 +1272,8 @@ h3 {
 .guide-cta-box {
   padding: 22px;
   border-radius: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
 }
 
 .guide-cta-btn {
@@ -1276,8 +1303,8 @@ h3 {
 .guide-example {
   margin-top: 20px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--border-soft);
+  background: var(--surface);
   padding: 18px 20px;
 }
 
@@ -1311,7 +1338,7 @@ h3 {
 .guide-inline-link {
   color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(75, 121, 168, 0.3);
+  border-bottom: 1px solid var(--accent-glow);
   transition: border-color 0.15s ease;
 }
 
