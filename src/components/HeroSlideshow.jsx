@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
 import homeShot from '/src/assets/slides/PaddockHero.png'
-import outlookShot from '/src/assets/slides/PaddockOutlook.png'
-import insightsShot from '/src/assets/slides/PaddockInsights.png'
+import outlookShot from '/src/assets/slides/paddock-plan.png'
+import insightsShot from '/src/assets/slides/paddock-decisions.png'
 import accountsShot from '/src/assets/slides/PaddockAccounts.png'
 import homeShotWebp from '/src/assets/slides/PaddockHeroWebP.webp'
-import outlookShotWebp from '/src/assets/slides/PaddockOutlookWebP.webp'
-import insightsShotWebp from '/src/assets/slides/PaddockInsightsWebP.webp'
+import outlookShotWebp from '/src/assets/slides/paddock-plan.webp'
+import insightsShotWebp from '/src/assets/slides/paddock-decisions.webp'
 import accountsShotWebp from '/src/assets/slides/PaddockAccountsWebP.webp'
 
 const slides = [
