@@ -12,47 +12,47 @@ import accountsShotWebp from '/src/assets/slides/PaddockAccountsWebP.webp'
 const slides = [
   {
     id: 1,
+    eyebrow: 'Decisions',
+    title: 'Know what the next pounds should do',
+    body:
+      'Model ISA timing, contribution changes and long-term trade-offs before you commit new money. Paddock helps turn balances into decisions.',
+    src: insightsShot,
+    webp: insightsShotWebp,
+    alt: 'Paddock decisions view showing planning tools and next-step modelling',
+    caption: 'Decision tools for ISA timing, contribution changes and long-term trade-offs.',
+  },
+  {
+    id: 2,
+    eyebrow: 'Projection',
+    title: 'See the path, not just the total',
+    body:
+      'Long-term projections show where your current pace is taking you, what is required, and how far ahead or behind you are.',
+    src: outlookShot,
+    webp: outlookShotWebp,
+    alt: 'Paddock projection view showing long-term wealth trajectory and target path',
+    caption: 'Long-term projection with visible assumptions, target path and trajectory.',
+  },
+  {
+    id: 3,
     eyebrow: 'Dashboard',
     title: 'See your wealth clearly',
     body:
-      'A calm dashboard for net worth, milestones, and long-term progress — designed to make the numbers feel instantly readable.',
+      'A calm dashboard for net worth, milestones and long-term progress — designed to make the important numbers readable at a glance.',
     src: homeShot,
     webp: homeShotWebp,
     alt: 'Paddock dashboard showing net worth, milestones and progress',
     caption: 'Net worth dashboard with milestones, trajectory and plan progress.',
   },
   {
-    id: 2,
+    id: 4,
     eyebrow: 'Accounts',
     title: 'Bring everything into one place',
     body:
-      'Track cash, ISAs, pensions, property and more in one structured view, with multi-currency support and a cleaner workflow than spreadsheets.',
+      'Track cash, ISAs, pensions, property and more in one structured view, with a cleaner workflow than spreadsheets and support for multiple currencies.',
     src: accountsShot,
     webp: accountsShotWebp,
-    alt: 'Paddock scenario and account planning view',
+    alt: 'Paddock accounts view showing structured wealth tracking across account types',
     caption: 'Structured wealth tracking across the accounts that matter most.',
-  },
-  {
-    id: 3,
-    eyebrow: 'Projection',
-    title: 'See where your wealth is heading',
-    body:
-      'Long-term projections make the path ahead clearer, with visible assumptions and a calmer sense of momentum.',
-    src: outlookShot,
-    webp: outlookShotWebp,
-    alt: 'Paddock outlook view showing long-term wealth projection',
-    caption: 'Long-term projection with visible assumptions and trajectory.',
-  },
-  {
-    id: 4,
-    eyebrow: 'Trust',
-    title: 'Private by design',
-    body:
-      'No ads. No bank linking. Just a deliberate, premium space to understand and build wealth with confidence.',
-      src: insightsShot,
-      webp: insightsShotWebp,
-    alt: 'Paddock dashboard interface representing private, focused wealth tracking',
-    caption: 'Private, focused wealth tracking in a calm and premium interface.',
   },
 ]
 
@@ -77,7 +77,7 @@ export default function HeroSlideshow({ goTo }) {
 
     const timer = window.setInterval(() => {
       setIndex((prev) => (prev + 1) % slides.length)
-    }, 4200)
+    }, 5200)
 
     return () => window.clearInterval(timer)
   }, [isPlaying])
@@ -142,7 +142,7 @@ export default function HeroSlideshow({ goTo }) {
 
           <div className="hero-showcase-cta">
             <button type="button" className="btn btn-primary" onClick={() => goTo('signup')}>
-              Get started — it’s free
+              Start planning — it’s free
             </button>
           </div>
         </div>

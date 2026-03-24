@@ -2,11 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import './App.css'
 
 import homeShot from '/src/assets/landing/paddock-home.png'
-import outlookShot from '/src/assets/landing/paddock-outlook.png'
-import insightsShot from '/src/assets/landing/paddock-insights.png'
+import outlookShot from '/src/assets/landing/paddock-plan.png'
+import insightsShot from '/src/assets/landing/paddock-decisions.png'
 import homeShotWebp from '/src/assets/landing/paddock-home.webp'
-import outlookShotWebp from '/src/assets/landing/paddock-outlook.webp'
-import insightsShotWebp from '/src/assets/landing/paddock-insights.webp'
+import outlookShotWebp from '/src/assets/landing/paddock-plan.webp'
+import insightsShotWebp from '/src/assets/landing/paddock-decisions.webp'
 
 import HeroSlideshow from './components/HeroSlideshow'
 
@@ -363,17 +363,17 @@ export default function App() {
       <section className="hero-section">
         <div className="container">
           <div className="hero-copy">
-            <div className="hero-kicker">Personal wealth dashboard</div>
+          <div className="hero-kicker">Private wealth planning</div>
 
-            <h1>
-              A net worth tracker.
-              <br />
-              For long-term wealth.
-            </h1>
+<h1>
+  Your wealth.
+  <br />
+  Planned.
+</h1>
 
-            <p className="hero-sub">
-              Track cash, investments, pensions and property in one calm dashboard — with multi-currency support, long-term projections, and privacy-first manual tracking.
-            </p>
+<p className="hero-sub">
+  Model ISA deadlines, mortgage trade-offs, pensions and long-term projections in one calm, private dashboard — built for decisions, not just balance checking.
+</p>
 
             <div className="hero-actions">
               <button
@@ -382,7 +382,7 @@ export default function App() {
                 onClick={() => goTo('signup')}
                 disabled={!!pending}
               >
-                {pending === 'signup' ? 'Opening…' : 'Get started — it’s free'}
+                {pending === 'signup' ? 'Opening…' : 'Start planning — it’s free'}
               </button>
 
               <button
@@ -398,34 +398,12 @@ export default function App() {
             <p className="hero-foot">Free to start • No credit card required • Setup takes under 2 minutes</p>
 
             <div className="hero-tags">
-              <button
-                type="button"
-                className="hero-tag-link"
-                onClick={() => navigateTo('/net-worth-tracker')}
-              >
-                Net worth tracking
-              </button>
-
-              <button
-                type="button"
-                className="hero-tag-link"
-                onClick={() => navigateTo('/guides/multi-currency-net-worth-tracker')}
-              >
-                Multi-currency support
-              </button>
-
-              <button
-                type="button"
-                className="hero-tag-link"
-                onClick={() => navigateTo('/track-isas-pensions-savings')}
-              >
-                Track ISAs and pensions
-              </button>
-
-              <span>No ads</span>
-              <span>No bank linking</span>
-              <span>Private by design</span>
-            </div>
+  <span>ISA deadline awareness</span>
+  <span>Mortgage trade-off modelling</span>
+  <span>Long-term projections</span>
+  <span>No bank linking</span>
+  <span>Private by design</span>
+</div>
           </div>
         </div>
       </section>
@@ -436,12 +414,11 @@ export default function App() {
       <section className="section-border">
         <div className="container section">
           <Reveal>
-            <SectionLabel>Use Paddock for</SectionLabel>
-            <h2>Built for real wealth tracking.</h2>
-            <p className="section-copy">
-              Explore the core ways people use Paddock to track wealth more clearly and stay focused
-              on long-term progress.
-            </p>
+          <SectionLabel>Use Paddock for</SectionLabel>
+<h2>Built for real wealth planning.</h2>
+<p className="section-copy">
+  Explore the core ways people use Paddock to see wealth clearly, plan ahead, and stay focused on long-term progress.
+</p>
 
             <div className="use-links-grid">
               <button
@@ -490,29 +467,36 @@ export default function App() {
 
       <section id="product" className="container section">
         <Reveal>
-          <SectionLabel>Product</SectionLabel>
-          <h2>Everything that matters, in one place.</h2>
-          <p className="section-copy">
-            Built for clarity: one long-term goal, visible assumptions, and a dashboard you'll actually check.
-          </p>
+        <SectionLabel>Why Paddock</SectionLabel>
+<h2>From balances to decisions.</h2>
+<p className="section-copy">
+  Paddock helps you see where your wealth is heading, what is getting in the way, and what to do next — without the clutter of a generic finance app.
+</p>
 
           <div className="split-columns">
-            <div>
-              <h3>One target. Always visible.</h3>
-              <div className="line" />
-              <p>
-                A single long-term goal anchors the model. Your projection evolves as your net worth and
-                contributions change.
-              </p>
-            </div>
+          <div>
+  <h3>One plan, always visible.</h3>
+  <div className="line" />
+  <p>
+    A named long-term goal anchors the model, so progress is measured against something real — not just a changing balance.
+  </p>
+</div>
 
-            <div>
-              <h3>Multi-currency portfolios.</h3>
-              <div className="line" />
-              <p>
-                Track ISAs, SIPPs, cash, property and more across currencies with a clear base-currency view.
-              </p>
-            </div>
+<div>
+  <h3>UK wealth context built in.</h3>
+  <div className="line" />
+  <p>
+    ISAs, pensions, property and wrapper-aware decisions are part of the experience — not bolted on later.
+  </p>
+</div>
+
+<div>
+  <h3>See the impact before you move.</h3>
+  <div className="line" />
+  <p>
+    Model contribution changes, compare paths, and understand trade-offs before you commit new money.
+  </p>
+</div>
 
             <div>
               <h3>Assumptions in plain sight.</h3>
@@ -527,36 +511,13 @@ export default function App() {
       </section>
 
       <section className="section-border">
-        <div className="container section">
-          <Reveal>
-            <SectionLabel>Projection</SectionLabel>
-            <h2>See where your wealth is heading.</h2>
-            <p className="section-copy">
-              A long-horizon model that shows both the gap and the path — so your progress is easier to
-              understand and easier to act on.
-            </p>
-          </Reveal>
-
-          <Reveal className="section-top-gap">
-            <Screenshot
-              src={outlookShot}
-              webp={outlookShotWebp}
-              alt="Paddock outlook view showing long-term wealth projection"
-              caption="Long-term projection with visible assumptions and trajectory."
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section-border">
         <div className="container section two-col">
           <Reveal>
-            <SectionLabel>Scenarios</SectionLabel>
-            <h2>See the impact before you commit.</h2>
-            <p className="section-copy narrow">
-              Adjust contributions, compare timelines, and understand the trade-offs before you make the next
-              move.
-            </p>
+          <SectionLabel>Decisions</SectionLabel>
+<h2>Know what the next pounds should do.</h2>
+<p className="section-copy narrow">
+  Use Paddock to model ISA timing, contribution changes, and long-term trade-offs before you make the next move.
+</p>
 
             <div className="pill-links">
               <button
@@ -594,15 +555,36 @@ export default function App() {
         </div>
       </section>
 
+
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+          <SectionLabel>Projection</SectionLabel>
+<h2>See the path, not just the total.</h2>
+<p className="section-copy">
+  Project your current path, compare it to the pace required, and understand the gap long before it becomes a surprise.
+</p>
+          </Reveal>
+
+          <Reveal className="section-top-gap">
+            <Screenshot
+              src={outlookShot}
+              webp={outlookShotWebp}
+              alt="Paddock outlook view showing long-term wealth projection"
+              caption="Long-term projection with visible assumptions and trajectory."
+            />
+          </Reveal>
+        </div>
+      </section>
+
       <section className="section-border">
         <div className="container section">
           <Reveal>
             <SectionLabel>Trust</SectionLabel>
             <h2>Private by design.</h2>
             <p className="section-copy">
-              No ads. No trackers. No bank linking. Just a deliberate, premium space to understand and build
-              wealth.
-            </p>
+  No ads. No trackers. No bank linking. Paddock is intentionally manual, so your data stays private and your numbers stay deliberate.
+</p>
 
             <div className="trust-grid">
               <div>
@@ -637,18 +619,19 @@ export default function App() {
       <section id="pricing" className="section-border">
         <div className="container section">
           <Reveal>
-            <SectionLabel>Pricing</SectionLabel>
-            <h2>Simple.</h2>
-            <p className="section-copy">
-              Start with structured tracking. Upgrade when you're ready to plan decades ahead.
-            </p>
+          <SectionLabel>Pricing</SectionLabel>
+<h2>Simple.</h2>
+<p className="section-copy">
+  Start free to track your wealth clearly. Upgrade when you want to plan years ahead and model what to do next.
+</p>
           </Reveal>
 
           <Reveal className="pricing-grid">
             <div className="price-card">
               <div className="price-tier">Free</div>
               <div className="price-value">£0</div>
-              <p className="price-copy">Structured wealth tracking</p>
+              <p className="price-copy price-copy-strong">See your wealth clearly.</p>
+<p className="price-copy price-copy-meta">Private by design. Most people update once after payday.</p>
 
               <div className="price-list">
                 <p>Net worth dashboard</p>
@@ -681,8 +664,9 @@ export default function App() {
                 <div className="price-suffix">/month</div>
               </div>
 
-              <p className="price-copy">or £60/year (2 months free) · Annual includes a 7-day trial</p>
-              <p className="price-copy">For serious wealth planning — decades, not months.</p>
+              <p className="price-copy price-copy-meta">£60/year (2 months free) · Includes a 7-day trial</p>
+<p className="price-copy price-copy-strong">See the path, the gap, and the next move.</p>
+<p className="price-copy">Plan 5–40 years ahead, compare scenarios, and understand what it takes to hit your target.</p>
 
               <div className="price-list">
                 <p>Unlimited accounts</p>

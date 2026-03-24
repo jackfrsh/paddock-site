@@ -902,26 +902,41 @@ h3 {
   background: var(--surface);
 }
 
+
+#pricing {
+  scroll-margin-top: 104px;
+}
+
+#pricing .section {
+  padding-top: 96px;
+}
+
 /* Pricing */
 
 .pricing-grid {
   grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  margin-top: 24px;
+  align-items: stretch;
 }
 
 .price-card {
   border-radius: var(--radius-2xl);
-  padding: 28px;
+  padding: 30px;
   box-shadow: var(--shadow);
   background: var(--card-gradient);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .price-card-featured {
   background: var(--card-gradient-featured);
-  border-color: var(--accent-tint-lg);
+  border-color: rgba(200, 155, 60, 0.24);
   box-shadow:
     0 20px 48px rgba(0, 0, 0, 0.32),
-    inset 0 0 0 1px var(--accent-tint-sm);
+    inset 0 0 0 1px rgba(200, 155, 60, 0.10);
 }
 
 .price-toprow {
@@ -931,12 +946,12 @@ h3 {
 }
 
 .price-tier {
-  color: var(--text-soft);
+  color: rgba(241,242,243,0.68);
   font-weight: 600;
 }
 
 .price-tier.feature {
-  color: var(--text);
+  color: rgba(241,242,243,0.94);
 }
 
 .badge {
@@ -956,6 +971,8 @@ h3 {
   font-size: 2.4rem;
   font-weight: 700;
   letter-spacing: -0.04em;
+  color: rgba(255,255,255,0.96);
+  line-height: 1;
 }
 
 .price-row {
@@ -970,7 +987,7 @@ h3 {
 }
 
 .price-suffix {
-  color: var(--text-subtle);
+  color: rgba(241,242,243,0.42);
   font-size: 0.9rem;
   font-weight: 600;
   line-height: 1;
@@ -978,19 +995,50 @@ h3 {
 
 .price-copy {
   margin: 10px 0 0;
-  color: rgba(241, 242, 243, 0.4);
+  color: rgba(241,242,243,0.58);
   line-height: 1.6;
+}
+
+.price-copy-strong {
+  color: rgba(241,242,243,0.90);
+  font-weight: 500;
+  line-height: 1.45;
+  margin-top: 14px;
+}
+
+.price-copy-meta {
+  color: rgba(241,242,243,0.42);
+  margin-top: 10px;
+}
+
+.price-card-featured .price-copy-strong {
+  color: rgba(255,255,255,0.94);
 }
 
 .price-list {
   display: grid;
-  gap: 8px;
-  margin: 22px 0 28px;
+  gap: 10px;
+  margin: 28px 0 34px;
 }
 
 .price-list p {
-  color: var(--text-faint);
-  line-height: 1.6;
+  color: rgba(241,242,243,0.72);
+  line-height: 1.5;
+}
+
+.price-card .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+@media (max-width: 900px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #pricing .section {
+    padding-top: 80px;
+  }
 }
 
 /* FAQ */
