@@ -372,7 +372,7 @@ export default function App() {
 </h1>
 
 <p className="hero-sub">
-  Model ISA deadlines, mortgage trade-offs, pensions and long-term projections in one calm, private dashboard — built for decisions, not just balance checking.
+Track ISAs, pensions, savings, property and multi-currency accounts in one private dashboard — with long-term projections, decision support, and no bank linking.
 </p>
 
             <div className="hero-actions">
@@ -412,65 +412,85 @@ export default function App() {
 
 
       <section className="section-border">
-        <div className="container section">
-          <Reveal>
-          <SectionLabel>Use Paddock for</SectionLabel>
-<h2>Built for real wealth planning.</h2>
-<p className="section-copy">
-  Explore the core ways people use Paddock to see wealth clearly, plan ahead, and stay focused on long-term progress.
-</p>
+  <div className="container section">
+    <Reveal>
+      <SectionLabel>Use Paddock for</SectionLabel>
+      <h2>Built for real wealth planning.</h2>
+      <p className="section-copy">
+        Paddock helps you track net worth clearly, bring UK wealth accounts into one place, replace fragile spreadsheets, and make better long-term decisions.
+      </p>
 
-            <div className="use-links-grid">
-              <button
-                type="button"
-                className="use-link-item"
-                onClick={() => navigateTo('/net-worth-tracker')}
-              >
-                <h3>Net worth tracking</h3>
-                <div className="line" />
-                <p>See assets and liabilities together in one calm dashboard.</p>
-              </button>
+      <div className="use-links-grid">
+        <a
+          href="/net-worth-tracker"
+          className="use-link-item"
+          onClick={(e) => {
+            if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+              e.preventDefault()
+              navigateTo('/net-worth-tracker')
+            }
+          }}
+        >
+          <h3>Net worth tracking</h3>
+          <div className="line" />
+          <p>See assets and liabilities together in one calm dashboard.</p>
+        </a>
 
-              <button
-                type="button"
-                className="use-link-item"
-                onClick={() => navigateTo('/track-isas-pensions-savings')}
-              >
-                <h3>Track ISAs and pensions</h3>
-                <div className="line" />
-                <p>Bring core UK wealth accounts into one clear long-term view.</p>
-              </button>
+        <a
+          href="/track-isas-pensions-savings"
+          className="use-link-item"
+          onClick={(e) => {
+            if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+              e.preventDefault()
+              navigateTo('/track-isas-pensions-savings')
+            }
+          }}
+        >
+          <h3>Track ISAs and pensions</h3>
+          <div className="line" />
+          <p>Bring core UK wealth accounts into one clear long-term view.</p>
+        </a>
 
-              <button
-                type="button"
-                className="use-link-item"
-                onClick={() => navigateTo('/spreadsheet-alternative-net-worth-tracking')}
-              >
-                <h3>Replace spreadsheets</h3>
-                <div className="line" />
-                <p>Move from fragile tabs and formulas to a cleaner structured workflow.</p>
-              </button>
+        <a
+          href="/spreadsheet-alternative-net-worth-tracking"
+          className="use-link-item"
+          onClick={(e) => {
+            if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+              e.preventDefault()
+              navigateTo('/spreadsheet-alternative-net-worth-tracking')
+            }
+          }}
+        >
+          <h3>Replace spreadsheets</h3>
+          <div className="line" />
+          <p>Move from fragile tabs and formulas to a cleaner structured workflow.</p>
+        </a>
 
-              <button
-                type="button"
-                className="use-link-item"
-                onClick={() => navigateTo('/how-to-track-your-net-worth')}
-              >
-                <h3>How to track your net worth</h3>
-                <div className="line" />
-                <p>Learn what to include, how often to update, and what matters most.</p>
-              </button>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+        <a
+          href="/how-to-track-your-net-worth"
+          className="use-link-item"
+          onClick={(e) => {
+            if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+              e.preventDefault()
+              navigateTo('/how-to-track-your-net-worth')
+            }
+          }}
+        >
+          <h3>How to track your net worth</h3>
+          <div className="line" />
+          <p>Learn what to include, how often to update, and what matters most.</p>
+        </a>
+      </div>
+    </Reveal>
+  </div>
+</section>
 
       <section id="product" className="container section">
         <Reveal>
         <SectionLabel>Why Paddock</SectionLabel>
 <h2>From balances to decisions.</h2>
 <p className="section-copy">
-  Paddock helps you see where your wealth is heading, what is getting in the way, and what to do next — without the clutter of a generic finance app.
+  Paddock is a manual-entry, privacy-first net worth tracker built for people who want more than balance checking — with clear projections, UK wealth context, and better next-step decisions.
 </p>
 
           <div className="split-columns">
@@ -665,18 +685,20 @@ export default function App() {
               </div>
 
               <p className="price-copy price-copy-meta">£60/year (2 months free) · Includes a 7-day trial</p>
-<p className="price-copy price-copy-strong">See the path, the gap, and the next move.</p>
-<p className="price-copy">Plan 5–40 years ahead, compare scenarios, and understand what it takes to hit your target.</p>
+              <p className="price-copy price-copy-strong">See the path, the gap, and what to do next.</p>
+<p className="price-copy">
+  Plan 5–40 years ahead, compare scenarios, and make clearer ISA, mortgage, and contribution decisions.
+</p>
 
-              <div className="price-list">
-                <p>Unlimited accounts</p>
-                <p>5–40 year projections</p>
-                <p>Full trajectory chart: projected vs required path</p>
-                <p>Inflation-adjusted (real terms) view</p>
-                <p>One-off deposit modelling</p>
-                <p>Optimiser: calculates required monthly contribution</p>
-                <p>What-if scenario comparisons</p>
-              </div>
+<div className="price-list">
+  <p>Unlimited accounts</p>
+  <p>5–40 year projections</p>
+  <p>Full trajectory chart: projected vs required path</p>
+  <p>Inflation-adjusted (real terms) view</p>
+  <p>Scenario comparisons</p>
+  <p>ISA strategy support</p>
+  <p>Mortgage overpayment and next-pounds decision support</p>
+</div>
 
               <button
                 type="button"

@@ -1,7 +1,8 @@
 export const PAGE_META = {
   landing: {
-    title: 'Paddock — Personal Wealth Dashboard',
-    description: 'Track net worth, understand progress, and model your long-term future with multi-currency tracking, visible assumptions, and projections that show the path ahead.',
+    title: 'Paddock | Net Worth Tracker for ISAs, Pensions and Multi-Currency Wealth',
+    description:
+      'Track ISAs, pensions, savings, property and multi-currency accounts in one private dashboard. Plan ahead with long-term projections and no bank linking.',
     canonical: 'https://getpaddock.com/',
     ogType: 'website',
     jsonLd: {
@@ -9,7 +10,8 @@ export const PAGE_META = {
       '@type': 'WebSite',
       name: 'Paddock',
       url: 'https://getpaddock.com',
-      description: 'Personal wealth dashboard with multi-currency net worth tracking, long-term projections, and visible assumptions.',
+      description:
+        'Track ISAs, pensions, savings, property and multi-currency accounts in one private dashboard. Plan ahead with long-term projections and no bank linking.',
     },
   },
   guides_index: {

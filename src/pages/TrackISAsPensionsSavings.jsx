@@ -5,7 +5,7 @@ function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
 }
 
-export default function HowToTrackNetWorth({ navigateTo }) {
+export default function TrackISAsPensionsSavings({ navigateTo }) {
   return (
     <div className="landing-shell">
       <section className="hero-section hero-section-guide">
