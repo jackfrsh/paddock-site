@@ -5,7 +5,7 @@ function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
 }
 
-export default function HowToTrackNetWorth({ navigateTo }) {
+export default function NetWorthTracker({ navigateTo }) {
   return (
     <div className="landing-shell">
       <section className="hero-section hero-section-guide">
@@ -32,15 +32,15 @@ export default function HowToTrackNetWorth({ navigateTo }) {
             <div className="hero-kicker">Net worth tracking</div>
 
             <h1>
-              A net worth tracker.
+            Track your net worth.
               <br />
-              For long-term wealth.
+              In one clear place.
             </h1>
 
             <p className="hero-sub">
-              Track cash, investments, pensions, property and liabilities in one calm dashboard —
-              with long-term projections, visible progress, and privacy-first manual tracking.
-            </p>
+  Track cash, investments, pensions, property and liabilities in one private dashboard —
+  with long-term projections, visible progress, multi-currency support, and no bank linking.
+</p>
 
             <div className="hero-actions">
               <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">

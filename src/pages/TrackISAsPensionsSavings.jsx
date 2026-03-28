@@ -29,18 +29,18 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
             </button>
           </div> 
           <div className="hero-copy">
-            <div className="hero-kicker">UK wealth tracking</div>
+          <div className="hero-kicker">Track ISAs, pensions and savings</div>
 
-            <h1>
-              Track ISAs, pensions and savings.
-              <br />
-              In one place.
-            </h1>
+<h1>
+  Track ISAs, pensions and savings.
+  <br />
+  In one place.
+</h1>
 
-            <p className="hero-sub">
-              Bring your core UK wealth accounts into one calm view, so you can see how cash,
-              investments and retirement savings are moving together over time.
-            </p>
+<p className="hero-sub">
+  Bring your core UK wealth accounts into one private dashboard, so you can see how savings,
+  investments and retirement wealth are moving together over time.
+</p>
 
             <div className="hero-actions">
               <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
