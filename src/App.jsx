@@ -622,16 +622,16 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
             </div>
 
             <div className="pill-links section-top-gap-sm">
-              <button type="button" onClick={() => navigateTo('/terms')} className="pill-link">
-                Terms
-              </button>
-              <button type="button" onClick={() => navigateTo('/privacy')} className="pill-link">
-                Privacy
-              </button>
-              <button type="button" onClick={() => navigateTo('/security')} className="pill-link">
-                Security
-              </button>
-            </div>
+  <a href="/terms" className="pill-link">
+    Terms
+  </a>
+  <a href="/privacy" className="pill-link">
+    Privacy
+  </a>
+  <a href="/security" className="pill-link">
+    Security
+  </a>
+</div>
           </Reveal>
         </div>
       </section>
