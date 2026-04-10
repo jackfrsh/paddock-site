@@ -1,5 +1,5 @@
-import GuideLayout from "../components/GuideLayout.jsx";
-import SiteFooter from "../components/SiteFooter.jsx";
+import { GuideLayout } from "../components/GuideLayout.jsx";
+import { SiteFooter }from "../components/SiteFooter.jsx";
 
 export default function Support() {
   return (
