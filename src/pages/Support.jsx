@@ -1,9 +1,17 @@
-import { GuideLayout } from "../components/GuideLayout.jsx";
-import { SiteFooter }from "../components/SiteFooter.jsx";
+import React from "react";
+import { GuideShell } from "../components/GuideLayout.jsx";
 
-export default function Support() {
+export default function Support({ navigateTo }) {
   return (
-    <GuideLayout>
+    <GuideShell
+      seoTitle="Support | Paddock"
+      metaDescription="Contact Paddock support for help with your account, billing, bug reports, or general questions. Email hello@getpaddock.com for fast assistance."
+      canonicalPath="/support"
+      heroLabel="Support"
+      navigateTo={navigateTo}
+      onBack={() => navigateTo("/")}
+      backLabel="Back to Paddock"
+    >
       <main className="mx-auto max-w-2xl px-4 py-16 text-slate-100">
         <h1 className="text-3xl font-semibold mb-4 tracking-tight">Support</h1>
         <p className="mb-8 text-lg text-slate-300">
@@ -32,7 +40,7 @@ export default function Support() {
               <li>What happened</li>
               <li>What you expected to happen</li>
               <li>Your device and iOS version</li>
-              <li>Screenshots (if possible)</li>
+              <li>Screenshots if possible</li>
             </ul>
           </div>
         </section>
@@ -42,7 +50,7 @@ export default function Support() {
             <h2 className="text-lg font-medium mb-2">We can help with</h2>
             <ul className="list-disc pl-5 text-slate-300 text-base space-y-1">
               <li>Account access</li>
-              <li>Billing & subscriptions</li>
+              <li>Billing and subscriptions</li>
               <li>Bug reports</li>
               <li>General questions</li>
             </ul>
@@ -55,7 +63,6 @@ export default function Support() {
           <a href="/terms" className="hover:underline">Terms of Service</a>
         </div>
       </main>
-      <SiteFooter />
-    </GuideLayout>
+    </GuideShell>
   );
 }
