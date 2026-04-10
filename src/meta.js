@@ -1,3 +1,17 @@
+  support: {
+    title: 'Support | Paddock',
+    description: 'Contact Paddock support for help with your account, billing, bug reports, or general questions. Email hello@getpaddock.com for fast assistance.',
+    canonical: 'https://getpaddock.com/support',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Support',
+      url: 'https://getpaddock.com/support',
+      description: 'Contact Paddock support for help with your account, billing, bug reports, or general questions. Email hello@getpaddock.com for fast assistance.',
+      isPartOf: { '@type': 'WebSite', name: 'Paddock', url: 'https://getpaddock.com' },
+    },
+  },
 export const PAGE_META = {
   landing: {
     title: 'Paddock | Net Worth Tracker for ISAs, Pensions and Multi-Currency Wealth',

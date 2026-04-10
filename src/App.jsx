@@ -21,6 +21,7 @@ import NetWorthTracker from './pages/NetWorthTracker'
 import TrackISAsPensionsSavings from './pages/TrackISAsPensionsSavings'
 import SpreadsheetAlternative from './pages/SpreadsheetAlternative'
 import HowToTrackNetWorth from './pages/HowToTrackNetWorth'
+import Support from './pages/Support'
 import { PAGE_META } from './meta'
 import SiteFooter from './components/SiteFooter'
 
@@ -38,6 +39,8 @@ function getRoute() {
   if (path.startsWith('/privacy')) return 'privacy'
   if (path.startsWith('/security')) return 'security'
   if (path.startsWith('/terms')) return 'terms'
+
+  if (path.startsWith('/support')) return 'support'
 
   if (path.startsWith('/net-worth-tracker')) return 'net_worth_tracker'
   if (path.startsWith('/track-isas-pensions-savings')) return 'track_isas_pensions_savings'
@@ -255,6 +258,7 @@ export default function App() {
   if (route === 'privacy') return <Privacy navigateTo={navigateTo} />
   if (route === 'security') return <Security navigateTo={navigateTo} />
   if (route === 'terms') return <Terms navigateTo={navigateTo} />
+  if (route === 'support') return <Support navigateTo={navigateTo} />
   if (route === 'net_worth_tracker') return <NetWorthTracker navigateTo={navigateTo} />
   if (route === 'track_isas_pensions_savings') return <TrackISAsPensionsSavings navigateTo={navigateTo} />
   if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative navigateTo={navigateTo} />
