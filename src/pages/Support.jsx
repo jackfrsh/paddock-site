@@ -1,6 +1,5 @@
 import GuideLayout from "../components/GuideLayout.jsx";
 import SiteFooter from "../components/SiteFooter.jsx";
-import { Link } from "react-router-dom";
 
 export default function Support() {
   return (
@@ -15,7 +14,10 @@ export default function Support() {
           <div className="rounded-xl bg-slate-800/80 border border-slate-700 p-6 mb-6">
             <h2 className="text-xl font-medium mb-2">Contact Support</h2>
             <p className="mb-2 text-slate-300">
-              Email us at <a href="mailto:hello@getpaddock.com" className="underline hover:text-blue-300">hello@getpaddock.com</a>
+              Email us at{" "}
+              <a href="mailto:hello@getpaddock.com" className="underline hover:text-blue-300">
+                hello@getpaddock.com
+              </a>
             </p>
             <p className="text-slate-400 text-sm">
               We aim to respond within 1 business day.
@@ -48,9 +50,9 @@ export default function Support() {
         </section>
 
         <div className="flex gap-6 mt-8 text-slate-400 text-sm">
-          <Link to="/privacy" className="hover:underline">Privacy Policy</Link>
+          <a href="/privacy" className="hover:underline">Privacy Policy</a>
           <span>·</span>
-          <Link to="/terms" className="hover:underline">Terms of Service</Link>
+          <a href="/terms" className="hover:underline">Terms of Service</a>
         </div>
       </main>
       <SiteFooter />
