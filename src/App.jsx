@@ -22,6 +22,9 @@ import TrackISAsPensionsSavings from './pages/TrackISAsPensionsSavings'
 import SpreadsheetAlternative from './pages/SpreadsheetAlternative'
 import HowToTrackNetWorth from './pages/HowToTrackNetWorth'
 import Support from './pages/Support'
+import PensionDrawdownCalculator from './tools/PensionDrawdownCalculator'
+import ToolsHub from './pages/ToolsHub'
+import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
 import SiteFooter from './components/SiteFooter'
 
@@ -46,6 +49,8 @@ function getRoute() {
   if (path.startsWith('/track-isas-pensions-savings')) return 'track_isas_pensions_savings'
   if (path.startsWith('/spreadsheet-alternative-net-worth-tracking')) return 'spreadsheet_alternative'
   if (path.startsWith('/how-to-track-your-net-worth')) return 'how_to_track_net_worth'
+  if (path.startsWith('/tools/pension-drawdown-calculator')) return 'tools_pension_drawdown'
+  if (path === '/tools' || path === '/tools/') return 'tools_hub'
 
   return 'landing'
 }
@@ -127,6 +132,7 @@ export default function App() {
   const [pending, setPending] = useState(null)
   const [route, setRoute] = useState(getRoute)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [toolsMobileOpen, setToolsMobileOpen] = useState(false)
   const [pageVisible, setPageVisible] = useState(true)
 
   const goTo = (kind) => {
@@ -159,18 +165,12 @@ export default function App() {
       doNav()
       return
     }
-  
+
     setPageVisible(false)
-  
+
     window.setTimeout(() => {
-      if (document.startViewTransition) {
-        document.startViewTransition(() => {
-          doNav()
-        })
-      } else {
-        doNav()
-      }
-  
+      doNav()
+
       requestAnimationFrame(() => {
         requestAnimationFrame(() => setPageVisible(true))
       })
@@ -263,6 +263,8 @@ export default function App() {
   if (route === 'track_isas_pensions_savings') return <TrackISAsPensionsSavings navigateTo={navigateTo} />
   if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative navigateTo={navigateTo} />
   if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth navigateTo={navigateTo} />
+  if (route === 'tools_pension_drawdown') return <PensionDrawdownCalculator navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'tools_hub') return <ToolsHub navigateTo={navigateTo} goTo={goTo} />
 
   return (
     <div className={`landing-shell page-shell ${pageVisible ? 'is-visible' : 'is-hidden'}`}>
@@ -290,6 +292,7 @@ export default function App() {
             >
               Guides
             </button>
+            <ToolsDropdown navigateTo={navigateTo} />
 
             <div className="nav-divider" />
 
@@ -353,6 +356,65 @@ export default function App() {
             <button type="button" onClick={() => { navigateTo('/guides'); setMenuOpen(false) }}>
               Guides
             </button>
+
+            {/* Tools accordion */}
+            <div className="mobile-tools-wrap">
+              <button
+                type="button"
+                className="mobile-tools-trigger"
+                onClick={() => setToolsMobileOpen((v) => !v)}
+                aria-expanded={toolsMobileOpen}
+              >
+                <span>Tools</span>
+                <svg
+                  className={`tools-chevron${toolsMobileOpen ? ' is-open' : ''}`}
+                  width="10"
+                  height="6"
+                  viewBox="0 0 10 6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M1 1l4 4 4-4" />
+                </svg>
+              </button>
+              {toolsMobileOpen && (
+                <div className="mobile-tools-items">
+                  <a
+                    href="/tools/pension-drawdown-calculator"
+                    className="mobile-tools-item"
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault()
+                        navigateTo('/tools/pension-drawdown-calculator')
+                        setMenuOpen(false)
+                        setToolsMobileOpen(false)
+                      }
+                    }}
+                  >
+                    Pension drawdown calculator
+                  </a>
+                  <a
+                    href="/tools"
+                    className="mobile-tools-item"
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault()
+                        navigateTo('/tools')
+                        setMenuOpen(false)
+                        setToolsMobileOpen(false)
+                      }
+                    }}
+                  >
+                    View all tools
+                  </a>
+                </div>
+              )}
+            </div>
+
             <button
               type="button"
               onClick={() => { goTo('signin'); setMenuOpen(false) }}
@@ -579,6 +641,46 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
         </div>
       </section>
 
+
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>Free tools</SectionLabel>
+            <h2>Start planning before you sign up.</h2>
+            <p className="section-copy">
+              Free calculators for UK pension planning and retirement income. No account required.
+              Your numbers stay in your browser.
+            </p>
+            <a
+              href="/tools/pension-drawdown-calculator"
+              className="tools-feature-card"
+              onClick={(e) => {
+                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                  e.preventDefault()
+                  navigateTo('/tools/pension-drawdown-calculator')
+                }
+              }}
+            >
+              <div className="tools-feature-card-body">
+                <h3 className="tools-feature-card-title">Pension drawdown calculator UK</h3>
+                <div className="line" />
+                <p className="tools-feature-card-desc">
+                  Estimate retirement income and how long your pension may last under different
+                  drawdown scenarios. Includes a 3% / 4% / 5% withdrawal comparison.
+                </p>
+                <span className="tools-feature-card-link">Try the calculator →</span>
+              </div>
+            </a>
+            <button
+              type="button"
+              className="tools-feature-all"
+              onClick={() => navigateTo('/tools')}
+            >
+              View all free tools
+            </button>
+          </Reveal>
+        </div>
+      </section>
 
       <section className="section-border">
         <div className="container section">

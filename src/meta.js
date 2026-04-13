@@ -192,4 +192,48 @@ export const PAGE_META = {
     canonical: 'https://getpaddock.com/how-to-track-your-net-worth',
     ogType: 'website',
   },
+
+  tools_hub: {
+    title: 'Free Planning Tools — Paddock',
+    description:
+      'Free UK financial planning tools from Paddock. Pension drawdown calculator and more — no login required. Your numbers stay in your browser.',
+    canonical: 'https://getpaddock.com/tools',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      name: 'Free Planning Tools',
+      url: 'https://getpaddock.com/tools',
+      description:
+        'Free UK financial planning tools from Paddock. Pension drawdown calculator and more — no login required.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
+  tools_pension_drawdown: {
+    title: 'Pension Drawdown Calculator UK — How Long Will My Pension Last? | Paddock',
+    description:
+      'Free UK pension drawdown calculator. Enter your pot, retirement age and assumptions to project how long your pension could last — no login required. Includes a 3%/4%/5% withdrawal comparison.',
+    canonical: 'https://getpaddock.com/tools/pension-drawdown-calculator',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Pension Drawdown Calculator UK',
+      url: 'https://getpaddock.com/tools/pension-drawdown-calculator',
+      description:
+        'Free UK pension drawdown calculator. Project how long your pension pot could last in drawdown, with a 3%/4%/5% withdrawal comparison.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
 }
