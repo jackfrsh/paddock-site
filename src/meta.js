@@ -215,6 +215,34 @@ export const PAGE_META = {
     },
   },
 
+  founder_manual_tracking: {
+    title: 'Why I Track Wealth Manually Instead of Using Open Banking Apps | Paddock',
+    description:
+      "A founder's perspective on why manual, privacy-first wealth tracking can be better than open banking sync — for people with ISAs, pensions, multi-currency accounts, and a long time horizon.",
+    canonical:
+      'https://getpaddock.com/why-i-track-wealth-manually-instead-of-using-open-banking-apps',
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: 'Why I Track Wealth Manually Instead of Using Open Banking Apps',
+      description:
+        "A founder's perspective on manual entry, privacy, and why deliberate wealth tracking can be better than automatic sync for people with complex UK accounts.",
+      url: 'https://getpaddock.com/why-i-track-wealth-manually-instead-of-using-open-banking-apps',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
   best_net_worth_apps_uk: {
     title: 'Best Net Worth Tracking Apps UK — Comparison & Review | Paddock',
     description:
