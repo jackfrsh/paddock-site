@@ -671,29 +671,51 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
             <SectionLabel>Free tools</SectionLabel>
             <h2>Start planning before you sign up.</h2>
             <p className="section-copy">
-              Free calculators for UK pension planning and retirement income. No account required.
-              Your numbers stay in your browser.
+              Free calculators for UK pension planning and financial independence. No account
+              required. Your numbers stay in your browser.
             </p>
-            <a
-              href="/tools/pension-drawdown-calculator"
-              className="tools-feature-card"
-              onClick={(e) => {
-                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-                  e.preventDefault()
-                  navigateTo('/tools/pension-drawdown-calculator')
-                }
-              }}
-            >
-              <div className="tools-feature-card-body">
-                <h3 className="tools-feature-card-title">Pension drawdown calculator UK</h3>
-                <div className="line" />
-                <p className="tools-feature-card-desc">
-                  Estimate retirement income and how long your pension may last under different
-                  drawdown scenarios. Includes a 3% / 4% / 5% withdrawal comparison.
-                </p>
-                <span className="tools-feature-card-link">Try the calculator →</span>
-              </div>
-            </a>
+            <div className="tools-feature-cards">
+              <a
+                href="/tools/pension-drawdown-calculator"
+                className="tools-feature-card"
+                onClick={(e) => {
+                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                    e.preventDefault()
+                    navigateTo('/tools/pension-drawdown-calculator')
+                  }
+                }}
+              >
+                <div className="tools-feature-card-body">
+                  <h3 className="tools-feature-card-title">Pension drawdown calculator UK</h3>
+                  <div className="line" />
+                  <p className="tools-feature-card-desc">
+                    Estimate retirement income and how long your pension may last under different
+                    drawdown scenarios. Includes a 3% / 4% / 5% withdrawal comparison.
+                  </p>
+                  <span className="tools-feature-card-link">Try the calculator →</span>
+                </div>
+              </a>
+              <a
+                href="/tools/fire-number-calculator"
+                className="tools-feature-card"
+                onClick={(e) => {
+                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                    e.preventDefault()
+                    navigateTo('/tools/fire-number-calculator')
+                  }
+                }}
+              >
+                <div className="tools-feature-card-body">
+                  <h3 className="tools-feature-card-title">FIRE number calculator UK</h3>
+                  <div className="line" />
+                  <p className="tools-feature-card-desc">
+                    Calculate your financial independence target based on annual spending and
+                    withdrawal rate. Includes a 3.5% / 4% / 4.5% withdrawal comparison.
+                  </p>
+                  <span className="tools-feature-card-link">Try the calculator →</span>
+                </div>
+              </a>
+            </div>
             <button
               type="button"
               className="tools-feature-all"
