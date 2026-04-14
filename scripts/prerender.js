@@ -21,6 +21,7 @@ const routeMap = {
   track_isas_pensions_savings: '/track-isas-pensions-savings',
   spreadsheet_alternative: '/spreadsheet-alternative-net-worth-tracking',
   how_to_track_net_worth: '/how-to-track-your-net-worth',
+  best_net_worth_apps_uk: '/best-net-worth-tracking-apps-uk',
   tools_hub: '/tools',
   tools_pension_drawdown: '/tools/pension-drawdown-calculator',
   tools_fire_number: '/tools/fire-number-calculator',

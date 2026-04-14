@@ -58,17 +58,17 @@ export const PAGE_META = {
   },
 
   guide_multi_currency: {
-    title: 'Multi-Currency Net Worth Tracking Explained | Paddock',
+    title: 'Multi-Currency Portfolio Tracker UK — Track Investments Across Currencies | Paddock',
     description:
-      'How multi-currency net worth tracking works, why single-currency totals mislead, and how to keep your wealth dashboard accurate across GBP, USD, and EUR.',
+      'Track investments, ISAs, pensions, savings, and other accounts across GBP, USD, EUR and more in one base-currency view. No bank connection required. Private, manual-entry wealth tracking with Paddock.',
     canonical: 'https://getpaddock.com/guides/multi-currency-net-worth-tracker',
     ogType: 'article',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'Article',
-      headline: 'Multi-Currency Net Worth Tracking Explained',
+      headline: 'Multi-Currency Portfolio Tracker — Track Investments Across Currencies',
       description:
-        'How multi-currency net worth tracking works, why single-currency totals mislead, and how to keep your wealth dashboard accurate across GBP, USD, and EUR.',
+        'Track investments, ISAs, pensions, savings, and other accounts across GBP, USD, EUR and more in one base-currency view. No bank connection required.',
       url: 'https://getpaddock.com/guides/multi-currency-net-worth-tracker',
       inLanguage: 'en',
       isPartOf: {
@@ -209,6 +209,33 @@ export const PAGE_META = {
       inLanguage: 'en-GB',
       isPartOf: {
         '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
+  best_net_worth_apps_uk: {
+    title: 'Best Net Worth Tracking Apps UK — Comparison & Review | Paddock',
+    description:
+      'A practical comparison of the best net worth tracking apps in the UK — covering Paddock, Emma, Moneyhub, and spreadsheets. For UK users tracking ISAs, pensions, savings, and multi-currency wealth.',
+    canonical: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: 'Best Net Worth Tracking Apps UK — Comparison & Review',
+      description:
+        'A practical comparison of the best net worth tracking apps in the UK for users tracking ISAs, pensions, savings, and multi-currency wealth.',
+      url: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+      publisher: {
+        '@type': 'Organization',
         name: 'Paddock',
         url: 'https://getpaddock.com',
       },

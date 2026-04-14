@@ -22,6 +22,7 @@ import TrackISAsPensionsSavings from './pages/TrackISAsPensionsSavings'
 import SpreadsheetAlternative from './pages/SpreadsheetAlternative'
 import HowToTrackNetWorth from './pages/HowToTrackNetWorth'
 import Support from './pages/Support'
+import BestNetWorthAppsUK from './pages/BestNetWorthAppsUK'
 import PensionDrawdownCalculator from './tools/PensionDrawdownCalculator'
 import FireNumberCalculator from './tools/FireNumberCalculator'
 import ToolsHub from './pages/ToolsHub'
@@ -50,6 +51,7 @@ function getRoute() {
   if (path.startsWith('/track-isas-pensions-savings')) return 'track_isas_pensions_savings'
   if (path.startsWith('/spreadsheet-alternative-net-worth-tracking')) return 'spreadsheet_alternative'
   if (path.startsWith('/how-to-track-your-net-worth')) return 'how_to_track_net_worth'
+  if (path.startsWith('/best-net-worth-tracking-apps-uk')) return 'best_net_worth_apps_uk'
   if (path.startsWith('/tools/pension-drawdown-calculator')) return 'tools_pension_drawdown'
   if (path.startsWith('/tools/fire-number-calculator')) return 'tools_fire_number'
   if (path === '/tools' || path === '/tools/') return 'tools_hub'
@@ -265,6 +267,7 @@ export default function App() {
   if (route === 'track_isas_pensions_savings') return <TrackISAsPensionsSavings navigateTo={navigateTo} />
   if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative navigateTo={navigateTo} />
   if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth navigateTo={navigateTo} />
+  if (route === 'best_net_worth_apps_uk') return <BestNetWorthAppsUK navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_pension_drawdown') return <PensionDrawdownCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_fire_number') return <FireNumberCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_hub') return <ToolsHub navigateTo={navigateTo} goTo={goTo} />
