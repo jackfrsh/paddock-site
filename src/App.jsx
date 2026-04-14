@@ -23,6 +23,7 @@ import SpreadsheetAlternative from './pages/SpreadsheetAlternative'
 import HowToTrackNetWorth from './pages/HowToTrackNetWorth'
 import Support from './pages/Support'
 import PensionDrawdownCalculator from './tools/PensionDrawdownCalculator'
+import FireNumberCalculator from './tools/FireNumberCalculator'
 import ToolsHub from './pages/ToolsHub'
 import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
@@ -50,6 +51,7 @@ function getRoute() {
   if (path.startsWith('/spreadsheet-alternative-net-worth-tracking')) return 'spreadsheet_alternative'
   if (path.startsWith('/how-to-track-your-net-worth')) return 'how_to_track_net_worth'
   if (path.startsWith('/tools/pension-drawdown-calculator')) return 'tools_pension_drawdown'
+  if (path.startsWith('/tools/fire-number-calculator')) return 'tools_fire_number'
   if (path === '/tools' || path === '/tools/') return 'tools_hub'
 
   return 'landing'
@@ -264,6 +266,7 @@ export default function App() {
   if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative navigateTo={navigateTo} />
   if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth navigateTo={navigateTo} />
   if (route === 'tools_pension_drawdown') return <PensionDrawdownCalculator navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'tools_fire_number') return <FireNumberCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_hub') return <ToolsHub navigateTo={navigateTo} goTo={goTo} />
 
   return (
@@ -396,6 +399,20 @@ export default function App() {
                     }}
                   >
                     Pension drawdown calculator
+                  </a>
+                  <a
+                    href="/tools/fire-number-calculator"
+                    className="mobile-tools-item"
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault()
+                        navigateTo('/tools/fire-number-calculator')
+                        setMenuOpen(false)
+                        setToolsMobileOpen(false)
+                      }
+                    }}
+                  >
+                    FIRE number calculator
                   </a>
                   <a
                     href="/tools"

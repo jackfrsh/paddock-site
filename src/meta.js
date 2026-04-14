@@ -215,6 +215,28 @@ export const PAGE_META = {
     },
   },
 
+  tools_fire_number: {
+    title: 'FIRE Number Calculator UK — How Much Do You Need to Retire? | Paddock',
+    description:
+      'Free FIRE number calculator. Enter your annual spending and assumptions to find your financial independence target, track your progress, and estimate how long it could take. No login required.',
+    canonical: 'https://getpaddock.com/tools/fire-number-calculator',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'FIRE Number Calculator UK',
+      url: 'https://getpaddock.com/tools/fire-number-calculator',
+      description:
+        'Free FIRE number calculator. Find your financial independence target, track progress, and see how the 3.5%, 4%, and 4.5% withdrawal rates compare.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
   tools_pension_drawdown: {
     title: 'Pension Drawdown Calculator UK — How Long Will My Pension Last? | Paddock',
     description:

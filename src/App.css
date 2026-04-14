@@ -1985,7 +1985,8 @@ h3 {
 .calc-cmp-rate {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  min-width: 88px;
 }
 
 .calc-cmp-rate-value {
@@ -1995,13 +1996,8 @@ h3 {
   font-variant-numeric: tabular-nums;
 }
 
-.calc-cmp-active-badge {
-  font-size: 0.66rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--accent);
-  white-space: nowrap;
+.calc-cmp-rate-value {
+  line-height: 1;
 }
 
 .calc-cmp-income {
@@ -2039,6 +2035,136 @@ h3 {
 
 .calc-cmp-duration.lasts {
   color: var(--green);
+}
+
+/* FIRE progress bar */
+
+.calc-progress {
+  margin-bottom: 20px;
+}
+
+.calc-progress-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.calc-progress-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.calc-progress-pct {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.calc-progress-track {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--border-faint);
+  overflow: hidden;
+}
+
+.calc-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .calc-progress-fill {
+    transition: none;
+  }
+}
+
+/* FIRE comparison table */
+
+.calc-fire-cmp-head {
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.calc-fire-cmp-head.has-years {
+  grid-template-columns: 70px 1fr 1fr 80px;
+}
+
+.calc-fire-cmp-row {
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr;
+  gap: 6px;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  font-size: 0.88rem;
+  align-items: center;
+  border: 1px solid transparent;
+  transition: background 0.12s ease;
+}
+
+.calc-fire-cmp-row.has-years {
+  grid-template-columns: 70px 1fr 1fr 80px;
+}
+
+.calc-fire-cmp-row.active {
+  background: var(--accent-tint-sm);
+  border-color: var(--accent-tint-md);
+}
+
+.calc-fire-cmp-row + .calc-fire-cmp-row {
+  margin-top: 2px;
+}
+
+.calc-fire-cmp-rate {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.calc-fire-cmp-rate-value {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-fire-cmp-target {
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-fire-cmp-gap {
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+}
+
+.calc-fire-cmp-gap.reached {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.calc-fire-cmp-years {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Disclaimer */

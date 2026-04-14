@@ -134,7 +134,6 @@ function ComparisonRow({ rate, monthlyIncome, annualIncome, exhaustedAge, target
     <div className={`calc-cmp-row${isActive ? ' active' : ''}`}>
       <div className="calc-cmp-rate">
         <span className="calc-cmp-rate-value">{rate}</span>
-        {isActive ? <span className="calc-cmp-active-badge">your rate</span> : null}
       </div>
       <div className="calc-cmp-income">
         <span className="calc-cmp-monthly">{fmt(monthlyIncome)}<span className="calc-cmp-per">/mo</span></span>

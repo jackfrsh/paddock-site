@@ -23,6 +23,7 @@ const routeMap = {
   how_to_track_net_worth: '/how-to-track-your-net-worth',
   tools_hub: '/tools',
   tools_pension_drawdown: '/tools/pension-drawdown-calculator',
+  tools_fire_number: '/tools/fire-number-calculator',
 }
 
 function escapeHtml(str) {

@@ -85,6 +85,14 @@ export default function ToolsHub({ navigateTo, goTo }) {
               tags={['Free', 'No login required', 'UK']}
               ctaText="Try the calculator"
             />
+            <ToolCard
+              href="/tools/fire-number-calculator"
+              onClick={() => navigateTo('/tools/fire-number-calculator')}
+              title="FIRE number calculator UK"
+              description="Find your financial independence target based on your annual spending and withdrawal rate. Includes a 3.5% / 4% / 4.5% comparison and an estimated timeline to FI."
+              tags={['Free', 'No login required', 'UK']}
+              ctaText="Calculate my FIRE number"
+            />
           </div>
           <p className="tools-hub-note">
             More tools are in development. Use{' '}

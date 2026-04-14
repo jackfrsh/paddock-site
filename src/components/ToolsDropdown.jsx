@@ -87,6 +87,22 @@ export default function ToolsDropdown({ navigateTo }) {
             </div>
           </a>
 
+          <a
+            href="/tools/fire-number-calculator"
+            className="tools-dropdown-item"
+            onClick={(e) => {
+              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                e.preventDefault()
+                go('/tools/fire-number-calculator')
+              }
+            }}
+          >
+            <div className="tools-dropdown-item-title">FIRE number calculator</div>
+            <div className="tools-dropdown-item-desc">
+              Find your financial independence target and see how long it could take.
+            </div>
+          </a>
+
           <div className="tools-dropdown-sep" />
 
           <a
