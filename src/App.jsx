@@ -27,6 +27,7 @@ import ManualTracking from './pages/ManualTracking'
 import PensionDrawdownCalculator from './tools/PensionDrawdownCalculator'
 import FireNumberCalculator from './tools/FireNumberCalculator'
 import IsaGrowthCalculator from './tools/IsaGrowthCalculator'
+import NetWorthCalculator from './tools/NetWorthCalculator'
 import ToolsHub from './pages/ToolsHub'
 import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
@@ -58,6 +59,7 @@ function getRoute() {
   if (path.startsWith('/tools/pension-drawdown-calculator')) return 'tools_pension_drawdown'
   if (path.startsWith('/tools/fire-number-calculator')) return 'tools_fire_number'
   if (path.startsWith('/tools/isa-growth-calculator')) return 'tools_isa_growth'
+  if (path.startsWith('/tools/net-worth-calculator')) return 'tools_net_worth'
   if (path === '/tools' || path === '/tools/') return 'tools_hub'
 
   return 'landing'
@@ -276,6 +278,7 @@ export default function App() {
   if (route === 'tools_pension_drawdown') return <PensionDrawdownCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_fire_number') return <FireNumberCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_isa_growth') return <IsaGrowthCalculator navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'tools_net_worth') return <NetWorthCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_hub') return <ToolsHub navigateTo={navigateTo} goTo={goTo} />
 
   return (
@@ -436,6 +439,20 @@ export default function App() {
                     }}
                   >
                     ISA growth calculator
+                  </a>
+                  <a
+                    href="/tools/net-worth-calculator"
+                    className="mobile-tools-item"
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault()
+                        navigateTo('/tools/net-worth-calculator')
+                        setMenuOpen(false)
+                        setToolsMobileOpen(false)
+                      }
+                    }}
+                  >
+                    Net worth calculator
                   </a>
                   <a
                     href="/tools"

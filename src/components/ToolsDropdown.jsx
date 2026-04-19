@@ -119,6 +119,22 @@ export default function ToolsDropdown({ navigateTo }) {
             </div>
           </a>
 
+          <a
+            href="/tools/net-worth-calculator"
+            className="tools-dropdown-item"
+            onClick={(e) => {
+              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                e.preventDefault()
+                go('/tools/net-worth-calculator')
+              }
+            }}
+          >
+            <div className="tools-dropdown-item-title">Net worth calculator</div>
+            <div className="tools-dropdown-item-desc">
+              Total your assets and liabilities instantly — no login required.
+            </div>
+          </a>
+
           <div className="tools-dropdown-sep" />
 
           <a

@@ -270,6 +270,28 @@ export const PAGE_META = {
     },
   },
 
+  tools_net_worth: {
+    title: 'Net Worth Calculator UK — Total Your Assets and Liabilities | Paddock',
+    description:
+      'Free UK net worth calculator. Enter your assets and liabilities to see your total net worth instantly — cash, investments, pensions, property, and debts. Supports multi-currency. No login required.',
+    canonical: 'https://getpaddock.com/tools/net-worth-calculator',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Net Worth Calculator UK',
+      url: 'https://getpaddock.com/tools/net-worth-calculator',
+      description:
+        'Free UK net worth calculator. Total your assets and liabilities — cash, investments, pensions, property, and debts — with optional multi-currency support.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
   tools_isa_growth: {
     title: 'ISA Growth Calculator UK — Project Your ISA Value | Paddock',
     description:

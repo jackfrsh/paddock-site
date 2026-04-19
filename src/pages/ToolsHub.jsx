@@ -101,6 +101,14 @@ export default function ToolsHub({ navigateTo, goTo }) {
               tags={['Free', 'No login required', 'UK']}
               ctaText="Project my ISA"
             />
+            <ToolCard
+              href="/tools/net-worth-calculator"
+              onClick={() => navigateTo('/tools/net-worth-calculator')}
+              title="Net worth calculator UK"
+              description="Total your assets and liabilities to see your net worth instantly — cash, investments, pensions, property, and debts. Results update as you type. Optional multi-currency support."
+              tags={['Free', 'No login required', 'Multi-currency']}
+              ctaText="Calculate my net worth"
+            />
           </div>
           <p className="tools-hub-note">
             More tools are in development. Use{' '}

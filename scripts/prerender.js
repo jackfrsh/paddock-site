@@ -27,6 +27,7 @@ const routeMap = {
   tools_pension_drawdown: '/tools/pension-drawdown-calculator',
   tools_fire_number: '/tools/fire-number-calculator',
   tools_isa_growth: '/tools/isa-growth-calculator',
+  tools_net_worth: '/tools/net-worth-calculator',
 }
 
 function escapeHtml(str) {

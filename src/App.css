@@ -2769,3 +2769,281 @@ h3 {
     padding: 20px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Net Worth Calculator
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Top controls: base currency + multi-currency toggle ── */
+
+.nw-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.nw-base-currency {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nw-base-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.nw-base-select {
+  height: 34px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 0 10px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.nw-base-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ── Multi-currency toggle ── */
+
+.nw-multicurrency-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.nw-multicurrency-toggle input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+/* ── Input rows ── */
+
+.nw-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nw-row {
+  display: grid;
+  grid-template-columns: 1fr 144px 68px;
+  align-items: center;
+  gap: 8px;
+}
+
+.nw-rows--single .nw-row {
+  grid-template-columns: 1fr 172px;
+}
+
+.nw-row-label {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--text-2);
+  line-height: 1.3;
+}
+
+/* Currency select per row */
+
+.nw-currency-select {
+  height: 44px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: var(--radius-md);
+  color: var(--text-2);
+  font: inherit;
+  font-size: 0.8rem;
+  padding: 0 6px;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: center;
+  width: 100%;
+}
+
+.nw-currency-select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ── Results: split bar ── */
+
+.nw-split-bar-wrap {
+  margin: 18px 0 6px;
+}
+
+.nw-split-bar-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 5px;
+}
+
+.nw-split-bar {
+  display: flex;
+  height: 7px;
+  border-radius: 9999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.nw-split-bar-assets {
+  background: var(--green);
+  opacity: 0.75;
+  transition: width 0.3s ease;
+  border-radius: 9999px 0 0 9999px;
+  min-width: 0;
+}
+
+.nw-split-bar-liabilities {
+  background: var(--amber);
+  opacity: 0.75;
+  transition: width 0.3s ease;
+  border-radius: 0 9999px 9999px 0;
+  min-width: 0;
+}
+
+/* ── Results: category breakdown ── */
+
+.nw-breakdown {
+  margin-top: 20px;
+}
+
+.nw-breakdown-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--text-quiet);
+  margin-bottom: 10px;
+}
+
+.nw-breakdown-row {
+  display: grid;
+  grid-template-columns: 110px 1fr 90px;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+
+.nw-breakdown-label {
+  font-size: 0.76rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nw-breakdown-bar-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.nw-breakdown-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.35s ease;
+}
+
+.nw-breakdown-bar-fill.asset {
+  background: var(--green);
+  opacity: 0.7;
+}
+
+.nw-breakdown-bar-fill.liability {
+  background: var(--amber);
+  opacity: 0.7;
+}
+
+.nw-breakdown-value {
+  font-size: 0.76rem;
+  color: var(--text-2);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ── Net worth value colouring ── */
+
+.calc-stat.nw-positive .calc-stat-value {
+  color: var(--green);
+}
+
+.calc-stat.nw-negative .calc-stat-value {
+  color: var(--amber);
+}
+
+/* ── Multi-currency note ── */
+
+.nw-fx-note {
+  margin-top: 14px;
+  font-size: 0.74rem;
+  color: var(--muted);
+  line-height: 1.5;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-tint-sm);
+  border: 1px solid rgba(75, 121, 168, 0.12);
+}
+
+/* ── Results empty state ── */
+
+.nw-results-empty {
+  padding: 32px 20px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 760px) {
+  .nw-row {
+    grid-template-columns: 1fr 120px 64px;
+    gap: 6px;
+  }
+
+  .nw-rows--single .nw-row {
+    grid-template-columns: 1fr 150px;
+  }
+
+  .nw-row-label {
+    font-size: 0.8rem;
+  }
+
+  .nw-breakdown-row {
+    grid-template-columns: 90px 1fr 76px;
+    gap: 8px;
+  }
+
+  .nw-breakdown-value {
+    font-size: 0.72rem;
+  }
+}
