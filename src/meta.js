@@ -270,6 +270,28 @@ export const PAGE_META = {
     },
   },
 
+  tools_isa_growth: {
+    title: 'ISA Growth Calculator UK — Project Your ISA Value | Paddock',
+    description:
+      'Free ISA growth calculator. Enter your balance, monthly contributions and return assumption to see how your ISA could grow over time. Includes a 3%, 5%, and 7% return comparison. No login required.',
+    canonical: 'https://getpaddock.com/tools/isa-growth-calculator',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'ISA Growth Calculator UK',
+      url: 'https://getpaddock.com/tools/isa-growth-calculator',
+      description:
+        'Free ISA growth calculator. Project your Stocks and Shares ISA over 5, 10, 20 or 30 years with a 3%, 5%, and 7% return comparison.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
   tools_fire_number: {
     title: 'FIRE Number Calculator UK — How Much Do You Need to Retire? | Paddock',
     description:

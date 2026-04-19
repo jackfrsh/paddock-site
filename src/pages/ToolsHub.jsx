@@ -93,6 +93,14 @@ export default function ToolsHub({ navigateTo, goTo }) {
               tags={['Free', 'No login required', 'UK']}
               ctaText="Calculate my FIRE number"
             />
+            <ToolCard
+              href="/tools/isa-growth-calculator"
+              onClick={() => navigateTo('/tools/isa-growth-calculator')}
+              title="ISA growth calculator UK"
+              description="Project your Stocks and Shares ISA over 5, 10, 20 or 30 years. Enter your balance, monthly contributions, and return assumption. Includes a 3% / 5% / 7% return comparison."
+              tags={['Free', 'No login required', 'UK']}
+              ctaText="Project my ISA"
+            />
           </div>
           <p className="tools-hub-note">
             More tools are in development. Use{' '}

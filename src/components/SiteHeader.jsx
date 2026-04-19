@@ -178,6 +178,18 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
                   FIRE number calculator
                 </a>
                 <a
+                  href="/tools/isa-growth-calculator"
+                  className="mobile-tools-item"
+                  onClick={(e) => {
+                    if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                      e.preventDefault()
+                      go('/tools/isa-growth-calculator')
+                    }
+                  }}
+                >
+                  ISA growth calculator
+                </a>
+                <a
                   href="/tools"
                   className="mobile-tools-item"
                   onClick={(e) => {

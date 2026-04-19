@@ -103,6 +103,22 @@ export default function ToolsDropdown({ navigateTo }) {
             </div>
           </a>
 
+          <a
+            href="/tools/isa-growth-calculator"
+            className="tools-dropdown-item"
+            onClick={(e) => {
+              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                e.preventDefault()
+                go('/tools/isa-growth-calculator')
+              }
+            }}
+          >
+            <div className="tools-dropdown-item-title">ISA growth calculator</div>
+            <div className="tools-dropdown-item-desc">
+              Project your ISA value over time and see the 3% / 5% / 7% return comparison.
+            </div>
+          </a>
+
           <div className="tools-dropdown-sep" />
 
           <a
