@@ -1,0 +1,10 @@
+# Netlify redirect rules for Paddock (Vite SPA with prerendering)
+#
+# All known routes have their own prerendered index.html files in dist/.
+# Netlify serves those directly with a 200 — no redirect needed for those paths.
+#
+# This catch-all serves the root index.html (with a 200, not a redirect) for
+# any path that does NOT have a prerendered file, so client-side routing
+# handles it cleanly instead of returning a 404.
+
+/*    /index.html    200

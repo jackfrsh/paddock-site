@@ -84,7 +84,7 @@ export function GuideShell({
   children,
 }) {
   const siteUrl = 'https://getpaddock.com'
-  const canonicalUrl = canonicalPath ? `${siteUrl}${canonicalPath}` : siteUrl
+  const canonicalUrl = canonicalPath ? `${siteUrl}${canonicalPath}/` : `${siteUrl}/`
 
   const resolvedSeoTitle = seoTitle || 'Paddock'
   const resolvedHeroLabel = heroLabel || 'Guide'

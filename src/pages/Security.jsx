@@ -4,7 +4,9 @@ import { GuideShell, H2, P } from '../components/GuideLayout'
 export default function Security({ navigateTo }) {
   return (
     <GuideShell
-  title="Security"
+  seoTitle="Security | Paddock"
+  metaDescription="How Paddock keeps your data secure: industry-standard authentication, Stripe billing, encrypted connections."
+  canonicalPath="/security"
   onBack={() => navigateTo('/')}
   navigateTo={navigateTo}
   backLabel="Back to Paddock"

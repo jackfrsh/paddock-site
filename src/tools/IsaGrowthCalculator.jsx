@@ -188,14 +188,14 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
           name="description"
           content="Free ISA growth calculator. Enter your balance, monthly contributions and return assumption to see how your ISA could grow over time. No login required."
         />
-        <link rel="canonical" href="https://getpaddock.com/tools/isa-growth-calculator" />
+        <link rel="canonical" href="https://getpaddock.com/tools/isa-growth-calculator/" />
         <meta property="og:title" content="ISA Growth Calculator UK | Paddock" />
         <meta
           property="og:description"
           content="Free ISA growth calculator. Project your Stocks and Shares ISA over 5, 10, 20 or 30 years. See the 3%, 5%, and 7% growth comparison."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/isa-growth-calculator" />
+        <meta property="og:url" content="https://getpaddock.com/tools/isa-growth-calculator/" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ISA Growth Calculator UK | Paddock" />
         <meta
