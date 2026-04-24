@@ -1,4 +1,5 @@
 import React from 'react'
+import AppStoreBadgeLink from './AppStoreBadgeLink'
 
 export default function SiteFooter({ navigateTo }) {
   return (
@@ -27,6 +28,8 @@ export default function SiteFooter({ navigateTo }) {
           </button>
           <span>© 2026</span>
         </div>
+
+        <AppStoreBadgeLink className="app-store-badge-footer" />
       </div>
     </footer>
   )

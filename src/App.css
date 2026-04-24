@@ -755,6 +755,41 @@ h3 {
   border-color: rgba(255, 255, 255, 0.14);
 }
 
+.app-store-badge-link {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 12px;
+  opacity: 0.84;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.app-store-badge-link:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.app-store-badge-link:focus-visible {
+  box-shadow: 0 0 0 3px rgba(75, 121, 168, 0.22);
+}
+
+.app-store-badge-image {
+  display: block;
+  width: 135px;
+  height: auto;
+}
+
+.app-store-badge-hero,
+.app-store-badge-final {
+  margin-top: 18px;
+}
+
+.app-store-badge-final {
+  margin-inline: auto;
+}
+
 /* Screenshots */
 
 .shot-wrap {
@@ -1082,11 +1117,17 @@ h3 {
 
 .landing-footer-inner {
   padding: 26px 0;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
 .footer-links {
   color: var(--text-subtle);
   font-size: 0.85rem;
+}
+
+.app-store-badge-footer {
+  margin-left: auto;
 }
 
 .footer-links button {
@@ -1439,6 +1480,10 @@ h3 {
 
   .hero-actions {
     flex-direction: column;
+  }
+
+  .app-store-badge-footer {
+    margin-left: 0;
   }
 
   .btn {

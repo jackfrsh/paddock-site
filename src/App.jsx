@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './App.css'
 
-import homeShot from '/src/assets/landing/paddock-home.png'
 import outlookShot from '/src/assets/landing/paddock-plan.png'
 import insightsShot from '/src/assets/landing/paddock-decisions.png'
-import homeShotWebp from '/src/assets/landing/paddock-home.webp'
 import outlookShotWebp from '/src/assets/landing/paddock-plan.webp'
 import insightsShotWebp from '/src/assets/landing/paddock-decisions.webp'
 
@@ -32,6 +30,7 @@ import ToolsHub from './pages/ToolsHub'
 import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
 import SiteFooter from './components/SiteFooter'
+import AppStoreBadgeLink from './components/AppStoreBadgeLink'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
@@ -518,6 +517,8 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
               </button>
             </div>
 
+            <AppStoreBadgeLink className="app-store-badge-hero" />
+
             <p className="hero-foot">Free to start • No credit card required • Setup takes under 2 minutes</p>
 
             <div className="hero-tags">
@@ -940,6 +941,8 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
                 {pending === 'signin' ? 'Opening…' : 'Sign in'}
               </button>
             </div>
+
+            <AppStoreBadgeLink className="app-store-badge-final" />
 
             <p className="hero-foot">Free to start • No credit card required</p>
           </Reveal>
