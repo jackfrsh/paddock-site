@@ -185,14 +185,14 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
           name="description"
           content="Free UK net worth calculator. Enter your assets and liabilities to see your total net worth instantly — cash, investments, pensions, property, and debts. No login required."
         />
-        <link rel="canonical" href="https://getpaddock.com/tools/net-worth-calculator/" />
+        <link rel="canonical" href="https://getpaddock.com/tools/net-worth-calculator" />
         <meta property="og:title" content="Net Worth Calculator UK | Paddock" />
         <meta
           property="og:description"
           content="Free net worth calculator. Add your assets and liabilities to see your total net worth. Supports multi-currency. No account needed."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/net-worth-calculator/" />
+        <meta property="og:url" content="https://getpaddock.com/tools/net-worth-calculator" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Net Worth Calculator UK | Paddock" />
         <meta

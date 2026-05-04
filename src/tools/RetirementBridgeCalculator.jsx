@@ -285,14 +285,14 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
           name="description"
           content="Estimate how much you may need in ISA, cash or other accessible savings to bridge the gap between stopping work and accessing pension income."
         />
-        <link rel="canonical" href="https://getpaddock.com/tools/retirement-bridge-calculator/" />
+        <link rel="canonical" href="https://getpaddock.com/tools/retirement-bridge-calculator" />
         <meta property="og:title" content="ISA Retirement Bridge Calculator UK | Paddock" />
         <meta
           property="og:description"
           content="Estimate how much you may need in ISA, cash or other accessible savings to bridge the gap between stopping work and accessing pension income."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/retirement-bridge-calculator/" />
+        <meta property="og:url" content="https://getpaddock.com/tools/retirement-bridge-calculator" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="ISA Retirement Bridge Calculator UK | Paddock" />
         <meta

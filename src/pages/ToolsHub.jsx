@@ -40,14 +40,14 @@ export default function ToolsHub({ navigateTo, goTo }) {
           name="description"
           content="Free UK financial planning tools from Paddock. Pension drawdown calculator and more — no login required. Your numbers stay in your browser."
         />
-        <link rel="canonical" href="https://getpaddock.com/tools/" />
+        <link rel="canonical" href="https://getpaddock.com/tools" />
         <meta property="og:title" content="Free Planning Tools — Paddock" />
         <meta
           property="og:description"
           content="Free UK financial planning tools from Paddock. Pension drawdown calculator and more — no login required."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/" />
+        <meta property="og:url" content="https://getpaddock.com/tools" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Free Planning Tools — Paddock" />
         <meta

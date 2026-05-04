@@ -1,3 +1,9 @@
 User-agent: *
+Disallow: /api/
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /settings
+Disallow: /accounts
+Disallow: /auth
 Allow: /
 Sitemap: https://getpaddock.com/sitemap.xml

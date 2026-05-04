@@ -201,14 +201,14 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
           name="description"
           content="Free FIRE number calculator. Enter your annual spending and assumptions to find your financial independence target, track your progress, and estimate how long it could take."
         />
-        <link rel="canonical" href="https://getpaddock.com/tools/fire-number-calculator/" />
+        <link rel="canonical" href="https://getpaddock.com/tools/fire-number-calculator" />
         <meta property="og:title" content="FIRE Number Calculator UK | Paddock" />
         <meta
           property="og:description"
           content="Free FIRE number calculator. Find your financial independence target and see how the 3.5%, 4%, and 4.5% withdrawal rates compare."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/fire-number-calculator/" />
+        <meta property="og:url" content="https://getpaddock.com/tools/fire-number-calculator" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="FIRE Number Calculator UK | Paddock" />
         <meta

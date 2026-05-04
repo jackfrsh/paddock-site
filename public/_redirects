@@ -1,10 +1,52 @@
-# Netlify redirect rules for Paddock (Vite SPA with prerendering)
-#
-# All known routes have their own prerendered index.html files in dist/.
-# Netlify serves those directly with a 200 — no redirect needed for those paths.
-#
-# This catch-all serves the root index.html (with a 200, not a redirect) for
-# any path that does NOT have a prerendered file, so client-side routing
-# handles it cleanly instead of returning a 404.
+# Cloudflare Pages redirects for the public marketing site.
+# Canonical domain policy: HTTPS, apex domain, no trailing slash for pages.
+# Note: Cloudflare Pages _redirects does not support domain-level redirects.
+# Configure HTTP -> HTTPS and www -> apex in Cloudflare DNS/Bulk Redirects.
 
-/*    /index.html    200
+# Retired trailing-slash variants. Canonical internal URLs and sitemap entries
+# point directly to the slashless paths below.
+/tools/ /tools 301
+/tools/net-worth-calculator/ /tools/net-worth-calculator 301
+/tools/pension-drawdown-calculator/ /tools/pension-drawdown-calculator 301
+/tools/retirement-bridge-calculator/ /tools/retirement-bridge-calculator 301
+/tools/fire-number-calculator/ /tools/fire-number-calculator 301
+/tools/isa-growth-calculator/ /tools/isa-growth-calculator 301
+/guides/ /guides 301
+/guides/multi-currency-net-worth-tracker/ /guides/multi-currency-net-worth-tracker 301
+/guides/long-term-wealth-projection/ /guides/long-term-wealth-projection 301
+/guides/inflation-adjusted-net-worth/ /guides/inflation-adjusted-net-worth 301
+/net-worth-tracker/ /net-worth-tracker 301
+/track-isas-pensions-savings/ /track-isas-pensions-savings 301
+/spreadsheet-alternative-net-worth-tracking/ /spreadsheet-alternative-net-worth-tracking 301
+/how-to-track-your-net-worth/ /how-to-track-your-net-worth 301
+/best-net-worth-tracking-apps-uk/ /best-net-worth-tracking-apps-uk 301
+/why-i-track-wealth-manually-instead-of-using-open-banking-apps/ /why-i-track-wealth-manually-instead-of-using-open-banking-apps 301
+/privacy/ /privacy 301
+/security/ /security 301
+/support/ /support 301
+/terms/ /terms 301
+
+# Serve prerendered slashless pages directly with 200 rewrites.
+/tools /tools.html 200
+/tools/net-worth-calculator /tools/net-worth-calculator.html 200
+/tools/pension-drawdown-calculator /tools/pension-drawdown-calculator.html 200
+/tools/retirement-bridge-calculator /tools/retirement-bridge-calculator.html 200
+/tools/fire-number-calculator /tools/fire-number-calculator.html 200
+/tools/isa-growth-calculator /tools/isa-growth-calculator.html 200
+/guides /guides.html 200
+/guides/multi-currency-net-worth-tracker /guides/multi-currency-net-worth-tracker.html 200
+/guides/long-term-wealth-projection /guides/long-term-wealth-projection.html 200
+/guides/inflation-adjusted-net-worth /guides/inflation-adjusted-net-worth.html 200
+/net-worth-tracker /net-worth-tracker.html 200
+/track-isas-pensions-savings /track-isas-pensions-savings.html 200
+/spreadsheet-alternative-net-worth-tracking /spreadsheet-alternative-net-worth-tracking.html 200
+/how-to-track-your-net-worth /how-to-track-your-net-worth.html 200
+/best-net-worth-tracking-apps-uk /best-net-worth-tracking-apps-uk.html 200
+/why-i-track-wealth-manually-instead-of-using-open-banking-apps /why-i-track-wealth-manually-instead-of-using-open-banking-apps.html 200
+/privacy /privacy.html 200
+/security /security.html 200
+/support /support.html 200
+/terms /terms.html 200
+
+# Unknown routes should not be canonicalized to the homepage.
+/* /404.html 404

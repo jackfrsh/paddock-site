@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import './App.css'
 
 import outlookShot from '/src/assets/landing/paddock-plan.png'
@@ -30,40 +31,19 @@ import RetirementBridgeCalculator from './tools/RetirementBridgeCalculator'
 import ToolsHub from './pages/ToolsHub'
 import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
+import { PUBLIC_ROUTES } from './seoRoutes'
 import SiteFooter from './components/SiteFooter'
 import AppStoreBadgeLink from './components/AppStoreBadgeLink'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
+const ROUTE_BY_PATH = Object.fromEntries(PUBLIC_ROUTES.map((route) => [route.path, route.key]))
 
 function getRoute() {
-  const path = (window.location.pathname || '/').toLowerCase()
+  const rawPath = (window.location.pathname || '/').toLowerCase()
+  const path = rawPath.length > 1 && rawPath.endsWith('/') ? rawPath.slice(0, -1) : rawPath
 
-  if (path.startsWith('/guides/multi-currency-net-worth-tracker')) return 'guide_multi_currency'
-  if (path.startsWith('/guides/long-term-wealth-projection')) return 'guide_long_term_projection'
-  if (path.startsWith('/guides/inflation-adjusted-net-worth')) return 'guide_inflation_adjusted'
-  if (path === '/guides' || path === '/guides/') return 'guides_index'
-
-  if (path.startsWith('/privacy')) return 'privacy'
-  if (path.startsWith('/security')) return 'security'
-  if (path.startsWith('/terms')) return 'terms'
-
-  if (path.startsWith('/support')) return 'support'
-
-  if (path.startsWith('/net-worth-tracker')) return 'net_worth_tracker'
-  if (path.startsWith('/track-isas-pensions-savings')) return 'track_isas_pensions_savings'
-  if (path.startsWith('/spreadsheet-alternative-net-worth-tracking')) return 'spreadsheet_alternative'
-  if (path.startsWith('/how-to-track-your-net-worth')) return 'how_to_track_net_worth'
-  if (path.startsWith('/why-i-track-wealth-manually')) return 'founder_manual_tracking'
-  if (path.startsWith('/best-net-worth-tracking-apps-uk')) return 'best_net_worth_apps_uk'
-  if (path.startsWith('/tools/pension-drawdown-calculator')) return 'tools_pension_drawdown'
-  if (path.startsWith('/tools/retirement-bridge-calculator')) return 'tools_retirement_bridge'
-  if (path.startsWith('/tools/fire-number-calculator')) return 'tools_fire_number'
-  if (path.startsWith('/tools/isa-growth-calculator')) return 'tools_isa_growth'
-  if (path.startsWith('/tools/net-worth-calculator')) return 'tools_net_worth'
-  if (path === '/tools' || path === '/tools/') return 'tools_hub'
-
-  return 'landing'
+  return ROUTE_BY_PATH[path] || 'not_found'
 }
 
 function scrollToId(id) {
@@ -121,6 +101,32 @@ function Reveal({ children, className = '' }) {
       }}
     >
       {children}
+    </div>
+  )
+}
+
+function NotFound({ navigateTo }) {
+  return (
+    <div className="landing-shell page-shell is-visible">
+      <Helmet>
+        <title>Page not found | Paddock</title>
+        <meta name="robots" content="noindex" />
+      </Helmet>
+      <header className="landing-nav">
+        <div className="landing-nav-inner">
+          <button type="button" onClick={() => navigateTo('/')} className="brand">
+            Paddock<span>.</span>
+          </button>
+        </div>
+      </header>
+      <main className="container section">
+        <div className="hero-kicker">404</div>
+        <h1>Page not found</h1>
+        <p className="section-copy">The page you requested does not exist.</p>
+        <button type="button" className="btn btn-primary" onClick={() => navigateTo('/')}>
+          Go to homepage
+        </button>
+      </main>
     </div>
   )
 }
@@ -282,6 +288,7 @@ export default function App() {
   if (route === 'tools_isa_growth') return <IsaGrowthCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_net_worth') return <NetWorthCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_hub') return <ToolsHub navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'not_found') return <NotFound navigateTo={navigateTo} />
 
   return (
     <div className={`landing-shell page-shell ${pageVisible ? 'is-visible' : 'is-hidden'}`}>

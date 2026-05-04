@@ -223,14 +223,14 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
           name="description"
           content="Free UK pension drawdown calculator. Enter your pot, retirement age and assumptions to project how long your pension could last — no login required."
         />
-        <link rel="canonical" href="https://getpaddock.com/tools/pension-drawdown-calculator/" />
+        <link rel="canonical" href="https://getpaddock.com/tools/pension-drawdown-calculator" />
         <meta property="og:title" content="Pension Drawdown Calculator UK | Paddock" />
         <meta
           property="og:description"
           content="Free UK pension drawdown calculator. Project how long your pension pot could last in drawdown, with a 3%/4%/5% comparison."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/pension-drawdown-calculator/" />
+        <meta property="og:url" content="https://getpaddock.com/tools/pension-drawdown-calculator" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Pension Drawdown Calculator UK | Paddock" />
         <meta

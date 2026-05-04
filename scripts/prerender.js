@@ -2,34 +2,14 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { PAGE_META } from '../src/meta.js'
+import { PUBLIC_ROUTE_MAP } from '../src/seoRoutes.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const distDir = path.resolve(__dirname, '../dist')
 const indexPath = path.join(distDir, 'index.html')
 
-const routeMap = {
-  landing: '/',
-  guides_index: '/guides',
-  guide_multi_currency: '/guides/multi-currency-net-worth-tracker',
-  guide_long_term_projection: '/guides/long-term-wealth-projection',
-  guide_inflation_adjusted: '/guides/inflation-adjusted-net-worth',
-  privacy: '/privacy',
-  security: '/security',
-  terms: '/terms',
-  net_worth_tracker: '/net-worth-tracker',
-  track_isas_pensions_savings: '/track-isas-pensions-savings',
-  spreadsheet_alternative: '/spreadsheet-alternative-net-worth-tracking',
-  how_to_track_net_worth: '/how-to-track-your-net-worth',
-  founder_manual_tracking: '/why-i-track-wealth-manually-instead-of-using-open-banking-apps',
-  best_net_worth_apps_uk: '/best-net-worth-tracking-apps-uk',
-  tools_hub: '/tools',
-  tools_pension_drawdown: '/tools/pension-drawdown-calculator',
-  tools_retirement_bridge: '/tools/retirement-bridge-calculator',
-  tools_fire_number: '/tools/fire-number-calculator',
-  tools_isa_growth: '/tools/isa-growth-calculator',
-  tools_net_worth: '/tools/net-worth-calculator',
-}
+const routeMap = PUBLIC_ROUTE_MAP
 
 function escapeHtml(str) {
   return String(str)
@@ -123,9 +103,8 @@ for (const [key, routePath] of Object.entries(routeMap)) {
     targetPath = path.join(distDir, 'index.html')
   } else {
     const clean = routePath.replace(/^\/+/, '')
-    const dir = path.join(distDir, clean)
-    ensureDir(dir)
-    targetPath = path.join(dir, 'index.html')
+    targetPath = path.join(distDir, `${clean}.html`)
+    ensureDir(path.dirname(targetPath))
   }
 
   fs.writeFileSync(targetPath, html, 'utf8')
