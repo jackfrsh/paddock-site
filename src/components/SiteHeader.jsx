@@ -166,6 +166,18 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
                   Pension drawdown calculator
                 </a>
                 <a
+                  href="/tools/retirement-bridge-calculator"
+                  className="mobile-tools-item"
+                  onClick={(e) => {
+                    if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                      e.preventDefault()
+                      go('/tools/retirement-bridge-calculator')
+                    }
+                  }}
+                >
+                  Retirement bridge calculator
+                </a>
+                <a
                   href="/tools/fire-number-calculator"
                   className="mobile-tools-item"
                   onClick={(e) => {

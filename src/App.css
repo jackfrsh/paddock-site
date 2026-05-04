@@ -2297,6 +2297,135 @@ h3 {
   max-width: 540px;
 }
 
+/* Retirement bridge calculator */
+
+.bridge-layout {
+  grid-template-columns: minmax(0, 1.04fr) minmax(420px, 0.96fr);
+}
+
+.bridge-results-panel {
+  overflow: hidden;
+}
+
+.bridge-result-callout {
+  margin-bottom: 22px;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--accent-tint-md);
+  background: var(--accent-tint-sm);
+}
+
+.bridge-result-callout.shortfall {
+  border-color: rgba(212, 137, 58, 0.28);
+  background: rgba(212, 137, 58, 0.07);
+}
+
+.bridge-result-callout.no_bridge_needed {
+  border-color: var(--border-soft);
+  background: var(--surface-soft);
+}
+
+.bridge-result-title {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.bridge-result-callout p {
+  margin: 10px 0 0;
+  color: var(--text-2);
+  line-height: 1.65;
+  font-size: 0.95rem;
+}
+
+.bridge-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0 0 22px;
+  padding: 18px 0 4px;
+}
+
+.bridge-line {
+  position: absolute;
+  top: 27px;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-faint), var(--gold-soft), var(--border-faint));
+}
+
+.bridge-step {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+.bridge-dot {
+  width: 17px;
+  height: 17px;
+  border-radius: 999px;
+  border: 1px solid rgba(196, 163, 90, 0.55);
+  background: #20242b;
+  box-shadow: 0 0 0 5px rgba(196, 163, 90, 0.06);
+}
+
+.bridge-step-label {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.25;
+}
+
+.bridge-step-age {
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.bridge-stats .calc-stat-value {
+  overflow-wrap: anywhere;
+}
+
+.bridge-advanced {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.bridge-advanced-toggle {
+  width: 100%;
+  appearance: none;
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.bridge-advanced-toggle span {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.bridge-advanced-fields {
+  margin-top: 16px;
+}
+
 /* Responsive */
 
 @media (max-width: 980px) {
@@ -2333,6 +2462,40 @@ h3 {
     grid-template-columns: 48px 1fr 1fr;
     gap: 4px;
     padding: 8px 6px;
+  }
+
+  .bridge-timeline {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 0;
+  }
+
+  .bridge-line {
+    top: 8px;
+    bottom: 8px;
+    left: 8px;
+    right: auto;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, var(--border-faint), var(--gold-soft), var(--border-faint));
+  }
+
+  .bridge-step {
+    min-height: 38px;
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 28px;
+    gap: 1px;
+  }
+
+  .bridge-dot {
+    position: absolute;
+    left: 0;
+    top: 2px;
+  }
+
+  .bridge-step-label {
+    margin-top: 0;
   }
 }
 

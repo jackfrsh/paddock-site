@@ -26,6 +26,7 @@ import PensionDrawdownCalculator from './tools/PensionDrawdownCalculator'
 import FireNumberCalculator from './tools/FireNumberCalculator'
 import IsaGrowthCalculator from './tools/IsaGrowthCalculator'
 import NetWorthCalculator from './tools/NetWorthCalculator'
+import RetirementBridgeCalculator from './tools/RetirementBridgeCalculator'
 import ToolsHub from './pages/ToolsHub'
 import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
@@ -56,6 +57,7 @@ function getRoute() {
   if (path.startsWith('/why-i-track-wealth-manually')) return 'founder_manual_tracking'
   if (path.startsWith('/best-net-worth-tracking-apps-uk')) return 'best_net_worth_apps_uk'
   if (path.startsWith('/tools/pension-drawdown-calculator')) return 'tools_pension_drawdown'
+  if (path.startsWith('/tools/retirement-bridge-calculator')) return 'tools_retirement_bridge'
   if (path.startsWith('/tools/fire-number-calculator')) return 'tools_fire_number'
   if (path.startsWith('/tools/isa-growth-calculator')) return 'tools_isa_growth'
   if (path.startsWith('/tools/net-worth-calculator')) return 'tools_net_worth'
@@ -275,6 +277,7 @@ export default function App() {
   if (route === 'founder_manual_tracking') return <ManualTracking navigateTo={navigateTo} goTo={goTo} />
   if (route === 'best_net_worth_apps_uk') return <BestNetWorthAppsUK navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_pension_drawdown') return <PensionDrawdownCalculator navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'tools_retirement_bridge') return <RetirementBridgeCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_fire_number') return <FireNumberCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_isa_growth') return <IsaGrowthCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_net_worth') return <NetWorthCalculator navigateTo={navigateTo} goTo={goTo} />
@@ -410,6 +413,20 @@ export default function App() {
                     }}
                   >
                     Pension drawdown calculator
+                  </a>
+                  <a
+                    href="/tools/retirement-bridge-calculator"
+                    className="mobile-tools-item"
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault()
+                        navigateTo('/tools/retirement-bridge-calculator')
+                        setMenuOpen(false)
+                        setToolsMobileOpen(false)
+                      }
+                    }}
+                  >
+                    Retirement bridge calculator
                   </a>
                   <a
                     href="/tools/fire-number-calculator"

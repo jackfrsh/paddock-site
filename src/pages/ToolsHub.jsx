@@ -86,6 +86,14 @@ export default function ToolsHub({ navigateTo, goTo }) {
               ctaText="Try the calculator"
             />
             <ToolCard
+              href="/tools/retirement-bridge-calculator"
+              onClick={() => navigateTo('/tools/retirement-bridge-calculator')}
+              title="ISA retirement bridge calculator UK"
+              description="Estimate how much you may need in ISA, cash or other accessible savings to bridge the gap between stopping work and private pension access."
+              tags={['Free', 'No login required', 'UK']}
+              ctaText="Estimate my bridge"
+            />
+            <ToolCard
               href="/tools/fire-number-calculator"
               onClick={() => navigateTo('/tools/fire-number-calculator')}
               title="FIRE number calculator UK"

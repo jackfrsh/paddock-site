@@ -25,6 +25,7 @@ const routeMap = {
   best_net_worth_apps_uk: '/best-net-worth-tracking-apps-uk',
   tools_hub: '/tools',
   tools_pension_drawdown: '/tools/pension-drawdown-calculator',
+  tools_retirement_bridge: '/tools/retirement-bridge-calculator',
   tools_fire_number: '/tools/fire-number-calculator',
   tools_isa_growth: '/tools/isa-growth-calculator',
   tools_net_worth: '/tools/net-worth-calculator',

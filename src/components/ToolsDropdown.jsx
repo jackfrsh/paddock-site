@@ -88,6 +88,22 @@ export default function ToolsDropdown({ navigateTo }) {
           </a>
 
           <a
+            href="/tools/retirement-bridge-calculator"
+            className="tools-dropdown-item"
+            onClick={(e) => {
+              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                e.preventDefault()
+                go('/tools/retirement-bridge-calculator')
+              }
+            }}
+          >
+            <div className="tools-dropdown-item-title">Retirement bridge calculator</div>
+            <div className="tools-dropdown-item-desc">
+              Estimate accessible savings for the gap before private pension access.
+            </div>
+          </a>
+
+          <a
             href="/tools/fire-number-calculator"
             className="tools-dropdown-item"
             onClick={(e) => {

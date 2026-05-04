@@ -11,7 +11,9 @@ function track(event, data = {}) {
     window.dispatchEvent(
       new CustomEvent('paddock:calc', { detail: { event, ...data } })
     )
-  } catch (_) {}
+  } catch {
+    /* Analytics is optional. */
+  }
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -210,15 +212,6 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
       }
     }
   }
-
-  const activeWithdrawalPct = form.withdrawalMode === 'percentage'
-    ? parsePct(form.annualWithdrawalPct)
-    : null
-
-  const activeComparisonRate =
-    results && form.withdrawalMode === 'percentage'
-      ? (parseFloat(form.annualWithdrawalPct) / 100).toFixed(2)
-      : null
 
   const targetEndAge = parseNum(form.targetEndAge)
 

@@ -10,7 +10,9 @@ function track(event, data = {}) {
     window.dispatchEvent(
       new CustomEvent('paddock:calc', { detail: { event, ...data } })
     )
-  } catch (_) {}
+  } catch {
+    /* Analytics is optional. */
+  }
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -26,11 +28,6 @@ function fmt(n) {
 function fmtPct(n) {
   if (!isFinite(n) || isNaN(n)) return '—'
   return `${n.toFixed(1)}%`
-}
-
-function parseNum(str) {
-  const n = parseFloat(String(str).replace(/,/g, ''))
-  return isNaN(n) ? NaN : n
 }
 
 // ─── Defaults ────────────────────────────────────────────────────────────────
@@ -109,7 +106,7 @@ function ProgressBar({ pct, label = 'Progress to target' }) {
   )
 }
 
-function IsaCompRow({ rateLabel, projectedValue, totalContributed, totalGrowth, isActive }) {
+function IsaCompRow({ rateLabel, projectedValue, totalGrowth, isActive }) {
   return (
     <div className={`calc-fire-cmp-row isa-cmp-row${isActive ? ' active' : ''}`}>
       <div className="calc-fire-cmp-rate">

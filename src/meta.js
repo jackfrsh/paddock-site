@@ -215,6 +215,28 @@ export const PAGE_META = {
     },
   },
 
+  tools_retirement_bridge: {
+    title: 'ISA Retirement Bridge Calculator UK | Paddock',
+    description:
+      'Estimate how much you may need in ISA, cash or other accessible savings to bridge the gap between stopping work and accessing pension income.',
+    canonical: 'https://getpaddock.com/tools/retirement-bridge-calculator/',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'ISA Retirement Bridge Calculator UK',
+      url: 'https://getpaddock.com/tools/retirement-bridge-calculator/',
+      description:
+        'Estimate how much you may need in ISA, cash or other accessible savings to bridge the gap between stopping work and accessing pension income.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
   founder_manual_tracking: {
     title: 'Why I Track Wealth Manually Instead of Using Open Banking Apps | Paddock',
     description:

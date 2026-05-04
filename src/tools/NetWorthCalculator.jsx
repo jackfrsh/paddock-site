@@ -16,7 +16,9 @@ function track(event, data = {}) {
     window.dispatchEvent(
       new CustomEvent('paddock:calc', { detail: { event, ...data } })
     )
-  } catch (_) {}
+  } catch {
+    /* Analytics is optional. */
+  }
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
@@ -76,7 +78,7 @@ function BreakdownRow({ label, amountBase, pct, type, currency }) {
   )
 }
 
-function NwRow({ rowDef, value, onChange, showCurrency, baseCurrency }) {
+function NwRow({ rowDef, value, onChange, showCurrency }) {
   const { key, label } = rowDef
   const symbol = CURRENCY_SYMBOLS[value.currency] || '£'
 

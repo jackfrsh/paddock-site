@@ -10,7 +10,9 @@ function track(event, data = {}) {
     window.dispatchEvent(
       new CustomEvent('paddock:calc', { detail: { event, ...data } })
     )
-  } catch (_) {}
+  } catch {
+    /* Analytics is optional. */
+  }
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
