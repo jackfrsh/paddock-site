@@ -2,30 +2,37 @@ import React from 'react'
 import AppStoreBadgeLink from './AppStoreBadgeLink'
 
 export default function SiteFooter({ navigateTo }) {
+  function handleInternalClick(event, path) {
+    if (!event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey && event.button === 0) {
+      event.preventDefault()
+      navigateTo(path)
+    }
+  }
+
   return (
     <footer className="landing-footer">
       <div className="landing-footer-inner">
-        <button
-          type="button"
-          onClick={() => navigateTo('/')}
+        <a
+          href="/"
+          onClick={(event) => handleInternalClick(event, '/')}
           className="footer-brand"
         >
           Paddock<span>.</span>
-        </button>
+        </a>
 
         <div className="footer-links">
-          <button type="button" onClick={() => navigateTo('/guides')}>
+          <a href="/guides" onClick={(event) => handleInternalClick(event, '/guides')}>
             Guides
-          </button>
-          <button type="button" onClick={() => navigateTo('/terms')}>
+          </a>
+          <a href="/terms" onClick={(event) => handleInternalClick(event, '/terms')}>
             Terms
-          </button>
-          <button type="button" onClick={() => navigateTo('/privacy')}>
+          </a>
+          <a href="/privacy" onClick={(event) => handleInternalClick(event, '/privacy')}>
             Privacy
-          </button>
-          <button type="button" onClick={() => navigateTo('/security')}>
+          </a>
+          <a href="/security" onClick={(event) => handleInternalClick(event, '/security')}>
             Security
-          </button>
+          </a>
           <span>© 2026</span>
         </div>
 

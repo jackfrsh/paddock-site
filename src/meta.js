@@ -21,18 +21,20 @@ export const PAGE_META = {
   },
 
   landing: {
-    title: 'Paddock | Net Worth Tracker for ISAs, Pensions and Multi-Currency Wealth',
+    title: 'Paddock | Net Worth Tracker UK | Manual Wealth Tracking',
     description:
-      'Track ISAs, pensions, savings, property and multi-currency accounts in one private dashboard. Plan ahead with long-term projections and no bank linking.',
+      'Track ISAs, pensions, savings, property and investments in one privacy-first UK wealth tracker. Manual entry, no bank linking.',
     canonical: 'https://getpaddock.com/',
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
-      '@type': 'WebSite',
+      '@type': 'WebApplication',
       name: 'Paddock',
+      applicationCategory: 'FinanceApplication',
+      operatingSystem: 'Web, iOS',
       url: 'https://getpaddock.com/',
       description:
-        'Track ISAs, pensions, savings, property and multi-currency accounts in one private dashboard. Plan ahead with long-term projections and no bank linking.',
+        'Track ISAs, pensions, savings, property and investments in one privacy-first UK wealth tracker. Manual entry, no bank linking.',
     },
   },
 
@@ -162,15 +164,15 @@ export const PAGE_META = {
   },
 
   net_worth_tracker: {
-    title: 'Net Worth Tracker — Paddock',
+    title: 'Net Worth Tracker UK | Manual Wealth Tracking | Paddock',
     description:
-      'Track cash, investments, pensions, property and liabilities in one calm dashboard. Built for long-term wealth with privacy-first manual tracking.',
+      'Track cash, investments, pensions, property and liabilities in one privacy-first UK net worth tracker. Manual entry, no bank linking.',
     canonical: 'https://getpaddock.com/net-worth-tracker',
     ogType: 'website',
   },
 
   track_isas_pensions_savings: {
-    title: 'Track ISAs, Pensions and Savings — Paddock',
+    title: 'Track ISAs, Pensions and Savings Together | Paddock',
     description:
       'See ISAs, pensions and savings together in one calm wealth dashboard. Track long-term progress clearly with privacy-first manual tracking.',
     canonical: 'https://getpaddock.com/track-isas-pensions-savings',
@@ -178,7 +180,7 @@ export const PAGE_META = {
   },
 
   spreadsheet_alternative: {
-    title: 'Spreadsheet Alternative for Net Worth Tracking — Paddock',
+    title: 'Spreadsheet Alternative for Net Worth Tracking | Paddock',
     description:
       'Replace fragile spreadsheets with a calmer way to track net worth, progress and long-term wealth in one premium dashboard.',
     canonical: 'https://getpaddock.com/spreadsheet-alternative-net-worth-tracking',
@@ -186,7 +188,7 @@ export const PAGE_META = {
   },
 
   how_to_track_net_worth: {
-    title: 'How to Track Your Net Worth — Paddock',
+    title: 'How to Track Your Net Worth Manually | Paddock',
     description:
       'Learn how to track your net worth clearly, including what to include, how often to update it, and why consistency matters more than noise.',
     canonical: 'https://getpaddock.com/how-to-track-your-net-worth',
@@ -194,18 +196,18 @@ export const PAGE_META = {
   },
 
   tools_hub: {
-    title: 'Free Planning Tools — Paddock',
+    title: 'UK Wealth Calculators | Pension, FIRE & Net Worth Tools | Paddock',
     description:
-      'Free UK financial planning tools from Paddock. Pension drawdown calculator and more — no login required. Your numbers stay in your browser.',
+      'Free UK wealth calculators for pension drawdown, FIRE, ISA growth and net worth tracking. No login required; numbers stay in your browser.',
     canonical: 'https://getpaddock.com/tools',
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'CollectionPage',
-      name: 'Free Planning Tools',
+      name: 'UK Wealth Calculators',
       url: 'https://getpaddock.com/tools',
       description:
-        'Free UK financial planning tools from Paddock. Pension drawdown calculator and more — no login required.',
+        'Free UK wealth calculators for pension drawdown, FIRE, ISA growth and net worth tracking. No login required.',
       inLanguage: 'en-GB',
       isPartOf: {
         '@type': 'WebSite',
@@ -266,9 +268,9 @@ export const PAGE_META = {
   },
 
   best_net_worth_apps_uk: {
-    title: 'Best Net Worth Tracking Apps UK — Comparison & Review | Paddock',
+    title: 'Best Net Worth Tracking Apps UK | Manual Wealth Tracking | Paddock',
     description:
-      'A practical comparison of the best net worth tracking apps in the UK — covering Paddock, Emma, Moneyhub, and spreadsheets. For UK users tracking ISAs, pensions, savings, and multi-currency wealth.',
+      'Compare UK net worth tracking apps including Paddock, Emma, Moneyhub and spreadsheets for ISAs, pensions, savings and multi-currency wealth.',
     canonical: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
     ogType: 'website',
     jsonLd: {
@@ -293,9 +295,9 @@ export const PAGE_META = {
   },
 
   tools_net_worth: {
-    title: 'Net Worth Calculator UK — Total Your Assets and Liabilities | Paddock',
+    title: 'Net Worth Calculator UK | Assets, Pensions & Debts | Paddock',
     description:
-      'Free UK net worth calculator. Enter your assets and liabilities to see your total net worth instantly — cash, investments, pensions, property, and debts. Supports multi-currency. No login required.',
+      'Free UK net worth calculator for cash, investments, pensions, property and debts. Supports multi-currency and manual private tracking.',
     canonical: 'https://getpaddock.com/tools/net-worth-calculator',
     ogType: 'website',
     jsonLd: {
@@ -337,9 +339,9 @@ export const PAGE_META = {
   },
 
   tools_fire_number: {
-    title: 'FIRE Number Calculator UK — How Much Do You Need to Retire? | Paddock',
+    title: 'FIRE Number Calculator UK | Financial Independence | Paddock',
     description:
-      'Free FIRE number calculator. Enter your annual spending and assumptions to find your financial independence target, track your progress, and estimate how long it could take. No login required.',
+      'Free UK FIRE number calculator. Estimate your financial independence target, progress and timeline from spending and withdrawal assumptions.',
     canonical: 'https://getpaddock.com/tools/fire-number-calculator',
     ogType: 'website',
     jsonLd: {
@@ -359,9 +361,9 @@ export const PAGE_META = {
   },
 
   tools_pension_drawdown: {
-    title: 'Pension Drawdown Calculator UK — How Long Will My Pension Last? | Paddock',
+    title: 'Pension Drawdown Calculator UK | How Long Will It Last? | Paddock',
     description:
-      'Free UK pension drawdown calculator. Enter your pot, retirement age and assumptions to project how long your pension could last — no login required. Includes a 3%/4%/5% withdrawal comparison.',
+      'Free UK pension drawdown calculator. Estimate how long your pension or SIPP could last with drawdown and withdrawal assumptions.',
     canonical: 'https://getpaddock.com/tools/pension-drawdown-calculator',
     ogType: 'website',
     jsonLd: {

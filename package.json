@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build && node scripts/prerender.js",
     "check:seo-redirects": "node scripts/check-seo-redirects.mjs",
+    "check:indexability": "node scripts/check-google-indexability.mjs",
+    "check:internal-links": "node scripts/check-internal-links.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },

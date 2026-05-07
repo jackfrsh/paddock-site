@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { PAGE_META } from '../src/meta.js'
-import { PUBLIC_ROUTE_MAP } from '../src/seoRoutes.js'
+import { CANONICAL_ORIGIN, PUBLIC_ROUTES, PUBLIC_ROUTE_MAP } from '../src/seoRoutes.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -79,6 +79,75 @@ function upsertMeta(html, { title, description, canonical, ogType, jsonLd }) {
   return out
 }
 
+function canonicalUrl(routePath) {
+  return `${CANONICAL_ORIGIN}${routePath === '/' ? '/' : routePath}`
+}
+
+function renderSeoFallback(route, meta) {
+  const links = Array.from(new Set(['/', ...(route.links || [])]))
+    .filter((href) => href !== route.path)
+    .map((href) => {
+      const linkedRoute = PUBLIC_ROUTES.find((item) => item.path === href)
+      const label = linkedRoute?.h1 || (href === '/' ? 'Paddock' : href.replaceAll('-', ' ').replaceAll('/', ' ').trim())
+      return `<li><a href="${escapeHtml(href)}">${escapeHtml(label)}</a></li>`
+    })
+    .join('')
+
+  return `<main class="seo-fallback" data-prerendered-route="${escapeHtml(route.path)}">
+    <h1>${escapeHtml(route.h1 || meta.title.replace(/\s+\|\s+Paddock.*$/, ''))}</h1>
+    <p>${escapeHtml(route.intro || meta.description)}</p>
+    <nav aria-label="Related Paddock pages"><ul>${links}</ul></nav>
+  </main>`
+}
+
+function upsertSeoFallback(html, route, meta) {
+  const fallback = renderSeoFallback(route, meta)
+  return html.replace(/<div id="root">.*?<\/div>/is, `<div id="root">${fallback}</div>`)
+}
+
+function renderSitemap() {
+  const urls = PUBLIC_ROUTES.map(
+    (route) => `  <url>
+    <loc>${canonicalUrl(route.path)}</loc>
+    <lastmod>${route.lastmod}</lastmod>
+  </url>`
+  ).join('\n\n')
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urls}
+</urlset>
+`
+}
+
+function renderRedirects() {
+  const slashRedirects = PUBLIC_ROUTES
+    .filter((route) => route.path !== '/')
+    .map((route) => `${route.path}/ ${route.path} 301`)
+    .join('\n')
+
+  const rewrites = PUBLIC_ROUTES
+    .filter((route) => route.path !== '/')
+    .map((route) => `${route.path} /${route.path.replace(/^\/+/, '')}.html 200`)
+    .join('\n')
+
+  return `# Cloudflare Pages redirects for the public marketing site.
+# Canonical domain policy: HTTPS, apex domain, no trailing slash for pages.
+# Note: Cloudflare Pages _redirects does not support domain-level redirects.
+# Configure HTTP -> HTTPS and www -> apex in Cloudflare DNS/Bulk Redirects.
+
+# Retired trailing-slash variants. Canonical internal URLs and sitemap entries
+# point directly to the slashless paths below.
+${slashRedirects}
+
+# Serve prerendered slashless pages directly with 200 rewrites.
+${rewrites}
+
+# Unknown routes should not be canonicalized to the homepage.
+/* /404.html 404
+`
+}
+
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true })
 }
@@ -95,8 +164,10 @@ let count = 0
 for (const [key, routePath] of Object.entries(routeMap)) {
   const meta = PAGE_META[key]
   if (!meta) continue
+  const route = PUBLIC_ROUTES.find((item) => item.key === key)
+  if (!route) continue
 
-  const html = upsertMeta(baseHtml, meta)
+  const html = upsertSeoFallback(upsertMeta(baseHtml, meta), route, meta)
 
   let targetPath
   if (routePath === '/') {
@@ -111,4 +182,8 @@ for (const [key, routePath] of Object.entries(routeMap)) {
   count += 1
 }
 
+fs.writeFileSync(path.join(distDir, 'sitemap.xml'), renderSitemap(), 'utf8')
+fs.writeFileSync(path.join(distDir, '_redirects'), renderRedirects(), 'utf8')
+
 console.log(`prerender: ${count} routes generated`)
+console.log('prerender: sitemap.xml and _redirects generated from PUBLIC_ROUTES')

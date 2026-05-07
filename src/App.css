@@ -550,6 +550,7 @@ h3 {
   font-weight: 700;
   letter-spacing: -0.02em;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .brand span,
