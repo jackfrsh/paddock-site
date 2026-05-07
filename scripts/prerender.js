@@ -126,11 +126,6 @@ function renderRedirects() {
     .map((route) => `${route.path}/ ${route.path} 301`)
     .join('\n')
 
-  const rewrites = PUBLIC_ROUTES
-    .filter((route) => route.path !== '/')
-    .map((route) => `${route.path} /${route.path.replace(/^\/+/, '')}.html 200`)
-    .join('\n')
-
   return `# Cloudflare Pages redirects for the public marketing site.
 # Canonical domain policy: HTTPS, apex domain, no trailing slash for pages.
 # Note: Cloudflare Pages _redirects does not support domain-level redirects.
@@ -139,9 +134,6 @@ function renderRedirects() {
 # Retired trailing-slash variants. Canonical internal URLs and sitemap entries
 # point directly to the slashless paths below.
 ${slashRedirects}
-
-# Serve prerendered slashless pages directly with 200 rewrites.
-${rewrites}
 
 # Unknown routes should not be canonicalized to the homepage.
 /* /404.html 404

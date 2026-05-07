@@ -26,27 +26,5 @@
 /support/ /support 301
 /terms/ /terms 301
 
-# Serve prerendered slashless pages directly with 200 rewrites.
-/tools /tools.html 200
-/tools/net-worth-calculator /tools/net-worth-calculator.html 200
-/tools/pension-drawdown-calculator /tools/pension-drawdown-calculator.html 200
-/tools/retirement-bridge-calculator /tools/retirement-bridge-calculator.html 200
-/tools/fire-number-calculator /tools/fire-number-calculator.html 200
-/tools/isa-growth-calculator /tools/isa-growth-calculator.html 200
-/guides /guides.html 200
-/guides/multi-currency-net-worth-tracker /guides/multi-currency-net-worth-tracker.html 200
-/guides/long-term-wealth-projection /guides/long-term-wealth-projection.html 200
-/guides/inflation-adjusted-net-worth /guides/inflation-adjusted-net-worth.html 200
-/net-worth-tracker /net-worth-tracker.html 200
-/track-isas-pensions-savings /track-isas-pensions-savings.html 200
-/spreadsheet-alternative-net-worth-tracking /spreadsheet-alternative-net-worth-tracking.html 200
-/how-to-track-your-net-worth /how-to-track-your-net-worth.html 200
-/best-net-worth-tracking-apps-uk /best-net-worth-tracking-apps-uk.html 200
-/why-i-track-wealth-manually-instead-of-using-open-banking-apps /why-i-track-wealth-manually-instead-of-using-open-banking-apps.html 200
-/privacy /privacy.html 200
-/security /security.html 200
-/support /support.html 200
-/terms /terms.html 200
-
 # Unknown routes should not be canonicalized to the homepage.
 /* /404.html 404

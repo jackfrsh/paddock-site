@@ -49,10 +49,9 @@ Harmful redirects removed or prevented:
 Kept in `_redirects`:
 
 - Trailing-slash retired variants for public pages, for example `/tools/` -> `/tools`.
-- One-hop rewrites from canonical page paths to generated prerendered HTML files, for example `/tools/pension-drawdown-calculator` -> `/tools/pension-drawdown-calculator.html` with status `200`.
 - Unknown route handling: `/* /404.html 404`.
 
-These are valid because canonical sitemap URLs return direct `200` responses, while duplicate slash variants consolidate to the slashless canonical page.
+These are valid because canonical sitemap URLs return direct `200` responses, while duplicate slash variants consolidate to the slashless canonical page. Do not add explicit `200` rewrites from extensionless URLs to `.html` files on Cloudflare Pages; Pages already resolves extensionless HTML routes, and rewriting `/tools` to `/tools.html` can loop when Pages redirects `.html` back to `/tools`.
 
 ## 4. Public Indexable URL List
 

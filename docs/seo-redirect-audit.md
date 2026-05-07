@@ -27,7 +27,7 @@ Redirect rules live in `public/_redirects`.
 The repo rules now do three things only:
 
 - Redirect retired trailing-slash page variants to their slashless canonical URL.
-- Serve prerendered slashless pages directly with `200` rewrites.
+- Let Cloudflare Pages serve generated `.html` pages at their extensionless paths.
 - Return `404` for unknown routes.
 
 The previous catch-all rewrite to `/index.html` was removed because it made unknown routes return homepage-like `200` responses. Unknown routes now fall through to `404.html` with a `404` status.
@@ -85,7 +85,7 @@ After this cleanup:
 
 - Sitemap URLs are slashless final canonical URLs.
 - Canonical tags and Open Graph URLs point to the same final URLs.
-- Public pages are prerendered as `.html` files and served by explicit `200` rewrites.
+- Public pages are prerendered as `.html` files and served at extensionless paths by Cloudflare Pages.
 - Retired trailing-slash URLs redirect once to the canonical slashless page.
 - Unknown routes return a real `404`.
 
