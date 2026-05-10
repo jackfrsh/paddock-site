@@ -72,7 +72,7 @@ export const PAGE_META = {
       description:
         'Track investments, ISAs, pensions, savings, and other accounts across GBP, USD, EUR and more in one base-currency view. No bank connection required.',
       url: 'https://getpaddock.com/guides/multi-currency-net-worth-tracker',
-      inLanguage: 'en',
+      inLanguage: 'en-GB',
       isPartOf: {
         '@type': 'WebSite',
         name: 'Paddock',
@@ -99,7 +99,7 @@ export const PAGE_META = {
       description:
         'How long-term wealth projections work, what drives them, and how to use compound growth and contribution modelling to plan 5–40 years ahead.',
       url: 'https://getpaddock.com/guides/long-term-wealth-projection',
-      inLanguage: 'en',
+      inLanguage: 'en-GB',
       isPartOf: {
         '@type': 'WebSite',
         name: 'Paddock',
@@ -126,7 +126,7 @@ export const PAGE_META = {
       description:
         'Why inflation-adjusted net worth matters for long-term planning, with worked examples showing the difference between nominal and real-terms projections.',
       url: 'https://getpaddock.com/guides/inflation-adjusted-net-worth',
-      inLanguage: 'en',
+      inLanguage: 'en-GB',
       isPartOf: {
         '@type': 'WebSite',
         name: 'Paddock',
