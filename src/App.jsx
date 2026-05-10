@@ -23,6 +23,7 @@ import HowToTrackNetWorth from './pages/HowToTrackNetWorth'
 import Support from './pages/Support'
 import BestNetWorthAppsUK from './pages/BestNetWorthAppsUK'
 import ManualTracking from './pages/ManualTracking'
+import MoneyHubAlternative from './pages/MoneyHubAlternative'
 import PensionDrawdownCalculator from './tools/PensionDrawdownCalculator'
 import FireNumberCalculator from './tools/FireNumberCalculator'
 import IsaGrowthCalculator from './tools/IsaGrowthCalculator'
@@ -281,6 +282,7 @@ export default function App() {
   if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative navigateTo={navigateTo} />
   if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth navigateTo={navigateTo} />
   if (route === 'founder_manual_tracking') return <ManualTracking navigateTo={navigateTo} goTo={goTo} />
+  if (route === 'moneyhub_alternative') return <MoneyHubAlternative navigateTo={navigateTo} goTo={goTo} />
   if (route === 'best_net_worth_apps_uk') return <BestNetWorthAppsUK navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_pension_drawdown') return <PensionDrawdownCalculator navigateTo={navigateTo} goTo={goTo} />
   if (route === 'tools_retirement_bridge') return <RetirementBridgeCalculator navigateTo={navigateTo} goTo={goTo} />

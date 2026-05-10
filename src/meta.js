@@ -360,6 +360,66 @@ export const PAGE_META = {
     },
   },
 
+  moneyhub_alternative: {
+    title: 'Best Moneyhub Alternative 2026 — UK Wealth Tracker Apps Compared',
+    description:
+      'Moneyhub is closing in August 2026. Here\'s an honest comparison of the best UK alternatives for tracking ISAs, SIPPs and net worth.',
+    canonical: 'https://getpaddock.com/moneyhub-alternative',
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Article',
+          headline: 'Moneyhub is closing — here are the best alternatives for UK investors',
+          description:
+            'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who need to migrate away from Moneyhub before August 2026.',
+          url: 'https://getpaddock.com/moneyhub-alternative',
+          inLanguage: 'en-GB',
+          isPartOf: {
+            '@type': 'WebSite',
+            name: 'Paddock',
+            url: 'https://getpaddock.com',
+          },
+          publisher: {
+            '@type': 'Organization',
+            name: 'Paddock',
+            url: 'https://getpaddock.com',
+          },
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: [
+            {
+              '@type': 'Question',
+              name: 'When is Moneyhub closing?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Moneyhub is closing its consumer-facing app in August 2026. Users should export their data and migrate to an alternative before that date.',
+              },
+            },
+            {
+              '@type': 'Question',
+              name: 'What is the best Moneyhub alternative for UK investors?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Paddock is the strongest like-for-like alternative for UK wealth tracking. It supports ISAs, SIPPs, savings, property and multi-currency accounts, offers long-term projections, and takes a privacy-first manual-entry approach with no bank linking required. It works on both web and iOS.',
+              },
+            },
+            {
+              '@type': 'Question',
+              name: 'Does Paddock link to my bank?',
+              acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'No. Paddock is entirely manual-entry. You enter your own balances — typically once a month — without connecting bank accounts or sharing any credentials. Your data never leaves your control.',
+              },
+            },
+          ],
+        },
+      ],
+    },
+  },
+
   tools_pension_drawdown: {
     title: 'Pension Drawdown Calculator UK | How Long Will It Last? | Paddock',
     description:
