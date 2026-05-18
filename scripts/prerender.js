@@ -121,9 +121,14 @@ ${urls}
 }
 
 function renderRedirects() {
-  const slashRedirects = PUBLIC_ROUTES
-    .filter((route) => route.path !== '/')
+  const nonRootRoutes = PUBLIC_ROUTES.filter((route) => route.path !== '/')
+
+  const slashRedirects = nonRootRoutes
     .map((route) => `${route.path}/ ${route.path} 301`)
+    .join('\n')
+
+  const htmlRedirects = nonRootRoutes
+    .map((route) => `${route.path}.html ${route.path} 301`)
     .join('\n')
 
   return `# Cloudflare Pages redirects for the public marketing site.
@@ -134,6 +139,11 @@ function renderRedirects() {
 # Retired trailing-slash variants. Canonical internal URLs and sitemap entries
 # point directly to the slashless paths below.
 ${slashRedirects}
+
+# Redirect .html file paths to canonical pretty URLs (Cloudflare Pages serves
+# both /foo and /foo.html for the same file; the .html variant must redirect
+# or Google flags them as duplicates without a user-selected canonical).
+${htmlRedirects}
 
 # Unknown routes should not be canonicalized to the homepage.
 /* /404.html 404

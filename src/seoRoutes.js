@@ -157,7 +157,7 @@ export const PUBLIC_ROUTES = [
     h1: 'Net worth tracker UK',
     intro:
       'Track cash, investments, pensions, ISAs, property and liabilities in one private manual-entry dashboard without connecting your bank.',
-    links: ['/tools/net-worth-calculator', '/best-net-worth-tracking-apps-uk', '/guides/multi-currency-net-worth-tracker', '/privacy'],
+    links: ['/track-isas-pensions-savings', '/spreadsheet-alternative-net-worth-tracking', '/how-to-track-your-net-worth', '/tools/net-worth-calculator', '/best-net-worth-tracking-apps-uk'],
     priority: true,
   },
   {
@@ -170,7 +170,7 @@ export const PUBLIC_ROUTES = [
     h1: 'Track ISAs, pensions and savings together',
     intro:
       'Bring ISAs, pensions, SIPPs, savings and property into one long-term wealth view built for UK planning and manual privacy-first tracking.',
-    links: ['/tools/isa-growth-calculator', '/tools/pension-drawdown-calculator', '/net-worth-tracker', '/privacy'],
+    links: ['/net-worth-tracker', '/spreadsheet-alternative-net-worth-tracking', '/how-to-track-your-net-worth', '/tools/isa-growth-calculator', '/tools/pension-drawdown-calculator'],
   },
   {
     key: 'spreadsheet_alternative',
@@ -182,7 +182,7 @@ export const PUBLIC_ROUTES = [
     h1: 'Spreadsheet alternative for net worth tracking',
     intro:
       'Replace fragile spreadsheet tabs with a structured manual wealth tracker for net worth, accounts, projections and long-term goals.',
-    links: ['/tools/net-worth-calculator', '/how-to-track-your-net-worth', '/net-worth-tracker', '/privacy'],
+    links: ['/net-worth-tracker', '/track-isas-pensions-savings', '/how-to-track-your-net-worth', '/tools/net-worth-calculator'],
   },
   {
     key: 'how_to_track_net_worth',
@@ -194,7 +194,7 @@ export const PUBLIC_ROUTES = [
     h1: 'How to track your net worth',
     intro:
       'A practical guide to tracking net worth manually, including what to include, how often to update and how to make the number useful.',
-    links: ['/tools/net-worth-calculator', '/net-worth-tracker', '/spreadsheet-alternative-net-worth-tracking', '/privacy'],
+    links: ['/net-worth-tracker', '/track-isas-pensions-savings', '/spreadsheet-alternative-net-worth-tracking', '/tools/net-worth-calculator'],
   },
   {
     key: 'best_net_worth_apps_uk',

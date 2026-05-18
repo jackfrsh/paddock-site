@@ -169,6 +169,32 @@ export const PAGE_META = {
       'Track cash, investments, pensions, property and liabilities in one privacy-first UK net worth tracker. Manual entry, no bank linking.',
     canonical: 'https://getpaddock.com/net-worth-tracker',
     ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Is Paddock a budgeting app?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No. Paddock is built around wealth tracking rather than day-to-day budgeting. The focus is on net worth, long-term progress and a clearer overall financial picture.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Do I need to link bank accounts?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No. Paddock is manual-entry by design. That keeps the experience simpler, more deliberate and more private.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Should pensions be included in net worth?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Many people include pensions because they are a major part of long-term wealth. What matters most is staying consistent in how you measure your position over time.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'How often should I update my numbers?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Monthly is enough for most people. The goal is not constant checking. It is a steady view of how your wealth is changing over time.' },
+        },
+      ],
+    },
   },
 
   track_isas_pensions_savings: {
@@ -177,6 +203,32 @@ export const PAGE_META = {
       'See ISAs, pensions and savings together in one calm wealth dashboard. Track long-term progress clearly with privacy-first manual tracking.',
     canonical: 'https://getpaddock.com/track-isas-pensions-savings',
     ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Can I track multiple ISAs?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Yes. The point is to build a complete view, not force everything into one account type. Multiple ISA balances can all contribute to the same broader wealth picture.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Should pensions be included?',
+          acceptedAnswer: { '@type': 'Answer', text: 'For many people, yes. Pensions are often one of the largest parts of long-term wealth, so excluding them can make the total picture less useful.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Do I need live account syncing?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No. Paddock is manual by design. That keeps the workflow cleaner and lets you update on a cadence that suits long-term wealth tracking.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Is this only for investing?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No. It is for seeing the broader picture across cash, savings, investments and pensions, so you can understand total progress more clearly.' },
+        },
+      ],
+    },
   },
 
   spreadsheet_alternative: {
@@ -185,6 +237,32 @@ export const PAGE_META = {
       'Replace fragile spreadsheets with a calmer way to track net worth, progress and long-term wealth in one premium dashboard.',
     canonical: 'https://getpaddock.com/spreadsheet-alternative-net-worth-tracking',
     ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Is Paddock automatic?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No. It is manual-entry by design. The difference is that the structure and review experience are cleaner than maintaining a spreadsheet over time.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Why not just keep using a spreadsheet?',
+          acceptedAnswer: { '@type': 'Answer', text: 'You can. Paddock becomes more useful when your current sheet feels harder to maintain, less readable, or too fragmented to support a calm long-term review.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Can I still think in categories and accounts?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Yes. That is part of the point. Paddock keeps the structure without forcing you to build and maintain the structure yourself.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Is this for budgeting?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No. It is for wealth tracking. The focus is on total net worth, long-term progress and a clearer overall financial position.' },
+        },
+      ],
+    },
   },
 
   how_to_track_net_worth: {
@@ -193,6 +271,32 @@ export const PAGE_META = {
       'Learn how to track your net worth clearly, including what to include, how often to update it, and why consistency matters more than noise.',
     canonical: 'https://getpaddock.com/how-to-track-your-net-worth',
     ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Should I include my pension in net worth?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Many people do, because pensions are often one of the biggest parts of long-term wealth. The important thing is to use a consistent approach over time.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Should I include my home?',
+          acceptedAnswer: { '@type': 'Answer', text: 'You can. If property is a meaningful part of your balance sheet, including it can make the picture more complete. Consistency is what matters most.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'How often should I track my net worth?',
+          acceptedAnswer: { '@type': 'Answer', text: 'Monthly is usually enough. That cadence is often frequent enough to stay aware without turning wealth tracking into constant checking.' },
+        },
+        {
+          '@type': 'Question',
+          name: 'Do I need automatic bank syncing?',
+          acceptedAnswer: { '@type': 'Answer', text: 'No. For long-term wealth tracking, manual updates can often be enough, especially when the goal is clarity rather than live transaction monitoring.' },
+        },
+      ],
+    },
   },
 
   tools_hub: {
@@ -272,25 +376,56 @@ export const PAGE_META = {
     description:
       'Compare UK net worth tracking apps including Paddock, Emma, Moneyhub and spreadsheets for ISAs, pensions, savings and multi-currency wealth.',
     canonical: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
-    ogType: 'website',
+    ogType: 'article',
     jsonLd: {
       '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline: 'Best Net Worth Tracking Apps UK — Comparison & Review',
-      description:
-        'A practical comparison of the best net worth tracking apps in the UK for users tracking ISAs, pensions, savings, and multi-currency wealth.',
-      url: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
-      inLanguage: 'en-GB',
-      isPartOf: {
-        '@type': 'WebSite',
-        name: 'Paddock',
-        url: 'https://getpaddock.com',
-      },
-      publisher: {
-        '@type': 'Organization',
-        name: 'Paddock',
-        url: 'https://getpaddock.com',
-      },
+      '@graph': [
+        {
+          '@type': 'Article',
+          headline: 'Best Net Worth Tracking Apps UK — Comparison & Review',
+          description:
+            'A practical comparison of the best net worth tracking apps in the UK for users tracking ISAs, pensions, savings, and multi-currency wealth.',
+          url: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
+          inLanguage: 'en-GB',
+          isPartOf: { '@type': 'WebSite', name: 'Paddock', url: 'https://getpaddock.com' },
+          publisher: { '@type': 'Organization', name: 'Paddock', url: 'https://getpaddock.com' },
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: [
+            {
+              '@type': 'Question',
+              name: 'What is the best net worth tracking app in the UK?',
+              acceptedAnswer: { '@type': 'Answer', text: 'It depends on what you are trying to do. If you want automatic syncing and spending insights, Emma or Moneyhub are strong options. If you want a private, deliberate view of total wealth — ISAs, pensions, savings, property, and multi-currency accounts — with long-term projections and no bank linking, Paddock is built for that.' },
+            },
+            {
+              '@type': 'Question',
+              name: 'Can I track pensions and ISAs in one place?',
+              acceptedAnswer: { '@type': 'Answer', text: 'Yes — Paddock is specifically designed to hold UK wealth accounts together. You can add a Stocks & Shares ISA, a SIPP, cash savings, and other accounts side by side, with everything converted into one base-currency net worth figure.' },
+            },
+            {
+              '@type': 'Question',
+              name: 'Do I need open banking to track my net worth?',
+              acceptedAnswer: { '@type': 'Answer', text: 'No. Paddock is entirely manual-entry — there is no open banking, no bank credential sharing, and no third-party sync. You enter your own balances.' },
+            },
+            {
+              '@type': 'Question',
+              name: 'Are manual net worth trackers better for privacy?',
+              acceptedAnswer: { '@type': 'Answer', text: 'Generally, yes. Open banking tools require you to share credentials or grant access to your financial accounts. With a manual tracker like Paddock, nothing is shared — you enter numbers yourself, and the data stays in the app.' },
+            },
+            {
+              '@type': 'Question',
+              name: 'What if I already use a spreadsheet?',
+              acceptedAnswer: { '@type': 'Answer', text: 'Spreadsheets work well until they do not — usually when the number of accounts grows, FX rates need to be maintained, projections become complicated, or mobile access matters. Paddock handles those parts automatically, while keeping the deliberate manual-entry approach.' },
+            },
+            {
+              '@type': 'Question',
+              name: 'Is there a UK net worth tracker that works without bank linking?',
+              acceptedAnswer: { '@type': 'Answer', text: 'Paddock is built specifically for this. It is a manual-entry, privacy-first wealth tracker with UK account types — ISAs, SIPPs, savings, property — multi-currency support with daily FX rates, and long-term projections. No bank connection is required at any point.' },
+            },
+          ],
+        },
+      ],
     },
   },
 

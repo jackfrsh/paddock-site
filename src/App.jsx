@@ -690,27 +690,27 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
 </p>
 
             <div className="pill-links">
-              <button
-                type="button"
-                onClick={() => navigateTo('/guides/long-term-wealth-projection')}
+              <a
+                href="/guides/long-term-wealth-projection"
                 className="pill-link"
+                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/long-term-wealth-projection') } }}
               >
                 Long-term projections
-              </button>
-              <button
-                type="button"
-                onClick={() => navigateTo('/guides/multi-currency-net-worth-tracker')}
+              </a>
+              <a
+                href="/guides/multi-currency-net-worth-tracker"
                 className="pill-link"
+                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/multi-currency-net-worth-tracker') } }}
               >
                 Multi-currency tracking
-              </button>
-              <button
-                type="button"
-                onClick={() => navigateTo('/guides/inflation-adjusted-net-worth')}
+              </a>
+              <a
+                href="/guides/inflation-adjusted-net-worth"
                 className="pill-link"
+                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/inflation-adjusted-net-worth') } }}
               >
                 Inflation-adjusted views
-              </button>
+              </a>
             </div>
           </Reveal>
 
@@ -777,13 +777,13 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
                 </div>
               </a>
             </div>
-            <button
-              type="button"
+            <a
+              href="/tools"
               className="tools-feature-all"
-              onClick={() => navigateTo('/tools')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/tools') } }}
             >
               View all free tools
-            </button>
+            </a>
           </Reveal>
         </div>
       </section>

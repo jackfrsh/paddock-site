@@ -11,22 +11,21 @@ export default function NetWorthTracker({ navigateTo }) {
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="page-topbar">
-            <button
-              type="button"
-              onClick={() => navigateTo('/')}
+            <a
+              href="/"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
               className="brand page-brand page-brand-lg"
-              aria-label="Go to home"
             >
               Paddock<span>.</span>
-            </button>
+            </a>
 
-            <button
-              type="button"
+            <a
+              href="/"
               className="guide-back-link"
-              onClick={() => navigateTo('/')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
             >
               Back to home
-            </button>
+            </a>
           </div>
 
           <div className="hero-copy">
@@ -48,13 +47,13 @@ export default function NetWorthTracker({ navigateTo }) {
                 Try Paddock
               </a>
 
-              <button
-                type="button"
+              <a
+                href="/net-worth-tracker"
                 className="btn btn-secondary"
-                onClick={() => navigateTo('/net-worth-tracker')}
+                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/net-worth-tracker') } }}
               >
                 View net worth page
-              </button>
+              </a>
             </div>
 
             <div className="hero-tags">
@@ -146,35 +145,35 @@ export default function NetWorthTracker({ navigateTo }) {
           </p>
 
           <div className="use-links-grid use-links-grid-3">
-            <button
-              type="button"
+            <a
+              href="/net-worth-tracker"
               className="use-link-item"
-              onClick={() => navigateTo('/net-worth-tracker')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/net-worth-tracker') } }}
             >
               <h3>Net worth tracking</h3>
               <div className="line" />
               <p>See the full picture in one premium dashboard built for long-term wealth.</p>
-            </button>
+            </a>
 
-            <button
-              type="button"
+            <a
+              href="/track-isas-pensions-savings"
               className="use-link-item"
-              onClick={() => navigateTo('/track-isas-pensions-savings')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/track-isas-pensions-savings') } }}
             >
               <h3>Track ISAs and pensions</h3>
               <div className="line" />
               <p>Bring key UK wealth accounts together in a single calm view.</p>
-            </button>
+            </a>
 
-            <button
-              type="button"
+            <a
+              href="/spreadsheet-alternative-net-worth-tracking"
               className="use-link-item"
-              onClick={() => navigateTo('/spreadsheet-alternative-net-worth-tracking')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/spreadsheet-alternative-net-worth-tracking') } }}
             >
               <h3>Replace spreadsheets</h3>
               <div className="line" />
               <p>Replace fragile financial workbooks with a clearer structured workflow.</p>
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -231,13 +230,13 @@ export default function NetWorthTracker({ navigateTo }) {
             <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
               Try Paddock
             </a>
-            <button
-              type="button"
+            <a
+              href="/net-worth-tracker"
               className="btn btn-secondary"
-              onClick={() => navigateTo('/net-worth-tracker')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/net-worth-tracker') } }}
             >
               View net worth page
-            </button>
+            </a>
           </div>
         </div>
       </section>

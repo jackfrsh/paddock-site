@@ -11,22 +11,21 @@ export default function NetWorthTracker({ navigateTo }) {
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="page-topbar">
-            <button
-              type="button"
-              onClick={() => navigateTo('/')}
+            <a
+              href="/"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
               className="brand page-brand page-brand-lg"
-              aria-label="Go to home"
             >
               Paddock<span>.</span>
-            </button>
+            </a>
 
-            <button
-              type="button"
+            <a
+              href="/"
               className="guide-back-link"
-              onClick={() => navigateTo('/')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
             >
               Back to home
-            </button>
+            </a>
           </div>
           <div className="hero-copy">
             <div className="hero-kicker">Net worth tracking</div>
@@ -46,13 +45,13 @@ export default function NetWorthTracker({ navigateTo }) {
               <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
                 Create account
               </a>
-              <button
-                type="button"
+              <a
+                href="/"
                 className="btn btn-secondary"
-                onClick={() => navigateTo('/')}
+                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
               >
                 Back to home
-              </button>
+              </a>
             </div>
 
             <div className="hero-tags">
@@ -149,35 +148,35 @@ export default function NetWorthTracker({ navigateTo }) {
           </p>
 
           <div className="use-links-grid use-links-grid-3">
-            <button
-              type="button"
+            <a
+              href="/track-isas-pensions-savings"
               className="use-link-item"
-              onClick={() => navigateTo('/track-isas-pensions-savings')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/track-isas-pensions-savings') } }}
             >
               <h3>Track ISAs and pensions</h3>
               <div className="line" />
               <p>See core UK wealth accounts together so your progress is easier to understand.</p>
-            </button>
+            </a>
 
-            <button
-              type="button"
+            <a
+              href="/spreadsheet-alternative-net-worth-tracking"
               className="use-link-item"
-              onClick={() => navigateTo('/spreadsheet-alternative-net-worth-tracking')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/spreadsheet-alternative-net-worth-tracking') } }}
             >
               <h3>Replace spreadsheets</h3>
               <div className="line" />
               <p>Move from scattered tabs and formulas to a calmer structured workflow.</p>
-            </button>
+            </a>
 
-            <button
-              type="button"
+            <a
+              href="/how-to-track-your-net-worth"
               className="use-link-item"
-              onClick={() => navigateTo('/how-to-track-your-net-worth')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/how-to-track-your-net-worth') } }}
             >
               <h3>How to track your net worth</h3>
               <div className="line" />
               <p>A practical framework for what to include, how often to update, and what matters.</p>
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -235,13 +234,13 @@ export default function NetWorthTracker({ navigateTo }) {
             <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
               Create account
             </a>
-            <button
-              type="button"
+            <a
+              href="/"
               className="btn btn-secondary"
-              onClick={() => navigateTo('/')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
             >
               Explore Paddock
-            </button>
+            </a>
           </div>
         </div>
       </section>
