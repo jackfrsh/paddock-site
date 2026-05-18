@@ -57,23 +57,23 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
   return (
     <header className="landing-nav">
       <div className="landing-nav-inner">
-        <button
-          type="button"
-          onClick={() => navigateTo('/')}
+        <a
+          href="/"
+          onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
           className="brand"
         >
           Paddock<span>.</span>
-        </button>
+        </a>
 
         <nav className="nav-actions nav-desktop">
           <ToolsDropdown navigateTo={navigateTo} />
-          <button
-            type="button"
-            onClick={() => navigateTo('/guides')}
+          <a
+            href="/guides"
             className="nav-link subtle"
+            onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides') } }}
           >
             Guides
-          </button>
+          </a>
 
           <div className="nav-divider" />
 
@@ -229,9 +229,12 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
             )}
           </div>
 
-          <button type="button" onClick={() => go('/guides')}>
+          <a
+            href="/guides"
+            onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); go('/guides') } }}
+          >
             Guides
-          </button>
+          </a>
           <button
             type="button"
             onClick={() => { goTo('signin'); setMenuOpen(false) }}

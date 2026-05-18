@@ -656,13 +656,13 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
                 >
                   Start planning — it&apos;s free
                 </button>
-                <button
-                  type="button"
+                <a
+                  href="/track-isas-pensions-savings"
                   className="btn btn-secondary"
-                  onClick={() => navigateTo('/track-isas-pensions-savings')}
+                  onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/track-isas-pensions-savings') } }}
                 >
                   How Paddock handles ISAs and pensions
-                </button>
+                </a>
               </div>
               <p className="hero-foot">Free to start · No credit card required · Setup in under 2 minutes</p>
             </div>

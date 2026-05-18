@@ -115,18 +115,18 @@ function NotFound({ navigateTo }) {
       </Helmet>
       <header className="landing-nav">
         <div className="landing-nav-inner">
-          <button type="button" onClick={() => navigateTo('/')} className="brand">
+          <a href="/" onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }} className="brand">
             Paddock<span>.</span>
-          </button>
+          </a>
         </div>
       </header>
       <main className="container section">
         <div className="hero-kicker">404</div>
         <h1>Page not found</h1>
         <p className="section-copy">The page you requested does not exist.</p>
-        <button type="button" className="btn btn-primary" onClick={() => navigateTo('/')}>
+        <a href="/" className="btn btn-primary" onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}>
           Go to homepage
-        </button>
+        </a>
       </main>
     </div>
   )
@@ -296,13 +296,13 @@ export default function App() {
     <div className={`landing-shell page-shell ${pageVisible ? 'is-visible' : 'is-hidden'}`}>
       <header className="landing-nav">
         <div className="landing-nav-inner">
-        <button
-  type="button"
-  onClick={() => navigateTo('/')}
+        <a
+  href="/"
+  onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
   className="brand"
 >
   Paddock<span>.</span>
-</button>
+</a>
 
           <nav className="nav-actions nav-desktop">
             <button type="button" onClick={() => scrollToId('product')} className="nav-link subtle">
@@ -311,13 +311,13 @@ export default function App() {
             <button type="button" onClick={() => scrollToId('pricing')} className="nav-link subtle">
               Pricing
             </button>
-            <button
-              type="button"
-              onClick={() => navigateTo('/guides')}
+            <a
+              href="/guides"
               className="nav-link subtle"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides') } }}
             >
               Guides
-            </button>
+            </a>
             <ToolsDropdown navigateTo={navigateTo} />
 
             <div className="nav-divider" />
@@ -379,9 +379,12 @@ export default function App() {
             <button type="button" onClick={() => { scrollToId('pricing'); setMenuOpen(false) }}>
               Pricing
             </button>
-            <button type="button" onClick={() => { navigateTo('/guides'); setMenuOpen(false) }}>
+            <a
+              href="/guides"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides'); setMenuOpen(false) } }}
+            >
               Guides
-            </button>
+            </a>
 
             {/* Tools accordion */}
             <div className="mobile-tools-wrap">

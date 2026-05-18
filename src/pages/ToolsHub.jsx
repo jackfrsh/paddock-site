@@ -155,13 +155,13 @@ export default function ToolsHub({ navigateTo, goTo }) {
               >
                 Start planning — it&apos;s free
               </button>
-              <button
-                type="button"
+              <a
+                href="/guides"
                 className="btn btn-secondary"
-                onClick={() => navigateTo('/guides')}
+                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides') } }}
               >
                 Read the guides
-              </button>
+              </a>
             </div>
             <p className="hero-foot">Free to start · No credit card required · Setup in under 2 minutes</p>
           </div>

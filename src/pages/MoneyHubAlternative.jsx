@@ -464,13 +464,13 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
             >
               Create your free account
             </button>
-            <button
-              type="button"
+            <a
+              href="/net-worth-tracker"
               className="btn btn-secondary"
-              onClick={() => navigateTo('/net-worth-tracker')}
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/net-worth-tracker') } }}
             >
               See how Paddock works
-            </button>
+            </a>
           </div>
 
           <p className="hero-foot">Free to start · No credit card required · No bank linking</p>

@@ -616,13 +616,13 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
                 >
                   Start tracking — it&apos;s free
                 </button>
-                <button
-                  type="button"
+                <a
+                  href="/net-worth-tracker"
                   className="btn btn-secondary"
-                  onClick={() => navigateTo('/net-worth-tracker')}
+                  onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/net-worth-tracker') } }}
                 >
                   How Paddock tracks net worth
-                </button>
+                </a>
               </div>
               <p className="hero-foot">Free to start · No credit card required · Setup in under 2 minutes</p>
             </div>

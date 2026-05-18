@@ -452,9 +452,13 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
               >
                 Save this projection in Paddock
               </button>
-              <button type="button" className="btn btn-secondary" onClick={() => navigateTo('/')}>
+              <a
+                href="/"
+                className="btn btn-secondary"
+                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/') } }}
+              >
                 Explore Paddock
-              </button>
+              </a>
             </div>
           </div>
         </div>

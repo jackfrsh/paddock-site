@@ -111,23 +111,21 @@ export function GuideShell({
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="guide-page-header">
-            <button
-              type="button"
-              onClick={() => navigateTo('/')}
+            <a
+              href="/"
+              onClick={(e) => { if (isModifiedEvent(e)) return; e.preventDefault(); navigateTo('/') }}
               className="brand guide-brand"
-              aria-label="Go to home"
             >
               Paddock<span>.</span>
-            </button>
+            </a>
 
-            <button
-              type="button"
-              onClick={onBack}
+            <a
+              href={canonicalPath?.startsWith('/guides/') ? '/guides' : '/'}
+              onClick={(e) => { if (isModifiedEvent(e)) return; e.preventDefault(); onBack() }}
               className="guide-back-link"
-              aria-label={resolvedBackLabel}
             >
               ← {resolvedBackLabel}
-            </button>
+            </a>
           </div>
 
           <div className="hero-copy guide-hero-copy">
