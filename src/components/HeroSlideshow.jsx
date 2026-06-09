@@ -60,7 +60,7 @@ function SlideImage({ src, webp, alt }) {
   return (
     <picture>
       {webp ? <source srcSet={webp} type="image/webp" /> : null}
-      <img src={src} alt={alt} className="hero-showcase-image" loading="eager" />
+      <img src={src} alt={alt} className="hero-showcase-image" loading="eager" fetchPriority="high" />
     </picture>
   )
 }

@@ -2,6 +2,7 @@ export const CANONICAL_ORIGIN = 'https://getpaddock.com'
 
 const sharedToolLinks = [
   '/tools/pension-drawdown-calculator',
+  '/tools/phased-drawdown-calculator',
   '/tools/fire-number-calculator',
   '/tools/net-worth-calculator',
   '/guides',
@@ -19,7 +20,7 @@ export const PUBLIC_ROUTES = [
     h1: 'Paddock wealth tracker',
     intro:
       'Paddock is a UK-first, privacy-first manual wealth tracker for ISAs, pensions, savings, investments, property and long-term goals. No bank linking required.',
-    links: ['/tools', '/guides', '/net-worth-tracker', '/privacy', '/security'],
+    links: ['/tools', '/guides', '/net-worth-tracker', '/moneyhub-alternative', '/privacy', '/security'],
     priority: true,
   },
   {
@@ -58,7 +59,20 @@ export const PUBLIC_ROUTES = [
     h1: 'Pension drawdown calculator UK',
     intro:
       'Estimate how long your pension pot could last using UK drawdown assumptions, withdrawal rates and retirement income planning scenarios.',
-    links: ['/tools/fire-number-calculator', '/tools/retirement-bridge-calculator', '/guides/long-term-wealth-projection', '/privacy'],
+    links: ['/tools/phased-drawdown-calculator', '/tools/fire-number-calculator', '/tools/retirement-bridge-calculator', '/guides/long-term-wealth-projection'],
+    priority: true,
+  },
+  {
+    key: 'tools_phased_drawdown',
+    path: '/tools/phased-drawdown-calculator',
+    lastmod: '2026-06-09',
+    targetKeyword: 'phased pension drawdown calculator UK',
+    secondaryKeywords: ['can I retire before State Pension', 'phased retirement income calculator', 'retirement bridge calculator UK'],
+    intent: 'Model phased retirement income and the bridge to State Pension',
+    h1: 'Can you retire before State Pension?',
+    intro:
+      'A free UK pension drawdown calculator that models phased retirement income — more early, less later — and your bridge to State Pension, all in today’s money.',
+    links: ['/tools/pension-drawdown-calculator', '/tools/retirement-bridge-calculator', '/tools/fire-number-calculator', '/guides/long-term-wealth-projection'],
     priority: true,
   },
   {
@@ -71,7 +85,7 @@ export const PUBLIC_ROUTES = [
     h1: 'ISA retirement bridge calculator UK',
     intro:
       'Estimate the ISA, cash or accessible savings you may need to bridge the years between stopping work and accessing pension income.',
-    links: ['/tools/pension-drawdown-calculator', '/tools/fire-number-calculator', '/guides/long-term-wealth-projection', '/track-isas-pensions-savings'],
+    links: ['/tools/phased-drawdown-calculator', '/tools/pension-drawdown-calculator', '/tools/fire-number-calculator', '/track-isas-pensions-savings'],
   },
   {
     key: 'tools_fire_number',
@@ -170,7 +184,7 @@ export const PUBLIC_ROUTES = [
     h1: 'Track ISAs, pensions and savings together',
     intro:
       'Bring ISAs, pensions, SIPPs, savings and property into one long-term wealth view built for UK planning and manual privacy-first tracking.',
-    links: ['/net-worth-tracker', '/spreadsheet-alternative-net-worth-tracking', '/how-to-track-your-net-worth', '/tools/isa-growth-calculator', '/tools/pension-drawdown-calculator'],
+    links: ['/net-worth-tracker', '/spreadsheet-alternative-net-worth-tracking', '/how-to-track-your-net-worth', '/moneyhub-alternative', '/tools/isa-growth-calculator'],
   },
   {
     key: 'spreadsheet_alternative',
@@ -206,7 +220,7 @@ export const PUBLIC_ROUTES = [
     h1: 'Best net worth tracking apps UK',
     intro:
       'An honest comparison of Paddock, Emma, Moneyhub and spreadsheets for UK users tracking ISAs, pensions, savings and multi-currency wealth.',
-    links: ['/net-worth-tracker', '/why-i-track-wealth-manually-instead-of-using-open-banking-apps', '/tools/net-worth-calculator', '/privacy'],
+    links: ['/net-worth-tracker', '/moneyhub-alternative', '/why-i-track-wealth-manually-instead-of-using-open-banking-apps', '/tools/net-worth-calculator'],
     priority: true,
   },
   {

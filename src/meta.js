@@ -28,13 +28,40 @@ export const PAGE_META = {
     ogType: 'website',
     jsonLd: {
       '@context': 'https://schema.org',
-      '@type': 'WebApplication',
-      name: 'Paddock',
-      applicationCategory: 'FinanceApplication',
-      operatingSystem: 'Web, iOS',
-      url: 'https://getpaddock.com/',
-      description:
-        'Track ISAs, pensions, savings, property and investments in one privacy-first UK wealth tracker. Manual entry, no bank linking.',
+      '@graph': [
+        {
+          '@type': 'Organization',
+          '@id': 'https://getpaddock.com/#organization',
+          name: 'Paddock',
+          url: 'https://getpaddock.com/',
+          logo: {
+            '@type': 'ImageObject',
+            url: 'https://getpaddock.com/icon-512.png',
+            width: 512,
+            height: 512,
+          },
+          description:
+            'A UK-first, privacy-first manual wealth tracker for ISAs, pensions, savings, property and investments.',
+        },
+        {
+          '@type': 'WebSite',
+          '@id': 'https://getpaddock.com/#website',
+          name: 'Paddock',
+          url: 'https://getpaddock.com/',
+          publisher: { '@id': 'https://getpaddock.com/#organization' },
+          inLanguage: 'en-GB',
+        },
+        {
+          '@type': 'WebApplication',
+          name: 'Paddock',
+          applicationCategory: 'FinanceApplication',
+          operatingSystem: 'Web, iOS',
+          url: 'https://getpaddock.com/',
+          publisher: { '@id': 'https://getpaddock.com/#organization' },
+          description:
+            'Track ISAs, pensions, savings, property and investments in one privacy-first UK wealth tracker. Manual entry, no bank linking.',
+        },
+      ],
     },
   },
 
@@ -60,9 +87,9 @@ export const PAGE_META = {
   },
 
   guide_multi_currency: {
-    title: 'Multi-Currency Portfolio Tracker UK — Track Investments Across Currencies | Paddock',
+    title: 'Multi-Currency Net Worth Tracker UK | Paddock',
     description:
-      'Track investments, ISAs, pensions, savings, and other accounts across GBP, USD, EUR and more in one base-currency view. No bank connection required. Private, manual-entry wealth tracking with Paddock.',
+      'Track ISAs, pensions, savings and investments across GBP, USD, EUR and more in one base-currency net worth view. Private, manual entry — no bank linking.',
     canonical: 'https://getpaddock.com/guides/multi-currency-net-worth-tracker',
     ogType: 'article',
     jsonLd: {
@@ -300,7 +327,7 @@ export const PAGE_META = {
   },
 
   tools_hub: {
-    title: 'UK Wealth Calculators | Pension, FIRE & Net Worth Tools | Paddock',
+    title: 'UK Wealth Calculators | Pension, FIRE & Net Worth | Paddock',
     description:
       'Free UK wealth calculators for pension drawdown, FIRE, ISA growth and net worth tracking. No login required; numbers stay in your browser.',
     canonical: 'https://getpaddock.com/tools',
@@ -344,9 +371,9 @@ export const PAGE_META = {
   },
 
   founder_manual_tracking: {
-    title: 'Why I Track Wealth Manually Instead of Using Open Banking Apps | Paddock',
+    title: 'Why I Track Wealth Manually, Not Open Banking Apps | Paddock',
     description:
-      "A founder's perspective on why manual, privacy-first wealth tracking can be better than open banking sync — for people with ISAs, pensions, multi-currency accounts, and a long time horizon.",
+      "A founder's take on why manual, privacy-first wealth tracking can beat open banking sync — for people with ISAs, pensions and multi-currency accounts.",
     canonical:
       'https://getpaddock.com/why-i-track-wealth-manually-instead-of-using-open-banking-apps',
     ogType: 'article',
@@ -454,7 +481,7 @@ export const PAGE_META = {
   tools_isa_growth: {
     title: 'ISA Growth Calculator UK — Project Your ISA Value | Paddock',
     description:
-      'Free ISA growth calculator. Enter your balance, monthly contributions and return assumption to see how your ISA could grow over time. Includes a 3%, 5%, and 7% return comparison. No login required.',
+      'Free ISA growth calculator. Enter your balance, monthly contributions and return to project your ISA over time, with a 3% / 5% / 7% comparison.',
     canonical: 'https://getpaddock.com/tools/isa-growth-calculator',
     ogType: 'website',
     jsonLd: {
@@ -552,6 +579,28 @@ export const PAGE_META = {
           ],
         },
       ],
+    },
+  },
+
+  tools_phased_drawdown: {
+    title: 'Phased Pension Drawdown Calculator UK | Paddock',
+    description:
+      'Free UK pension drawdown calculator with phased income — more early, less later. Model your bridge to State Pension and see if you can retire early.',
+    canonical: 'https://getpaddock.com/tools/phased-drawdown-calculator',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Phased Pension Drawdown Calculator UK',
+      url: 'https://getpaddock.com/tools/phased-drawdown-calculator',
+      description:
+        'Model phased retirement income and the bridge to State Pension. Compares a phased plan against a flat income-for-life plan, in today’s money.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
     },
   },
 

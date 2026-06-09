@@ -3256,3 +3256,184 @@ h3 {
     font-size: 0.72rem;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Phased drawdown calculator
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Stack the three phased-income inputs full width */
+.phased-income-fields {
+  max-width: 100%;
+}
+
+/* Single-column stat list reads cleanly on the right-hand panel */
+.phased-stats {
+  grid-template-columns: 1fr;
+}
+
+.calc-stat.phased-stat-good {
+  border-color: rgba(122, 165, 122, 0.30);
+  background: rgba(122, 165, 122, 0.07);
+}
+
+.calc-stat.phased-stat-good .calc-stat-value {
+  color: #9cc49c;
+}
+
+.calc-stat.phased-stat-warn {
+  border-color: rgba(212, 137, 58, 0.30);
+  background: rgba(212, 137, 58, 0.07);
+}
+
+.calc-stat.phased-stat-warn .calc-stat-value {
+  color: #e0a05a;
+}
+
+/* Chart */
+.phased-chart {
+  position: relative;
+  margin: 0 0 22px;
+  padding: 4px 0 0;
+}
+
+.phased-chart-svg {
+  display: block;
+  width: 100%;
+  height: 200px;
+  overflow: visible;
+}
+
+/* Keep strokes crisp and uniform under non-uniform svg scaling */
+.phased-chart-svg polyline,
+.phased-chart-svg line {
+  vector-effect: non-scaling-stroke;
+}
+
+.phased-chart-xaxis {
+  position: relative;
+  height: 16px;
+  margin-top: 2px;
+}
+
+.phased-chart-xlabel {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.phased-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.phased-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.phased-legend-swatch {
+  width: 16px;
+  height: 10px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, rgba(75, 121, 168, 0.55), rgba(75, 121, 168, 0.12));
+  border-top: 2px solid var(--accent);
+}
+
+.phased-legend-marker {
+  width: 14px;
+  height: 0;
+  border-top: 1px dashed rgba(255, 255, 255, 0.3);
+}
+
+.phased-legend-marker.marker-sp {
+  border-top-color: rgba(196, 163, 90, 0.7);
+}
+
+.phased-legend-marker.marker-75 {
+  border-top-color: rgba(255, 255, 255, 0.28);
+}
+
+/* Year-by-year table */
+.phased-table-toggle {
+  margin-top: 4px;
+}
+
+.phased-table-wrap {
+  margin-top: 14px;
+  max-height: 320px;
+  overflow: auto;
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-md);
+}
+
+.phased-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+}
+
+.phased-table thead th {
+  position: sticky;
+  top: 0;
+  background: #1d2128;
+  color: var(--muted);
+  font-weight: 600;
+  text-align: right;
+  padding: 9px 10px;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.phased-table thead th:first-child {
+  text-align: left;
+}
+
+.phased-table tbody td {
+  text-align: right;
+  padding: 7px 10px;
+  color: var(--text-2);
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.phased-table tbody td:first-child {
+  text-align: left;
+  color: var(--text);
+  font-weight: 600;
+}
+
+.phased-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.phased-table tbody tr.phased-row-depleted td {
+  color: var(--text-quiet);
+}
+
+.phased-table tbody tr.phased-row-depleted td:nth-child(6) {
+  color: #e0a05a;
+}
+
+@media (max-width: 760px) {
+  .phased-chart-svg {
+    height: 170px;
+  }
+
+  .phased-table {
+    font-size: 0.72rem;
+  }
+
+  .phased-table thead th,
+  .phased-table tbody td {
+    padding: 6px 7px;
+  }
+}

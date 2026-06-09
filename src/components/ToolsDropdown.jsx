@@ -88,6 +88,22 @@ export default function ToolsDropdown({ navigateTo }) {
           </a>
 
           <a
+            href="/tools/phased-drawdown-calculator"
+            className="tools-dropdown-item"
+            onClick={(e) => {
+              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                e.preventDefault()
+                go('/tools/phased-drawdown-calculator')
+              }
+            }}
+          >
+            <div className="tools-dropdown-item-title">Phased drawdown calculator</div>
+            <div className="tools-dropdown-item-desc">
+              Can you retire before State Pension? Model phased income and your bridge.
+            </div>
+          </a>
+
+          <a
             href="/tools/retirement-bridge-calculator"
             className="tools-dropdown-item"
             onClick={(e) => {

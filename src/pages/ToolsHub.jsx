@@ -35,21 +35,21 @@ export default function ToolsHub({ navigateTo, goTo }) {
   return (
     <div className="landing-shell">
       <Helmet>
-        <title>Free Planning Tools — Paddock</title>
+        <title>UK Wealth Calculators | Pension, FIRE & Net Worth | Paddock</title>
         <meta
           name="description"
-          content="Free UK financial planning tools from Paddock. Pension drawdown calculator and more — no login required. Your numbers stay in your browser."
+          content="Free UK wealth calculators for pension drawdown, FIRE, ISA growth and net worth tracking. No login required; numbers stay in your browser."
         />
         <link rel="canonical" href="https://getpaddock.com/tools" />
-        <meta property="og:title" content="Free Planning Tools — Paddock" />
+        <meta property="og:title" content="UK Wealth Calculators | Pension, FIRE & Net Worth | Paddock" />
         <meta
           property="og:description"
-          content="Free UK financial planning tools from Paddock. Pension drawdown calculator and more — no login required."
+          content="Free UK wealth calculators for pension drawdown, FIRE, ISA growth and net worth tracking. No login required; numbers stay in your browser."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://getpaddock.com/tools" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free Planning Tools — Paddock" />
+        <meta name="twitter:title" content="UK Wealth Calculators | Pension, FIRE & Net Worth | Paddock" />
         <meta
           name="twitter:description"
           content="Free UK financial planning tools from Paddock. No login required."
@@ -84,6 +84,14 @@ export default function ToolsHub({ navigateTo, goTo }) {
               description="Enter your pension pot, retirement age, and assumptions to project how far your pension could go in drawdown. Includes a 3% / 4% / 5% withdrawal rate comparison."
               tags={['Free', 'No login required', 'UK']}
               ctaText="Try the calculator"
+            />
+            <ToolCard
+              href="/tools/phased-drawdown-calculator"
+              onClick={() => navigateTo('/tools/phased-drawdown-calculator')}
+              title="Phased pension drawdown calculator UK"
+              description="Can you retire before State Pension? Model phased retirement income — more in your active early years, less later — and your bridge to State Pension. Compares phased vs flat income for life."
+              tags={['Free', 'No login required', 'UK']}
+              ctaText="See if you can retire early"
             />
             <ToolCard
               href="/tools/retirement-bridge-calculator"
