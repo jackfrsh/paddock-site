@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ToolsDropdown from './ToolsDropdown'
+import SkipLink from './SkipLink'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
@@ -56,6 +57,7 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
 
   return (
     <header className="landing-nav">
+      <SkipLink />
       <div className="landing-nav-inner">
         <a
           href="/"

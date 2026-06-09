@@ -1,6 +1,5 @@
 import React from 'react'
 import appStoreBadge from '../assets/app-store-badge.svg'
-import { APP_STORE_URL } from '../constants'
 
 export default function AppStoreBadgeLink({ className = '' }) {
   const classes = ['app-store-badge-link', className].filter(Boolean).join(' ')

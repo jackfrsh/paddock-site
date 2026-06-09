@@ -35,13 +35,14 @@
   --surface-soft: rgba(255, 255, 255, 0.03);
   --surface-hover: rgba(255, 255, 255, 0.04);
 
-  /* Text opacity scale */
-  --text-soft: rgba(241, 242, 243, 0.6);
-  --text-faint: rgba(241, 242, 243, 0.42);
-  --text-subtle: rgba(241, 242, 243, 0.32);
-  --text-quiet: rgba(241, 242, 243, 0.28);
-  --text-dim: rgba(241, 242, 243, 0.35);
-  --text-kicker: rgba(241, 242, 243, 0.46);
+  /* Text opacity scale. Floor raised to ~0.55 so small text clears WCAG AA
+     (≥4.5:1) on the dark background, while keeping a subtle visual hierarchy. */
+  --text-soft: rgba(241, 242, 243, 0.62);
+  --text-faint: rgba(241, 242, 243, 0.58);
+  --text-subtle: rgba(241, 242, 243, 0.55);
+  --text-quiet: rgba(241, 242, 243, 0.55);
+  --text-dim: rgba(241, 242, 243, 0.57);
+  --text-kicker: rgba(241, 242, 243, 0.6);
 
   /* Shadows */
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
@@ -3436,4 +3437,38 @@ h3 {
   .phased-table tbody td {
     padding: 6px 7px;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Skip link (accessibility) — hidden until keyboard-focused
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 2000;
+  transform: translateY(-200%);
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 650;
+  text-decoration: none;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Avoid a persistent focus ring on the programmatically-focused content target */
+#main-content:focus,
+.landing-nav + *:focus {
+  outline: none;
 }

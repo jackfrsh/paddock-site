@@ -36,6 +36,7 @@ import { PAGE_META } from './meta'
 import { PUBLIC_ROUTES } from './seoRoutes'
 import SiteFooter from './components/SiteFooter'
 import AppStoreBadgeLink from './components/AppStoreBadgeLink'
+import SkipLink from './components/SkipLink'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
@@ -297,6 +298,7 @@ export default function App() {
   return (
     <div className={`landing-shell page-shell ${pageVisible ? 'is-visible' : 'is-hidden'}`}>
       <header className="landing-nav">
+        <SkipLink />
         <div className="landing-nav-inner">
         <a
   href="/"
