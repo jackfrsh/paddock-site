@@ -518,16 +518,16 @@ export default function App() {
       <section className="hero-section">
         <div className="container">
           <div className="hero-copy">
-          <div className="hero-kicker">Private wealth planning</div>
+          <div className="hero-kicker">Private UK wealth tracker</div>
 
 <h1>
-  Your wealth.
+  Know where you stand.
   <br />
-  Planned.
+  See where you&apos;re going.
 </h1>
 
 <p className="hero-sub">
-Track ISAs, pensions, savings, property and multi-currency accounts in one private dashboard — with long-term projections, decision support, and no bank linking.
+Paddock brings your ISAs, pensions, savings, investments, property and goals into one private wealth dashboard — no bank linking required.
 </p>
 
             <div className="hero-actions">
@@ -537,35 +537,69 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
                 onClick={() => goTo('signup')}
                 disabled={!!pending}
               >
-                {pending === 'signup' ? 'Opening…' : 'Start planning — it’s free'}
+                {pending === 'signup' ? 'Opening…' : 'Start planning free'}
               </button>
 
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => goTo('signin')}
+                onClick={() => navigateTo('/tools')}
                 disabled={!!pending}
               >
-                {pending === 'signin' ? 'Opening…' : 'Sign in'}
+                Try the free calculators
               </button>
             </div>
 
             <AppStoreBadgeLink className="app-store-badge-hero" />
 
-            <p className="hero-foot">Free to start • No credit card required • Setup takes under 2 minutes</p>
+            <p className="hero-foot">No bank linking. No ads. No data selling. Manual entry, always.</p>
 
             <div className="hero-tags">
-  <span>ISA deadline awareness</span>
-  <span>Mortgage trade-off modelling</span>
+  <span>UK net worth tracker</span>
+  <span>ISAs and pensions</span>
+  <span>Financial planning</span>
   <span>Long-term projections</span>
-  <span>No bank linking</span>
-  <span>Private by design</span>
+  <span>Manual by design</span>
 </div>
           </div>
         </div>
       </section>
 
       <HeroSlideshow goTo={goTo} />
+
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>Why Paddock exists</SectionLabel>
+            <h2>Most finance apps show transactions. Paddock shows direction.</h2>
+            <p className="section-copy">
+              Paddock is built for people who care less about yesterday&apos;s coffee spend and more
+              about whether their ISA, pension, property and savings are moving them toward the
+              life they want.
+            </p>
+
+            <div className="split-columns why-grid">
+              <div>
+                <h3>Not another budgeting app</h3>
+                <div className="line" />
+                <p>Paddock focuses on wealth, progress and long-term direction — not daily spending noise.</p>
+              </div>
+
+              <div>
+                <h3>Manual by design</h3>
+                <div className="line" />
+                <p>Add the accounts that matter, update them on your terms, and keep your financial life under your control.</p>
+              </div>
+
+              <div>
+                <h3>Built for UK wealth</h3>
+                <div className="line" />
+                <p>Track ISAs, SIPPs, pensions, savings, investments, property and long-term goals in one calm dashboard.</p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
 
       <section className="section-border">
@@ -644,10 +678,10 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
 
       <section id="product" className="container section">
         <Reveal>
-        <SectionLabel>Why Paddock</SectionLabel>
-<h2>From balances to decisions.</h2>
+        <SectionLabel>How Paddock is different</SectionLabel>
+<h2>Manual entry is not a compromise. It is the point.</h2>
 <p className="section-copy">
-  Paddock is a manual-entry, privacy-first net worth tracker built for people who want more than balance checking — with clear projections, UK wealth context, and better next-step decisions.
+  No bank credentials. No broken connections. No unwanted access. Just the numbers that matter, updated by you.
 </p>
 
           <div className="split-columns">
@@ -655,7 +689,7 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
   <h3>One plan, always visible.</h3>
   <div className="line" />
   <p>
-    A named long-term goal anchors the model, so progress is measured against something real — not just a changing balance.
+    A named long-term goal anchors the model, so progress is measured against something real — not just a changing account balance.
   </p>
 </div>
 
@@ -676,11 +710,10 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
 </div>
 
             <div>
-              <h3>Assumptions in plain sight.</h3>
+              <h3>No noisy sync layer.</h3>
               <div className="line" />
               <p>
-                Contribution, return and time horizon sit next to the model — not buried in menus or hidden
-                settings.
+                Paddock is for deliberate updates, clean records and calm planning — not live transaction monitoring.
               </p>
             </div>
           </div>
@@ -693,10 +726,16 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
           <SectionLabel>Decisions</SectionLabel>
 <h2>Know what the next pounds should do.</h2>
 <p className="section-copy narrow">
-  Use Paddock to model ISA timing, contribution changes, and long-term trade-offs before you make the next move.
+  Everything you own. Everything you owe. The path between today and your goal.
 </p>
 
             <div className="pill-links">
+              <span className="pill-link pill-link-static">Total wealth</span>
+              <span className="pill-link pill-link-static">Goal progress</span>
+              <span className="pill-link pill-link-static">Pension path</span>
+              <span className="pill-link pill-link-static">ISA growth</span>
+              <span className="pill-link pill-link-static">Property and liabilities</span>
+              <span className="pill-link pill-link-static">Financial freedom gap</span>
               <a
                 href="/guides/long-term-wealth-projection"
                 className="pill-link"
@@ -726,7 +765,7 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
               src={insightsShot}
               webp={insightsShotWebp}
               alt="Paddock insights and scenario modelling view"
-              caption="Scenario modelling and deeper planning views."
+              caption="Outcome views for total wealth, goal progress, ISA growth and the financial freedom gap."
             />
           </Reveal>
         </div>
@@ -737,10 +776,10 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
         <div className="container section">
           <Reveal>
             <SectionLabel>Free tools</SectionLabel>
-            <h2>Start planning before you sign up.</h2>
+            <h2>Start with a question. Build the plan from there.</h2>
             <p className="section-copy">
-              Free calculators for UK pension planning and financial independence. No account
-              required. Your numbers stay in your browser.
+              Use Paddock&apos;s free UK planning tools to model pension drawdown, FIRE goals,
+              ISA growth and net worth milestones — then save your progress when you are ready.
             </p>
             <div className="tools-feature-cards">
               <a
@@ -760,7 +799,27 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
                     Estimate retirement income and how long your pension may last under different
                     drawdown scenarios. Includes a 3% / 4% / 5% withdrawal comparison.
                   </p>
-                  <span className="tools-feature-card-link">Try the calculator →</span>
+                  <span className="tools-feature-card-link">Save this projection and track it over time with Paddock →</span>
+                </div>
+              </a>
+              <a
+                href="/tools/isa-growth-calculator"
+                className="tools-feature-card"
+                onClick={(e) => {
+                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                    e.preventDefault()
+                    navigateTo('/tools/isa-growth-calculator')
+                  }
+                }}
+              >
+                <div className="tools-feature-card-body">
+                  <h3 className="tools-feature-card-title">ISA growth calculator UK</h3>
+                  <div className="line" />
+                  <p className="tools-feature-card-desc">
+                    Project a Stocks and Shares ISA over 5, 10, 20 or 30 years using your balance,
+                    contributions and return assumptions.
+                  </p>
+                  <span className="tools-feature-card-link">Save this projection and track it over time with Paddock →</span>
                 </div>
               </a>
               <a
@@ -780,7 +839,27 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
                     Calculate your financial independence target based on annual spending and
                     withdrawal rate. Includes a 3.5% / 4% / 4.5% withdrawal comparison.
                   </p>
-                  <span className="tools-feature-card-link">Try the calculator →</span>
+                  <span className="tools-feature-card-link">Save this projection and track it over time with Paddock →</span>
+                </div>
+              </a>
+              <a
+                href="/tools/net-worth-calculator"
+                className="tools-feature-card"
+                onClick={(e) => {
+                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                    e.preventDefault()
+                    navigateTo('/tools/net-worth-calculator')
+                  }
+                }}
+              >
+                <div className="tools-feature-card-body">
+                  <h3 className="tools-feature-card-title">Net worth calculator UK</h3>
+                  <div className="line" />
+                  <p className="tools-feature-card-desc">
+                    Add assets and liabilities to see your net worth instantly, including cash,
+                    investments, pensions, property and debts.
+                  </p>
+                  <span className="tools-feature-card-link">Save this projection and track it over time with Paddock →</span>
                 </div>
               </a>
             </div>
@@ -789,7 +868,7 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
               className="tools-feature-all"
               onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/tools') } }}
             >
-              View all free tools
+              Try the free tools
             </a>
           </Reveal>
         </div>
@@ -820,23 +899,23 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
         <div className="container section">
           <Reveal>
             <SectionLabel>Trust</SectionLabel>
-            <h2>Private by design.</h2>
+            <h2>Private by default. Manual by design.</h2>
             <p className="section-copy">
-  No ads. No trackers. No bank linking. Paddock is intentionally manual, so your data stays private and your numbers stay deliberate.
+  Paddock does not need access to your bank. Your data is not sold. There are no ads, no noisy growth tricks, and no unnecessary data collection.
 </p>
 
             <div className="trust-grid">
               <div>
-                <h3>No ads. No ad tracking.</h3>
-                <p>The product is designed to stay focused, private and free from ad clutter.</p>
+                <h3>No bank linking</h3>
+                <p>No bank credentials, no open-banking connection, and no unwanted access to transaction history.</p>
               </div>
               <div>
-                <h3>Secure authentication.</h3>
-                <p>Industry-standard sign-in with protected sessions and secure password management.</p>
+                <h3>No ads or data selling</h3>
+                <p>Paddock is designed to stay focused, private and free from advertising incentives.</p>
               </div>
               <div>
-                <h3>Payments by Stripe.</h3>
-                <p>Card details are handled entirely by Stripe — they never touch our servers.</p>
+                <h3>Deliberate manual updates</h3>
+                <p>Update the accounts that matter on your terms, with a rhythm that suits long-term planning.</p>
               </div>
             </div>
 
@@ -865,6 +944,19 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
                 Founder note: why we built Paddock this way →
               </a>
             </p>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <div className="contrast-block">
+              <p>Not a budgeting app.</p>
+              <p>Not a trading app.</p>
+              <p>Not another bank-linking aggregator.</p>
+              <h2>Paddock is a private wealth dashboard for people thinking long term.</h2>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -949,10 +1041,9 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
       <section className="section-border">
         <div className="container final-cta">
           <Reveal>
-            <h2>Wealth isn't built by accident.</h2>
+            <h2>Start with your net worth. Build the plan from there.</h2>
             <p className="section-copy center narrow-center">
-              It's built with clarity, consistency and time. Paddock gives you a calmer way to see the
-              numbers and keep moving.
+              Add your accounts manually, set your long-term goal, and see whether your wealth is moving in the right direction.
             </p>
 
             <div className="hero-actions center">
@@ -962,22 +1053,22 @@ Track ISAs, pensions, savings, property and multi-currency accounts in one priva
                 onClick={() => goTo('signup')}
                 disabled={!!pending}
               >
-                {pending === 'signup' ? 'Opening…' : 'Create account'}
+                {pending === 'signup' ? 'Opening…' : 'Start planning free'}
               </button>
 
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => goTo('signin')}
+                onClick={() => navigateTo('/tools')}
                 disabled={!!pending}
               >
-                {pending === 'signin' ? 'Opening…' : 'Sign in'}
+                Explore the free tools
               </button>
             </div>
 
             <AppStoreBadgeLink className="app-store-badge-final" />
 
-            <p className="hero-foot">Free to start • No credit card required</p>
+            <p className="hero-foot">No bank linking. No ads. No data selling.</p>
           </Reveal>
         </div>
       </section>

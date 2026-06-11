@@ -13,13 +13,13 @@ export const PUBLIC_ROUTES = [
   {
     key: 'landing',
     path: '/',
-    lastmod: '2026-05-07',
+    lastmod: '2026-06-11',
     targetKeyword: 'net worth tracker UK',
-    secondaryKeywords: ['manual wealth tracker', 'privacy-first wealth tracking', 'Paddock wealth tracker'],
+    secondaryKeywords: ['private UK wealth tracker', 'net worth planner UK', 'manual wealth tracking'],
     intent: 'Find a private UK wealth tracking product',
-    h1: 'Paddock wealth tracker',
+    h1: "Know where you stand. See where you're going.",
     intro:
-      'Paddock is a UK-first, privacy-first manual wealth tracker for ISAs, pensions, savings, investments, property and long-term goals. No bank linking required.',
+      'Paddock brings your ISAs, pensions, savings, investments, property and goals into one private wealth dashboard. No bank linking. No ads. No data selling. Manual entry, always.',
     links: ['/tools', '/guides', '/net-worth-tracker', '/moneyhub-alternative', '/privacy', '/security'],
     priority: true,
   },

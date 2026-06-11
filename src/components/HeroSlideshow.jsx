@@ -12,47 +12,47 @@ import accountsShotWebp from '/src/assets/slides/PaddockAccountsWebP.webp'
 const slides = [
   {
     id: 1,
-    eyebrow: 'Decisions',
+    eyebrow: 'Financial freedom gap',
     title: 'Know what the next pounds should do',
     body:
       'Model ISA timing, contribution changes and long-term trade-offs before you commit new money. Paddock helps turn balances into decisions.',
     src: insightsShot,
     webp: insightsShotWebp,
     alt: 'Paddock decisions view showing planning tools and next-step modelling',
-    caption: 'Decision tools for ISA timing, contribution changes and long-term trade-offs.',
+    caption: 'Decision tools for ISA timing, contribution changes, goal progress and long-term trade-offs.',
   },
   {
     id: 2,
-    eyebrow: 'Projection',
+    eyebrow: 'Long-term projection',
     title: 'See the path, not just the total',
     body:
       'Long-term projections show where your current pace is taking you, what is required, and how far ahead or behind you are.',
     src: outlookShot,
     webp: outlookShotWebp,
     alt: 'Paddock projection view showing long-term wealth trajectory and target path',
-    caption: 'Long-term projection with visible assumptions, target path and trajectory.',
+    caption: 'Pension path and long-term projection with visible assumptions, target path and trajectory.',
   },
   {
     id: 3,
-    eyebrow: 'Dashboard',
+    eyebrow: 'Total wealth',
     title: 'See your wealth clearly',
     body:
       'A calm dashboard for net worth, milestones and long-term progress — designed to make the important numbers readable at a glance.',
     src: homeShot,
     webp: homeShotWebp,
     alt: 'Paddock dashboard showing net worth, milestones and progress',
-    caption: 'Net worth dashboard with milestones, trajectory and plan progress.',
+    caption: 'Net worth dashboard with total wealth, milestones, trajectory and plan progress.',
   },
   {
     id: 4,
-    eyebrow: 'Accounts',
+    eyebrow: 'Property and liabilities',
     title: 'Bring everything into one place',
     body:
       'Track cash, ISAs, pensions, property and more in one structured view, with a cleaner workflow than spreadsheets and support for multiple currencies.',
     src: accountsShot,
     webp: accountsShotWebp,
     alt: 'Paddock accounts view showing structured wealth tracking across account types',
-    caption: 'Structured wealth tracking across the accounts that matter most.',
+    caption: 'Structured wealth tracking across ISAs, pensions, property, liabilities and the accounts that matter most.',
   },
 ]
 

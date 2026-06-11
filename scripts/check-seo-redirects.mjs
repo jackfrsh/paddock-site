@@ -5,6 +5,7 @@ const canonicalOrigin = (process.env.SEO_CANONICAL_ORIGIN || CANONICAL_ORIGIN).r
 const isCanonicalHost = baseUrl === canonicalOrigin
 const checkCanonicalTargets = process.env.CHECK_CANONICAL_TARGETS !== '0' && isCanonicalHost
 const maxRedirects = 5
+const fetchTimeoutMs = Number(process.env.SEO_FETCH_TIMEOUT_MS || 10000)
 
 const errors = []
 const notes = []
@@ -19,14 +20,17 @@ function urlFor(pathOrCanonicalUrl) {
 }
 
 async function fetchManual(url, method = 'HEAD') {
+  const signal = AbortSignal.timeout(fetchTimeoutMs)
   try {
     return await fetch(url, {
       method,
       redirect: 'manual',
       headers: { 'user-agent': 'paddock-seo-redirect-check/1.0' },
+      signal,
     })
   } catch (error) {
-    errors.push(`${method} ${url} failed: ${error.message}`)
+    const reason = error.name === 'TimeoutError' ? `timed out after ${fetchTimeoutMs}ms` : error.message
+    errors.push(`${method} ${url} failed: ${reason}`)
     return null
   }
 }
@@ -62,10 +66,15 @@ function assert(condition, message) {
   if (!condition) errors.push(message)
 }
 
+function formatChain(result) {
+  return result.chain.map((step) => `${step.status} ${step.url}`).join(' -> ')
+}
+
 async function assertDirect200(url, label) {
   const result = await follow(url)
-  assert(result.status === 200, `${label} expected 200, got ${result.status}`)
-  assert(result.chain.length === 1, `${label} should not redirect, got ${result.chain.length - 1} redirects`)
+  const chain = formatChain(result)
+  assert(result.status === 200, `${label} expected 200, got ${result.status}. Chain: ${chain}`)
+  assert(result.chain.length === 1, `${label} should not redirect, got ${result.chain.length - 1} redirects. Chain: ${chain}`)
   return result
 }
 
@@ -83,6 +92,8 @@ function hasNoindex(html, headers) {
 }
 
 async function checkDomainVariants() {
+  console.log('CHECK domain variants')
+
   if (!isCanonicalHost) {
     notes.push('Skipped live domain variant checks because SEO_BASE_URL is not the canonical origin.')
     return
@@ -97,13 +108,16 @@ async function checkDomainVariants() {
 
   for (const check of checks) {
     const result = await follow(check.from)
-    assert(result.status === 200, `${check.from} expected final 200, got ${result.status}`)
-    assert(result.chain.length - 1 === check.redirects, `${check.from} expected ${check.redirects} redirect(s), got ${result.chain.length - 1}`)
-    assert(result.finalUrl === check.final, `${check.from} expected final ${check.final}, got ${result.finalUrl}`)
+    const chain = formatChain(result)
+    assert(result.status === 200, `${check.from} expected final 200, got ${result.status}. Chain: ${chain}`)
+    assert(result.chain.length - 1 === check.redirects, `${check.from} expected ${check.redirects} redirect(s), got ${result.chain.length - 1}. Chain: ${chain}`)
+    assert(result.finalUrl === check.final, `${check.from} expected final ${check.final}, got ${result.finalUrl}. Chain: ${chain}`)
   }
 }
 
 async function checkSitemap() {
+  console.log('CHECK sitemap')
+
   const sitemapUrl = `${baseUrl}/sitemap.xml`
   await assertDirect200(sitemapUrl, 'sitemap.xml')
 
@@ -122,6 +136,8 @@ async function checkSitemap() {
 }
 
 async function checkPublicPages(sitemapUrls) {
+  console.log(`CHECK ${PUBLIC_ROUTES.length} public pages`)
+
   for (const route of PUBLIC_ROUTES) {
     const expectedCanonical = canonicalUrl(route.path)
     const localUrl = urlFor(expectedCanonical)
@@ -139,10 +155,14 @@ async function checkPublicPages(sitemapUrls) {
     if (checkCanonicalTargets) await assertDirect200(canonical, `canonical target ${canonical}`)
   }
 
+  console.log(`CHECK ${sitemapUrls.length} sitemap URLs`)
+
   for (const sitemapUrl of sitemapUrls) {
     await assertDirect200(urlFor(sitemapUrl), `sitemap URL ${sitemapUrl}`)
   }
 }
+
+console.log(`SEO redirect check: base=${baseUrl}, canonical=${canonicalOrigin}, timeout=${fetchTimeoutMs}ms`)
 
 await checkDomainVariants()
 const sitemapUrls = await checkSitemap()

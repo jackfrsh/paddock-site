@@ -21,9 +21,9 @@ export const PAGE_META = {
   },
 
   landing: {
-    title: 'Paddock | Net Worth Tracker UK | Manual Wealth Tracking',
+    title: 'Paddock | Private UK Wealth Tracker & Net Worth Planner',
     description:
-      'Track ISAs, pensions, savings, property and investments in one privacy-first UK wealth tracker. Manual entry, no bank linking.',
+      'Track your net worth, ISAs, pensions, savings, investments and long-term goals in one private UK wealth dashboard. No bank linking, no ads, no data selling.',
     canonical: 'https://getpaddock.com/',
     ogType: 'website',
     jsonLd: {
@@ -41,7 +41,7 @@ export const PAGE_META = {
             height: 512,
           },
           description:
-            'A UK-first, privacy-first manual wealth tracker for ISAs, pensions, savings, property and investments.',
+            'A private UK wealth tracker and net worth planner for ISAs, pensions, savings, investments, property and long-term goals. No bank linking, no ads, no data selling.',
         },
         {
           '@type': 'WebSite',
@@ -59,7 +59,7 @@ export const PAGE_META = {
           url: 'https://getpaddock.com/',
           publisher: { '@id': 'https://getpaddock.com/#organization' },
           description:
-            'Track ISAs, pensions, savings, property and investments in one privacy-first UK wealth tracker. Manual entry, no bank linking.',
+            'Track your net worth, ISAs, pensions, savings, investments and long-term goals in one private UK wealth dashboard. Manual entry, no bank linking, no ads, no data selling.',
         },
       ],
     },
