@@ -2,12 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import './App.css'
 
+import homeShot from '/src/assets/landing/paddock-home.png'
+import homeShotWebp from '/src/assets/landing/paddock-home.webp'
+import accountsShot from '/src/assets/landing/paddock-accounts.png'
+import accountsShotWebp from '/src/assets/landing/paddock-accounts.webp'
 import outlookShot from '/src/assets/landing/paddock-plan.png'
-import insightsShot from '/src/assets/landing/paddock-decisions.png'
 import outlookShotWebp from '/src/assets/landing/paddock-plan.webp'
-import insightsShotWebp from '/src/assets/landing/paddock-decisions.webp'
-
-import HeroSlideshow from './components/HeroSlideshow'
+import appStoreQr from './assets/appstore-qr.svg'
 
 import GuideIndex from './guides/GuideIndex'
 import MultiCurrency from './guides/MultiCurrency'
@@ -34,12 +35,14 @@ import ToolsHub from './pages/ToolsHub'
 import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
 import { PUBLIC_ROUTES } from './seoRoutes'
+import { HOME_FAQS } from './homeFaqs'
 import SiteFooter from './components/SiteFooter'
 import AppStoreBadgeLink from './components/AppStoreBadgeLink'
 import SkipLink from './components/SkipLink'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
+const APP_STORE_URL = 'https://apps.apple.com/gb/app/paddock-wealth/id6761938898'
 const ROUTE_BY_PATH = Object.fromEntries(PUBLIC_ROUTES.map((route) => [route.path, route.key]))
 
 function getRoute() {
@@ -148,6 +151,94 @@ function Screenshot({ src, webp, alt, caption, loading = 'lazy' }) {
   )
 }
 
+/* Internal link that uses client-side navigation for plain left clicks. */
+function InternalLink({ to, navigateTo, className, children }) {
+  return (
+    <a
+      href={to}
+      className={className}
+      onClick={(e) => {
+        if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+          e.preventDefault()
+          navigateTo(to)
+        }
+      }}
+    >
+      {children}
+    </a>
+  )
+}
+
+/* Product-led hero visual: a realistic UK wealth dashboard, rendered in
+   HTML/CSS so the hero LCP stays text-fast and the mockup scales cleanly. */
+const MOCK_ACCOUNTS = [
+  { name: 'Stocks & Shares ISA', tag: 'ISA', value: '£84,300' },
+  { name: 'SIPP', tag: 'Pension', value: '£112,650' },
+  { name: 'Workplace pension', tag: 'Pension', value: '£38,900' },
+  { name: 'Premium Bonds', tag: 'NS&I', value: '£21,550' },
+  { name: 'Home', tag: 'Property', value: '£342,000' },
+  { name: 'Mortgage', tag: 'Liability', value: '−£287,000', negative: true },
+]
+
+function HeroMockup() {
+  return (
+    <div
+      className="hero-mock"
+      role="img"
+      aria-label="Illustrative Paddock dashboard showing a net worth of £312,400 across a Stocks and Shares ISA, SIPP, workplace pension, Premium Bonds, property and a mortgage"
+    >
+      <div className="hero-mock-top">
+        <span className="hero-mock-brand">Paddock<span>.</span></span>
+        <span className="hero-mock-status">
+          <span className="hero-mock-status-dot" />
+          On track
+        </span>
+      </div>
+
+      <div className="hero-mock-label">Net worth</div>
+      <div className="hero-mock-value">£312,400</div>
+      <div className="hero-mock-delta">▲ £4,120 this month</div>
+
+      <svg className="hero-mock-spark" viewBox="0 0 320 60" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <linearGradient id="heroSparkFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="currentColor" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M0 52 C 42 49, 74 44, 106 39 S 168 28, 208 22 S 284 10, 320 6 L 320 60 L 0 60 Z"
+          fill="url(#heroSparkFill)"
+          stroke="none"
+        />
+        <path
+          d="M0 52 C 42 49, 74 44, 106 39 S 168 28, 208 22 S 284 10, 320 6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      <ul className="hero-mock-rows">
+        {MOCK_ACCOUNTS.map((row) => (
+          <li key={row.name} className="hero-mock-row">
+            <span className="hero-mock-row-name">
+              {row.name}
+              <span className="hero-mock-row-tag">{row.tag}</span>
+            </span>
+            <span className={`hero-mock-row-value${row.negative ? ' is-negative' : ''}`}>
+              {row.value}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="hero-mock-foot">Illustrative figures · Updated by you, monthly</div>
+    </div>
+  )
+}
+
 export default function App() {
   const [pending, setPending] = useState(null)
   const [route, setRoute] = useState(getRoute)
@@ -171,16 +262,16 @@ export default function App() {
       setMenuOpen(false)
       return
     }
-  
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  
+
     const doNav = () => {
       window.history.pushState({}, '', path)
       setRoute(getRoute())
       setMenuOpen(false)
       window.scrollTo(0, 0)
     }
-  
+
     if (reduceMotion) {
       doNav()
       return
@@ -248,25 +339,25 @@ export default function App() {
   useEffect(() => {
     const onPop = () => {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  
+
       if (reduceMotion) {
         setRoute(getRoute())
         window.scrollTo(0, 0)
         return
       }
-  
+
       setPageVisible(false)
-  
+
       window.setTimeout(() => {
         setRoute(getRoute())
         window.scrollTo(0, 0)
-  
+
         requestAnimationFrame(() => {
           requestAnimationFrame(() => setPageVisible(true))
         })
       }, 120)
     }
-  
+
     window.addEventListener('popstate', onPop)
     return () => window.removeEventListener('popstate', onPop)
   }, [])
@@ -515,20 +606,23 @@ export default function App() {
         )}
       </header>
 
+      {/* ── 1. Hero ─────────────────────────────────────────────────────── */}
       <section className="hero-section">
-        <div className="container">
+        <div className="container hero-grid">
           <div className="hero-copy">
-          <div className="hero-kicker">Private UK wealth tracker</div>
+            <div className="hero-kicker">Private UK wealth tracker</div>
 
-<h1>
-  Know where you stand.
-  <br />
-  See where you&apos;re going.
-</h1>
+            <h1>
+              Know where you stand.
+              <br />
+              See where you&apos;re going.
+            </h1>
 
-<p className="hero-sub">
-Paddock brings your ISAs, pensions, savings, investments, property and goals into one private wealth dashboard — no bank linking required.
-</p>
+            <p className="hero-sub">
+              Paddock brings your ISAs, SIPPs, pensions, savings, property and investments into
+              one calm, private dashboard. You update it. You own it. We never ask for your bank
+              login — and we never sell your data.
+            </p>
 
             <div className="hero-actions">
               <button
@@ -537,359 +631,186 @@ Paddock brings your ISAs, pensions, savings, investments, property and goals int
                 onClick={() => goTo('signup')}
                 disabled={!!pending}
               >
-                {pending === 'signup' ? 'Opening…' : 'Start planning free'}
+                {pending === 'signup' ? 'Opening…' : 'Start free on the web'}
               </button>
 
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => navigateTo('/tools')}
-                disabled={!!pending}
-              >
-                Try the free calculators
-              </button>
+              <a className="btn btn-secondary" href={APP_STORE_URL} target="_blank" rel="noreferrer">
+                Download on the App Store
+              </a>
             </div>
 
-            <AppStoreBadgeLink className="app-store-badge-hero" />
+            <ul className="hero-trust-strip" aria-label="Paddock trust points">
+              <li>No bank linking</li>
+              <li>Built for UK wrappers</li>
+              <li>No data selling</li>
+              <li>Web + iOS</li>
+            </ul>
+          </div>
 
-            <p className="hero-foot">No bank linking. No ads. No data selling. Manual entry, always.</p>
-
-            <div className="hero-tags">
-  <span>UK net worth tracker</span>
-  <span>ISAs and pensions</span>
-  <span>Financial planning</span>
-  <span>Long-term projections</span>
-  <span>Manual by design</span>
-</div>
+          <div className="hero-visual">
+            <HeroMockup />
           </div>
         </div>
       </section>
 
-      <HeroSlideshow goTo={goTo} />
-
+      {/* ── 2. Trust ────────────────────────────────────────────────────── */}
       <section className="section-border">
         <div className="container section">
           <Reveal>
-            <SectionLabel>Why Paddock exists</SectionLabel>
-            <h2>Most finance apps show transactions. Paddock shows direction.</h2>
+            <SectionLabel>Trust</SectionLabel>
+            <h2>Why Paddock never asks for your bank login</h2>
             <p className="section-copy">
-              Paddock is built for people who care less about yesterday&apos;s coffee spend and more
-              about whether their ISA, pension, property and savings are moving them toward the
-              life they want.
+              Most finance apps need your bank credentials to exist. Paddock doesn&apos;t. You
+              enter your balances, we do the maths, and your bank details never leave your bank.
+              It takes a few minutes a month — and it means there is nothing to leak, nothing to
+              sell, and nothing to reconnect.
             </p>
 
-            <div className="split-columns why-grid">
+            <div className="trust-grid">
               <div>
-                <h3>Not another budgeting app</h3>
+                <h3>Nothing to breach</h3>
                 <div className="line" />
-                <p>Paddock focuses on wealth, progress and long-term direction — not daily spending noise.</p>
+                <p>
+                  We never hold your bank credentials. Paddock is designed so your bank logins
+                  never enter the product.
+                </p>
               </div>
+              <div>
+                <h3>Nothing to sell</h3>
+                <div className="line" />
+                <p>
+                  Paddock is a paid product, not an ads or data business. You are the customer,
+                  not the inventory.
+                </p>
+              </div>
+              <div>
+                <h3>Nothing to break</h3>
+                <div className="line" />
+                <p>
+                  No flaky connections. No re-authenticating every 90 days. No accounts silently
+                  dropping off. Manual entry keeps the picture controlled and reliable.
+                </p>
+              </div>
+            </div>
 
-              <div>
-                <h3>Manual by design</h3>
-                <div className="line" />
-                <p>Add the accounts that matter, update them on your terms, and keep your financial life under your control.</p>
-              </div>
+            <p className="trust-honest">
+              Yes, you update balances yourself. Most users can do it once a month in under five
+              minutes. That&apos;s the trade: a few minutes for total privacy and control.
+            </p>
 
-              <div>
-                <h3>Built for UK wealth</h3>
-                <div className="line" />
-                <p>Track ISAs, SIPPs, pensions, savings, investments, property and long-term goals in one calm dashboard.</p>
-              </div>
+            <div className="pill-links section-top-gap-sm">
+              <InternalLink to="/security" navigateTo={navigateTo} className="pill-link">
+                Security
+              </InternalLink>
+              <InternalLink to="/privacy" navigateTo={navigateTo} className="pill-link">
+                Privacy
+              </InternalLink>
+              <InternalLink
+                to="/why-i-track-wealth-manually-instead-of-using-open-banking-apps"
+                navigateTo={navigateTo}
+                className="pill-link"
+              >
+                Why manual entry? →
+              </InternalLink>
             </div>
           </Reveal>
         </div>
       </section>
 
+      {/* ── 3. Product tour ─────────────────────────────────────────────── */}
+      <section id="product" className="section-border">
+        <div className="container section two-col">
+          <Reveal>
+            <SectionLabel>The full picture</SectionLabel>
+            <h2>Your full net worth, finally in one place.</h2>
+            <p className="section-copy narrow">
+              The ISA in one app, the pension in another, the mortgage in a letter somewhere.
+              Paddock puts everything you own and everything you owe on one calm screen — wrappers,
+              pensions, property and liabilities — with one number at the top: where you stand.
+            </p>
+            <div className="pill-links section-top-gap-sm">
+              <span className="pill-link pill-link-static">Total wealth</span>
+              <span className="pill-link pill-link-static">Assets and liabilities</span>
+              <span className="pill-link pill-link-static">Multi-currency</span>
+              <InternalLink to="/net-worth-tracker" navigateTo={navigateTo} className="pill-link">
+                More on net worth tracking →
+              </InternalLink>
+            </div>
+          </Reveal>
+
+          <Reveal>
+            <Screenshot
+              src={homeShot}
+              webp={homeShotWebp}
+              alt="Paddock dashboard showing total net worth, milestones and account mix"
+              caption="One calm dashboard: total wealth, milestones and progress."
+              loading="eager"
+            />
+          </Reveal>
+        </div>
+      </section>
 
       <section className="section-border">
-  <div className="container section">
-    <Reveal>
-      <SectionLabel>Use Paddock for</SectionLabel>
-      <h2>Built for real wealth planning.</h2>
-      <p className="section-copy">
-        Paddock helps you track net worth clearly, bring UK wealth accounts into one place, replace fragile spreadsheets, and make better long-term decisions.
-      </p>
-
-      <div className="use-links-grid">
-        <a
-          href="/net-worth-tracker"
-          className="use-link-item"
-          onClick={(e) => {
-            if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-              e.preventDefault()
-              navigateTo('/net-worth-tracker')
-            }
-          }}
-        >
-          <h3>Net worth tracking</h3>
-          <div className="line" />
-          <p>See assets and liabilities together in one calm dashboard.</p>
-        </a>
-
-        <a
-          href="/track-isas-pensions-savings"
-          className="use-link-item"
-          onClick={(e) => {
-            if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-              e.preventDefault()
-              navigateTo('/track-isas-pensions-savings')
-            }
-          }}
-        >
-          <h3>Track ISAs and pensions</h3>
-          <div className="line" />
-          <p>Bring core UK wealth accounts into one clear long-term view.</p>
-        </a>
-
-        <a
-          href="/spreadsheet-alternative-net-worth-tracking"
-          className="use-link-item"
-          onClick={(e) => {
-            if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-              e.preventDefault()
-              navigateTo('/spreadsheet-alternative-net-worth-tracking')
-            }
-          }}
-        >
-          <h3>Replace spreadsheets</h3>
-          <div className="line" />
-          <p>Move from fragile tabs and formulas to a cleaner structured workflow.</p>
-        </a>
-
-        <a
-          href="/how-to-track-your-net-worth"
-          className="use-link-item"
-          onClick={(e) => {
-            if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-              e.preventDefault()
-              navigateTo('/how-to-track-your-net-worth')
-            }
-          }}
-        >
-          <h3>How to track your net worth</h3>
-          <div className="line" />
-          <p>Learn what to include, how often to update, and what matters most.</p>
-        </a>
-      </div>
-    </Reveal>
-  </div>
-</section>
-
-      <section id="product" className="container section">
-        <Reveal>
-        <SectionLabel>How Paddock is different</SectionLabel>
-<h2>Manual entry is not a compromise. It is the point.</h2>
-<p className="section-copy">
-  No bank credentials. No broken connections. No unwanted access. Just the numbers that matter, updated by you.
-</p>
-
-          <div className="split-columns">
-          <div>
-  <h3>One plan, always visible.</h3>
-  <div className="line" />
-  <p>
-    A named long-term goal anchors the model, so progress is measured against something real — not just a changing account balance.
-  </p>
-</div>
-
-<div>
-  <h3>UK wealth context built in.</h3>
-  <div className="line" />
-  <p>
-    ISAs, pensions, property and wrapper-aware decisions are part of the experience — not bolted on later.
-  </p>
-</div>
-
-<div>
-  <h3>See the impact before you move.</h3>
-  <div className="line" />
-  <p>
-    Model contribution changes, compare paths, and understand trade-offs before you commit new money.
-  </p>
-</div>
-
-            <div>
-              <h3>No noisy sync layer.</h3>
-              <div className="line" />
-              <p>
-                Paddock is for deliberate updates, clean records and calm planning — not live transaction monitoring.
-              </p>
+        <div className="container section two-col two-col-flip">
+          <Reveal>
+            <SectionLabel>Always current</SectionLabel>
+            <h2>Keep every account fresh.</h2>
+            <p className="section-copy narrow">
+              The old workplace pension. The savings account you opened for the rate. The ISA you
+              stopped checking. Paddock shows you which balances are going stale and makes each
+              update a ten-second job — so the picture stays true without a spreadsheet to
+              maintain.
+            </p>
+            <div className="pill-links section-top-gap-sm">
+              <span className="pill-link pill-link-static">Stale account review</span>
+              <span className="pill-link pill-link-static">Quick balance updates</span>
+              <InternalLink to="/how-to-track-your-net-worth" navigateTo={navigateTo} className="pill-link">
+                How to track your net worth →
+              </InternalLink>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+
+          <Reveal>
+            <Screenshot
+              src={accountsShot}
+              webp={accountsShotWebp}
+              alt="Paddock accounts view showing ISAs, pensions, property and liabilities kept up to date"
+              caption="Every account in one structured view, updated on your terms."
+            />
+          </Reveal>
+        </div>
       </section>
 
       <section className="section-border">
         <div className="container section two-col">
           <Reveal>
-          <SectionLabel>Decisions</SectionLabel>
-<h2>Know what the next pounds should do.</h2>
-<p className="section-copy narrow">
-  Everything you own. Everything you owe. The path between today and your goal.
-</p>
-
-            <div className="pill-links">
-              <span className="pill-link pill-link-static">Total wealth</span>
-              <span className="pill-link pill-link-static">Goal progress</span>
-              <span className="pill-link pill-link-static">Pension path</span>
-              <span className="pill-link pill-link-static">ISA growth</span>
-              <span className="pill-link pill-link-static">Property and liabilities</span>
-              <span className="pill-link pill-link-static">Financial freedom gap</span>
-              <a
-                href="/guides/long-term-wealth-projection"
-                className="pill-link"
-                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/long-term-wealth-projection') } }}
-              >
-                Long-term projections
-              </a>
-              <a
-                href="/guides/multi-currency-net-worth-tracker"
-                className="pill-link"
-                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/multi-currency-net-worth-tracker') } }}
-              >
-                Multi-currency tracking
-              </a>
-              <a
-                href="/guides/inflation-adjusted-net-worth"
-                className="pill-link"
-                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/inflation-adjusted-net-worth') } }}
-              >
-                Inflation-adjusted views
-              </a>
-            </div>
-          </Reveal>
-
-          <Reveal>
-            <Screenshot
-              src={insightsShot}
-              webp={insightsShotWebp}
-              alt="Paddock insights and scenario modelling view"
-              caption="Outcome views for total wealth, goal progress, ISA growth and the financial freedom gap."
-            />
-          </Reveal>
-        </div>
-      </section>
-
-
-      <section className="section-border">
-        <div className="container section">
-          <Reveal>
-            <SectionLabel>Free tools</SectionLabel>
-            <h2>Start with a question. Build the plan from there.</h2>
-            <p className="section-copy">
-              Use Paddock&apos;s free UK planning tools to model pension drawdown, FIRE goals,
-              ISA growth and net worth milestones — then save your progress when you are ready.
+            <SectionLabel>Trajectory</SectionLabel>
+            <h2>See where you&apos;re heading.</h2>
+            <p className="section-copy narrow">
+              Project your current path 5–40 years ahead and compare it with the pace your goal
+              requires. Projections are illustrative and based on assumptions you control — no
+              black box, no advice, just your numbers carried forward so you can see the gap
+              before it becomes a surprise.
             </p>
-            <div className="tools-feature-cards">
-              <a
-                href="/tools/pension-drawdown-calculator"
-                className="tools-feature-card"
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-                    e.preventDefault()
-                    navigateTo('/tools/pension-drawdown-calculator')
-                  }
-                }}
+            <div className="pill-links section-top-gap-sm">
+              <span className="pill-link pill-link-static">Freedom trajectory</span>
+              <span className="pill-link pill-link-static">Scenario comparisons</span>
+              <InternalLink
+                to="/guides/long-term-wealth-projection"
+                navigateTo={navigateTo}
+                className="pill-link"
               >
-                <div className="tools-feature-card-body">
-                  <h3 className="tools-feature-card-title">Pension drawdown calculator UK</h3>
-                  <div className="line" />
-                  <p className="tools-feature-card-desc">
-                    Estimate retirement income and how long your pension may last under different
-                    drawdown scenarios. Includes a 3% / 4% / 5% withdrawal comparison.
-                  </p>
-                  <span className="tools-feature-card-link">Save this projection and track it over time with Paddock →</span>
-                </div>
-              </a>
-              <a
-                href="/tools/isa-growth-calculator"
-                className="tools-feature-card"
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-                    e.preventDefault()
-                    navigateTo('/tools/isa-growth-calculator')
-                  }
-                }}
-              >
-                <div className="tools-feature-card-body">
-                  <h3 className="tools-feature-card-title">ISA growth calculator UK</h3>
-                  <div className="line" />
-                  <p className="tools-feature-card-desc">
-                    Project a Stocks and Shares ISA over 5, 10, 20 or 30 years using your balance,
-                    contributions and return assumptions.
-                  </p>
-                  <span className="tools-feature-card-link">Save this projection and track it over time with Paddock →</span>
-                </div>
-              </a>
-              <a
-                href="/tools/fire-number-calculator"
-                className="tools-feature-card"
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-                    e.preventDefault()
-                    navigateTo('/tools/fire-number-calculator')
-                  }
-                }}
-              >
-                <div className="tools-feature-card-body">
-                  <h3 className="tools-feature-card-title">FIRE number calculator UK</h3>
-                  <div className="line" />
-                  <p className="tools-feature-card-desc">
-                    Calculate your financial independence target based on annual spending and
-                    withdrawal rate. Includes a 3.5% / 4% / 4.5% withdrawal comparison.
-                  </p>
-                  <span className="tools-feature-card-link">Save this projection and track it over time with Paddock →</span>
-                </div>
-              </a>
-              <a
-                href="/tools/net-worth-calculator"
-                className="tools-feature-card"
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-                    e.preventDefault()
-                    navigateTo('/tools/net-worth-calculator')
-                  }
-                }}
-              >
-                <div className="tools-feature-card-body">
-                  <h3 className="tools-feature-card-title">Net worth calculator UK</h3>
-                  <div className="line" />
-                  <p className="tools-feature-card-desc">
-                    Add assets and liabilities to see your net worth instantly, including cash,
-                    investments, pensions, property and debts.
-                  </p>
-                  <span className="tools-feature-card-link">Save this projection and track it over time with Paddock →</span>
-                </div>
-              </a>
+                How projections work →
+              </InternalLink>
             </div>
-            <a
-              href="/tools"
-              className="tools-feature-all"
-              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/tools') } }}
-            >
-              Try the free tools
-            </a>
           </Reveal>
-        </div>
-      </section>
 
-      <section className="section-border">
-        <div className="container section">
           <Reveal>
-          <SectionLabel>Projection</SectionLabel>
-<h2>See the path, not just the total.</h2>
-<p className="section-copy">
-  Project your current path, compare it to the pace required, and understand the gap long before it becomes a surprise.
-</p>
-          </Reveal>
-
-          <Reveal className="section-top-gap">
             <Screenshot
               src={outlookShot}
               webp={outlookShotWebp}
-              alt="Paddock outlook view showing long-term wealth projection"
-              caption="Long-term projection with visible assumptions and trajectory."
+              alt="Paddock projection view showing long-term wealth trajectory against a target path"
+              caption="Illustrative projections with visible assumptions — projected path vs required path."
             />
           </Reveal>
         </div>
@@ -898,52 +819,178 @@ Paddock brings your ISAs, pensions, savings, investments, property and goals int
       <section className="section-border">
         <div className="container section">
           <Reveal>
-            <SectionLabel>Trust</SectionLabel>
-            <h2>Private by default. Manual by design.</h2>
-            <p className="section-copy">
-  Paddock does not need access to your bank. Your data is not sold. There are no ads, no noisy growth tricks, and no unnecessary data collection.
-</p>
+            <div className="carry-banner">
+              <div>
+                <SectionLabel>Web + iOS</SectionLabel>
+                <h2>Carry the number with you.</h2>
+                <p className="section-copy">
+                  Paddock lives on the web and on your iPhone. Check your position from your
+                  pocket, update a balance the moment a statement arrives, and keep your progress
+                  in view wherever the month takes you.
+                </p>
+              </div>
+              <div className="carry-banner-actions">
+                <AppStoreBadgeLink className="app-store-badge-carry" />
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => goTo('signup')}
+                  disabled={!!pending}
+                >
+                  {pending === 'signup' ? 'Opening…' : 'Start free on the web'}
+                </button>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-            <div className="trust-grid">
-              <div>
-                <h3>No bank linking</h3>
-                <p>No bank credentials, no open-banking connection, and no unwanted access to transaction history.</p>
-              </div>
-              <div>
-                <h3>No ads or data selling</h3>
-                <p>Paddock is designed to stay focused, private and free from advertising incentives.</p>
-              </div>
-              <div>
-                <h3>Deliberate manual updates</h3>
-                <p>Update the accounts that matter on your terms, with a rhythm that suits long-term planning.</p>
-              </div>
+      {/* ── 4. Comparison ───────────────────────────────────────────────── */}
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>Compare</SectionLabel>
+            <h2>Spreadsheet, open-banking app, or Paddock?</h2>
+            <p className="section-copy">
+              Three honest ways to track your wealth — and what each one really costs you.
+            </p>
+
+            <div className="cmp-table-wrap">
+              <table className="cmp-table">
+                <thead>
+                  <tr>
+                    <th scope="col"><span className="sr-only">Feature</span></th>
+                    <th scope="col">Spreadsheet</th>
+                    <th scope="col">Open-banking apps</th>
+                    <th scope="col" className="cmp-col-paddock">Paddock</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Bank credentials needed</td>
+                    <td>Never</td>
+                    <td>Required</td>
+                    <td className="cmp-col-paddock">Never</td>
+                  </tr>
+                  <tr>
+                    <td>UK wrappers supported</td>
+                    <td>DIY labels and formulas</td>
+                    <td>Often weak on ISA / SIPP / LISA</td>
+                    <td className="cmp-col-paddock">Native — ISA, SIPP, LISA, GIA</td>
+                  </tr>
+                  <tr>
+                    <td>Pensions and property</td>
+                    <td>Manual handling</td>
+                    <td>Patchy or missing</td>
+                    <td className="cmp-col-paddock">Built in, with liabilities</td>
+                  </tr>
+                  <tr>
+                    <td>FI projection / trajectory</td>
+                    <td>Build it yourself</td>
+                    <td>Rare — built for transactions</td>
+                    <td className="cmp-col-paddock">Built in, 5–40 years</td>
+                  </tr>
+                  <tr>
+                    <td>Works well on phone</td>
+                    <td>Poor</td>
+                    <td>Yes</td>
+                    <td className="cmp-col-paddock">Yes — web + iOS</td>
+                  </tr>
+                  <tr>
+                    <td>Spending nags</td>
+                    <td>None</td>
+                    <td>Often — budgeting noise</td>
+                    <td className="cmp-col-paddock">None</td>
+                  </tr>
+                  <tr>
+                    <td>Business model</td>
+                    <td>Free, high maintenance</td>
+                    <td>Data, ads or referrals</td>
+                    <td className="cmp-col-paddock">Paid, privacy-first</td>
+                  </tr>
+                  <tr>
+                    <td>Monthly update ritual</td>
+                    <td>Yours to maintain</td>
+                    <td>Automatic, until it breaks</td>
+                    <td className="cmp-col-paddock">A few minutes, guided</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div className="cmp-tradeoff section-top-gap-sm">
+              <p>
+                If you already track your wealth in a spreadsheet, Paddock is built for you. Keep
+                the monthly ritual, lose the maintenance: no broken formulas, no charts to
+                rebuild, and no bank logins to hand over.
+              </p>
+            </div>
+
+            <div className="hero-actions">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => goTo('signup')}
+                disabled={!!pending}
+              >
+                {pending === 'signup' ? 'Opening…' : 'Replace your spreadsheet'}
+              </button>
             </div>
 
             <div className="pill-links section-top-gap-sm">
-  <a href="/terms" className="pill-link">
-    Terms
-  </a>
-  <a href="/privacy" className="pill-link">
-    Privacy
-  </a>
-  <a href="/security" className="pill-link">
-    Security
-  </a>
-</div>
-            <p className="hero-foot">
-              <a
-                href="/why-i-track-wealth-manually-instead-of-using-open-banking-apps"
-                className="guide-inline-link"
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
-                    e.preventDefault()
-                    navigateTo('/why-i-track-wealth-manually-instead-of-using-open-banking-apps')
-                  }
-                }}
+              <InternalLink
+                to="/spreadsheet-alternative-net-worth-tracking"
+                navigateTo={navigateTo}
+                className="pill-link"
               >
-                Founder note: why we built Paddock this way →
-              </a>
+                The spreadsheet alternative →
+              </InternalLink>
+              <InternalLink to="/moneyhub-alternative" navigateTo={navigateTo} className="pill-link">
+                Coming from Moneyhub?
+              </InternalLink>
+              <InternalLink
+                to="/best-net-worth-tracking-apps-uk"
+                navigateTo={navigateTo}
+                className="pill-link"
+              >
+                Compare UK tracking apps
+              </InternalLink>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 5. Built for UK wealth ──────────────────────────────────────── */}
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>UK-first</SectionLabel>
+            <h2>Built for UK wealth, not generic finance.</h2>
+            <p className="section-copy">
+              Paddock understands the way UK wealth is actually built: across tax wrappers,
+              pensions, property, savings, investments and liabilities.
             </p>
+
+            <ul className="wrapper-grid" aria-label="Account types Paddock supports">
+              <li><strong>S&amp;S ISA</strong><span>Tax wrapper</span></li>
+              <li><strong>Cash ISA</strong><span>Tax wrapper</span></li>
+              <li><strong>Lifetime ISA</strong><span>Tax wrapper</span></li>
+              <li><strong>GIA</strong><span>Investments</span></li>
+              <li><strong>SIPP</strong><span>Pension</span></li>
+              <li><strong>Workplace pension</strong><span>Pension</span></li>
+              <li><strong>Premium Bonds</strong><span>NS&amp;I</span></li>
+              <li><strong>Savings</strong><span>Cash</span></li>
+              <li><strong>Property</strong><span>Asset</span></li>
+              <li><strong>Mortgage</strong><span>Liability</span></li>
+              <li><strong>Credit cards</strong><span>Liability</span></li>
+              <li><strong>Other liabilities</strong><span>Liability</span></li>
+            </ul>
+
+            <div className="pill-links section-top-gap-sm">
+              <InternalLink to="/track-isas-pensions-savings" navigateTo={navigateTo} className="pill-link">
+                Track ISAs, pensions and savings together →
+              </InternalLink>
+            </div>
           </Reveal>
         </div>
       </section>
@@ -961,14 +1008,58 @@ Paddock brings your ISAs, pensions, savings, investments, property and goals int
         </div>
       </section>
 
+      {/* ── 6. Founder note ─────────────────────────────────────────────── */}
+      <section className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>From the founder</SectionLabel>
+            <h2>Built because spreadsheets and bank-linking apps both felt wrong.</h2>
+
+            <div className="founder-note">
+              <p>
+                I built Paddock because I wanted to really know my financial position — without
+                handing my bank logins to a third party, and without babysitting a spreadsheet
+                that broke a little more every month.
+              </p>
+              <p>
+                Paddock is for long-term wealth, not daily spending noise. It tracks the things
+                that actually decide your future: the ISA, the pensions collected across jobs,
+                the house, the mortgage — and whether the whole picture is moving in the right
+                direction.
+              </p>
+              <p>
+                The philosophy is simple: calm, private, and yours. You enter the numbers. You
+                own the data. We do the maths.
+              </p>
+
+              <p className="founder-sig">
+                Martyn
+                <span>Founder, Paddock</span>
+              </p>
+
+              <InternalLink
+                to="/why-i-track-wealth-manually-instead-of-using-open-banking-apps"
+                navigateTo={navigateTo}
+                className="guide-inline-link"
+              >
+                Read the full founder note →
+              </InternalLink>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 7. Pricing ──────────────────────────────────────────────────── */}
       <section id="pricing" className="section-border">
         <div className="container section">
           <Reveal>
-          <SectionLabel>Pricing</SectionLabel>
-<h2>Simple.</h2>
-<p className="section-copy">
-  Start free to track your wealth clearly. Upgrade when you want to plan years ahead and model what to do next.
-</p>
+            <SectionLabel>Pricing</SectionLabel>
+            <h2>Simple pricing. No hidden business model.</h2>
+            <p className="section-copy">
+              Paddock is paid because privacy has to be the product, not the promise. We do not
+              sell your data, run ads, or make money from referrals. Start free — upgrade when
+              you want to plan years ahead.
+            </p>
           </Reveal>
 
           <Reveal className="pricing-grid">
@@ -976,7 +1067,7 @@ Paddock brings your ISAs, pensions, savings, investments, property and goals int
               <div className="price-tier">Free</div>
               <div className="price-value">£0</div>
               <p className="price-copy price-copy-strong">See your wealth clearly.</p>
-<p className="price-copy price-copy-meta">Private by design. Most people update once after payday.</p>
+              <p className="price-copy price-copy-meta">Private by design. Most people update once after payday.</p>
 
               <div className="price-list">
                 <p>Net worth dashboard</p>
@@ -1011,19 +1102,20 @@ Paddock brings your ISAs, pensions, savings, investments, property and goals int
 
               <p className="price-copy price-copy-meta">£60/year (2 months free) · Includes a 7-day trial</p>
               <p className="price-copy price-copy-strong">See the path, the gap, and what to do next.</p>
-<p className="price-copy">
-  Plan 5–40 years ahead, compare scenarios, and make clearer ISA, mortgage, and contribution decisions.
-</p>
+              <p className="price-copy">
+                Plan 5–40 years ahead, compare scenarios, and make clearer ISA, mortgage, and
+                contribution decisions.
+              </p>
 
-<div className="price-list">
-  <p>Unlimited accounts</p>
-  <p>5–40 year projections</p>
-  <p>Full trajectory chart: projected vs required path</p>
-  <p>Inflation-adjusted (real terms) view</p>
-  <p>Scenario comparisons</p>
-  <p>ISA strategy support</p>
-  <p>Mortgage overpayment and next-pounds decision support</p>
-</div>
+              <div className="price-list">
+                <p>Unlimited accounts</p>
+                <p>5–40 year projections</p>
+                <p>Full trajectory chart: projected vs required path</p>
+                <p>Inflation-adjusted (real terms) view</p>
+                <p>Scenario comparisons</p>
+                <p>ISA strategy support</p>
+                <p>Mortgage overpayment and next-pounds decision support</p>
+              </div>
 
               <button
                 type="button"
@@ -1035,15 +1127,61 @@ Paddock brings your ISAs, pensions, savings, investments, property and goals int
               </button>
             </div>
           </Reveal>
+
+          <Reveal>
+            <p className="pricing-trust">
+              Unlike free finance apps, Paddock&apos;s business model is simple: you pay for the
+              product, and your data stays yours.
+            </p>
+          </Reveal>
         </div>
       </section>
 
+      {/* ── 8. FAQ ──────────────────────────────────────────────────────── */}
+      <section id="faq" className="section-border">
+        <div className="container section">
+          <Reveal>
+            <SectionLabel>Questions</SectionLabel>
+            <h2>Fair questions, honest answers.</h2>
+
+            <div className="faq-list">
+              {HOME_FAQS.map((item) => (
+                <details key={item.q} className="faq-item">
+                  <summary>{item.q}</summary>
+                  <p>{item.a}</p>
+                </details>
+              ))}
+            </div>
+
+            <p className="faq-compliance">
+              Paddock is a tracking and planning tool. It does not provide financial advice,
+              investment recommendations, or guaranteed outcomes. Projections are illustrative
+              and based on assumptions controlled by the user.
+            </p>
+
+            <div className="pill-links section-top-gap-sm">
+              <InternalLink to="/tools" navigateTo={navigateTo} className="pill-link">
+                Free UK planning tools
+              </InternalLink>
+              <InternalLink to="/guides" navigateTo={navigateTo} className="pill-link">
+                Guides
+              </InternalLink>
+              <InternalLink to="/support" navigateTo={navigateTo} className="pill-link">
+                Support
+              </InternalLink>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 9. Final CTA ────────────────────────────────────────────────── */}
       <section className="section-border">
         <div className="container final-cta">
           <Reveal>
-            <h2>Start with your net worth. Build the plan from there.</h2>
+            <h2>Start with one account. Build the full picture.</h2>
             <p className="section-copy center narrow-center">
-              Add your accounts manually, set your long-term goal, and see whether your wealth is moving in the right direction.
+              Add your first balance in minutes and see your wealth, wrappers, pensions, property
+              and progress in one private dashboard.
             </p>
 
             <div className="hero-actions center">
@@ -1053,22 +1191,20 @@ Paddock brings your ISAs, pensions, savings, investments, property and goals int
                 onClick={() => goTo('signup')}
                 disabled={!!pending}
               >
-                {pending === 'signup' ? 'Opening…' : 'Start planning free'}
+                {pending === 'signup' ? 'Opening…' : 'Start free on the web'}
               </button>
 
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => navigateTo('/tools')}
-                disabled={!!pending}
-              >
-                Explore the free tools
-              </button>
+              <a className="btn btn-secondary" href={APP_STORE_URL} target="_blank" rel="noreferrer">
+                Download on the App Store
+              </a>
             </div>
 
-            <AppStoreBadgeLink className="app-store-badge-final" />
+            <div className="final-qr">
+              <img src={appStoreQr} alt="QR code linking to Paddock on the App Store" width="96" height="96" loading="lazy" />
+              <span>On desktop? Scan with your iPhone to get the iOS app.</span>
+            </div>
 
-            <p className="hero-foot">No bank linking. No ads. No data selling.</p>
+            <p className="hero-foot">No bank linking. No ads. No data selling. Manual entry, always.</p>
           </Reveal>
         </div>
       </section>

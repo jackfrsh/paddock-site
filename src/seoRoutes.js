@@ -13,14 +13,24 @@ export const PUBLIC_ROUTES = [
   {
     key: 'landing',
     path: '/',
-    lastmod: '2026-06-11',
+    lastmod: '2026-07-03',
     targetKeyword: 'net worth tracker UK',
     secondaryKeywords: ['private UK wealth tracker', 'net worth planner UK', 'manual wealth tracking'],
     intent: 'Find a private UK wealth tracking product',
     h1: "Know where you stand. See where you're going.",
     intro:
-      'Paddock brings your ISAs, pensions, savings, investments, property and goals into one private wealth dashboard. No bank linking. No ads. No data selling. Manual entry, always.',
-    links: ['/tools', '/guides', '/net-worth-tracker', '/moneyhub-alternative', '/privacy', '/security'],
+      'Paddock brings your ISAs, SIPPs, pensions, savings, property and investments into one calm, private dashboard. No bank linking. No ads. No data selling. Manual entry, always.',
+    links: [
+      '/tools',
+      '/guides',
+      '/net-worth-tracker',
+      '/moneyhub-alternative',
+      '/spreadsheet-alternative-net-worth-tracking',
+      '/best-net-worth-tracking-apps-uk',
+      '/track-isas-pensions-savings',
+      '/privacy',
+      '/security',
+    ],
     priority: true,
   },
   {

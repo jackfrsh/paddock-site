@@ -11,31 +11,6 @@ const indexPath = path.join(distDir, 'index.html')
 
 const routeMap = PUBLIC_ROUTE_MAP
 
-// Resolve the hashed LCP hero image from the Vite build manifest so we can
-// preload it on the homepage (improves Largest Contentful Paint — the image
-// otherwise only starts downloading after the JS bundle executes).
-function resolveHeroPreloadHref() {
-  try {
-    const manifest = JSON.parse(
-      fs.readFileSync(path.join(distDir, '.vite/manifest.json'), 'utf8')
-    )
-    const key = Object.keys(manifest).find((k) => /slides\/paddock-decisions\.webp$/.test(k))
-      || Object.keys(manifest).find((k) => /paddock-decisions\.webp$/.test(k))
-    if (key && manifest[key]?.file) return `/${manifest[key].file}`
-  } catch {
-    /* manifest absent (e.g. partial build) — skip the preload hint. */
-  }
-  return null
-}
-
-const heroPreloadHref = resolveHeroPreloadHref()
-
-function injectHeroPreload(html) {
-  if (!heroPreloadHref) return html
-  const tag = `  <link rel="preload" as="image" href="${heroPreloadHref}" type="image/webp" fetchpriority="high" />\n</head>`
-  return html.replace('</head>', tag)
-}
-
 function escapeHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;')
@@ -194,9 +169,9 @@ for (const [key, routePath] of Object.entries(routeMap)) {
   const route = PUBLIC_ROUTES.find((item) => item.key === key)
   if (!route) continue
 
-  let html = upsertSeoFallback(upsertMeta(baseHtml, meta), route, meta)
-  // Preload the LCP hero image on the homepage only.
-  if (key === 'landing') html = injectHeroPreload(html)
+  // The homepage hero is now a text-and-CSS dashboard mockup, so there is no
+  // LCP image to preload — the first screenshot sits below the fold.
+  const html = upsertSeoFallback(upsertMeta(baseHtml, meta), route, meta)
 
   let targetPath
   if (routePath === '/') {

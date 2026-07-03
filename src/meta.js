@@ -1,3 +1,5 @@
+import { HOME_FAQS } from './homeFaqs.js'
+
 export const PAGE_META = {
   support: {
     title: 'Support | Paddock',
@@ -60,6 +62,14 @@ export const PAGE_META = {
           publisher: { '@id': 'https://getpaddock.com/#organization' },
           description:
             'Track your net worth, ISAs, pensions, savings, investments and long-term goals in one private UK wealth dashboard. Manual entry, no bank linking, no ads, no data selling.',
+        },
+        {
+          '@type': 'FAQPage',
+          mainEntity: HOME_FAQS.map((item) => ({
+            '@type': 'Question',
+            name: item.q,
+            acceptedAnswer: { '@type': 'Answer', text: item.a },
+          })),
         },
       ],
     },
