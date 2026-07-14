@@ -5,8 +5,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    // Emit a manifest so the prerender step can resolve hashed asset
-    // filenames (used to preload the LCP hero image).
-    manifest: true,
+    rollupOptions: {
+      output: {
+        // React changes far less often than site content, so giving it its own
+        // chunk lets it stay cached across content deploys.
+        manualChunks: {
+          react: ['react', 'react-dom/client', 'react-helmet-async'],
+        },
+      },
+    },
   },
 })

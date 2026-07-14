@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import './App.css'
 
@@ -10,28 +10,6 @@ import outlookShot from '/src/assets/landing/paddock-plan.png'
 import outlookShotWebp from '/src/assets/landing/paddock-plan.webp'
 import appStoreQr from './assets/appstore-qr.svg'
 
-import GuideIndex from './guides/GuideIndex'
-import MultiCurrency from './guides/MultiCurrency'
-import LongTermProjection from './guides/LongTermProjection'
-import InflationAdjusted from './guides/InflationAdjusted'
-import Privacy from './pages/Privacy'
-import Security from './pages/Security'
-import Terms from './pages/Terms'
-import NetWorthTracker from './pages/NetWorthTracker'
-import TrackISAsPensionsSavings from './pages/TrackISAsPensionsSavings'
-import SpreadsheetAlternative from './pages/SpreadsheetAlternative'
-import HowToTrackNetWorth from './pages/HowToTrackNetWorth'
-import Support from './pages/Support'
-import BestNetWorthAppsUK from './pages/BestNetWorthAppsUK'
-import ManualTracking from './pages/ManualTracking'
-import MoneyHubAlternative from './pages/MoneyHubAlternative'
-import PensionDrawdownCalculator from './tools/PensionDrawdownCalculator'
-import PhasedDrawdownCalculator from './tools/PhasedDrawdownCalculator'
-import FireNumberCalculator from './tools/FireNumberCalculator'
-import IsaGrowthCalculator from './tools/IsaGrowthCalculator'
-import NetWorthCalculator from './tools/NetWorthCalculator'
-import RetirementBridgeCalculator from './tools/RetirementBridgeCalculator'
-import ToolsHub from './pages/ToolsHub'
 import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
 import { PUBLIC_ROUTES } from './seoRoutes'
@@ -44,6 +22,34 @@ const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
 const APP_STORE_URL = 'https://apps.apple.com/gb/app/paddock-wealth/id6761938898'
 const ROUTE_BY_PATH = Object.fromEntries(PUBLIC_ROUTES.map((route) => [route.path, route.key]))
+
+/* Every route except the landing page is code-split. The landing page is the
+   most-visited entry point and lives in this module, so it renders without a
+   second network round trip; the other routes only cost their own chunk. */
+const ROUTE_COMPONENTS = {
+  guides_index: lazy(() => import('./guides/GuideIndex')),
+  guide_multi_currency: lazy(() => import('./guides/MultiCurrency')),
+  guide_long_term_projection: lazy(() => import('./guides/LongTermProjection')),
+  guide_inflation_adjusted: lazy(() => import('./guides/InflationAdjusted')),
+  privacy: lazy(() => import('./pages/Privacy')),
+  security: lazy(() => import('./pages/Security')),
+  terms: lazy(() => import('./pages/Terms')),
+  support: lazy(() => import('./pages/Support')),
+  net_worth_tracker: lazy(() => import('./pages/NetWorthTracker')),
+  track_isas_pensions_savings: lazy(() => import('./pages/TrackISAsPensionsSavings')),
+  spreadsheet_alternative: lazy(() => import('./pages/SpreadsheetAlternative')),
+  how_to_track_net_worth: lazy(() => import('./pages/HowToTrackNetWorth')),
+  founder_manual_tracking: lazy(() => import('./pages/ManualTracking')),
+  moneyhub_alternative: lazy(() => import('./pages/MoneyHubAlternative')),
+  best_net_worth_apps_uk: lazy(() => import('./pages/BestNetWorthAppsUK')),
+  tools_pension_drawdown: lazy(() => import('./tools/PensionDrawdownCalculator')),
+  tools_phased_drawdown: lazy(() => import('./tools/PhasedDrawdownCalculator')),
+  tools_retirement_bridge: lazy(() => import('./tools/RetirementBridgeCalculator')),
+  tools_fire_number: lazy(() => import('./tools/FireNumberCalculator')),
+  tools_isa_growth: lazy(() => import('./tools/IsaGrowthCalculator')),
+  tools_net_worth: lazy(() => import('./tools/NetWorthCalculator')),
+  tools_hub: lazy(() => import('./pages/ToolsHub')),
+}
 
 function getRoute() {
   const rawPath = (window.location.pathname || '/').toLowerCase()
@@ -362,28 +368,14 @@ export default function App() {
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
-  if (route === 'guides_index') return <GuideIndex navigateTo={navigateTo} />
-  if (route === 'guide_multi_currency') return <MultiCurrency navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'guide_long_term_projection') return <LongTermProjection navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'guide_inflation_adjusted') return <InflationAdjusted navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'privacy') return <Privacy navigateTo={navigateTo} />
-  if (route === 'security') return <Security navigateTo={navigateTo} />
-  if (route === 'terms') return <Terms navigateTo={navigateTo} />
-  if (route === 'support') return <Support navigateTo={navigateTo} />
-  if (route === 'net_worth_tracker') return <NetWorthTracker navigateTo={navigateTo} />
-  if (route === 'track_isas_pensions_savings') return <TrackISAsPensionsSavings navigateTo={navigateTo} />
-  if (route === 'spreadsheet_alternative') return <SpreadsheetAlternative navigateTo={navigateTo} />
-  if (route === 'how_to_track_net_worth') return <HowToTrackNetWorth navigateTo={navigateTo} />
-  if (route === 'founder_manual_tracking') return <ManualTracking navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'moneyhub_alternative') return <MoneyHubAlternative navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'best_net_worth_apps_uk') return <BestNetWorthAppsUK navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'tools_pension_drawdown') return <PensionDrawdownCalculator navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'tools_phased_drawdown') return <PhasedDrawdownCalculator navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'tools_retirement_bridge') return <RetirementBridgeCalculator navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'tools_fire_number') return <FireNumberCalculator navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'tools_isa_growth') return <IsaGrowthCalculator navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'tools_net_worth') return <NetWorthCalculator navigateTo={navigateTo} goTo={goTo} />
-  if (route === 'tools_hub') return <ToolsHub navigateTo={navigateTo} goTo={goTo} />
+  const RouteComponent = ROUTE_COMPONENTS[route]
+  if (RouteComponent) {
+    return (
+      <Suspense fallback={<div className="route-loading" aria-busy="true" />}>
+        <RouteComponent navigateTo={navigateTo} goTo={goTo} />
+      </Suspense>
+    )
+  }
   if (route === 'not_found') return <NotFound navigateTo={navigateTo} />
 
   return (

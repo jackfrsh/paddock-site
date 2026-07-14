@@ -487,6 +487,12 @@ h3 {
   }
 }
 
+/* Holds the viewport open while a code-split route chunk arrives, so the
+   incoming page does not shift the footer up and register as layout shift. */
+.route-loading {
+  min-height: 100vh;
+}
+
 .page-shell {
   opacity: 1;
   transform: translateY(0);
