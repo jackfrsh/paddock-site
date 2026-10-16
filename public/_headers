@@ -1,0 +1,10 @@
+# Cloudflare Pages headers.
+# The pages.dev hostnames serve a full copy of the site. Their canonicals
+# already point at https://getpaddock.com, but noindex keeps the production
+# and preview mirrors out of Google entirely. Rules match by hostname, so the
+# custom domain is unaffected.
+https://paddock-site.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.paddock-site.pages.dev/*
+  X-Robots-Tag: noindex

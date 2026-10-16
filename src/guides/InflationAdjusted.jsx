@@ -14,8 +14,6 @@ import {
 export default function InflationAdjustedGuide({ navigateTo, goTo }) {
   return (
     <GuideShell
-      seoTitle="Inflation-Adjusted Net Worth | Real vs Nominal Wealth Planning | Paddock"
-      metaDescription="Learn why inflation-adjusted net worth matters, how real terms differ from nominal returns, and how to plan long-term wealth in today's money."
       canonicalPath="/guides/inflation-adjusted-net-worth"
       heroLabel="Inflation-adjusted net worth"
       onBack={() => navigateTo('/guides')}

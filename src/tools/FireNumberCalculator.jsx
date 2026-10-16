@@ -1,5 +1,4 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { Helmet } from 'react-helmet-async'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import { calculateFire } from './fireCalc'
@@ -195,27 +194,6 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
 
   return (
     <div className="landing-shell">
-      <Helmet>
-        <title>FIRE Number Calculator UK — How Much Do You Need to Retire? | Paddock</title>
-        <meta
-          name="description"
-          content="Free FIRE number calculator. Enter your annual spending and assumptions to find your financial independence target, track your progress, and estimate how long it could take."
-        />
-        <link rel="canonical" href="https://getpaddock.com/tools/fire-number-calculator" />
-        <meta property="og:title" content="FIRE Number Calculator UK | Paddock" />
-        <meta
-          property="og:description"
-          content="Free FIRE number calculator. Find your financial independence target and see how the 3.5%, 4%, and 4.5% withdrawal rates compare."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/fire-number-calculator" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FIRE Number Calculator UK | Paddock" />
-        <meta
-          name="twitter:description"
-          content="Free FIRE number calculator. Find your financial independence target and see how long it could take."
-        />
-      </Helmet>
 
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 

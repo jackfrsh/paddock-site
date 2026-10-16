@@ -13,8 +13,6 @@ import {
 export default function ManualTracking({ navigateTo, goTo }) {
   return (
     <GuideShell
-      seoTitle="Why I Track Wealth Manually Instead of Using Open Banking Apps | Paddock"
-      metaDescription="A founder's perspective on why manual, privacy-first wealth tracking can be better than open banking sync — for people with ISAs, pensions, multi-currency accounts, and a long time horizon."
       canonicalPath="/why-i-track-wealth-manually-instead-of-using-open-banking-apps"
       heroLabel="Founder perspective"
       backLabel="Back to Paddock"

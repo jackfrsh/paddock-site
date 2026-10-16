@@ -1,5 +1,4 @@
 import React from 'react'
-import { Helmet } from 'react-helmet-async'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 
@@ -34,27 +33,6 @@ function ToolCard({ title, description, tags, ctaText, href, onClick }) {
 export default function ToolsHub({ navigateTo, goTo }) {
   return (
     <div className="landing-shell">
-      <Helmet>
-        <title>UK Wealth Calculators | Pension, FIRE & Net Worth | Paddock</title>
-        <meta
-          name="description"
-          content="Free UK wealth calculators for pension drawdown, FIRE, ISA growth and net worth tracking. No login required; numbers stay in your browser."
-        />
-        <link rel="canonical" href="https://getpaddock.com/tools" />
-        <meta property="og:title" content="UK Wealth Calculators | Pension, FIRE & Net Worth | Paddock" />
-        <meta
-          property="og:description"
-          content="Free UK wealth calculators for pension drawdown, FIRE, ISA growth and net worth tracking. No login required; numbers stay in your browser."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="UK Wealth Calculators | Pension, FIRE & Net Worth | Paddock" />
-        <meta
-          name="twitter:description"
-          content="Free UK financial planning tools from Paddock. No login required."
-        />
-      </Helmet>
 
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 

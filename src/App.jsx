@@ -296,7 +296,16 @@ export default function App() {
 
   // Per-route metadata: title, description, canonical, OG, Twitter, JSON-LD
   useEffect(() => {
-    const meta = PAGE_META[route] || PAGE_META.landing
+    const meta = PAGE_META[route]
+
+    // Unknown routes are noindex 404s (NotFound sets title and robots), so they
+    // must not inherit the homepage canonical from the shell HTML.
+    if (!meta) {
+      document.querySelector('link[rel="canonical"]')?.remove()
+      document.getElementById('paddock-jsonld')?.remove()
+      return
+    }
+
     document.title = meta.title
 
     const setMeta = (selector, attr, value) => {
@@ -304,8 +313,15 @@ export default function App() {
       if (el) el.setAttribute(attr, value)
     }
 
+    let canonical = document.querySelector('link[rel="canonical"]')
+    if (!canonical) {
+      canonical = document.createElement('link')
+      canonical.rel = 'canonical'
+      document.head.appendChild(canonical)
+    }
+    canonical.href = meta.canonical
+
     setMeta('meta[name="description"]', 'content', meta.description)
-    setMeta('link[rel="canonical"]', 'href', meta.canonical)
     setMeta('meta[property="og:title"]', 'content', meta.title)
     setMeta('meta[property="og:description"]', 'content', meta.description)
     setMeta('meta[property="og:url"]', 'content', meta.canonical)

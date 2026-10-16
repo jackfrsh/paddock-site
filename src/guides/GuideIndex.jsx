@@ -4,8 +4,6 @@ import { GuideShell, GuideLink } from '../components/GuideLayout'
 export default function GuideIndex({ navigateTo }) {
   return (
     <GuideShell
-  seoTitle="Wealth Tracking Guides | Multi-Currency, Projections, Inflation | Paddock"
-  metaDescription="Practical guides to multi-currency net worth tracking, long-term wealth projections, and inflation-adjusted planning."
   canonicalPath="/guides"
   heroLabel="Library"
   onBack={() => navigateTo('/')}

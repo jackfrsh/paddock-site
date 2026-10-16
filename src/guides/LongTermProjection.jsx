@@ -13,8 +13,6 @@ import {
 export default function LongTermProjectionGuide({ navigateTo, goTo }) {
   return (
     <GuideShell
-      seoTitle="Long-Term Wealth Projection | How Wealth Projections Work | Paddock"
-      metaDescription="Learn how long-term wealth projections work, what drives future net worth, and how to think about contributions, returns, and time horizon."
       canonicalPath="/guides/long-term-wealth-projection"
       heroLabel="Long-term wealth projection"
       onBack={() => navigateTo('/guides')}

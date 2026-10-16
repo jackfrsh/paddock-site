@@ -410,25 +410,6 @@ export default function PhasedDrawdownCalculator({ navigateTo, goTo }) {
   return (
     <div className="landing-shell">
       <Helmet>
-        <title>Phased Pension Drawdown Calculator UK | Paddock</title>
-        <meta
-          name="description"
-          content="Free UK pension drawdown calculator with phased income — more early, less later. Model your bridge to State Pension and see if you can retire early."
-        />
-        <link rel="canonical" href="https://getpaddock.com/tools/phased-drawdown-calculator" />
-        <meta property="og:title" content="Phased Pension Drawdown Calculator UK | Paddock" />
-        <meta
-          property="og:description"
-          content="Free UK pension drawdown calculator with phased income — more early, less later. Model your bridge to State Pension and see if you can retire early."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/phased-drawdown-calculator" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Phased Pension Drawdown Calculator UK | Paddock" />
-        <meta
-          name="twitter:description"
-          content="Free UK pension drawdown calculator with phased income — more early, less later. Model your bridge to State Pension and see if you can retire early."
-        />
         <script type="application/ld+json">{JSON.stringify(FAQ_LD)}</script>
       </Helmet>
 

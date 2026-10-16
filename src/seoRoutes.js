@@ -314,5 +314,14 @@ export const PUBLIC_ROUTES = [
   },
 ]
 
+// Retired or foreign URLs Google has been told about that this site never
+// served. /guides/how-long-will-my-pension-last was listed in the sitemap the
+// web app build published on getpaddock.com from September 2026; its topic is
+// covered by the pension drawdown calculator. Each target must be a
+// PUBLIC_ROUTES path so the redirect resolves in one hop to a 200.
+export const LEGACY_REDIRECTS = [
+  { from: '/guides/how-long-will-my-pension-last', to: '/tools/pension-drawdown-calculator' },
+]
+
 export const PUBLIC_ROUTE_MAP = Object.fromEntries(PUBLIC_ROUTES.map((route) => [route.key, route.path]))
 export const PUBLIC_ROUTE_BY_PATH = Object.fromEntries(PUBLIC_ROUTES.map((route) => [route.path, route]))

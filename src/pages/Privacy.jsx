@@ -4,8 +4,6 @@ import { GuideShell, H2, P } from '../components/GuideLayout'
 export default function Privacy({ navigateTo }) {
   return (
     <GuideShell
-  seoTitle="Privacy | Paddock"
-  metaDescription="How Paddock handles your data: no ads, no bank linking, no tracking. Privacy built into the product."
   canonicalPath="/privacy"
   onBack={() => navigateTo('/')}
   navigateTo={navigateTo}

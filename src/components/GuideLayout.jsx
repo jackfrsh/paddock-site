@@ -1,5 +1,4 @@
 import React from 'react'
-import { Helmet } from 'react-helmet-async'
 import SiteFooter from './SiteFooter'
 
 function isModifiedEvent(e) {
@@ -74,8 +73,6 @@ export function GuideLink({ to, navigateTo, children, className = '' }) {
 }
 
 export function GuideShell({
-  seoTitle,
-  metaDescription,
   canonicalPath,
   heroLabel,
   onBack,
@@ -83,31 +80,12 @@ export function GuideShell({
   backLabel,
   children,
 }) {
-  const siteUrl = 'https://getpaddock.com'
-  const canonicalUrl = canonicalPath ? `${siteUrl}${canonicalPath}` : `${siteUrl}/`
-
-  const resolvedSeoTitle = seoTitle || 'Paddock'
   const resolvedHeroLabel = heroLabel || 'Guide'
   const resolvedBackLabel =
     backLabel || (canonicalPath === '/guides' ? 'Back to Paddock' : 'Back to Guides')
 
   return (
     <div className="landing-shell">
-      <Helmet>
-        <title>{resolvedSeoTitle}</title>
-        {metaDescription ? <meta name="description" content={metaDescription} /> : null}
-        <link rel="canonical" href={canonicalUrl} />
-
-        <meta property="og:title" content={resolvedSeoTitle} />
-        {metaDescription ? <meta property="og:description" content={metaDescription} /> : null}
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content={canonicalUrl} />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={resolvedSeoTitle} />
-        {metaDescription ? <meta name="twitter:description" content={metaDescription} /> : null}
-      </Helmet>
-
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="guide-page-header">

@@ -14,8 +14,6 @@ import {
 export default function MultiCurrencyGuide({ navigateTo, goTo }) {
   return (
     <GuideShell
-      seoTitle="Multi-Currency Portfolio Tracker UK — Track Investments Across Currencies | Paddock"
-      metaDescription="Track investments, ISAs, pensions, savings, and other accounts across GBP, USD, EUR and more in one base-currency view. No bank connection required. Private, manual-entry wealth tracking with Paddock."
       canonicalPath="/guides/multi-currency-net-worth-tracker"
       heroLabel="Multi-currency wealth tracker"
       onBack={() => navigateTo('/guides')}

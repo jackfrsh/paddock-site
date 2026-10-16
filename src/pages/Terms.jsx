@@ -4,8 +4,6 @@ import { GuideShell, H2, P } from '../components/GuideLayout'
 export default function Terms({ navigateTo }) {
   return (
     <GuideShell
-  seoTitle="Terms of Use | Paddock"
-  metaDescription="Terms of use for Paddock, the personal wealth dashboard."
   canonicalPath="/terms"
   onBack={() => navigateTo('/')}
   navigateTo={navigateTo}

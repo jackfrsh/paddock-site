@@ -4,8 +4,6 @@ import { GuideShell } from "../components/GuideLayout.jsx";
 export default function Support({ navigateTo }) {
   return (
     <GuideShell
-      seoTitle="Support | Paddock"
-      metaDescription="Contact Paddock support for help with your account, billing, bug reports, or general questions. Email hello@getpaddock.com for fast assistance."
       canonicalPath="/support"
       heroLabel="Support"
       navigateTo={navigateTo}

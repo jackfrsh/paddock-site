@@ -1,4 +1,6 @@
-import { PUBLIC_ROUTES } from '../src/seoRoutes.js'
+import fs from 'node:fs'
+import path from 'node:path'
+import { LEGACY_REDIRECTS, PUBLIC_ROUTES } from '../src/seoRoutes.js'
 import {
   assert,
   canonicalOrigin,
@@ -91,6 +93,8 @@ async function checkPublicPages(baseUrl, sitemapUrls, disallows) {
     const h1s = extractH1s(html)
 
     assert(pageCanonical === canonical, `${canonical} canonical expected ${canonical}, got ${pageCanonical || 'none'}`)
+    const canonicalCount = (html.match(/<link\b[^>]*rel=["']canonical["']/gi) || []).length
+    assert(canonicalCount === 1, `${canonical} expected exactly one canonical tag, found ${canonicalCount}`)
     assert(!hasNoindex(html, response.headers), `${canonical} must not include noindex`)
     assert(sitemapUrls.includes(canonical), `${canonical} missing from sitemap`)
     assert(!isBlockedByRobots(route.path, disallows), `${canonical} blocked by robots.txt`)
@@ -138,6 +142,14 @@ async function checkNonCanonicalVariants(baseUrl, localMode) {
     assert(result.finalUrl === check.final, `${check.label} expected final ${check.final}, got ${result.finalUrl}`)
   }
 
+  for (const { from, to } of LEGACY_REDIRECTS) {
+    const result = await follow(`${baseUrl}${from}`)
+    assert(result.status === 200, `${from} expected final 200, got ${result.status}`)
+    assert(result.chain.length - 1 === 1, `${from} should redirect in one hop, got ${result.chain.length - 1}`)
+    assert(result.finalUrl === `${baseUrl}${to}`, `${from} expected final ${baseUrl}${to}, got ${result.finalUrl}`)
+    assert(PUBLIC_ROUTES.some((route) => route.path === to), `${from} redirects to ${to}, which is not a public route`)
+  }
+
   if (localMode) {
     warnings.push('Skipped http/www live domain variant checks in local mode. Set SEO_BASE_URL=https://getpaddock.com after deployment.')
     return
@@ -158,7 +170,27 @@ async function checkNonCanonicalVariants(baseUrl, localMode) {
   }
 }
 
+// App.jsx sets the one canonical per route from meta.js (the same values the
+// prerender writes). A page component that also renders a canonical through
+// Helmet adds a second <link rel="canonical"> in the rendered DOM, and its
+// title/description drift from the prerendered HTML.
+function checkNoComponentHeadTags() {
+  const srcDir = path.resolve(import.meta.dirname, '../src')
+  const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = path.join(dir, entry.name)
+    return entry.isDirectory() ? walk(full) : [full]
+  })
+
+  for (const file of walk(srcDir).filter((f) => f.endsWith('.jsx') && !f.endsWith(`${path.sep}App.jsx`))) {
+    const source = fs.readFileSync(file, 'utf8')
+    const rel = path.relative(srcDir, file)
+    assert(!/rel=["']canonical["']/.test(source), `src/${rel} renders a canonical tag; canonicals belong in meta.js`)
+    assert(!/<Helmet>[\s\S]*?<title>/.test(source), `src/${rel} sets <title> via Helmet; titles belong in meta.js`)
+  }
+}
+
 await withServer(async (baseUrl, localMode) => {
+  checkNoComponentHeadTags()
   const sitemapUrls = await checkSitemap(baseUrl)
   const disallows = await checkRobots(baseUrl)
   const rows = await checkPublicPages(baseUrl, sitemapUrls, disallows)

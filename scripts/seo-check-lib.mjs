@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import http from 'node:http'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { CANONICAL_ORIGIN, PUBLIC_ROUTES } from '../src/seoRoutes.js'
+import { CANONICAL_ORIGIN, LEGACY_REDIRECTS, PUBLIC_ROUTES } from '../src/seoRoutes.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -141,6 +141,8 @@ export async function follow(url, maxRedirects = 5) {
 }
 
 function findRedirect(pathname) {
+  const legacy = LEGACY_REDIRECTS.find(({ from }) => pathname === from || pathname === `${from}/`)
+  if (legacy) return legacy.to
   if (pathname !== '/' && pathname.endsWith('/')) {
     const canonicalPath = pathname.slice(0, -1)
     if (PUBLIC_ROUTES.some((route) => route.path === canonicalPath)) return canonicalPath

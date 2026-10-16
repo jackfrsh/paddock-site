@@ -2,7 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { PAGE_META } from '../src/meta.js'
-import { CANONICAL_ORIGIN, PUBLIC_ROUTES, PUBLIC_ROUTE_MAP } from '../src/seoRoutes.js'
+import { CANONICAL_ORIGIN, LEGACY_REDIRECTS, PUBLIC_ROUTES, PUBLIC_ROUTE_MAP } from '../src/seoRoutes.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -131,6 +131,10 @@ function renderRedirects() {
     .map((route) => `${route.path}.html ${route.path} 301`)
     .join('\n')
 
+  const legacyRedirects = LEGACY_REDIRECTS
+    .map(({ from, to }) => `${from} ${to} 301\n${from}/ ${to} 301`)
+    .join('\n')
+
   return `# Cloudflare Pages redirects for the public marketing site.
 # Canonical domain policy: HTTPS, apex domain, no trailing slash for pages.
 # Note: Cloudflare Pages _redirects does not support domain-level redirects.
@@ -144,6 +148,9 @@ ${slashRedirects}
 # both /foo and /foo.html for the same file; the .html variant must redirect
 # or Google flags them as duplicates without a user-selected canonical).
 ${htmlRedirects}
+
+# Legacy URLs that were never pages on this site but are known to Google.
+${legacyRedirects}
 
 # Unknown routes should not be canonicalized to the homepage.
 /* /404.html 404

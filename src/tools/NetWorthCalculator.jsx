@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useRef, useCallback } from 'react'
-import { Helmet } from 'react-helmet-async'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import {
@@ -179,27 +178,6 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
 
   return (
     <div className="landing-shell">
-      <Helmet>
-        <title>Net Worth Calculator UK — Total Your Assets and Liabilities | Paddock</title>
-        <meta
-          name="description"
-          content="Free UK net worth calculator. Enter your assets and liabilities to see your total net worth instantly — cash, investments, pensions, property, and debts. No login required."
-        />
-        <link rel="canonical" href="https://getpaddock.com/tools/net-worth-calculator" />
-        <meta property="og:title" content="Net Worth Calculator UK | Paddock" />
-        <meta
-          property="og:description"
-          content="Free net worth calculator. Add your assets and liabilities to see your total net worth. Supports multi-currency. No account needed."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://getpaddock.com/tools/net-worth-calculator" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Net Worth Calculator UK | Paddock" />
-        <meta
-          name="twitter:description"
-          content="Free net worth calculator. Total your assets and liabilities instantly — no login required."
-        />
-      </Helmet>
 
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 
