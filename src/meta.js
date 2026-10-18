@@ -535,7 +535,7 @@ export const PAGE_META = {
   moneyhub_alternative: {
     title: 'Best Moneyhub Alternative 2026 — UK Wealth Tracker Apps Compared',
     description:
-      'Moneyhub is closing in August 2026. Here\'s an honest comparison of the best UK alternatives for tracking ISAs, SIPPs and net worth.',
+      'Moneyhub closed its consumer app in August 2026. Here\'s an honest comparison of the best UK alternatives for tracking ISAs, SIPPs and net worth.',
     canonical: 'https://getpaddock.com/moneyhub-alternative',
     ogType: 'article',
     jsonLd: {
@@ -543,9 +543,9 @@ export const PAGE_META = {
       '@graph': [
         {
           '@type': 'Article',
-          headline: 'Moneyhub is closing — here are the best alternatives for UK investors',
+          headline: 'Moneyhub has closed — here are the best alternatives for UK investors',
           description:
-            'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who need to migrate away from Moneyhub before August 2026.',
+            'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who used Moneyhub before its consumer app closed in August 2026.',
           url: 'https://getpaddock.com/moneyhub-alternative',
           inLanguage: 'en-GB',
           isPartOf: {
@@ -564,10 +564,10 @@ export const PAGE_META = {
           mainEntity: [
             {
               '@type': 'Question',
-              name: 'When is Moneyhub closing?',
+              name: 'When did Moneyhub close?',
               acceptedAnswer: {
                 '@type': 'Answer',
-                text: 'Moneyhub is closing its consumer-facing app in August 2026. Users should export their data and migrate to an alternative before that date.',
+                text: 'Moneyhub closed its consumer-facing app in August 2026. If you saved an export of your data, you can use it to rebuild your balances in an alternative such as Paddock.',
               },
             },
             {

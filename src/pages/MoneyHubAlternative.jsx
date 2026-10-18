@@ -15,18 +15,18 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="hero-copy">
-            <div className="hero-kicker">Moneyhub is closing August 2026</div>
+            <div className="hero-kicker">Moneyhub closed its consumer app in August 2026</div>
             <h1>
-              Moneyhub is closing — here are the best alternatives for UK investors
+              Moneyhub has closed — here are the best alternatives for UK investors
             </h1>
             <p className="hero-sub">
-              Moneyhub has confirmed it is shutting down its consumer product in August 2026.
-              If you have been using it to track ISAs, pensions, savings or net worth, you need
-              to find a replacement — and migrate your data — before that deadline.
+              Moneyhub shut down its consumer product in August 2026. If you used it to track
+              ISAs, pensions, savings or net worth, you now need a replacement — and, if you
+              kept a CSV export of your data, a way to bring it across.
               This is an honest comparison of the four strongest options.
             </p>
             <p className="hero-foot" style={{ marginTop: 16 }}>
-              May 2026 · Updated as new information becomes available
+              Updated October 2026
             </p>
             <div className="hero-tags" style={{ marginTop: 24 }}>
               <span>ISAs &amp; SIPPs</span>
@@ -55,9 +55,9 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
             The closure of its consumer product reflects a broader pattern: open banking
             aggregation is expensive to maintain, bank connections break frequently, and the
             economics of consumer finance apps remain difficult. Moneyhub is concentrating on
-            its institutional and adviser business. For its retail users, August 2026 is the
-            cut-off. Export your data before then and give yourself enough time to settle into
-            a replacement before the deadline.
+            its institutional and adviser business. For its retail users, the consumer app
+            closed in August 2026. If you saved a CSV export of your accounts, keep it — it is
+            the quickest way to rebuild your balances in whichever replacement you choose.
           </p>
         </div>
       </section>

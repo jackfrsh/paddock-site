@@ -236,13 +236,13 @@ export const PUBLIC_ROUTES = [
   {
     key: 'moneyhub_alternative',
     path: '/moneyhub-alternative',
-    lastmod: '2026-05-10',
+    lastmod: '2026-10-18',
     targetKeyword: 'Moneyhub alternative UK',
-    secondaryKeywords: ['Moneyhub closing 2026', 'best Moneyhub replacement', 'UK wealth tracker app comparison'],
-    intent: 'Find a replacement for Moneyhub before its August 2026 closure',
-    h1: 'Moneyhub is closing — here are the best alternatives for UK investors',
+    secondaryKeywords: ['Moneyhub closed 2026', 'best Moneyhub replacement', 'UK wealth tracker app comparison'],
+    intent: 'Find a replacement for Moneyhub after its August 2026 closure',
+    h1: 'Moneyhub has closed — here are the best alternatives for UK investors',
     intro:
-      'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who need to migrate away from Moneyhub before its August 2026 shutdown.',
+      'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who used Moneyhub before its consumer app closed in August 2026.',
     links: [
       '/best-net-worth-tracking-apps-uk',
       '/why-i-track-wealth-manually-instead-of-using-open-banking-apps',
