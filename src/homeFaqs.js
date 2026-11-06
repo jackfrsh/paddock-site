@@ -3,7 +3,7 @@
 export const HOME_FAQS = [
   {
     q: "Why doesn't Paddock connect to my bank?",
-    a: 'By design. Most finance apps need your bank credentials to exist — Paddock is built so they never enter the product. You type in balances yourself, which means there is nothing to leak, nothing to sell, and no connection to break or re-authenticate. Your bank details stay where they belong: at your bank.',
+    a: 'By design. Most finance apps need your bank credentials to exist — Paddock is built so they never enter the product. You type in balances yourself, which means there are no bank credentials for us to store or lose, no data business behind the product, and no connection to break or re-authenticate. Your bank details stay where they belong: at your bank.',
   },
   {
     q: 'Is manual entry a pain?',
