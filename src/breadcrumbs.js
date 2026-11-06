@@ -22,6 +22,8 @@ const PAGE_LABELS = {
   '/guides/multi-currency-net-worth-tracker': 'Multi-currency net worth',
   '/guides/long-term-wealth-projection': 'Long-term wealth projection',
   '/guides/inflation-adjusted-net-worth': 'Inflation-adjusted net worth',
+  '/guides/how-much-do-i-need-to-retire-uk': 'How much do I need to retire?',
+  '/guides/pension-drawdown-explained': 'Pension drawdown explained',
   '/net-worth-tracker': 'Net worth tracker',
   '/track-isas-pensions-savings': 'Track ISAs, pensions and savings',
   '/spreadsheet-alternative-net-worth-tracking': 'Spreadsheet alternative',

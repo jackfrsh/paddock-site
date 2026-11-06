@@ -24,6 +24,14 @@ export default function GuideIndex({ navigateTo }) {
       </p>
 
       <div className="guide-links" style={{ marginTop: 24 }}>
+        <GuideLink to="/guides/how-much-do-i-need-to-retire-uk" navigateTo={navigateTo}>
+          How much do I need to retire in the UK? →
+        </GuideLink>
+
+        <GuideLink to="/guides/pension-drawdown-explained" navigateTo={navigateTo}>
+          Pension drawdown explained →
+        </GuideLink>
+
         <GuideLink to="/guides/multi-currency-net-worth-tracker" navigateTo={navigateTo}>
           Multi-currency net worth tracker guide →
         </GuideLink>

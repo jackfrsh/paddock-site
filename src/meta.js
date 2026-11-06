@@ -405,6 +405,46 @@ export const PAGE_META = {
     },
   },
 
+  guide_how_much_retire_uk: {
+    title: 'How Much Do I Need to Retire in the UK? | Paddock',
+    description:
+      'A step-by-step way to estimate the pot you need to retire in the UK: income wanted, minus State Pension, divided by a withdrawal rate, with worked examples and sources.',
+    canonical: 'https://getpaddock.com/guides/how-much-do-i-need-to-retire-uk',
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: 'How Much Do I Need to Retire in the UK?',
+      description:
+        'A step-by-step way to estimate the pot you need to retire in the UK, with worked examples and primary sources.',
+      url: 'https://getpaddock.com/guides/how-much-do-i-need-to-retire-uk',
+      inLanguage: 'en-GB',
+      author: { '@type': 'Organization', name: 'Paddock', url: 'https://getpaddock.com' },
+      isPartOf: { '@type': 'WebSite', name: 'Paddock', url: 'https://getpaddock.com' },
+      publisher: { '@type': 'Organization', name: 'Paddock', url: 'https://getpaddock.com' },
+    },
+  },
+
+  guide_pension_drawdown_explained: {
+    title: 'Pension Drawdown Explained (UK) | Paddock',
+    description:
+      'How flexi-access pension drawdown works in the UK: the tax-free 25%, tax on the rest, the money purchase annual allowance, the main risks and the alternatives.',
+    canonical: 'https://getpaddock.com/guides/pension-drawdown-explained',
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: 'Pension Drawdown Explained',
+      description:
+        'How flexi-access pension drawdown works in the UK, with the rules, risks and alternatives and links to primary sources.',
+      url: 'https://getpaddock.com/guides/pension-drawdown-explained',
+      inLanguage: 'en-GB',
+      author: { '@type': 'Organization', name: 'Paddock', url: 'https://getpaddock.com' },
+      isPartOf: { '@type': 'WebSite', name: 'Paddock', url: 'https://getpaddock.com' },
+      publisher: { '@type': 'Organization', name: 'Paddock', url: 'https://getpaddock.com' },
+    },
+  },
+
   tools_retirement_age: {
     title: 'Retirement Age Calculator UK | When Can I Retire? | Paddock',
     description:
@@ -576,7 +616,11 @@ for (const meta of Object.values(PAGE_META)) {
 /* Article pages get dateModified from the route's lastmod, the same date the
    sitemap uses, so the two cannot disagree. datePublished is only added where
    the page itself states when it was first published. */
-const FIRST_PUBLISHED = { moneyhub_alternative: '2026-05' }
+const FIRST_PUBLISHED = {
+  moneyhub_alternative: '2026-05',
+  guide_how_much_retire_uk: '2026-11-06',
+  guide_pension_drawdown_explained: '2026-11-06',
+}
 const routeByKey = Object.fromEntries(PUBLIC_ROUTES.map((r) => [r.key, r]))
 for (const [key, meta] of Object.entries(PAGE_META)) {
   const nodes = meta.jsonLd?.['@graph'] ?? (meta.jsonLd ? [meta.jsonLd] : [])

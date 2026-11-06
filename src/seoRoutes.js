@@ -137,6 +137,32 @@ export const PUBLIC_ROUTES = [
     links: ['/track-isas-pensions-savings', '/tools/net-worth-calculator', '/guides/inflation-adjusted-net-worth', '/privacy'],
   },
   {
+    key: 'guide_how_much_retire_uk',
+    path: '/guides/how-much-do-i-need-to-retire-uk',
+    lastmod: '2026-11-06',
+    targetKeyword: 'how much do I need to retire UK',
+    secondaryKeywords: ['how much pension do I need UK', 'retirement pot calculator UK', 'State Pension and savings needed'],
+    intent: 'Work out the pot needed to retire in the UK',
+    h1: 'How much do I need to retire in the UK?',
+    intro:
+      'A step-by-step way to estimate the pot you need: income wanted, minus State Pension, divided by a withdrawal rate, with the gap before State Pension age added.',
+    links: ['/tools/retirement-age-calculator', '/tools/retirement-bridge-calculator', '/tools/fire-number-calculator', '/tools/pension-drawdown-calculator', '/guides'],
+    priority: true,
+  },
+  {
+    key: 'guide_pension_drawdown_explained',
+    path: '/guides/pension-drawdown-explained',
+    lastmod: '2026-11-06',
+    targetKeyword: 'pension drawdown explained',
+    secondaryKeywords: ['what is pension drawdown UK', 'flexi-access drawdown', 'money purchase annual allowance'],
+    intent: 'Understand how pension drawdown works in the UK',
+    h1: 'Pension drawdown explained',
+    intro:
+      'How flexi-access drawdown works in the UK: the tax-free 25%, tax on the rest, the money purchase annual allowance, the main risks and the alternatives.',
+    links: ['/tools/pension-drawdown-calculator', '/tools/phased-drawdown-calculator', '/guides/how-much-do-i-need-to-retire-uk', '/guides'],
+    priority: true,
+  },
+  {
     key: 'guides_index',
     path: '/guides',
     lastmod: '2026-05-07',

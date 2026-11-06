@@ -273,7 +273,7 @@ export default function RetirementAgeCalculator({ navigateTo, goTo }) {
                     </p>
                   )}
 
-                  <div className="calc-comparison">
+                  <div className="calc-comparison calc-age-table">
                     <div className="calc-cmp-title">Pot against pot needed, by age</div>
                     <div className="calc-fire-cmp-head has-years">
                       <span>Age</span>

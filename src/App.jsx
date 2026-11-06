@@ -34,6 +34,8 @@ const ROUTE_COMPONENTS = {
   guide_multi_currency: lazy(() => import('./guides/MultiCurrency')),
   guide_long_term_projection: lazy(() => import('./guides/LongTermProjection')),
   guide_inflation_adjusted: lazy(() => import('./guides/InflationAdjusted')),
+  guide_how_much_retire_uk: lazy(() => import('./guides/HowMuchToRetireUK')),
+  guide_pension_drawdown_explained: lazy(() => import('./guides/PensionDrawdownExplained')),
   privacy: lazy(() => import('./pages/Privacy')),
   security: lazy(() => import('./pages/Security')),
   terms: lazy(() => import('./pages/Terms')),
@@ -650,9 +652,10 @@ export default function App({ initialPath } = {}) {
             </h1>
 
             <p className="hero-sub">
-              Paddock brings your ISAs, SIPPs, pensions, savings, property and investments into
-              one calm, private dashboard. You update it. You own it. We never ask for your bank
-              login — and we never sell your data.
+              <strong>Your complete financial picture. No bank access required.</strong> Paddock
+              brings your ISAs, SIPPs, pensions, savings, property and investments into one calm,
+              private dashboard. You update it. You own it. We never ask for your bank login — and
+              we never sell your data.
             </p>
 
             <div className="hero-actions">
@@ -676,6 +679,26 @@ export default function App({ initialPath } = {}) {
               <li>No data selling</li>
               <li>Web + iOS</li>
             </ul>
+
+            <p className="hero-calc-row">
+              Not ready to sign up? Try a free calculator first:{' '}
+              <InternalLink to="/tools/retirement-age-calculator" navigateTo={navigateTo} className="hero-calc-link">
+                retirement age
+              </InternalLink>
+              ,{' '}
+              <InternalLink to="/tools/pension-drawdown-calculator" navigateTo={navigateTo} className="hero-calc-link">
+                pension drawdown
+              </InternalLink>
+              ,{' '}
+              <InternalLink to="/tools/fire-number-calculator" navigateTo={navigateTo} className="hero-calc-link">
+                FIRE number
+              </InternalLink>{' '}
+              or{' '}
+              <InternalLink to="/tools/isa-growth-calculator" navigateTo={navigateTo} className="hero-calc-link">
+                ISA growth
+              </InternalLink>
+              .
+            </p>
           </div>
 
           <div className="hero-visual">
@@ -693,13 +716,14 @@ export default function App({ initialPath } = {}) {
             <p className="section-copy">
               Most finance apps need your bank credentials to exist. Paddock doesn&apos;t. You
               enter your balances, we do the maths, and your bank details never leave your bank.
-              It takes a few minutes a month — and it means there is nothing to leak, nothing to
-              sell, and nothing to reconnect.
+              It takes a few minutes a month — and it means there are no bank credentials for us to
+              store or lose, no account links to reconnect, and no ads or data business behind the
+              product.
             </p>
 
             <div className="trust-grid">
               <div>
-                <h3>Nothing to breach</h3>
+                <h3>No bank logins to lose</h3>
                 <div className="line" />
                 <p>
                   We never hold your bank credentials. Paddock is designed so your bank logins
