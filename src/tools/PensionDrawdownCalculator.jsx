@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import { calculateDrawdown } from './pensionCalc'
+import ResultCta from '../components/ResultCta'
 
 // ─── Analytics ───────────────────────────────────────────────────────────────
 // Dispatches a DOM event — a no-op until the site wires an analytics listener.
@@ -551,6 +552,7 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
                   <p className="calc-disclaimer">
                     Illustrative only. Based on your assumptions, with monthly compounding. Returns and longevity are not guaranteed. Not financial advice.
                   </p>
+                  <ResultCta source="pension_drawdown" />
                 </div>
               ) : (
                 <div className="calc-results-empty">

@@ -174,9 +174,12 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
           </div>
 
           <p className="cmp-note">
-            Comparison reflects each product&apos;s primary positioning and public feature set when
-            this page was first published in May 2026. Plans, prices and features may have changed
-            since. Not financial advice.
+            Paddock publishes this page and is one of the products compared. The descriptions of
+            other products reflect their public positioning and feature set when this page was
+            first published in May 2026; the Moneyhub closure details were checked on 6 November
+            2026. We have not re-checked every other provider since, so plans, prices and
+            features may have changed. Check each provider&apos;s own site before deciding. Not
+            financial advice.
           </p>
         </div>
       </section>

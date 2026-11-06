@@ -1,4 +1,5 @@
 import React from 'react'
+import Breadcrumbs from '../components/Breadcrumbs'
 import SiteFooter from '../components/SiteFooter'
 import IsaAllowanceCard from '../components/IsaAllowanceCard'
 import { ISA_RULES, gbp } from '../isaRules'
@@ -36,6 +37,7 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
               Back to home
             </a>
           </div>
+          <Breadcrumbs />
           <div className="hero-copy">
           <div className="hero-kicker">Track ISAs, pensions and savings</div>
 
@@ -163,7 +165,7 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
             </p>
             <p className="section-copy narrow">
               The planned cut to the Cash ISA limit, to {gbp(ISA_RULES.cancelledCashIsaLimit)} for
-              people under 65 from {ISA_RULES.nextTaxYearStart}, was dropped in the Autumn Budget
+              people under 65 from {ISA_RULES.cashIsaCapWouldHaveStarted}, was dropped in the Autumn Budget
               on {ISA_RULES.cashIsaCapDroppedOn}. HMRC says the {gbp(ISA_RULES.overallAllowance)}{' '}
               Cash ISA limit is retained from that date (see{' '}
               <a href={ISA_RULES.hmrcNewsletterUrl} target="_blank" rel="noreferrer">

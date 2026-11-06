@@ -2,6 +2,17 @@ import React, { useState, useCallback, useEffect } from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import { calculateIsa } from './isaCalc'
+import { ISA_RULES, gbp } from '../isaRules'
+import { pensionAccessAge, valueOn } from '../ukFigures'
+import ResultCta from '../components/ResultCta'
+
+const ALLOWANCE = gbp(ISA_RULES.overallAllowance)
+const LISA_LIMIT = gbp(valueOn('isa.lifetime_isa.annual_limit'))
+const JISA_LIMIT = gbp(valueOn('isa.junior_isa.annual_limit'))
+const NMPA = pensionAccessAge()
+const SIPP_ACCESS = NMPA.next
+  ? `from age ${NMPA.now} (rising to ${NMPA.next} on ${NMPA.nextFrom})`
+  : `from age ${NMPA.now}`
 
 // ─── Analytics ───────────────────────────────────────────────────────────────
 function track(event, data = {}) {
@@ -414,6 +425,7 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
                   <p className="calc-disclaimer">
                     Illustrative only. Uses monthly compounding. Returns are not guaranteed. ISA allowance rules and tax treatment may change. Not financial advice.
                   </p>
+                  <ResultCta source="isa_growth" />
                 </div>
               ) : (
                 <div className="calc-results-empty">
@@ -483,17 +495,17 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
 
             <h2 className="calc-guide-h2">What counts as an ISA contribution</h2>
             <p className="calc-guide-p">
-              The annual ISA allowance in 2025/26 is £20,000 per person. This covers
+              The annual ISA allowance in {ISA_RULES.taxYear} is {ALLOWANCE} per person. This covers
               contributions to all ISA types combined: Cash ISA, Stocks and Shares ISA,
-              Innovative Finance ISA, and Lifetime ISA (subject to its own £4,000 sub-limit).
-              Junior ISAs have a separate allowance (£9,000 in 2025/26).
+              Innovative Finance ISA, and Lifetime ISA (subject to its own {LISA_LIMIT} sub-limit).
+              Junior ISAs have a separate allowance ({JISA_LIMIT} in {ISA_RULES.taxYear}).
             </p>
             <p className="calc-guide-p">
               This calculator does not enforce the annual allowance limit — it models the
               mathematical outcome of any contribution level you enter. For planning, ensure
               your monthly contribution does not exceed the annual allowance over a tax year.
               At £500 per month, contributions total £6,000 per year — well within the
-              £20,000 limit.
+              {ALLOWANCE} limit.
             </p>
 
             <h2 className="calc-guide-h2">Stocks and Shares ISA vs Cash ISA</h2>
@@ -554,7 +566,7 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
               <div className="faq-card">
                 <h3>Does the ISA allowance limit how much I can contribute?</h3>
                 <p>
-                  Yes. The 2025/26 ISA allowance is £20,000 per person per tax year across all
+                  Yes. The {ISA_RULES.taxYear} ISA allowance is {ALLOWANCE} per person per tax year across all
                   ISA types. The calculator does not enforce this limit — it projects whatever
                   monthly contribution you enter. At £500 per month (£6,000 per year) you are
                   well within the limit; at £2,000 per month (£24,000 per year) you would exceed
@@ -565,8 +577,8 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
               <div className="faq-card">
                 <h3>What platform fees should I enter?</h3>
                 <p>
-                  Common low-cost UK platform fees range from 0.15% (e.g. Vanguard, iWeb) to
-                  0.35–0.45% (e.g. Hargreaves Lansdown, AJ Bell). Some platforms charge fixed
+                  Check your own platform's charges page and add the ongoing fund charges to it. Fees
+                  vary by provider and change over time, so use your own figure. Some platforms charge fixed
                   fees rather than percentage fees, which work differently and are not modelled
                   here. The fee field is for the total annual cost as a percentage of the portfolio,
                   including platform fee and any ongoing fund charges (OCF/TER).
@@ -591,8 +603,7 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
                   Both ISAs and SIPPs offer tax-efficient growth, but in different ways. SIPP
                   contributions receive tax relief (20–45% depending on your tax rate), which
                   boosts the effective contribution. ISA contributions receive no upfront relief
-                  but withdrawals are fully tax-free. SIPPs are accessible from age 57 (rising
-                  to 58); ISAs can be accessed at any time. Many people hold both and use them
+                  but withdrawals are fully tax-free. You can usually take money from a SIPP {SIPP_ACCESS}; ISAs can be accessed at any time. Many people hold both and use them
                   for different purposes. This calculator models ISA-style growth with no tax
                   deductions on withdrawal.
                 </p>

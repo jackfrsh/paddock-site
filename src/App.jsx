@@ -13,6 +13,7 @@ import appStoreQr from './assets/appstore-qr.svg'
 import ToolsDropdown from './components/ToolsDropdown'
 import { PAGE_META } from './meta'
 import { PUBLIC_ROUTES } from './seoRoutes'
+import { RouteContext } from './routeContext'
 import { HOME_FAQS } from './homeFaqs'
 import SiteFooter from './components/SiteFooter'
 import AppStoreBadgeLink from './components/AppStoreBadgeLink'
@@ -49,6 +50,7 @@ const ROUTE_COMPONENTS = {
   tools_retirement_bridge: lazy(() => import('./tools/RetirementBridgeCalculator')),
   tools_fire_number: lazy(() => import('./tools/FireNumberCalculator')),
   tools_isa_growth: lazy(() => import('./tools/IsaGrowthCalculator')),
+  tools_retirement_age: lazy(() => import('./tools/RetirementAgeCalculator')),
   tools_net_worth: lazy(() => import('./tools/NetWorthCalculator')),
   tools_hub: lazy(() => import('./pages/ToolsHub')),
 }
@@ -392,9 +394,11 @@ export default function App({ initialPath } = {}) {
   const RouteComponent = ROUTE_COMPONENTS[route]
   if (RouteComponent) {
     return (
-      <Suspense fallback={<div className="route-loading" aria-busy="true" />}>
-        <RouteComponent navigateTo={navigateTo} goTo={goTo} />
-      </Suspense>
+      <RouteContext.Provider value={{ path: PUBLIC_ROUTES.find((r) => r.key === route)?.path ?? null, navigateTo }}>
+        <Suspense fallback={<div className="route-loading" aria-busy="true" />}>
+          <RouteComponent navigateTo={navigateTo} goTo={goTo} />
+        </Suspense>
+      </RouteContext.Provider>
     )
   }
   if (route === 'not_found') return <NotFound navigateTo={navigateTo} />
@@ -561,6 +565,20 @@ export default function App({ initialPath } = {}) {
                     }}
                   >
                     FIRE number calculator
+                  </a>
+                  <a
+                    href="/tools/retirement-age-calculator"
+                    className="mobile-tools-item"
+                    onClick={(e) => {
+                      if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                        e.preventDefault()
+                        navigateTo('/tools/retirement-age-calculator')
+                        setMenuOpen(false)
+                        setToolsMobileOpen(false)
+                      }
+                    }}
+                  >
+                    Retirement age calculator
                   </a>
                   <a
                     href="/tools/isa-growth-calculator"
@@ -844,7 +862,7 @@ export default function App({ initialPath } = {}) {
             <p className="section-copy narrow">
               The planned cut to the Cash ISA limit was dropped in the Autumn Budget on{' '}
               {ISA_RULES.cashIsaCapDroppedOn}, so the limit stays at{' '}
-              {gbp(ISA_RULES.overallAllowance)} from {ISA_RULES.nextTaxYearStart}.
+              {gbp(ISA_RULES.overallAllowance)} from {ISA_RULES.cashIsaCapWouldHaveStarted}.
             </p>
             <div className="pill-links section-top-gap-sm">
               <InternalLink to="/track-isas-pensions-savings" navigateTo={navigateTo} className="pill-link">

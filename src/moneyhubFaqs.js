@@ -15,6 +15,6 @@ export const MONEYHUB_FAQS = [
   },
   {
     q: 'Does Paddock link to my bank?',
-    a: 'No. Paddock is entirely manual-entry. You enter your own balances, typically once a month, without connecting bank accounts or sharing any credentials. Your data never leaves your control.',
+    a: 'No. Paddock is entirely manual-entry. You enter your own balances, typically once a month, without connecting bank accounts or sharing any bank credentials. You choose what you enter, and you can ask for a copy or for your data to be deleted.',
   },
 ]

@@ -136,6 +136,22 @@ export default function ToolsDropdown({ navigateTo }) {
           </a>
 
           <a
+            href="/tools/retirement-age-calculator"
+            className="tools-dropdown-item"
+            onClick={(e) => {
+              if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                e.preventDefault()
+                go('/tools/retirement-age-calculator')
+              }
+            }}
+          >
+            <div className="tools-dropdown-item-title">Retirement age calculator</div>
+            <div className="tools-dropdown-item-desc">
+              Find the earliest age your savings could cover the income you want.
+            </div>
+          </a>
+
+          <a
             href="/tools/isa-growth-calculator"
             className="tools-dropdown-item"
             onClick={(e) => {

@@ -35,8 +35,8 @@ export default function Privacy({ navigateTo }) {
       <H2>No bank linking</H2>
       <P>
         Paddock does not require bank connections to function. You can build and maintain your
-        wealth model without granting access to your financial accounts. Your data stays under
-        your control.
+        wealth model without granting access to your financial accounts. You choose what you
+        enter, and you can ask for a copy of your data or for it to be deleted.
       </P>
 
       <H2>Authentication and billing</H2>

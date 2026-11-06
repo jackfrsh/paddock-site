@@ -88,6 +88,14 @@ export default function ToolsHub({ navigateTo, goTo }) {
               ctaText="Calculate my FIRE number"
             />
             <ToolCard
+              href="/tools/retirement-age-calculator"
+              onClick={() => navigateTo('/tools/retirement-age-calculator')}
+              title="Retirement age calculator UK"
+              description="Find the earliest age your savings could cover the income you want, allowing for the gap before your State Pension starts. Results are in today's money."
+              tags={['Free', 'No login required', 'UK']}
+              ctaText="Find my retirement age"
+            />
+            <ToolCard
               href="/tools/isa-growth-calculator"
               onClick={() => navigateTo('/tools/isa-growth-calculator')}
               title="ISA growth calculator UK"

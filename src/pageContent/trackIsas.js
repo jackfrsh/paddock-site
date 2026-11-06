@@ -1,7 +1,14 @@
 import { ISA_FAQS, ISA_RULES, gbp } from '../isaRules.js'
 import { sum } from './format.js'
+import { pensionAccessAge, valueOn } from '../ukFigures.js'
 
 const r = ISA_RULES
+const lisaLimit = valueOn('isa.lifetime_isa.annual_limit')
+const lisaBonus = valueOn('isa.lifetime_isa.bonus_rate')
+const lisaWithdrawalAge = valueOn('isa.lifetime_isa.withdrawal_age')
+const lisaCharge = valueOn('isa.lifetime_isa.unauthorised_withdrawal_charge')
+const premiumBondsMax = valueOn('nsi.premium_bonds.max_holding')
+const nmpa = pensionAccessAge()
 
 export const ISA_PAGE_QUICK_ANSWER =
   'To track ISAs, pensions and savings together, list each account with its current value, group them by type, and add them up alongside any debts. Paddock does this for UK accounts, including Cash and Stocks & Shares ISAs, Lifetime ISAs, SIPPs and workplace pensions.'
@@ -27,21 +34,23 @@ export const ISA_PAGE_TABLE = {
     ],
     [
       'Lifetime ISA',
-      'Tax-free, plus a 25% government bonus on up to £4,000 a year.',
-      'For a first home or from age 60. Other withdrawals face a 25% charge.',
-      `Yes. The £4,000 counts towards the ${gbp(r.overallAllowance)}.`,
+      `Tax-free, plus a ${lisaBonus}% government bonus on up to ${gbp(lisaLimit)} a year.`,
+      `For a first home or from age ${lisaWithdrawalAge}. Other withdrawals face a ${lisaCharge}% charge.`,
+      `Yes. The ${gbp(lisaLimit)} counts towards the ${gbp(r.overallAllowance)}.`,
     ],
     [
       'SIPP or workplace pension',
       'Tax relief on contributions.',
-      'From the minimum pension age: 55, rising to 57 on 6 April 2028.',
+      nmpa.next
+        ? `From the minimum pension age: ${nmpa.now}, rising to ${nmpa.next} on ${nmpa.nextFrom}.`
+        : `From the minimum pension age: ${nmpa.now}.`,
       'No. Pensions have a separate annual allowance.',
     ],
     [
       'Premium Bonds',
       'Prizes are tax-free. No interest is paid.',
       'You can withdraw at any time.',
-      `No. NS&I limits holdings to ${gbp(50000)} per person.`,
+      `No. NS&I limits holdings to ${gbp(premiumBondsMax)} per person.`,
     ],
     [
       'General investment account (GIA)',
@@ -74,7 +83,7 @@ export const ISA_PAGE_EXAMPLE = {
   summary: [
     { label: 'Allowance left', values: [r.overallAllowance - totalPaidIn], emphasis: true },
   ],
-  note: `The allowance counts what you pay in, not what the accounts are worth, so growth does not use it up. The same ${gbp(r.overallAllowance)} allowance carries on from ${r.nextTaxYearStart}: the planned ${gbp(r.cancelledCashIsaLimit)} Cash ISA limit for under-65s was dropped in the Autumn Budget on ${r.cashIsaCapDroppedOn}.`,
+  note: `The allowance counts what you pay in, not what the accounts are worth, so growth does not use it up. The same ${gbp(r.overallAllowance)} allowance carries on from ${r.cashIsaCapWouldHaveStarted}: the planned ${gbp(r.cancelledCashIsaLimit)} Cash ISA limit for under-65s was dropped in the Autumn Budget on ${r.cashIsaCapDroppedOn}.`,
 }
 
 export const TRACK_ISAS_FAQS = [

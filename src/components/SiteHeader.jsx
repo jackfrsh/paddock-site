@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ToolsDropdown from './ToolsDropdown'
 import SkipLink from './SkipLink'
+import Breadcrumbs from './Breadcrumbs'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
@@ -56,6 +57,7 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
   }
 
   return (
+    <>
     <header className="landing-nav">
       <SkipLink />
       <div className="landing-nav-inner">
@@ -204,6 +206,18 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
                   FIRE number calculator
                 </a>
                 <a
+                  href="/tools/retirement-age-calculator"
+                  className="mobile-tools-item"
+                  onClick={(e) => {
+                    if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                      e.preventDefault()
+                      go('/tools/retirement-age-calculator')
+                    }
+                  }}
+                >
+                  Retirement age calculator
+                </a>
+                <a
                   href="/tools/isa-growth-calculator"
                   className="mobile-tools-item"
                   onClick={(e) => {
@@ -259,5 +273,9 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
         </nav>
       )}
     </header>
+    <div className="container breadcrumbs-bar">
+      <Breadcrumbs />
+    </div>
+    </>
   )
 }

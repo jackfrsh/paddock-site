@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef, useCallback } from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
+import ResultCta from '../components/ResultCta'
 import {
   CURRENCIES,
   CURRENCY_SYMBOLS,
@@ -356,6 +357,7 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
                   <p className="calc-disclaimer">
                     Based on the amounts you enter. Not financial advice.
                   </p>
+                  <ResultCta source="net_worth" />
                 </div>
               )}
             </div>

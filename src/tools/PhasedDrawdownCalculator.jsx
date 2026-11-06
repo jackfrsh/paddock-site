@@ -3,6 +3,10 @@ import { Helmet } from 'react-helmet-async'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import { calculatePhasedDrawdown, LATE_PHASE_AGE } from './phasedDrawdownCalc'
+import { gbp, taxYearOf, valueOn } from '../ukFigures'
+import ResultCta from '../components/ResultCta'
+
+const STATE_PENSION_HINT = `Full new State Pension is ${gbp(valueOn('state_pension.new_full_rate_annual'))} a year in ${taxYearOf().label}.`
 
 function track(event, data = {}) {
   try {
@@ -372,6 +376,7 @@ function ResultPanel({ result }) {
         Estimates in today&apos;s money using a real return of {fmtPct(result.realReturn)}. Not financial advice;
         excludes tax, charges and future changes to pension rules.
       </p>
+      <ResultCta source="phased_drawdown" />
     </div>
   )
 }
@@ -476,7 +481,7 @@ export default function PhasedDrawdownCalculator({ navigateTo, goTo }) {
                   <CalcField label="Current pension / retirement pot" id="currentPot" prefix="£">
                     <NumInput id="currentPot" value={form.currentPot} onChange={setField('currentPot')} min="0" step="1000" prefix="£" />
                   </CalcField>
-                  <CalcField label="Estimated annual State Pension" id="statePensionAmount" hint="Full new State Pension is around £12,548." prefix="£">
+                  <CalcField label="Estimated annual State Pension" id="statePensionAmount" hint={STATE_PENSION_HINT} prefix="£">
                     <NumInput id="statePensionAmount" value={form.statePensionAmount} onChange={setField('statePensionAmount')} min="0" step="100" prefix="£" />
                   </CalcField>
                   <CalcField label="Expected annual return" id="expectedReturn" hint="Nominal, before inflation." suffix="%">

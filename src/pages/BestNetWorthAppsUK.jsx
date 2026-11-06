@@ -116,8 +116,10 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
           </div>
 
           <p className="cmp-note">
-            Comparison reflects each product's primary positioning and public feature set.
-            Individual plans and features may vary. Not financial advice.
+            Paddock publishes this page and is one of the products compared. Descriptions of other
+            products reflect their public positioning and feature set and have not been
+            re-checked line by line recently, so check each provider's own site for current plans,
+            prices and features. Not financial advice.
           </p>
         </div>
       </section>

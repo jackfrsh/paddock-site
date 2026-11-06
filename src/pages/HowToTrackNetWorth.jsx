@@ -1,4 +1,5 @@
 import React from 'react'
+import Breadcrumbs from '../components/Breadcrumbs'
 import SiteFooter from '../components/SiteFooter'
 import { ExampleSection, FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
 import {
@@ -35,6 +36,7 @@ export default function NetWorthTracker({ navigateTo }) {
             </a>
           </div>
 
+          <Breadcrumbs />
           <div className="hero-copy">
             <div className="hero-kicker">Guide</div>
 

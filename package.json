@@ -10,6 +10,9 @@
     "check:indexability": "node scripts/check-google-indexability.mjs",
     "check:internal-links": "node scripts/check-internal-links.mjs",
     "lint": "eslint .",
+    "test": "node scripts/run-tests.mjs",
+    "check:figures": "node scripts/check-figures.mjs",
+    "check": "npm run lint && npm run test && npm run check:figures",
     "preview": "vite preview"
   },
   "dependencies": {

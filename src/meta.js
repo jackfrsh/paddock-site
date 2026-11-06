@@ -1,3 +1,5 @@
+import { breadcrumbList } from './breadcrumbs.js'
+import { PUBLIC_ROUTES } from './seoRoutes.js'
 import { HOME_FAQS } from './homeFaqs.js'
 import { MONEYHUB_FAQS } from './moneyhubFaqs.js'
 import { HOWTO_FAQS } from './pageContent/howToTrackNetWorth.js'
@@ -403,6 +405,28 @@ export const PAGE_META = {
     },
   },
 
+  tools_retirement_age: {
+    title: 'Retirement Age Calculator UK | When Can I Retire? | Paddock',
+    description:
+      'Free UK retirement age calculator. See the earliest age your savings could cover the income you want, including the gap before your State Pension starts.',
+    canonical: 'https://getpaddock.com/tools/retirement-age-calculator',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Retirement Age Calculator UK',
+      url: 'https://getpaddock.com/tools/retirement-age-calculator',
+      description:
+        'Free retirement age calculator. Find the earliest age your savings could cover your income, allowing for the years before your State Pension starts.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
   tools_isa_growth: {
     title: 'ISA Growth Calculator UK — Project Your ISA Value | Paddock',
     description:
@@ -530,4 +554,45 @@ export const PAGE_META = {
       },
     },
   },
+}
+
+/* Every public page except the home page gets a BreadcrumbList, built from the
+   same trail data as the visible breadcrumbs. A page that already has JSON-LD
+   keeps it; the list is added to its @graph. */
+for (const meta of Object.values(PAGE_META)) {
+  const list = breadcrumbList(new URL(meta.canonical).pathname)
+  if (!list) continue
+  const existing = meta.jsonLd
+  if (!existing) {
+    meta.jsonLd = { '@context': 'https://schema.org', ...list }
+  } else if (existing['@graph']) {
+    existing['@graph'].push(list)
+  } else {
+    const { '@context': context = 'https://schema.org', ...rest } = existing
+    meta.jsonLd = { '@context': context, '@graph': [rest, list] }
+  }
+}
+
+/* Article pages get dateModified from the route's lastmod, the same date the
+   sitemap uses, so the two cannot disagree. datePublished is only added where
+   the page itself states when it was first published. */
+const FIRST_PUBLISHED = { moneyhub_alternative: '2026-05' }
+const routeByKey = Object.fromEntries(PUBLIC_ROUTES.map((r) => [r.key, r]))
+for (const [key, meta] of Object.entries(PAGE_META)) {
+  const nodes = meta.jsonLd?.['@graph'] ?? (meta.jsonLd ? [meta.jsonLd] : [])
+  for (const node of nodes) {
+    if (node['@type'] === 'Article') {
+      if (routeByKey[key]?.lastmod) node.dateModified = routeByKey[key].lastmod
+      if (FIRST_PUBLISHED[key]) node.datePublished = FIRST_PUBLISHED[key]
+    }
+    // Calculator pages describe a free in-browser application.
+    if (key.startsWith('tools_') && key !== 'tools_hub' && node['@type'] === 'WebPage') {
+      node['@type'] = 'WebApplication'
+      node.applicationCategory = 'FinanceApplication'
+      node.operatingSystem = 'Any (runs in the browser)'
+      node.isAccessibleForFree = true
+      node.offers = { '@type': 'Offer', price: '0', priceCurrency: 'GBP' }
+      node.publisher = { '@type': 'Organization', name: 'Paddock', url: 'https://getpaddock.com' }
+    }
+  }
 }

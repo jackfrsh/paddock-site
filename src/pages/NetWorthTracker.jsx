@@ -1,4 +1,5 @@
 import React from 'react'
+import Breadcrumbs from '../components/Breadcrumbs'
 import SiteFooter from '../components/SiteFooter'
 import { ExampleSection, FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
 import { NWT_EXAMPLE, NWT_FAQS, NWT_QUICK_ANSWER, NWT_TABLE } from '../pageContent/netWorthTracker.js'
@@ -29,6 +30,7 @@ export default function NetWorthTracker({ navigateTo }) {
               Back to home
             </a>
           </div>
+          <Breadcrumbs />
           <div className="hero-copy">
             <div className="hero-kicker">Net worth tracking</div>
 

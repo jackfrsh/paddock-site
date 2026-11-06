@@ -4,6 +4,7 @@ const sharedToolLinks = [
   '/tools/pension-drawdown-calculator',
   '/tools/phased-drawdown-calculator',
   '/tools/fire-number-calculator',
+  '/tools/retirement-age-calculator',
   '/tools/net-worth-calculator',
   '/guides',
   '/privacy',
@@ -75,7 +76,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'tools_phased_drawdown',
     path: '/tools/phased-drawdown-calculator',
-    lastmod: '2026-06-09',
+    lastmod: '2026-11-06',
     targetKeyword: 'phased pension drawdown calculator UK',
     secondaryKeywords: ['can I retire before State Pension', 'phased retirement income calculator', 'retirement bridge calculator UK'],
     intent: 'Model phased retirement income and the bridge to State Pension',
@@ -88,7 +89,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'tools_retirement_bridge',
     path: '/tools/retirement-bridge-calculator',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'ISA retirement bridge calculator UK',
     secondaryKeywords: ['retire before pension access UK', 'ISA bridge calculator', 'retirement income planner UK'],
     intent: 'Estimate accessible savings needed before pension access',
@@ -100,7 +101,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'tools_fire_number',
     path: '/tools/fire-number-calculator',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'FIRE number calculator UK',
     secondaryKeywords: ['financial independence calculator UK', 'how much do I need to retire early UK', 'track financial independence UK'],
     intent: 'Calculate financial independence target and progress',
@@ -111,9 +112,22 @@ export const PUBLIC_ROUTES = [
     priority: true,
   },
   {
+    key: 'tools_retirement_age',
+    path: '/tools/retirement-age-calculator',
+    lastmod: '2026-11-06',
+    targetKeyword: 'retirement age calculator UK',
+    secondaryKeywords: ['when can I retire UK', 'early retirement calculator UK', 'how much do I need to retire'],
+    intent: 'Find the earliest age savings could cover the income wanted',
+    h1: 'Retirement age calculator UK',
+    intro:
+      'Find the earliest age your savings could cover the income you want, allowing for the gap before your State Pension starts.',
+    links: ['/tools/fire-number-calculator', '/tools/retirement-bridge-calculator', '/tools/pension-drawdown-calculator', '/privacy'],
+    priority: true,
+  },
+  {
     key: 'tools_isa_growth',
     path: '/tools/isa-growth-calculator',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'ISA growth calculator UK',
     secondaryKeywords: ['Stocks and Shares ISA calculator', 'ISA projection calculator', 'investment growth calculator UK'],
     intent: 'Project ISA growth from contributions and returns',
@@ -267,7 +281,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'privacy',
     path: '/privacy',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'privacy-first finance app UK',
     secondaryKeywords: ['manual wealth tracking app', 'best finance app without bank linking', 'no bank linking finance app'],
     intent: 'Understand Paddock privacy and data handling',

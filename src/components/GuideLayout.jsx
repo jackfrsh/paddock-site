@@ -1,5 +1,6 @@
 import React from 'react'
 import SiteFooter from './SiteFooter'
+import Breadcrumbs from './Breadcrumbs'
 
 function isModifiedEvent(e) {
   return e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0
@@ -105,6 +106,8 @@ export function GuideShell({
               ← {resolvedBackLabel}
             </a>
           </div>
+
+          <Breadcrumbs />
 
           <div className="hero-copy guide-hero-copy">
             <div className="hero-kicker">{resolvedHeroLabel}</div>

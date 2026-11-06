@@ -3,6 +3,17 @@ import { Helmet } from 'react-helmet-async'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import { calculateRetirementBridge } from './retirementBridgeCalc'
+import { pensionAccessAge } from '../ukFigures'
+import ResultCta from '../components/ResultCta'
+
+const NMPA = pensionAccessAge()
+const NMPA_SHORT = NMPA.next
+  ? `Most people can currently access private pensions from ${NMPA.now}. The normal minimum pension age rises to ${NMPA.next} from ${NMPA.nextFrom}.`
+  : `The normal minimum pension age is ${NMPA.now}.`
+const NMPA_LONG = `${NMPA_SHORT} Protected pension ages and scheme rules can differ.`
+const NMPA_HINT = NMPA.next
+  ? `Most people will be able to access private pensions from ${NMPA.next} from ${NMPA.nextFrom}, though protected pension ages and scheme rules can differ.`
+  : `The normal minimum pension age is ${NMPA.now}, though protected pension ages and scheme rules can differ.`
 
 function track(event, data = {}) {
   try {
@@ -72,7 +83,7 @@ const FAQ_LD = {
       name: 'What age can I access my private pension in the UK?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Most people can currently access private pensions from 55. The normal minimum pension age rises to 57 from 6 April 2028, although protected pension ages and scheme rules can differ.',
+        text: NMPA_LONG,
       },
     },
     {
@@ -245,6 +256,7 @@ function ResultPanel({ result, form }) {
         This is not a retirement income plan. It is a simple estimate of the accessible assets
         you may need before pension income starts.
       </p>
+      <ResultCta source="retirement_bridge" />
     </div>
   )
 }
@@ -323,7 +335,7 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
                   <CalcField
                     label="Private pension access age"
                     id="privatePensionAccessAge"
-                    hint="Most people will be able to access private pensions from 57 from 6 April 2028, though protected pension ages and scheme rules can differ."
+                    hint={NMPA_HINT}
                   >
                     <NumInput id="privatePensionAccessAge" value={form.privatePensionAccessAge} onChange={setField('privatePensionAccessAge')} min="55" max="75" step="1" />
                   </CalcField>
@@ -478,12 +490,21 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
               the years before pension income starts.
             </p>
 
+            <p className="calc-guide-p">
+              To see the earliest age your total savings could cover the income you want, try the
+              {' '}<a
+              href="/tools/retirement-age-calculator"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/tools/retirement-age-calculator') } }}
+              >
+              retirement age calculator
+              </a>.
+            </p>
+
             <h2 className="calc-guide-h2">Pension age vs State Pension age</h2>
             <p className="calc-guide-p">
-              Private pension access age and State Pension age are separate. Most people can
-              currently access private pensions from age 55, but the normal minimum pension age
-              rises to 57 from 6 April 2028. Some people may have protected pension ages or
-              scheme-specific rules, so it is worth checking your own pension paperwork.
+              Private pension access age and State Pension age are separate. {NMPA_SHORT} Some
+              people may have protected pension ages or scheme-specific rules, so it is worth
+              checking your own pension paperwork.
             </p>
             <p className="calc-guide-p">
               State Pension age is different and depends on date of birth and government rules. The
@@ -558,7 +579,7 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
               </div>
               <div className="faq-card">
                 <h3>What age can I access my private pension in the UK?</h3>
-                <p>Most people can currently access private pensions from 55. The normal minimum pension age rises to 57 from 6 April 2028.</p>
+                <p>{NMPA_SHORT}</p>
               </div>
               <div className="faq-card">
                 <h3>Is State Pension age the same as pension access age?</h3>

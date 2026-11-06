@@ -2,6 +2,11 @@ import React, { useState, useCallback, useEffect } from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import { calculateFire } from './fireCalc'
+import { gbp, taxYearOf, valueOn } from '../ukFigures'
+import ResultCta from '../components/ResultCta'
+
+const STATE_PENSION_ANNUAL = gbp(valueOn('state_pension.new_full_rate_annual'))
+const TAX_YEAR = taxYearOf().label
 
 // ─── Analytics ───────────────────────────────────────────────────────────────
 function track(event, data = {}) {
@@ -426,6 +431,7 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
                   <p className="calc-disclaimer">
                     Illustrative only. Based on your assumptions, with annual compounding. Returns are not guaranteed. Not financial advice.
                   </p>
+                  <ResultCta source="fire" />
                 </div>
               ) : (
                 <div className="calc-results-empty">
@@ -526,9 +532,19 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
               25% typically tax-free). This means the gross FIRE number this calculator produces
               is a reasonable planning target for your total investable portfolio, but the
               after-tax income it generates may differ depending on how and where the assets are
-              held. The State Pension (currently up to approximately £11,500 per year) can also
+              held. The State Pension (the full new State Pension is {STATE_PENSION_ANNUAL} a year in {TAX_YEAR}) can also
               significantly reduce the portfolio size needed once you reach state pension age —
               enter expected State Pension income in the passive income field to reflect this.
+            </p>
+            <p className="calc-guide-p">
+              Prefer an age to a number? The <a
+                href="/tools/retirement-age-calculator"
+                onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/tools/retirement-age-calculator') } }}
+              >
+                retirement age calculator
+              </a> shows the earliest age
+              your savings could cover the income you want, including the gap before your State
+              Pension starts.
             </p>
 
             <div className="calc-guide-note">
