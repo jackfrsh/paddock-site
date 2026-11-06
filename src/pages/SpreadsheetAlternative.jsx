@@ -1,5 +1,12 @@
 import React from 'react'
 import SiteFooter from '../components/SiteFooter'
+import { FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
+import {
+  SHEET_COMPARISON,
+  SHEET_FAQS,
+  SHEET_MAPPING,
+  SHEET_QUICK_ANSWER,
+} from '../pageContent/spreadsheetAlternative.js'
 
 function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
@@ -65,6 +72,7 @@ export default function NetWorthTracker({ navigateTo }) {
       </section>
 
       <section className="container section">
+        <QuickAnswer>{SHEET_QUICK_ANSWER}</QuickAnswer>
         <SectionLabel>Overview</SectionLabel>
         <h2>Spreadsheets are powerful, until they become maintenance.</h2>
         <p className="section-copy narrow">
@@ -136,6 +144,10 @@ export default function NetWorthTracker({ navigateTo }) {
         </div>
       </section>
 
+      <TableSection {...SHEET_COMPARISON} />
+
+      <TableSection {...SHEET_MAPPING} />
+
       <section className="section-border">
         <div className="container section">
           <SectionLabel>Related pages</SectionLabel>
@@ -178,46 +190,8 @@ export default function NetWorthTracker({ navigateTo }) {
         </div>
       </section>
 
-      <section className="section-border">
-        <div className="container section">
-          <SectionLabel>FAQ</SectionLabel>
-          <h2>Common questions.</h2>
+      <FaqSection faqs={SHEET_FAQS} />
 
-          <div className="faq-grid">
-            <div className="faq-card">
-              <h3>Is Paddock automatic?</h3>
-              <p>
-                No. It is manual-entry by design. The difference is that the structure and review
-                experience are cleaner than maintaining a spreadsheet over time.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Why not just keep using a spreadsheet?</h3>
-              <p>
-                You can. Paddock becomes more useful when your current sheet feels harder to
-                maintain, less readable, or too fragmented to support a calm long-term review.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Can I still think in categories and accounts?</h3>
-              <p>
-                Yes. That is part of the point. Paddock keeps the structure without forcing you to
-                build and maintain the structure yourself.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Is this for budgeting?</h3>
-              <p>
-                No. It is for wealth tracking. The focus is on total net worth, long-term progress
-                and a clearer overall financial position.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="section-border">
         <div className="container final-cta">

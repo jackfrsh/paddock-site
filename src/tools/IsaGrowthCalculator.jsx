@@ -498,10 +498,10 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
 
             <h2 className="calc-guide-h2">Stocks and Shares ISA vs Cash ISA</h2>
             <p className="calc-guide-p">
-              Cash ISAs currently offer rates in the range of 4–5% (as of 2025), which are
-              competitive for short-term savings but are not inflation-beating over most
-              longer horizons. Stocks and Shares ISAs carry more volatility but have
-              historically returned more than cash over 10+ year periods.
+              Cash ISA rates change often and differ by provider, so check the current rate
+              before you model one. Cash suits short-term savings, but over longer horizons
+              it can struggle to beat inflation. Stocks and Shares ISAs carry more volatility
+              but have historically returned more than cash over 10+ year periods.
             </p>
             <p className="calc-guide-p">
               This calculator is most relevant for Stocks and Shares ISAs with a medium to

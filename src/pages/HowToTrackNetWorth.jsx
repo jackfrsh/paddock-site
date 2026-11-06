@@ -1,5 +1,12 @@
 import React from 'react'
 import SiteFooter from '../components/SiteFooter'
+import { ExampleSection, FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
+import {
+  HOWTO_EXAMPLE,
+  HOWTO_FAQS,
+  HOWTO_QUICK_ANSWER,
+  HOWTO_TABLE,
+} from '../pageContent/howToTrackNetWorth.js'
 
 function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
@@ -67,6 +74,7 @@ export default function NetWorthTracker({ navigateTo }) {
       </section>
 
       <section className="container section">
+        <QuickAnswer>{HOWTO_QUICK_ANSWER}</QuickAnswer>
         <SectionLabel>Framework</SectionLabel>
         <h2>Start with the right definition.</h2>
         <p className="section-copy narrow">
@@ -136,6 +144,10 @@ export default function NetWorthTracker({ navigateTo }) {
         </div>
       </section>
 
+      <TableSection {...HOWTO_TABLE} />
+
+      <ExampleSection {...HOWTO_EXAMPLE} />
+
       <section className="section-border">
         <div className="container section">
           <SectionLabel>Related pages</SectionLabel>
@@ -178,46 +190,8 @@ export default function NetWorthTracker({ navigateTo }) {
         </div>
       </section>
 
-      <section className="section-border">
-        <div className="container section">
-          <SectionLabel>FAQ</SectionLabel>
-          <h2>Common questions.</h2>
+      <FaqSection faqs={HOWTO_FAQS} />
 
-          <div className="faq-grid">
-            <div className="faq-card">
-              <h3>Should I include my pension in net worth?</h3>
-              <p>
-                Many people do, because pensions are often one of the biggest parts of long-term
-                wealth. The important thing is to use a consistent approach over time.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Should I include my home?</h3>
-              <p>
-                You can. If property is a meaningful part of your balance sheet, including it can
-                make the picture more complete. Consistency is what matters most.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>How often should I track my net worth?</h3>
-              <p>
-                Monthly is usually enough. That cadence is often frequent enough to stay aware
-                without turning wealth tracking into constant checking.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Do I need automatic bank syncing?</h3>
-              <p>
-                No. For long-term wealth tracking, manual updates can often be enough, especially
-                when the goal is clarity rather than live transaction monitoring.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="section-border">
         <div className="container final-cta">

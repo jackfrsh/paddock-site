@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 import { PAGE_META } from '../src/meta.js'
 import { CANONICAL_ORIGIN, LEGACY_REDIRECTS, PUBLIC_ROUTES, PUBLIC_ROUTE_MAP } from '../src/seoRoutes.js'
 
@@ -8,6 +8,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const distDir = path.resolve(__dirname, '../dist')
 const indexPath = path.join(distDir, 'index.html')
+const serverEntryPath = path.resolve(__dirname, '../dist-ssr/entry-server.js')
 
 const routeMap = PUBLIC_ROUTE_MAP
 
@@ -72,7 +73,7 @@ function upsertMeta(html, { title, description, canonical, ogType, jsonLd }) {
   if (jsonLd) {
     out = out.replace(
       '</head>',
-      `  <script id="paddock-jsonld" type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`
+      () => `  <script id="paddock-jsonld" type="application/ld+json">${JSON.stringify(jsonLd)}</script>\n</head>`
     )
   }
 
@@ -83,26 +84,43 @@ function canonicalUrl(routePath) {
   return `${CANONICAL_ORIGIN}${routePath === '/' ? '/' : routePath}`
 }
 
-function renderSeoFallback(route, meta) {
-  const links = Array.from(new Set(['/', ...(route.links || [])]))
-    .filter((href) => href !== route.path)
-    .map((href) => {
-      const linkedRoute = PUBLIC_ROUTES.find((item) => item.path === href)
-      const label = linkedRoute?.h1 || (href === '/' ? 'Paddock' : href.replaceAll('-', ' ').replaceAll('/', ' ').trim())
-      return `<li><a href="${escapeHtml(href)}">${escapeHtml(label)}</a></li>`
-    })
-    .join('')
+// A built page must carry its real content. If a route renders thin (a loading
+// placeholder, an empty shell), fail the build instead of deploying a page that
+// crawlers would see as empty.
+const MIN_PRERENDERED_WORDS = 100
 
-  return `<main class="seo-fallback" data-prerendered-route="${escapeHtml(route.path)}">
-    <h1>${escapeHtml(route.h1 || meta.title.replace(/\s+\|\s+Paddock.*$/, ''))}</h1>
-    <p>${escapeHtml(route.intro || meta.description)}</p>
-    <nav aria-label="Related Paddock pages"><ul>${links}</ul></nav>
-  </main>`
+function visibleWordCount(html) {
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&[a-z#0-9]+;/gi, ' ')
+    .split(/\s+/)
+    .filter(Boolean).length
 }
 
-function upsertSeoFallback(html, route, meta) {
-  const fallback = renderSeoFallback(route, meta)
-  return html.replace(/<div id="root">.*?<\/div>/is, `<div id="root">${fallback}</div>`)
+function assertRenderedPage(route, appHtml) {
+  const h1Count = (appHtml.match(/<h1[\s>]/gi) || []).length
+  if (h1Count !== 1) {
+    throw new Error(`prerender: ${route.path} rendered ${h1Count} <h1> elements, expected exactly 1`)
+  }
+  const words = visibleWordCount(appHtml)
+  if (words < MIN_PRERENDERED_WORDS) {
+    throw new Error(`prerender: ${route.path} rendered only ${words} words, expected at least ${MIN_PRERENDERED_WORDS}`)
+  }
+  return words
+}
+
+function upsertRenderedApp(html, appHtml) {
+  return html.replace(/<div id="root">[\s\S]*?<\/div>/i, () => `<div id="root">${appHtml}</div>`)
+}
+
+// Head tags a page component adds through <Helmet> (the FAQ JSON-LD on two
+// calculator pages). Everything else in the head comes from PAGE_META.
+function upsertHelmetTags(html, helmet) {
+  const tags = helmet?.script?.toString?.() || ''
+  if (!tags) return html
+  return html.replace('</head>', () => `  ${tags}\n</head>`)
 }
 
 function renderSitemap() {
@@ -166,6 +184,13 @@ if (!fs.existsSync(indexPath)) {
   process.exit(1)
 }
 
+if (!fs.existsSync(serverEntryPath)) {
+  console.error('prerender: dist-ssr/entry-server.js not found (run the SSR build first)')
+  process.exit(1)
+}
+
+const { render } = await import(pathToFileURL(serverEntryPath).href)
+
 const baseHtml = fs.readFileSync(indexPath, 'utf8')
 
 let count = 0
@@ -176,9 +201,10 @@ for (const [key, routePath] of Object.entries(routeMap)) {
   const route = PUBLIC_ROUTES.find((item) => item.key === key)
   if (!route) continue
 
-  // The homepage hero is now a text-and-CSS dashboard mockup, so there is no
-  // LCP image to preload — the first screenshot sits below the fold.
-  const html = upsertSeoFallback(upsertMeta(baseHtml, meta), route, meta)
+  const { html: appHtml, helmet } = await render(routePath)
+  const words = assertRenderedPage(route, appHtml)
+
+  const html = upsertHelmetTags(upsertRenderedApp(upsertMeta(baseHtml, meta), appHtml), helmet)
 
   let targetPath
   if (routePath === '/') {
@@ -190,6 +216,7 @@ for (const [key, routePath] of Object.entries(routeMap)) {
   }
 
   fs.writeFileSync(targetPath, html, 'utf8')
+  console.log(`prerender: ${routePath} (${words} words)`)
   count += 1
 }
 

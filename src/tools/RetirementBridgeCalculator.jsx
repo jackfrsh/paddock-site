@@ -271,6 +271,7 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
   }
 
   const relatedTools = [
+    ['/tools/phased-drawdown-calculator', 'Phased Drawdown Calculator'],
     ['/tools/pension-drawdown-calculator', 'Pension Drawdown Calculator'],
     ['/tools/fire-number-calculator', 'FIRE Number Calculator'],
     ['/tools/isa-growth-calculator', 'ISA Growth Calculator'],

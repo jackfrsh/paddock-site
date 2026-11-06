@@ -1,6 +1,7 @@
 import React from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
+import { MONEYHUB_FAQS } from '../moneyhubFaqs'
 
 function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
@@ -15,18 +16,19 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="hero-copy">
-            <div className="hero-kicker">Moneyhub is closing August 2026</div>
+            <div className="hero-kicker">Moneyhub&apos;s consumer app closed in August 2026</div>
             <h1>
-              Moneyhub is closing — here are the best alternatives for UK investors
+              Moneyhub has closed — here are the best alternatives for UK investors
             </h1>
             <p className="hero-sub">
-              Moneyhub has confirmed it is shutting down its consumer product in August 2026.
-              If you have been using it to track ISAs, pensions, savings or net worth, you need
-              to find a replacement — and migrate your data — before that deadline.
-              This is an honest comparison of the four strongest options.
+              Moneyhub closed its consumer app in August 2026 and now works with banks, advisers
+              and other businesses rather than individuals. If you used it to track ISAs, pensions,
+              savings or net worth, you need somewhere else to do that. This is an honest
+              comparison of the four strongest options for UK investors, and what to do if you
+              did not export your data in time.
             </p>
             <p className="hero-foot" style={{ marginTop: 16 }}>
-              May 2026 · Updated as new information becomes available
+              First published May 2026 · Updated 6 November 2026, after the closure
             </p>
             <div className="hero-tags" style={{ marginTop: 24 }}>
               <span>ISAs &amp; SIPPs</span>
@@ -44,7 +46,7 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
           <SectionLabel>Background</SectionLabel>
           <h2>What was Moneyhub?</h2>
           <p className="section-copy">
-            Moneyhub was one of the UK's longest-running open banking aggregation platforms. It
+            Moneyhub was one of the UK&apos;s longest-running open banking aggregation platforms. It
             let users connect bank accounts, pensions, investments and property in one view, and
             was used both by consumers directly and by financial advisers through its B2B
             platform. For many UK investors it was the only tool that offered a reasonably
@@ -52,13 +54,47 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
             in one place.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
-            The closure of its consumer product reflects a broader pattern: open banking
-            aggregation is expensive to maintain, bank connections break frequently, and the
-            economics of consumer finance apps remain difficult. Moneyhub is concentrating on
-            its institutional and adviser business. For its retail users, August 2026 is the
-            cut-off. Export your data before then and give yourself enough time to settle into
-            a replacement before the deadline.
+            Moneyhub said it was concentrating on the business channels where it works with
+            financial institutions, so it stopped taking new consumer customers and building new
+            features for the app, then closed it. Apps that depend on automatic bank connections
+            are also costly to run: the connections need re-authorising regularly and can break.
+            Whatever the mix of reasons, the consumer product is gone, and its users have had to
+            choose a replacement.
           </p>
+        </div>
+      </section>
+
+      {/* ── After the closure ────────────────────────────────────────────── */}
+      <section className="section-border">
+        <div className="container section">
+          <SectionLabel>After the closure</SectionLabel>
+          <h2>If you used Moneyhub: what to do now</h2>
+          <div className="faq-grid" style={{ marginTop: 24 }}>
+            <div className="faq-card">
+              <h3>Check what you still have</h3>
+              <p>
+                Moneyhub said you could download your data as a CSV before closure and that
+                personal data would be deleted once the app closed. If you exported in time, keep
+                that file. If you did not, ask Moneyhub support what is still available.
+              </p>
+            </div>
+            <div className="faq-card">
+              <h3>You do not need the old history to start</h3>
+              <p>
+                For total wealth, today&apos;s balances matter most. With a manual tracker such as
+                Paddock you enter your current ISA, SIPP, savings and property values, and the
+                history builds from your next update onwards.
+              </p>
+            </div>
+            <div className="faq-card">
+              <h3>Decide how much automation you need</h3>
+              <p>
+                If you valued automatic syncing and spending categories, look at Emma. If you
+                mainly used Moneyhub to see your whole position, the manual options below can
+                match that without sharing bank logins.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -138,8 +174,9 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
           </div>
 
           <p className="cmp-note">
-            Comparison reflects each product's primary positioning and public feature set at time
-            of writing. Individual plans and features may vary. Not financial advice.
+            Comparison reflects each product&apos;s primary positioning and public feature set when
+            this page was first published in May 2026. Plans, prices and features may have changed
+            since. Not financial advice.
           </p>
         </div>
       </section>
@@ -384,6 +421,22 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
               Paddock is a wealth tracker, not a budgeting app. If those are your priorities,
               Emma is the better choice from this list.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ──────────────────────────────────────────────────────────── */}
+      <section className="section-border">
+        <div className="container section">
+          <SectionLabel>FAQ</SectionLabel>
+          <h2>Moneyhub questions, answered.</h2>
+          <div className="faq-grid" style={{ marginTop: 24 }}>
+            {MONEYHUB_FAQS.map((faq) => (
+              <div className="faq-card" key={faq.q}>
+                <h3>{faq.q}</h3>
+                <p>{faq.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

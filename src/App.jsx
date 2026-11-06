@@ -17,6 +17,8 @@ import { HOME_FAQS } from './homeFaqs'
 import SiteFooter from './components/SiteFooter'
 import AppStoreBadgeLink from './components/AppStoreBadgeLink'
 import SkipLink from './components/SkipLink'
+import IsaAllowanceCard from './components/IsaAllowanceCard'
+import { ISA_RULES, gbp } from './isaRules'
 
 const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
 const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
@@ -51,8 +53,11 @@ const ROUTE_COMPONENTS = {
   tools_hub: lazy(() => import('./pages/ToolsHub')),
 }
 
-function getRoute() {
-  const rawPath = (window.location.pathname || '/').toLowerCase()
+/* The browser reads the path from the URL. At build time there is no window,
+   so scripts/prerender.js passes the path in through the initialPath prop. */
+function getRoute(pathname) {
+  const currentPath = pathname ?? (typeof window !== 'undefined' ? window.location.pathname : '/')
+  const rawPath = (currentPath || '/').toLowerCase()
   const path = rawPath.length > 1 && rawPath.endsWith('/') ? rawPath.slice(0, -1) : rawPath
 
   return ROUTE_BY_PATH[path] || 'not_found'
@@ -245,9 +250,9 @@ function HeroMockup() {
   )
 }
 
-export default function App() {
+export default function App({ initialPath } = {}) {
   const [pending, setPending] = useState(null)
-  const [route, setRoute] = useState(getRoute)
+  const [route, setRoute] = useState(() => getRoute(initialPath))
   const [menuOpen, setMenuOpen] = useState(false)
   const [toolsMobileOpen, setToolsMobileOpen] = useState(false)
   const [pageVisible, setPageVisible] = useState(true)
@@ -820,6 +825,47 @@ export default function App() {
               alt="Paddock projection view showing long-term wealth trajectory against a target path"
               caption="Illustrative projections with visible assumptions — projected path vs required path."
             />
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section-border">
+        <div className="container section two-col two-col-flip">
+          <Reveal>
+            <SectionLabel>ISA allowance</SectionLabel>
+            <h2>See how much of your ISA allowance is left.</h2>
+            <p className="section-copy narrow">
+              The ISA allowance is {gbp(ISA_RULES.overallAllowance)} for the {ISA_RULES.taxYear} tax
+              year, which ends on {ISA_RULES.taxYearEnd}. Paddock’s planner works out how much is
+              left from what you have already paid in this tax year, and whether your current
+              monthly saving would use it by then, so you are not working it out from provider
+              statements in March.
+            </p>
+            <p className="section-copy narrow">
+              The planned cut to the Cash ISA limit was dropped in the Autumn Budget on{' '}
+              {ISA_RULES.cashIsaCapDroppedOn}, so the limit stays at{' '}
+              {gbp(ISA_RULES.overallAllowance)} from {ISA_RULES.nextTaxYearStart}.
+            </p>
+            <div className="pill-links section-top-gap-sm">
+              <InternalLink to="/track-isas-pensions-savings" navigateTo={navigateTo} className="pill-link">
+                Track ISAs, pensions and savings →
+              </InternalLink>
+              <InternalLink to="/tools/isa-growth-calculator" navigateTo={navigateTo} className="pill-link">
+                ISA growth calculator →
+              </InternalLink>
+            </div>
+            <p className="isa-rules-note">
+              General information, not financial or tax advice. Rules checked {ISA_RULES.reviewed};
+              confirm the latest on{' '}
+              <a href={ISA_RULES.govUkUrl} target="_blank" rel="noreferrer">
+                GOV.UK
+              </a>
+              .
+            </p>
+          </Reveal>
+
+          <Reveal className="isa-card-wrap">
+            <IsaAllowanceCard />
           </Reveal>
         </div>
       </section>

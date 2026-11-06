@@ -13,7 +13,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'landing',
     path: '/',
-    lastmod: '2026-07-03',
+    lastmod: '2026-11-06',
     targetKeyword: 'net worth tracker UK',
     secondaryKeywords: ['private UK wealth tracker', 'net worth planner UK', 'manual wealth tracking'],
     intent: 'Find a private UK wealth tracking product',
@@ -174,7 +174,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'net_worth_tracker',
     path: '/net-worth-tracker',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'net worth tracker UK',
     secondaryKeywords: ['manual wealth tracking app', 'wealth tracker UK', 'track wealth without connecting bank account'],
     intent: 'Find a UK net worth tracking product',
@@ -187,7 +187,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'track_isas_pensions_savings',
     path: '/track-isas-pensions-savings',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'track ISA and SIPP together',
     secondaryKeywords: ['track ISAs pensions savings', 'UK wealth tracker', 'manual net worth tracker'],
     intent: 'Find a way to track UK account types together',
@@ -199,7 +199,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'spreadsheet_alternative',
     path: '/spreadsheet-alternative-net-worth-tracking',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'spreadsheet alternative net worth tracking',
     secondaryKeywords: ['manual wealth tracking app', 'net worth tracker UK', 'privacy-first finance app UK'],
     intent: 'Replace spreadsheets for net worth tracking',
@@ -211,7 +211,7 @@ export const PUBLIC_ROUTES = [
   {
     key: 'how_to_track_net_worth',
     path: '/how-to-track-your-net-worth',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'how to track your net worth',
     secondaryKeywords: ['how to track net worth manually', 'net worth calculator UK', 'wealth tracker UK'],
     intent: 'Learn a practical net worth tracking method',
@@ -223,26 +223,26 @@ export const PUBLIC_ROUTES = [
   {
     key: 'best_net_worth_apps_uk',
     path: '/best-net-worth-tracking-apps-uk',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-06',
     targetKeyword: 'best net worth tracking app UK',
     secondaryKeywords: ['Emma alternative UK', 'Moneyhub alternative', 'best finance app without bank linking'],
     intent: 'Compare UK net worth tracking app options',
     h1: 'Best net worth tracking apps UK',
     intro:
-      'An honest comparison of Paddock, Emma, Moneyhub and spreadsheets for UK users tracking ISAs, pensions, savings and multi-currency wealth.',
+      'An honest comparison of Paddock, Emma and spreadsheets for UK users tracking ISAs, pensions, savings and multi-currency wealth.',
     links: ['/net-worth-tracker', '/moneyhub-alternative', '/why-i-track-wealth-manually-instead-of-using-open-banking-apps', '/tools/net-worth-calculator'],
     priority: true,
   },
   {
     key: 'moneyhub_alternative',
     path: '/moneyhub-alternative',
-    lastmod: '2026-05-10',
+    lastmod: '2026-11-06',
     targetKeyword: 'Moneyhub alternative UK',
-    secondaryKeywords: ['Moneyhub closing 2026', 'best Moneyhub replacement', 'UK wealth tracker app comparison'],
-    intent: 'Find a replacement for Moneyhub before its August 2026 closure',
-    h1: 'Moneyhub is closing — here are the best alternatives for UK investors',
+    secondaryKeywords: ['Moneyhub closed', 'best Moneyhub replacement', 'UK wealth tracker app comparison'],
+    intent: 'Find a replacement for Moneyhub after its consumer app closed in August 2026',
+    h1: 'Moneyhub has closed — here are the best alternatives for UK investors',
     intro:
-      'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who need to migrate away from Moneyhub before its August 2026 shutdown.',
+      'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who used Moneyhub, whose consumer app closed in August 2026.',
     links: [
       '/best-net-worth-tracking-apps-uk',
       '/why-i-track-wealth-manually-instead-of-using-open-banking-apps',

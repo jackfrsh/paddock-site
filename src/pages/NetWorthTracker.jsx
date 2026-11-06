@@ -1,5 +1,7 @@
 import React from 'react'
 import SiteFooter from '../components/SiteFooter'
+import { ExampleSection, FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
+import { NWT_EXAMPLE, NWT_FAQS, NWT_QUICK_ANSWER, NWT_TABLE } from '../pageContent/netWorthTracker.js'
 
 function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
@@ -65,6 +67,7 @@ export default function NetWorthTracker({ navigateTo }) {
       </section>
 
       <section className="container section">
+        <QuickAnswer>{NWT_QUICK_ANSWER}</QuickAnswer>
         <SectionLabel>Overview</SectionLabel>
         <h2>See your full financial picture in one place.</h2>
         <p className="section-copy narrow">
@@ -139,6 +142,10 @@ export default function NetWorthTracker({ navigateTo }) {
         </div>
       </section>
 
+      <TableSection {...NWT_TABLE} />
+
+      <ExampleSection {...NWT_EXAMPLE} />
+
       <section className="section-border">
         <div className="container section">
           <SectionLabel>Related pages</SectionLabel>
@@ -181,46 +188,8 @@ export default function NetWorthTracker({ navigateTo }) {
         </div>
       </section>
 
-      <section className="section-border">
-        <div className="container section">
-          <SectionLabel>FAQ</SectionLabel>
-          <h2>Common questions.</h2>
+      <FaqSection faqs={NWT_FAQS} />
 
-          <div className="faq-grid">
-            <div className="faq-card">
-              <h3>Is Paddock a budgeting app?</h3>
-              <p>
-                No. Paddock is built around wealth tracking rather than day-to-day budgeting. The
-                focus is on net worth, long-term progress and a clearer overall financial picture.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Do I need to link bank accounts?</h3>
-              <p>
-                No. This build is manual-entry by design. That keeps the experience simpler, more
-                deliberate and more private.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Should pensions be included in net worth?</h3>
-              <p>
-                Many people include pensions because they are a major part of long-term wealth. What
-                matters most is staying consistent in how you measure your position over time.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>How often should I update my numbers?</h3>
-              <p>
-                Monthly is enough for most people. The goal is not constant checking. It is a steady
-                view of how your wealth is changing over time.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="section-border">
         <div className="container final-cta">

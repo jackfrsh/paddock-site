@@ -57,7 +57,7 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
                   <th></th>
                   <th className="cmp-col-paddock">Paddock</th>
                   <th>Emma</th>
-                  <th>Moneyhub</th>
+                  <th>Moneyhub (closed)</th>
                   <th>Spreadsheet</th>
                 </tr>
               </thead>
@@ -108,7 +108,7 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
                   <td>Best for</td>
                   <td className="cmp-col-paddock">Private, deliberate wealth tracking</td>
                   <td>Automatic spending overview</td>
-                  <td>Broad aggregation or adviser users</td>
+                  <td>Consumer app closed in August 2026</td>
                   <td>Spreadsheet-native users</td>
                 </tr>
               </tbody>
@@ -154,12 +154,12 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
             </div>
 
             <div className="faq-card">
-              <h3>Moneyhub — best for broad automatic aggregation</h3>
+              <h3>Moneyhub — consumer app closed in August 2026</h3>
               <p>
-                If you want a wider range of accounts aggregated automatically, or if you
-                work with a financial adviser who uses Moneyhub's platform, it may be a
-                better fit. It is more aggregation-focused than planning-focused, and
-                primarily relies on open banking connections.
+                Moneyhub was the broadest automatic aggregator of the group, but it closed
+                its consumer app in August 2026 and now works with banks and advisers
+                instead. If you used it, our Moneyhub alternatives page compares the
+                replacements.
               </p>
             </div>
 
@@ -233,7 +233,7 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
           <div className="cmp-tradeoff">
             <p>
               <strong>If you want automatic syncing above all else,</strong> Paddock is not
-              the right choice. Emma and Moneyhub are better-designed for users who want
+              the right choice. Emma is better designed for users who want
               accounts to update without any manual input. Paddock requires you to enter
               your own numbers — typically once a month.
             </p>
@@ -321,7 +321,7 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
               <h3>What is the best net worth tracking app in the UK?</h3>
               <p>
                 It depends on what you are trying to do. If you want automatic syncing and
-                spending insights, Emma or Moneyhub are strong options. If you want a
+                spending insights, Emma is a strong option. If you want a
                 private, deliberate view of total wealth — ISAs, pensions, savings,
                 property, and multi-currency accounts — with long-term projections and no
                 bank linking, Paddock is built for that.

@@ -25,6 +25,30 @@ function fmt(n) {
   }).format(n)
 }
 
+const RELATED_TOOLS = [
+  ['/tools/phased-drawdown-calculator', 'Phased Drawdown Calculator (retire before State Pension)'],
+  ['/tools/retirement-bridge-calculator', 'ISA Retirement Bridge Calculator'],
+  ['/tools/fire-number-calculator', 'FIRE Number Calculator'],
+  ['/guides/long-term-wealth-projection', 'How long-term wealth projections work'],
+]
+
+function ToolLink({ href, children, navigateTo }) {
+  return (
+    <a
+      href={href}
+      className="guide-link-card"
+      onClick={(e) => {
+        if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+          e.preventDefault()
+          navigateTo(href)
+        }
+      }}
+    >
+      {children}
+    </a>
+  )
+}
+
 function parsePct(str) {
   const n = parseFloat(str)
   return isNaN(n) ? NaN : n / 100
@@ -721,6 +745,19 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
                   approximate this by entering a lump sum in the "other assumptions" section.
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-border">
+        <div className="container section">
+          <div className="calc-guide">
+            <h2 className="calc-guide-h2">Related tools and guides</h2>
+            <div className="guide-links">
+              {RELATED_TOOLS.map(([href, label]) => (
+                <ToolLink key={href} href={href} navigateTo={navigateTo}>{label} →</ToolLink>
+              ))}
             </div>
           </div>
         </div>

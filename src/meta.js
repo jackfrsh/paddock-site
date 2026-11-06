@@ -1,4 +1,19 @@
 import { HOME_FAQS } from './homeFaqs.js'
+import { MONEYHUB_FAQS } from './moneyhubFaqs.js'
+import { HOWTO_FAQS } from './pageContent/howToTrackNetWorth.js'
+import { NWT_FAQS } from './pageContent/netWorthTracker.js'
+import { SHEET_FAQS } from './pageContent/spreadsheetAlternative.js'
+import { TRACK_ISAS_FAQS } from './pageContent/trackIsas.js'
+
+const faqPage = (faqs) => ({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+})
 
 export const PAGE_META = {
   support: {
@@ -206,32 +221,7 @@ export const PAGE_META = {
       'Track cash, investments, pensions, property and liabilities in one privacy-first UK net worth tracker. Manual entry, no bank linking.',
     canonical: 'https://getpaddock.com/net-worth-tracker',
     ogType: 'website',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Is Paddock a budgeting app?',
-          acceptedAnswer: { '@type': 'Answer', text: 'No. Paddock is built around wealth tracking rather than day-to-day budgeting. The focus is on net worth, long-term progress and a clearer overall financial picture.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Do I need to link bank accounts?',
-          acceptedAnswer: { '@type': 'Answer', text: 'No. Paddock is manual-entry by design. That keeps the experience simpler, more deliberate and more private.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Should pensions be included in net worth?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Many people include pensions because they are a major part of long-term wealth. What matters most is staying consistent in how you measure your position over time.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'How often should I update my numbers?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Monthly is enough for most people. The goal is not constant checking. It is a steady view of how your wealth is changing over time.' },
-        },
-      ],
-    },
+    jsonLd: faqPage(NWT_FAQS),
   },
 
   track_isas_pensions_savings: {
@@ -240,32 +230,7 @@ export const PAGE_META = {
       'See ISAs, pensions and savings together in one calm wealth dashboard. Track long-term progress clearly with privacy-first manual tracking.',
     canonical: 'https://getpaddock.com/track-isas-pensions-savings',
     ogType: 'website',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Can I track multiple ISAs?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Yes. The point is to build a complete view, not force everything into one account type. Multiple ISA balances can all contribute to the same broader wealth picture.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Should pensions be included?',
-          acceptedAnswer: { '@type': 'Answer', text: 'For many people, yes. Pensions are often one of the largest parts of long-term wealth, so excluding them can make the total picture less useful.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Do I need live account syncing?',
-          acceptedAnswer: { '@type': 'Answer', text: 'No. Paddock is manual by design. That keeps the workflow cleaner and lets you update on a cadence that suits long-term wealth tracking.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Is this only for investing?',
-          acceptedAnswer: { '@type': 'Answer', text: 'No. It is for seeing the broader picture across cash, savings, investments and pensions, so you can understand total progress more clearly.' },
-        },
-      ],
-    },
+    jsonLd: faqPage(TRACK_ISAS_FAQS),
   },
 
   spreadsheet_alternative: {
@@ -274,32 +239,7 @@ export const PAGE_META = {
       'Replace fragile spreadsheets with a calmer way to track net worth, progress and long-term wealth in one premium dashboard.',
     canonical: 'https://getpaddock.com/spreadsheet-alternative-net-worth-tracking',
     ogType: 'website',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Is Paddock automatic?',
-          acceptedAnswer: { '@type': 'Answer', text: 'No. It is manual-entry by design. The difference is that the structure and review experience are cleaner than maintaining a spreadsheet over time.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Why not just keep using a spreadsheet?',
-          acceptedAnswer: { '@type': 'Answer', text: 'You can. Paddock becomes more useful when your current sheet feels harder to maintain, less readable, or too fragmented to support a calm long-term review.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Can I still think in categories and accounts?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Yes. That is part of the point. Paddock keeps the structure without forcing you to build and maintain the structure yourself.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Is this for budgeting?',
-          acceptedAnswer: { '@type': 'Answer', text: 'No. It is for wealth tracking. The focus is on total net worth, long-term progress and a clearer overall financial position.' },
-        },
-      ],
-    },
+    jsonLd: faqPage(SHEET_FAQS),
   },
 
   how_to_track_net_worth: {
@@ -308,32 +248,7 @@ export const PAGE_META = {
       'Learn how to track your net worth clearly, including what to include, how often to update it, and why consistency matters more than noise.',
     canonical: 'https://getpaddock.com/how-to-track-your-net-worth',
     ogType: 'website',
-    jsonLd: {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: [
-        {
-          '@type': 'Question',
-          name: 'Should I include my pension in net worth?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Many people do, because pensions are often one of the biggest parts of long-term wealth. The important thing is to use a consistent approach over time.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Should I include my home?',
-          acceptedAnswer: { '@type': 'Answer', text: 'You can. If property is a meaningful part of your balance sheet, including it can make the picture more complete. Consistency is what matters most.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'How often should I track my net worth?',
-          acceptedAnswer: { '@type': 'Answer', text: 'Monthly is usually enough. That cadence is often frequent enough to stay aware without turning wealth tracking into constant checking.' },
-        },
-        {
-          '@type': 'Question',
-          name: 'Do I need automatic bank syncing?',
-          acceptedAnswer: { '@type': 'Answer', text: 'No. For long-term wealth tracking, manual updates can often be enough, especially when the goal is clarity rather than live transaction monitoring.' },
-        },
-      ],
-    },
+    jsonLd: faqPage(HOWTO_FAQS),
   },
 
   tools_hub: {
@@ -411,7 +326,7 @@ export const PAGE_META = {
   best_net_worth_apps_uk: {
     title: 'Best Net Worth Tracking Apps UK | Manual Wealth Tracking | Paddock',
     description:
-      'Compare UK net worth tracking apps including Paddock, Emma, Moneyhub and spreadsheets for ISAs, pensions, savings and multi-currency wealth.',
+      'Compare UK net worth tracking apps including Paddock, Emma and spreadsheets for ISAs, pensions, savings and multi-currency wealth.',
     canonical: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
     ogType: 'article',
     jsonLd: {
@@ -433,7 +348,7 @@ export const PAGE_META = {
             {
               '@type': 'Question',
               name: 'What is the best net worth tracking app in the UK?',
-              acceptedAnswer: { '@type': 'Answer', text: 'It depends on what you are trying to do. If you want automatic syncing and spending insights, Emma or Moneyhub are strong options. If you want a private, deliberate view of total wealth — ISAs, pensions, savings, property, and multi-currency accounts — with long-term projections and no bank linking, Paddock is built for that.' },
+              acceptedAnswer: { '@type': 'Answer', text: 'It depends on what you are trying to do. If you want automatic syncing and spending insights, Emma is a strong option. If you want a private, deliberate view of total wealth — ISAs, pensions, savings, property, and multi-currency accounts — with long-term projections and no bank linking, Paddock is built for that.' },
             },
             {
               '@type': 'Question',
@@ -533,9 +448,9 @@ export const PAGE_META = {
   },
 
   moneyhub_alternative: {
-    title: 'Best Moneyhub Alternative 2026 — UK Wealth Tracker Apps Compared',
+    title: 'Moneyhub Alternatives (2026): UK Wealth Trackers Compared',
     description:
-      'Moneyhub is closing in August 2026. Here\'s an honest comparison of the best UK alternatives for tracking ISAs, SIPPs and net worth.',
+      'Moneyhub\'s consumer app has closed. Compare the best UK alternatives for tracking ISAs, SIPPs and net worth: Paddock, WealthR, WealthView and Emma.',
     canonical: 'https://getpaddock.com/moneyhub-alternative',
     ogType: 'article',
     jsonLd: {
@@ -543,10 +458,11 @@ export const PAGE_META = {
       '@graph': [
         {
           '@type': 'Article',
-          headline: 'Moneyhub is closing — here are the best alternatives for UK investors',
+          headline: 'Moneyhub has closed — here are the best alternatives for UK investors',
           description:
-            'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who need to migrate away from Moneyhub before August 2026.',
+            'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who used Moneyhub, whose consumer app closed in August 2026.',
           url: 'https://getpaddock.com/moneyhub-alternative',
+          dateModified: '2026-11-06',
           inLanguage: 'en-GB',
           isPartOf: {
             '@type': 'WebSite',
@@ -561,32 +477,11 @@ export const PAGE_META = {
         },
         {
           '@type': 'FAQPage',
-          mainEntity: [
-            {
-              '@type': 'Question',
-              name: 'When is Moneyhub closing?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Moneyhub is closing its consumer-facing app in August 2026. Users should export their data and migrate to an alternative before that date.',
-              },
-            },
-            {
-              '@type': 'Question',
-              name: 'What is the best Moneyhub alternative for UK investors?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'Paddock is the strongest like-for-like alternative for UK wealth tracking. It supports ISAs, SIPPs, savings, property and multi-currency accounts, offers long-term projections, and takes a privacy-first manual-entry approach with no bank linking required. It works on both web and iOS.',
-              },
-            },
-            {
-              '@type': 'Question',
-              name: 'Does Paddock link to my bank?',
-              acceptedAnswer: {
-                '@type': 'Answer',
-                text: 'No. Paddock is entirely manual-entry. You enter your own balances — typically once a month — without connecting bank accounts or sharing any credentials. Your data never leaves your control.',
-              },
-            },
-          ],
+          mainEntity: MONEYHUB_FAQS.map((faq) => ({
+            '@type': 'Question',
+            name: faq.q,
+            acceptedAnswer: { '@type': 'Answer', text: faq.a },
+          })),
         },
       ],
     },

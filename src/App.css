@@ -3713,6 +3713,147 @@ h3 {
   color: var(--muted);
 }
 
+/* ISA allowance card ("This tax year") */
+
+.isa-card {
+  width: min(100%, 420px);
+  padding: 24px 24px 18px;
+  border-radius: var(--radius-2xl);
+  border: 1px solid var(--border);
+  background: var(--card-gradient);
+  box-shadow: var(--shadow-lg);
+}
+
+.isa-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.isa-card-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.isa-card-year {
+  min-height: 26px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 11px;
+  border-radius: 999px;
+  background: var(--accent-tint-md);
+  color: var(--text);
+  font-size: 0.74rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.isa-card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.isa-card-left {
+  margin-top: 6px;
+  font-size: 2.3rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.97);
+  font-variant-numeric: tabular-nums;
+}
+
+.isa-card-left span {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.isa-card-bar {
+  margin-top: 18px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--surface-hover);
+  overflow: hidden;
+}
+
+.isa-card-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.isa-card-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.isa-card-rows {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.isa-card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--border-faint);
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+
+.isa-card-row span:last-child {
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.isa-card-foot {
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-faint);
+  font-size: 0.74rem;
+  color: var(--muted);
+}
+
+.isa-card-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.isa-rules-note {
+  margin: 18px 0 0;
+  max-width: 62ch;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.isa-rules-note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .isa-card {
+    width: 100%;
+    padding: 20px 18px 16px;
+  }
+}
+
 /* Trust honest line */
 
 .trust-honest {
@@ -4126,5 +4267,117 @@ h3 {
      plain gaps read cleaner on mobile. */
   .hero-trust-strip li + li::before {
     content: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Long-form pages — quick answer, reference tables, worked examples
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.quick-answer {
+  max-width: 860px;
+  margin: 0 0 44px;
+  padding: 22px 26px;
+  border: 1px solid var(--accent-tint-md);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-xl);
+  background: var(--accent-tint-sm);
+}
+
+.quick-answer-label {
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-kicker);
+}
+
+.quick-answer-text {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.cmp-table-wrap:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.cmp-table-wide {
+  min-width: 680px;
+}
+
+/* Row headers: same look as the first-column cells in the homepage table,
+   but real <th scope="row"> so screen readers announce the row name. */
+.cmp-table tbody th {
+  min-width: 150px;
+  padding: 13px 16px;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  white-space: normal;
+  color: var(--text);
+  line-height: 1.55;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-faint);
+}
+
+.cmp-table tbody tr:last-child th {
+  border-bottom: none;
+}
+
+.example-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.cmp-table .example-group th {
+  padding: 18px 16px 8px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: none;
+}
+
+.example-subtotal th,
+.example-subtotal td {
+  font-weight: 700;
+  color: var(--text);
+  border-top: 1px solid var(--border);
+}
+
+.example-summary th,
+.example-summary td {
+  background: var(--accent-tint-sm);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.example-summary .is-total th,
+.example-summary .is-total td {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .quick-answer {
+    padding: 18px 18px;
+    margin-bottom: 32px;
+  }
+
+  .quick-answer-text {
+    font-size: 1rem;
+  }
+
+  .cmp-table tbody th {
+    min-width: 120px;
+    padding: 10px 12px;
+    font-size: 0.76rem;
   }
 }

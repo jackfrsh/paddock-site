@@ -1,5 +1,14 @@
 import React from 'react'
 import SiteFooter from '../components/SiteFooter'
+import IsaAllowanceCard from '../components/IsaAllowanceCard'
+import { ISA_RULES, gbp } from '../isaRules'
+import { ExampleSection, FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
+import {
+  ISA_PAGE_EXAMPLE,
+  ISA_PAGE_QUICK_ANSWER,
+  ISA_PAGE_TABLE,
+  TRACK_ISAS_FAQS,
+} from '../pageContent/trackIsas.js'
 
 function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
@@ -65,6 +74,7 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
       </section>
 
       <section className="container section">
+        <QuickAnswer>{ISA_PAGE_QUICK_ANSWER}</QuickAnswer>
         <SectionLabel>Overview</SectionLabel>
         <h2>UK wealth is often spread across too many places.</h2>
         <p className="section-copy narrow">
@@ -136,6 +146,50 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
         </div>
       </section>
 
+      <TableSection {...ISA_PAGE_TABLE} />
+
+      <section className="section-border">
+        <div className="container section two-col">
+          <div>
+            <SectionLabel>ISA allowance</SectionLabel>
+            <h2>Keep an eye on your ISA allowance as you track.</h2>
+            <p className="section-copy narrow">
+              Tracking ISA balances is one job; knowing how much allowance you have left is
+              another. The ISA allowance is {gbp(ISA_RULES.overallAllowance)} for the{' '}
+              {ISA_RULES.taxYear} tax year ({ISA_RULES.taxYearStart} to {ISA_RULES.taxYearEnd}),
+              shared across every adult ISA you hold. Paddock’s planner works out how much is
+              left from what you have already paid in this tax year, and whether your current
+              monthly saving would use it before the year ends.
+            </p>
+            <p className="section-copy narrow">
+              The planned cut to the Cash ISA limit, to {gbp(ISA_RULES.cancelledCashIsaLimit)} for
+              people under 65 from {ISA_RULES.nextTaxYearStart}, was dropped in the Autumn Budget
+              on {ISA_RULES.cashIsaCapDroppedOn}. HMRC says the {gbp(ISA_RULES.overallAllowance)}{' '}
+              Cash ISA limit is retained from that date (see{' '}
+              <a href={ISA_RULES.hmrcNewsletterUrl} target="_blank" rel="noreferrer">
+                HMRC’s October 2026 newsletter
+              </a>
+              ). Seeing your Cash and Stocks and Shares ISAs side by side still makes it easier to
+              plan the split.
+            </p>
+            <p className="isa-rules-note">
+              General information, not financial or tax advice. Rules checked {ISA_RULES.reviewed};
+              confirm the latest on{' '}
+              <a href={ISA_RULES.govUkUrl} target="_blank" rel="noreferrer">
+                GOV.UK
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="isa-card-wrap">
+            <IsaAllowanceCard />
+          </div>
+        </div>
+      </section>
+
+      <ExampleSection {...ISA_PAGE_EXAMPLE} />
+
       <section className="section-border">
         <div className="container section">
           <SectionLabel>Related pages</SectionLabel>
@@ -178,46 +232,8 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
         </div>
       </section>
 
-      <section className="section-border">
-        <div className="container section">
-          <SectionLabel>FAQ</SectionLabel>
-          <h2>Common questions.</h2>
+      <FaqSection faqs={TRACK_ISAS_FAQS} />
 
-          <div className="faq-grid">
-            <div className="faq-card">
-              <h3>Can I track multiple ISAs?</h3>
-              <p>
-                Yes. The point is to build a complete view, not force everything into one account
-                type. Multiple ISA balances can all contribute to the same broader wealth picture.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Should pensions be included?</h3>
-              <p>
-                For many people, yes. Pensions are often one of the largest parts of long-term
-                wealth, so excluding them can make the total picture less useful.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Do I need live account syncing?</h3>
-              <p>
-                No. Paddock is manual by design. That keeps the workflow cleaner and lets you update
-                on a cadence that suits long-term wealth tracking.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Is this only for investing?</h3>
-              <p>
-                No. It is for seeing the broader picture across cash, savings, investments and
-                pensions, so you can understand total progress more clearly.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section className="section-border">
         <div className="container final-cta">
