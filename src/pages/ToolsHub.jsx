@@ -157,7 +157,7 @@ export default function ToolsHub({ navigateTo, goTo }) {
                 Read the guides
               </a>
             </div>
-            <p className="hero-foot">Free to start · No credit card required · Setup in under 2 minutes</p>
+            <p className="hero-foot">Free to start · No credit card required</p>
           </div>
         </div>
       </section>

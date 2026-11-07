@@ -647,7 +647,7 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
                   How Paddock handles ISAs and pensions
                 </a>
               </div>
-              <p className="hero-foot">Free to start · No credit card required · Setup in under 2 minutes</p>
+              <p className="hero-foot">Free to start · No credit card required</p>
             </div>
           </div>
         </div>

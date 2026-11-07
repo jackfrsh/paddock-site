@@ -41,7 +41,7 @@ export default function Terms({ navigateTo }) {
       <H2>Accounts and subscriptions</H2>
       <P>
         Account access is managed through secure authentication infrastructure. Paid plans and
-        subscriptions are processed by Stripe. Trial terms, pricing, and cancellation options are
+        subscriptions are processed by Stripe on the web and by Apple for App Store purchases. Trial terms, pricing, and cancellation options are
         presented clearly within the product.
       </P>
 

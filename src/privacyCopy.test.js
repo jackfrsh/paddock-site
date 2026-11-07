@@ -66,5 +66,19 @@ test('the Privacy page uses this copy and makes no unqualified third-party shari
   for (const processor of ['Supabase', 'Google Cloud', 'Stripe', 'Apple', 'Google']) assert.ok(page.includes(processor), processor)
 })
 
+test('trust pages agree with the live setup: Stripe on the web, Apple on iOS, Google Fonts disclosed, no unsupported timing claim', () => {
+  const read = (rel) => readFileSync(new URL(rel, import.meta.url), 'utf8')
+  const security = read('./pages/Security.jsx')
+  const terms = read('./pages/Terms.jsx')
+  assert.match(security, /Stripe and Apple/)
+  assert.doesNotMatch(security, /All billing and subscription management is processed by Stripe/)
+  assert.match(terms, /Stripe on the web and by Apple/)
+  assert.match(read('./pages/Privacy.jsx'), /Google Fonts/)
+  // "Setup in under 2 minutes" was removed on 2026-11-07: no evidence. Reinstate only with timed evidence.
+  for (const f of ['./tools/IsaGrowthCalculator.jsx', './tools/NetWorthCalculator.jsx', './tools/FireNumberCalculator.jsx', './tools/PensionDrawdownCalculator.jsx', './pages/ToolsHub.jsx']) {
+    assert.doesNotMatch(read(f), /under 2 minutes/i, f)
+  }
+})
+
 console.log(`\n${passed} passed, ${failed} failed`)
 process.exit(failed ? 1 : 0)

@@ -24,11 +24,11 @@ export default function Security({ navigateTo }) {
         are managed with modern security practices.
       </P>
 
-      <H2>Payments handled by Stripe</H2>
+      <H2>Payments handled by Stripe and Apple</H2>
       <P>
-        All billing and subscription management is processed by Stripe. Your card details are
-        handled entirely within Stripe's PCI-compliant environment — they never touch Paddock's
-        servers.
+        Subscriptions bought on the web are processed by Stripe, and subscriptions bought in the
+        iOS app are processed by Apple. Your card details are handled entirely by Stripe, a PCI
+        DSS Level 1 service provider, or by Apple. They never touch Paddock&apos;s servers.
       </P>
 
       <H2>Minimal data surface</H2>

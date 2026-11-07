@@ -206,7 +206,7 @@ export const PAGE_META = {
   security: {
     title: 'Security | Paddock',
     description:
-      'How Paddock keeps your data secure: industry-standard authentication, Stripe billing, encrypted connections.',
+      'How Paddock keeps your data secure: industry-standard authentication, Stripe and Apple payments, encrypted connections.',
     canonical: 'https://getpaddock.com/security',
     ogType: 'website',
   },
