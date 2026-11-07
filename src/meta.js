@@ -198,7 +198,7 @@ export const PAGE_META = {
   privacy: {
     title: 'Privacy | Paddock',
     description:
-      'How Paddock handles your data: no ads, no bank linking, no tracking. Privacy built into the product.',
+      'How Paddock handles your data: no ads, no bank linking and no advertising trackers, plus what this website counts and what it never collects.',
     canonical: 'https://getpaddock.com/privacy',
     ogType: 'website',
   },
@@ -213,7 +213,7 @@ export const PAGE_META = {
 
   terms: {
     title: 'Terms of Use | Paddock',
-    description: 'Terms of use for Paddock, the personal wealth dashboard.',
+    description: 'The terms of use for Paddock, the private wealth dashboard: what the product is, your responsibilities, accounts and subscriptions, and availability.',
     canonical: 'https://getpaddock.com/terms',
     ogType: 'website',
   },
@@ -338,7 +338,7 @@ export const PAGE_META = {
   best_net_worth_apps_uk: {
     title: 'Best Net Worth Tracking Apps UK | Manual Wealth Tracking | Paddock',
     description:
-      'Compare UK net worth tracking apps including Paddock, WealthR, WealthView, Emma and spreadsheets for ISAs, pensions, savings and multi-currency wealth. Facts checked 7 November 2026.',
+      'Compare UK net worth tracking apps including Paddock, WealthR, WealthView, Emma and spreadsheets for ISAs, pensions and savings. Facts checked 7 November 2026.',
     canonical: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
     ogType: 'article',
     jsonLd: {
