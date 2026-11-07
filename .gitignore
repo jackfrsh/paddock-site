@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .claude/
+
+# Local reporting credentials (see .env.example)
+.env
+.env.local

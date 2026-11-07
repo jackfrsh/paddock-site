@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef } from 'react'
 import { RouteContext } from '../routeContext'
 import { pageKeyForPath } from '../analyticsSchema'
-import { trackCtaClicked, trackCtaDisplayed } from '../analytics'
+import { trackCtaClicked, trackCtaDisplayed, withVisitChannel } from '../analytics'
 import { DEFAULT_RESULT_CTA, FREE_NOTE, RESULT_CTA } from '../ctaCopy'
 import { signupUrl } from '../links'
 
@@ -41,7 +41,11 @@ export default function ResultCta({ source }) {
       <a
         className="btn btn-primary calc-result-cta-btn"
         href={signupUrl(page)}
-        onClick={() => trackCtaClicked({ page, location: 'result', target: 'signup' })}
+        onClick={(event) => {
+          trackCtaClicked({ page, location: 'result', target: 'signup' })
+          event.currentTarget.href = withVisitChannel(event.currentTarget.href)
+        }}
+        onAuxClick={(event) => { event.currentTarget.href = withVisitChannel(event.currentTarget.href) }}
       >
         {copy.button}
       </a>

@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
-import { buildQuery, buildReport, summarise } from '../scripts/acquisition-report.mjs'
+import {
+  buildAppFunnelSection, buildQuery, buildReport, buildStatusSection, buildWebAnalyticsQuery, buildWebAnalyticsSection, summarise,
+} from '../scripts/acquisition-report.mjs'
 
 let passed = 0
 let failed = 0
@@ -55,6 +57,70 @@ test('report shows rates, marks live calculators and flags low volume', () => {
 
 test('app store clicks are not counted as sign-up clicks', () => {
   assert.equal(summarise(rows).signupByPage.landing, 40)
+})
+
+const webAccount = {
+  pages: [{ count: 120, sum: { visits: 90 }, dimensions: { requestPath: '/tools/fire-number-calculator' } }, { count: 30, sum: { visits: 20 }, dimensions: { requestPath: '/' } }],
+  referrers: [{ count: 100, sum: { visits: 80 }, dimensions: { refererHost: 'www.google.com' } }, { count: 50, sum: { visits: 30 }, dimensions: { refererHost: '' } }],
+  devices: [{ count: 110, sum: { visits: 85 }, dimensions: { deviceType: 'mobile' } }, { count: 40, sum: { visits: 25 }, dimensions: { deviceType: 'desktop' } }],
+}
+
+test('web analytics query is read-only, scoped to one site tag and asks for no personal fields', () => {
+  const q = buildWebAnalyticsQuery()
+  assert.match(q, /^query Rum\(/)
+  assert.ok(!/mutation/i.test(q))
+  assert.match(q, /siteTag: \$siteTag/)
+  for (const personal of ['ip', 'userAgent', 'clientIP', 'sessionId']) assert.ok(!new RegExp(personal, 'i').test(q.replace(/requestPath|refererHost/g, '')), personal)
+})
+
+test('web analytics section totals visits and page views and labels empty referrers', () => {
+  const text = buildWebAnalyticsSection(webAccount).join('\n')
+  assert.match(text, /Visits: \*\*110\*\*/)
+  assert.match(text, /page views: \*\*150\*\*/)
+  assert.match(text, /\(direct \/ none\)/)
+  assert.match(text, /not unique people/)
+})
+
+test('web analytics section says plainly when it is not available', () => {
+  assert.match(buildWebAnalyticsSection(undefined).join('\n'), /Not available/)
+})
+
+const funnel = {
+  range_days: 30,
+  activation_definition: 'test definition',
+  totals: { registrations: 10, activated: 4, upgrade_viewed: 3, checkout_started: 2, subscribed: 1, paid: 0 },
+  by_source: [
+    { source: 'tools_fire_number', registrations: 6, activated: 3, upgrade_viewed: 2, checkout_started: 1, subscribed: 1, paid: 0 },
+    { source: 'guide_isa_allowance_uk', registrations: 2, activated: 0, upgrade_viewed: 0, checkout_started: 0, subscribed: 0, paid: 0 },
+  ],
+  unattributed: { registrations: 2, activated: 1, upgrade_viewed: 1, checkout_started: 1, subscribed: 0, paid: 0 },
+  by_channel: [{ channel: 'search', registrations: 7, activated: 3, upgrade_viewed: 2, checkout_started: 1, subscribed: 1, paid: 0 }],
+}
+
+test('app funnel section lists sources by registrations, unattributed accounts and totals', () => {
+  const text = buildAppFunnelSection(funnel).join('\n')
+  assert.ok(text.indexOf('tools_fire_number') < text.indexOf('guide_isa_allowance_uk'))
+  assert.match(text, /\(no website source recorded\)/)
+  assert.match(text, /\*\*All accounts\*\*/)
+  assert.match(text, /By how the visit began/)
+  assert.match(text, /test definition/)
+})
+
+test('app funnel section never prints emails or ids even if the file contained them', () => {
+  const dirty = { ...funnel, users: [{ email: 'a@b.com', user_id: 7 }] }
+  const text = buildAppFunnelSection(dirty).join('\n')
+  assert.ok(!text.includes('a@b.com') && !text.includes('user_id'))
+})
+
+test('the full report says which parts were and were not measured', () => {
+  const full = buildReport(rows, { days: 7, web: webAccount, app: funnel })
+  assert.match(full, /Website traffic \(Cloudflare Web Analytics\) \| yes/)
+  assert.match(full, /App funnel by source \| yes/)
+  const bare = buildReport(rows, { days: 7 })
+  assert.match(bare, /Website traffic \(Cloudflare Web Analytics\) \| no/)
+  assert.match(bare, /App funnel by source \| no/)
+  assert.match(bare, /Unique visitors \| no \| Not measured, by design/)
+  assert.match(buildStatusSection({ events: true, web: false, app: false }).join('\n'), /Search Console/)
 })
 
 console.log(`\n${passed} passed, ${failed} failed`)

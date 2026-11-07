@@ -3,7 +3,7 @@ import ToolsDropdown from './ToolsDropdown'
 import SkipLink from './SkipLink'
 import Breadcrumbs from './Breadcrumbs'
 import { authUrl } from '../links'
-import { currentPageKey, trackCtaClicked } from '../analytics'
+import { currentPageKey, trackCtaClicked, withVisitChannel } from '../analytics'
 
 
 /**
@@ -47,7 +47,7 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
       const page = currentPageKey()
       trackCtaClicked({ page, location: 'header', target: kind })
       window.setTimeout(() => {
-        window.location.href = authUrl(kind, page)
+        window.location.href = withVisitChannel(authUrl(kind, page))
       }, 180)
     }
   }

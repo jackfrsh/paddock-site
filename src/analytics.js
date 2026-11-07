@@ -102,6 +102,25 @@ export function trackOnce(key, name, fields) {
   return trackEvent(name, fields)
 }
 
+/* Adds how this visit began (`ch`) to a sign-up link, at click time only.
+
+   It is added when the link is used, not when the page is built, so the
+   prerendered HTML is the same for everyone. Nothing is added when the browser
+   signals Global Privacy Control or Do Not Track, outside production, or for any
+   link that is not the app's sign-up page. The value comes from the same closed
+   list as the events (search, direct, internal, social, other). */
+export function withVisitChannel(url) {
+  try {
+    if (typeof url !== 'string' || !enabled()) return url
+    const parsed = new URL(url)
+    if (parsed.searchParams.get('mode') !== 'signup' || parsed.searchParams.has('ch')) return url
+    parsed.searchParams.set('ch', currentChannel())
+    return parsed.toString()
+  } catch {
+    return url
+  }
+}
+
 /* The route key of the page the visitor is on, or null. */
 export function currentPageKey() {
   if (typeof window === 'undefined') return null

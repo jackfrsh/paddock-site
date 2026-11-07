@@ -1,5 +1,6 @@
 import React from 'react'
 import { GuideShell, H2, P, UL } from '../components/GuideLayout'
+import { websiteMeasurementCopy } from '../privacyCopy'
 
 export default function Privacy({ navigateTo }) {
   return (
@@ -39,57 +40,41 @@ export default function Privacy({ navigateTo }) {
         enter, and you can ask for a copy of your data or for it to be deleted.
       </P>
 
-      <H2>Authentication and billing</H2>
+      <H2>Who processes your data</H2>
       <P>
-        Account sign-in and password management are handled through industry-standard authentication
-        infrastructure with secure session handling. Billing and subscription management are processed
-        by Stripe. These services support secure access and paid plans — they are not used to build
-        an advertising profile or share data with third parties.
+        Paddock does not sell your data, does not use it for advertising and does not share it with
+        anyone for their own purposes. To run the service, though, some providers process data on our
+        behalf, and you should know who they are:
+      </P>
+      <UL>
+        <li><strong>Supabase</strong> handles sign-in and password management for the app.</li>
+        <li><strong>Railway</strong> hosts the app and its database, where your accounts, balances, goals and planning assumptions are stored.</li>
+        <li><strong>Stripe</strong> processes card payments for Paddock Pro bought on the web, and <strong>Apple</strong> processes payments for Paddock Pro bought through the App Store.</li>
+        <li><strong>Google</strong> handles sign-in if you choose &ldquo;Continue with Google&rdquo;.</li>
+      </UL>
+      <P>
+        These providers process data only to provide their service to us. They are not used to build an
+        advertising profile of you.
       </P>
 
       <H2>Data handling</H2>
       <P>
-        The information you enter into Paddock — account balances, goals, and planning assumptions — is
-        stored securely and used solely to power your dashboard and projections. It is not sold, shared
-        with third parties, or used for purposes beyond operating the product.
+        The information you enter into Paddock, such as account balances, goals and planning
+        assumptions, is stored in the app&apos;s database and used to power your dashboard and
+        projections. You can ask for a copy of your data or for it to be deleted, and deleting your
+        account removes it from the app.
       </P>
 
       <H2>This website</H2>
-      <P>
-        The calculators and guides on getpaddock.com run in your browser. The figures you type
-        into a calculator are not sent to us, stored, or placed in the page address.
-      </P>
-      <P>
-        We count how the website is used, in aggregate, so we can see which pages help and which
-        do not. Two things do this:
-      </P>
-      <UL>
-        <li>
-          <strong>Cloudflare Web Analytics</strong> counts page views, where visits came from
-          and how quickly pages load. Cloudflare describes it as cookieless and as not tracking
-          visitors across sites.
-        </li>
-        <li>
-          <strong>A small counter of anonymous events</strong> runs on our own Cloudflare
-          account. It records that a calculator was used or completed, or that a sign-up or App
-          Store link was clicked, with the page it happened on and a broad category for how the
-          visit began (search, direct, social or other). Each event is a fixed label from a
-          short list. It contains no figures, nothing you typed and no identifier, we do not
-          store your IP address or browser details with it, and it is not linked to any account.
-          Events are kept for up to three months. If your browser sends Global Privacy Control
-          or Do Not Track, this counter records nothing.
-        </li>
-      </UL>
-      <P>
-        Our own counter sets no cookies and uses none of your browser&apos;s storage, and Cloudflare
-        says the same of Web Analytics. We do not use Google Analytics, advertising pixels or
-        social media trackers on this website.
-      </P>
-      <P>
-        Links from this website to the sign-up page include a short label naming the page you
-        came from, such as the name of a calculator, so we can see which pages lead to accounts.
-        It contains nothing you typed.
-      </P>
+      {websiteMeasurementCopy().map((block, i) => (
+        block.type === 'ul' ? (
+          <UL key={i}>
+            {block.items.map((item) => (
+              <li key={item.strong}><strong>{item.strong}</strong>{item.text}</li>
+            ))}
+          </UL>
+        ) : <P key={i}>{block.text}</P>
+      ))}
 
       <H2>Contact</H2>
       <P>

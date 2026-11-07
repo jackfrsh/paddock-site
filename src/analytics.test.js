@@ -3,8 +3,8 @@ import {
   BLOB_COLUMNS, CHANNELS, EVENTS, EVENT_NAMES, LOCATIONS, PAGES, SCHEMA_VERSION, TARGETS, VARIANTS,
   parseEvent, toDataPoint,
 } from './analyticsSchema.js'
-import { classifyReferrer, isOptedOut, trackEvent } from './analytics.js'
-import { onRequest, onRequestPost } from '../functions/api/e.js'
+import { classifyReferrer, isOptedOut, trackEvent, withVisitChannel } from './analytics.js'
+import { onRequest, onRequestGet, onRequestPost } from '../functions/api/e.js'
 
 let passed = 0
 let failed = 0
@@ -128,6 +128,44 @@ await test('Global Privacy Control and Do Not Track are honoured', () => {
   assert.equal(isOptedOut({}), false)
 })
 
+await test('the visit channel is added to sign-up links only inside a production browser', () => {
+  const link = 'https://app.getpaddock.com/auth?mode=signup&src=tools_fire_number'
+  assert.equal(withVisitChannel(link), link) // no window in Node: nothing is added
+  assert.equal(withVisitChannel(undefined), undefined)
+})
+
+await test('the visit channel is a closed-list value, added once, to sign-up links only', async () => {
+  const saved = { window: globalThis.window, navigator: globalThis.navigator, document: globalThis.document, location: globalThis.location }
+  const setEnv = (nav, referrer) => {
+    globalThis.window = { location: { hostname: 'getpaddock.com' } }
+    Object.defineProperty(globalThis, 'navigator', { value: nav, configurable: true })
+    globalThis.document = { referrer }
+    globalThis.location = { hostname: 'getpaddock.com' }
+  }
+  const { resetForTests } = await import('./analytics.js')
+  try {
+    const link = 'https://app.getpaddock.com/auth?mode=signup&src=tools_fire_number'
+    resetForTests(); setEnv({}, 'https://www.google.co.uk/')
+    assert.equal(withVisitChannel(link), `${link}&ch=search`)
+    assert.equal(withVisitChannel(`${link}&ch=search`), `${link}&ch=search`) // never doubled
+    assert.equal(withVisitChannel('https://app.getpaddock.com/auth?mode=signin'), 'https://app.getpaddock.com/auth?mode=signin')
+    resetForTests(); setEnv({ globalPrivacyControl: true }, 'https://www.google.co.uk/')
+    assert.equal(withVisitChannel(link), link) // opt-out: no measurement signal added to the link
+    resetForTests(); setEnv({ doNotTrack: '1' }, '')
+    assert.equal(withVisitChannel(link), link)
+    resetForTests(); setEnv({}, 'https://example.org/post?secret=1')
+    const decorated = new URL(withVisitChannel(link))
+    assert.equal(decorated.searchParams.get('ch'), 'other')
+    assert.ok(!decorated.toString().includes('secret')) // referrer path/query never reaches the link
+    assert.ok(CHANNELS.includes(decorated.searchParams.get('ch')))
+  } finally {
+    for (const [k, v] of Object.entries(saved)) {
+      if (v === undefined) delete globalThis[k]; else Object.defineProperty(globalThis, k, { value: v, configurable: true, writable: true })
+    }
+    resetForTests()
+  }
+})
+
 await test('the client sends nothing outside a browser on the production host', () => {
   assert.equal(trackEvent('calculator_completed', { page: 'tools_fire_number' }), false) // no window in Node
 })
@@ -185,14 +223,48 @@ await test('function rejects bad payloads and oversized bodies without writing',
   assert.equal(written.length, 0)
 })
 
-await test('function is a harmless no-op before the binding exists', async () => {
-  assert.equal((await onRequestPost({ request: post(good), env: {} })).status, 204)
-  assert.equal((await onRequestPost({ request: post(good), env: undefined })).status, 204)
+await test('function never pretends to store an event when the binding is missing', async () => {
+  const logged = []
+  const original = console.error
+  console.error = (...args) => logged.push(args.join(' '))
+  try {
+    for (const env of [{}, undefined, { PADDOCK_EVENTS: {} }]) {
+      const res = await onRequestPost({ request: post(good), env })
+      assert.equal(res.status, 503)
+      assert.equal((await res.json()).reason, 'storage_unavailable')
+    }
+  } finally { console.error = original }
+  assert.equal(logged.length, 3)
+  assert.ok(logged.every((line) => line.includes('PADDOCK_EVENTS')))
 })
 
-await test('function survives a failing binding', async () => {
-  const env = { PADDOCK_EVENTS: { writeDataPoint: () => { throw new Error('boom') } } }
-  assert.equal((await onRequestPost({ request: post(good), env })).status, 204)
+await test('a missing binding does not turn opt-outs or bad payloads into errors', async () => {
+  assert.equal((await onRequestPost({ request: post(good, { 'Sec-GPC': '1' }), env: {} })).status, 204)
+  assert.equal((await onRequestPost({ request: post(good, { Origin: 'https://paddock-site.pages.dev' }), env: {} })).status, 204)
+  assert.equal((await onRequestPost({ request: post('not json'), env: {} })).status, 400)
+})
+
+await test('function reports a failing binding instead of hiding it', async () => {
+  const original = console.error
+  const logged = []
+  console.error = (...args) => logged.push(args.join(' '))
+  try {
+    const env = { PADDOCK_EVENTS: { writeDataPoint: () => { throw new Error('boom') } } }
+    const res = await onRequestPost({ request: post(good), env })
+    assert.equal(res.status, 503)
+    assert.equal((await res.json()).reason, 'write_failed')
+  } finally { console.error = original }
+  assert.equal(logged.length, 1)
+})
+
+await test('GET /api/e reports whether storage is configured, and nothing else', async () => {
+  const missing = await onRequestGet({ env: {} })
+  assert.equal(missing.status, 503)
+  assert.deepEqual(await missing.json(), { ok: false, storage: 'missing', schema: SCHEMA_VERSION })
+  const ok = await onRequestGet({ env: fakeEnv().env })
+  assert.equal(ok.status, 200)
+  assert.deepEqual(await ok.json(), { ok: true, storage: 'configured', schema: SCHEMA_VERSION })
+  assert.equal(ok.headers.get('Cache-Control'), 'no-store')
 })
 
 await test('other methods get 405', () => {

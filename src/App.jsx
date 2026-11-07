@@ -21,7 +21,7 @@ import SkipLink from './components/SkipLink'
 import IsaAllowanceCard from './components/IsaAllowanceCard'
 import { ISA_RULES, gbp } from './isaRules'
 import { APP_STORE_URL, authUrl } from './links'
-import { trackCtaClicked } from './analytics'
+import { trackCtaClicked, withVisitChannel } from './analytics'
 import {
   ANNUAL_MONTHS_FREE, FREE_FEATURES, PRO_FEATURES, PRO_PRICE, TRIAL,
 } from './planFacts'
@@ -278,7 +278,7 @@ export default function App({ initialPath } = {}) {
     setPending(kind)
 
     trackCtaClicked({ page: route, location, target: kind })
-    const url = authUrl(kind, route)
+    const url = withVisitChannel(authUrl(kind, route))
 
     window.setTimeout(() => {
       window.location.href = url

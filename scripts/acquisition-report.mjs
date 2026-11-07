@@ -5,8 +5,14 @@
    (GROUP BY, never individual rows) and the dataset holds no personal data.
 
    Usage
-     CF_ACCOUNT_ID=... CF_API_TOKEN=... node scripts/acquisition-report.mjs [--days 7] [--dataset paddock_events]
-     node scripts/acquisition-report.mjs --file rows.json      (offline: rows saved from the SQL API)
+     node scripts/acquisition-report.mjs --check                 (is event storage configured? no credentials needed)
+     node scripts/acquisition-report.mjs [--days 7|1]            (needs CF_ACCOUNT_ID and CF_API_TOKEN)
+     node scripts/acquisition-report.mjs --file rows.json        (offline: rows saved from the SQL API)
+     ... --app-file funnel.json                                  (adds the app's aggregate sign-up funnel, see docs/acquisition-dashboard.md)
+
+   Optional: set CF_WEB_ANALYTICS_SITE_TAG to add visits, landing pages, referrers
+   and devices from Cloudflare Web Analytics; or pass --web-file groups.json offline.
+   Copy .env.example to .env.local and `set -a; . ./.env.local; set +a` to load it.
 
    The API token needs only the "Account Analytics: Read" permission. It is read
    from the environment and never printed or written anywhere. */
@@ -63,7 +69,7 @@ export function summarise(rows) {
 const pct = (a, b) => (b > 0 ? `${((a / b) * 100).toFixed(1)}%` : 'n/a')
 const flag = (n) => (n < LOW_VOLUME ? ' (low volume)' : '')
 
-export function buildReport(rows, { days = 7, generatedAt = new Date() } = {}) {
+export function buildReport(rows, { days = 7, generatedAt = new Date(), web = undefined, app = undefined, events = true } = {}) {
   const { by, channels, signupByPage } = summarise(rows)
   const lines = []
   lines.push(`# Acquisition report`)
@@ -102,9 +108,103 @@ export function buildReport(rows, { days = 7, generatedAt = new Date() } = {}) {
     for (const [c, n] of chan) lines.push(`| ${c} | ${n} |`)
   }
   lines.push('')
-  lines.push('Page views, referrers and performance are in Cloudflare Web Analytics; search visibility is in Search Console; sign-ups and upgrades are in the app. This report covers only what those three cannot.')
-  lines.push('')
+  lines.push(...buildWebAnalyticsSection(web))
+  lines.push(...buildAppFunnelSection(app))
+  lines.push(...buildStatusSection({ events, web: Boolean(web), app: Boolean(app && Array.isArray(app.by_source)) }))
   return lines.join('\n')
+}
+
+
+/* ── Cloudflare Web Analytics (RUM) ──────────────────────────────────────────
+   Read through the GraphQL Analytics API with the same read-only token. The
+   dataset and field names follow Cloudflare's published schema for
+   rumPageloadEventsAdaptiveGroups; this part has not yet been run against a live
+   site because Web Analytics is not enabled (docs/phase-3-owner-actions.md). */
+
+export function buildWebAnalyticsQuery() {
+  return `query Rum($accountTag: String!, $siteTag: String!, $since: Time!, $until: Time!) {
+  viewer { accounts(filter: { accountTag: $accountTag }) {
+    pages: rumPageloadEventsAdaptiveGroups(limit: 25, filter: { siteTag: $siteTag, datetime_geq: $since, datetime_lt: $until }, orderBy: [count_DESC]) { count sum { visits } dimensions { requestPath } }
+    referrers: rumPageloadEventsAdaptiveGroups(limit: 25, filter: { siteTag: $siteTag, datetime_geq: $since, datetime_lt: $until }, orderBy: [count_DESC]) { count sum { visits } dimensions { refererHost } }
+    devices: rumPageloadEventsAdaptiveGroups(limit: 10, filter: { siteTag: $siteTag, datetime_geq: $since, datetime_lt: $until }, orderBy: [count_DESC]) { count sum { visits } dimensions { deviceType } }
+  } }
+}`
+}
+
+const sumVisits = (groups) => groups.reduce((n, g) => n + num(g?.sum?.visits), 0)
+const sumLoads = (groups) => groups.reduce((n, g) => n + num(g?.count), 0)
+
+export function buildWebAnalyticsSection(account) {
+  const lines = ['## Website traffic (Cloudflare Web Analytics)', '']
+  if (!account) {
+    lines.push('Not available: Cloudflare Web Analytics has not been enabled or queried (see docs/phase-3-owner-actions.md, action 1).', '')
+    return lines
+  }
+  const { pages = [], referrers = [], devices = [] } = account
+  lines.push(`Visits: **${sumVisits(pages)}** · page views: **${sumLoads(pages)}** (Cloudflare counts a visit when a page load has an external or empty referrer; these are not unique people).`, '')
+  const table = (title, groups, dim, label) => {
+    lines.push(`### ${title}`, '', `| ${label} | Visits | Page views |`, '| --- | ---: | ---: |')
+    if (groups.length === 0) lines.push('| none | 0 | 0 |')
+    for (const g of groups) lines.push(`| ${g.dimensions?.[dim] || '(direct / none)'} | ${num(g?.sum?.visits)} | ${num(g?.count)} |`)
+    lines.push('')
+  }
+  table('Landing and most viewed pages', pages, 'requestPath', 'Path')
+  table('Where visits came from (referrer host only)', referrers, 'refererHost', 'Referrer')
+  table('Devices', devices, 'deviceType', 'Device')
+  return lines
+}
+
+/* ── The app's aggregate funnel (wealthapp /api/admin/acquisition) ──────────
+   Counts only, by sign-up source. The file comes from the owner's admin view;
+   it contains no emails or financial data. */
+
+const FUNNEL_COLUMNS = [
+  ['registrations', 'Accounts'],
+  ['activated', 'Activated'],
+  ['upgrade_viewed', 'Viewed upgrade'],
+  ['checkout_started', 'Checkout started'],
+  ['subscribed', 'Subscribed (incl. trial)'],
+  ['paid', 'Paid'],
+]
+
+export function buildAppFunnelSection(funnel) {
+  const lines = ['## App funnel by sign-up source', '']
+  if (!funnel || !Array.isArray(funnel.by_source)) {
+    lines.push('Not available: pass --app-file with the aggregate funnel from the app (see docs/acquisition-dashboard.md).', '')
+    return lines
+  }
+  const row = (label, r) => `| ${label} | ${FUNNEL_COLUMNS.map(([k]) => num(r?.[k])).join(' | ')} |`
+  const header = `| Source | ${FUNNEL_COLUMNS.map(([, h]) => h).join(' | ')} |`
+  const rule = `| --- | ${FUNNEL_COLUMNS.map(() => '---:').join(' | ')} |`
+  lines.push(`Last ${funnel.range_days ?? '?'} days · activation = ${funnel.activation_definition || 'see docs/phase-3-event-taxonomy.md'}`, '')
+  lines.push(header, rule)
+  const sources = [...funnel.by_source].sort((a, b) => num(b.registrations) - num(a.registrations))
+  for (const s of sources) lines.push(row(s.source, s))
+  if (funnel.unattributed) lines.push(row('(no website source recorded)', funnel.unattributed))
+  if (funnel.totals) lines.push(row('**All accounts**', funnel.totals))
+  lines.push('')
+  if (Array.isArray(funnel.by_channel) && funnel.by_channel.length) {
+    lines.push('By how the visit began:', '', header.replace('Source', 'Channel'), rule)
+    for (const c of funnel.by_channel) lines.push(row(c.channel, c))
+    lines.push('')
+  }
+  return lines
+}
+
+export function buildStatusSection({ events, web, app }) {
+  const yes = (v) => (v ? 'yes' : 'no')
+  return [
+    '## What this report measured',
+    '',
+    '| Source | Included | Kind |',
+    '| --- | --- | --- |',
+    `| Website events (calculator, CTA) | ${yes(events)} | Directly measured, anonymous counts |`,
+    `| Website traffic (Cloudflare Web Analytics) | ${yes(web)} | Directly measured, page loads and visits (not people) |`,
+    `| App funnel by source | ${yes(app)} | Directly measured, per-source counts from the app database |`,
+    '| Search Console clicks and impressions | no | Not available from this script: read in Search Console |',
+    '| Unique visitors | no | Not measured, by design |',
+    '',
+  ]
 }
 
 async function fetchRows({ accountId, token, dataset, days }) {
@@ -123,20 +223,61 @@ function arg(name, fallback) {
   return i > -1 ? process.argv[i + 1] : fallback
 }
 
+async function graphql({ accountId, token, siteTag, days }) {
+  const until = new Date()
+  const since = new Date(until.getTime() - days * 86_400_000)
+  const res = await fetch('https://api.cloudflare.com/client/v4/graphql', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      query: buildWebAnalyticsQuery(),
+      variables: { accountTag: accountId, siteTag, since: since.toISOString(), until: until.toISOString() },
+    }),
+  })
+  if (!res.ok) throw new Error(`Cloudflare GraphQL API returned ${res.status}`)
+  const json = await res.json()
+  if (json.errors?.length) throw new Error(`Cloudflare GraphQL error: ${json.errors[0].message}`)
+  return json.data?.viewer?.accounts?.[0] ?? null
+}
+
+async function checkStorage(site) {
+  const res = await fetch(`${site}/api/e`, { headers: { 'Cache-Control': 'no-cache' } })
+  let body = null
+  try { body = await res.json() } catch { /* not JSON */ }
+  const ok = res.status === 200 && body?.storage === 'configured'
+  console.log(ok
+    ? `OK: ${site}/api/e reports event storage configured (schema ${body.schema}).`
+    : `NOT CONFIGURED: ${site}/api/e answered ${res.status}${body ? ` ${JSON.stringify(body)}` : ''}. Events are being refused until the PADDOCK_EVENTS binding exists (docs/phase-3-owner-actions.md, action 2).`)
+  return ok
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const site = (process.env.PADDOCK_SITE_URL || 'https://getpaddock.com').replace(/\/$/, '')
+  if (process.argv.includes('--check')) {
+    process.exit((await checkStorage(site)) ? 0 : 1)
+  }
   const days = Number(arg('days', 7))
   const file = arg('file')
+  const appFile = arg('app-file')
+  const webFile = arg('web-file')
+  const { CF_ACCOUNT_ID: accountId, CF_API_TOKEN: token, CF_WEB_ANALYTICS_SITE_TAG: siteTag } = process.env
+
   let rows
   if (file) {
     const parsed = JSON.parse(fs.readFileSync(file, 'utf8'))
     rows = Array.isArray(parsed) ? parsed : parsed.data ?? []
   } else {
-    const { CF_ACCOUNT_ID: accountId, CF_API_TOKEN: token } = process.env
     if (!accountId || !token) {
-      console.error('Set CF_ACCOUNT_ID and CF_API_TOKEN (Account Analytics: Read), or pass --file rows.json')
+      console.error('Set CF_ACCOUNT_ID and CF_API_TOKEN (read-only: Account Analytics Read), or pass --file rows.json. See .env.example.')
       process.exit(2)
     }
     rows = await fetchRows({ accountId, token, dataset: arg('dataset', DEFAULT_DATASET), days })
   }
-  console.log(buildReport(rows, { days }))
+
+  let web
+  if (webFile) web = JSON.parse(fs.readFileSync(webFile, 'utf8'))
+  else if (accountId && token && siteTag) web = await graphql({ accountId, token, siteTag, days })
+
+  const app = appFile ? JSON.parse(fs.readFileSync(appFile, 'utf8')) : undefined
+  console.log(buildReport(rows, { days, web, app }))
 }

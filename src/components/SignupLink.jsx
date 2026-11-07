@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { RouteContext } from '../routeContext'
 import { pageKeyForPath } from '../analyticsSchema'
-import { trackCtaClicked } from '../analytics'
+import { trackCtaClicked, withVisitChannel } from '../analytics'
 import { signupUrl } from '../links'
 
 /* A plain link to the app's sign-up page. It carries the current page's route
@@ -15,7 +15,11 @@ export default function SignupLink({ location = 'inline', className = 'btn btn-p
     <a
       href={signupUrl(page)}
       className={className}
-      onClick={() => trackCtaClicked({ page, location, target: 'signup' })}
+      onClick={(event) => {
+        trackCtaClicked({ page, location, target: 'signup' })
+        event.currentTarget.href = withVisitChannel(event.currentTarget.href)
+      }}
+      onAuxClick={(event) => { event.currentTarget.href = withVisitChannel(event.currentTarget.href) }}
     >
       {children}
     </a>

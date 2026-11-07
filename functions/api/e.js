@@ -10,15 +10,18 @@
      rejected, so free text, values and identifiers cannot be stored.
    - The visitor's IP address, user agent, cookies and full URL are never read
      into the data point. Only the validated fields are written.
-   - Before the binding exists the function does nothing and answers 204, so
-     the site is unaffected until the owner turns measurement on. */
+   - If the storage binding is missing or a write fails, the function says so:
+     it answers 503, writes a line to the Pages Function log, and GET /api/e
+     reports `storage: "missing"`. It never pretends an event was stored. The
+     visitor is unaffected either way (the browser fires and forgets). */
 
-import { parseEvent, toDataPoint } from '../../src/analyticsSchema.js'
+import { SCHEMA_VERSION, parseEvent, toDataPoint } from '../../src/analyticsSchema.js'
 
 const MAX_BODY_BYTES = 512
 const ALLOWED_ORIGINS = ['https://getpaddock.com']
 
 const noContent = () => new Response(null, { status: 204, headers: { 'Cache-Control': 'no-store' } })
+const hasStorage = (env) => Boolean(env && env.PADDOCK_EVENTS && typeof env.PADDOCK_EVENTS.writeDataPoint === 'function')
 const reject = (status, reason) =>
   new Response(JSON.stringify({ ok: false, reason }), {
     status,
@@ -46,17 +49,30 @@ export async function onRequestPost({ request, env }) {
   const parsed = parseEvent(payload)
   if (!parsed.ok) return reject(400, parsed.reason)
 
-  // Binding not configured yet: accept and discard.
-  if (!env || !env.PADDOCK_EVENTS || typeof env.PADDOCK_EVENTS.writeDataPoint !== 'function') {
-    return noContent()
+  // A valid event that cannot be stored is an operational fault, not a success.
+  // The log line is visible in the Pages project's real-time Function logs.
+  if (!hasStorage(env)) {
+    console.error('[paddock-events] PADDOCK_EVENTS binding is missing: valid event dropped. See docs/measurement-and-search-console.md')
+    return reject(503, 'storage_unavailable')
   }
 
   try {
     env.PADDOCK_EVENTS.writeDataPoint(toDataPoint(parsed.event))
-  } catch {
-    // Measurement must never surface an error to the visitor.
+  } catch (err) {
+    console.error('[paddock-events] writeDataPoint failed: valid event dropped:', err && err.name)
+    return reject(503, 'write_failed')
   }
   return noContent()
+}
+
+/* GET /api/e: whether event storage is configured. Reveals nothing about
+   visitors or counts; used by `node scripts/acquisition-report.mjs --check`. */
+export function onRequestGet({ env }) {
+  const storage = hasStorage(env) ? 'configured' : 'missing'
+  return new Response(JSON.stringify({ ok: storage === 'configured', storage, schema: SCHEMA_VERSION }), {
+    status: storage === 'configured' ? 200 : 503,
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+  })
 }
 
 export function onRequest() {
