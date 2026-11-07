@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import {
-  buildAppFunnelSection, buildQuery, buildReport, buildStatusSection, buildWebAnalyticsQuery, buildWebAnalyticsSection, summarise,
+  buildAppFunnelSection, buildDailyQuery, buildDailySection, buildFunnelSection, buildLandingSection, buildQuery, buildReport,
+  buildStatusSection, buildWebAnalyticsQuery, buildWebAnalyticsSection, summariseDaily, summarise,
 } from '../scripts/acquisition-report.mjs'
 
 let passed = 0
@@ -19,6 +20,9 @@ const rows = [
   row('cta_clicked', 'landing', 40, { location: 'hero', target: 'signup' }),
   row('cta_clicked', 'landing', 9, { location: 'hero', target: 'app_store' }),
   row('calculator_started', 'tools_phased_drawdown', 10, { channel: 'direct' }),
+  row('visitor_landing', 'tools_retirement_age', 300),
+  row('visitor_landing', 'landing', 120, { channel: 'direct' }),
+  row('visitor_landing', 'guide_isa_allowance_uk', 80, { channel: 'social' }),
 ]
 
 test('query is a fixed aggregate over the documented columns', () => {
@@ -88,13 +92,13 @@ test('web analytics section says plainly when it is not available', () => {
 const funnel = {
   range_days: 30,
   activation_definition: 'test definition',
-  totals: { registrations: 10, activated: 4, upgrade_viewed: 3, checkout_started: 2, subscribed: 1, paid: 0 },
+  totals: { registrations: 10, first_account: 6, goal_created: 5, activated: 4, upgrade_viewed: 3, checkout_started: 2, subscribed: 1, paid: 0 },
   by_source: [
-    { source: 'tools_fire_number', registrations: 6, activated: 3, upgrade_viewed: 2, checkout_started: 1, subscribed: 1, paid: 0 },
-    { source: 'guide_isa_allowance_uk', registrations: 2, activated: 0, upgrade_viewed: 0, checkout_started: 0, subscribed: 0, paid: 0 },
+    { source: 'tools_fire_number', registrations: 6, first_account: 4, goal_created: 3, activated: 3, upgrade_viewed: 2, checkout_started: 1, subscribed: 1, paid: 0 },
+    { source: 'guide_isa_allowance_uk', registrations: 2, first_account: 1, goal_created: 1, activated: 0, upgrade_viewed: 0, checkout_started: 0, subscribed: 0, paid: 0 },
   ],
-  unattributed: { registrations: 2, activated: 1, upgrade_viewed: 1, checkout_started: 1, subscribed: 0, paid: 0 },
-  by_channel: [{ channel: 'search', registrations: 7, activated: 3, upgrade_viewed: 2, checkout_started: 1, subscribed: 1, paid: 0 }],
+  unattributed: { registrations: 2, first_account: 1, goal_created: 1, activated: 1, upgrade_viewed: 1, checkout_started: 1, subscribed: 0, paid: 0 },
+  by_channel: [{ channel: 'search', registrations: 7, first_account: 4, goal_created: 3, activated: 3, upgrade_viewed: 2, checkout_started: 1, subscribed: 1, paid: 0 }],
 }
 
 test('app funnel section lists sources by registrations, unattributed accounts and totals', () => {
@@ -110,6 +114,72 @@ test('app funnel section never prints emails or ids even if the file contained t
   const dirty = { ...funnel, users: [{ email: 'a@b.com', user_id: 7 }] }
   const text = buildAppFunnelSection(dirty).join('\n')
   assert.ok(!text.includes('a@b.com') && !text.includes('user_id'))
+})
+
+test('landings are counted per page and per channel', () => {
+  const s = summarise(rows)
+  assert.equal(s.landings.tools_retirement_age, 300)
+  assert.equal(s.landings.landing, 120)
+  assert.equal(s.landingChannels.search, 300)
+  assert.equal(s.landingChannels.direct, 120)
+  assert.equal(s.landingChannels.social, 80)
+  const text = buildLandingSection(s).join('\n')
+  assert.ok(text.indexOf('tools_retirement_age') < text.indexOf('guide_isa_allowance_uk'))
+  assert.match(text, /\| tools_retirement_age \| 300 \| 12 \|/)
+  assert.match(text, /not a rate/)
+  assert.match(buildLandingSection(summarise([])).join('\n'), /No landings recorded/)
+})
+
+test('funnel table keeps website page views and app people apart', () => {
+  const text = buildFunnelSection(summarise(rows), funnel).join('\n')
+  assert.match(text, /\| Visits began \(landings\) \| 500 \| page loads \|/)
+  assert.match(text, /\| Calculator completed \| 150 \| page views \| 75\.0% of started \(excluding live calculators\) \|/)
+  assert.match(text, /\| Sign-up link clicked \(all pages\) \| 52 \| clicks \|/) // 12 + 40, app store excluded
+  assert.match(text, /\| Accounts created \| 10 \| people \| n\/a \|/)
+  assert.match(text, /\| Activated \| 4 \| people \| 40\.0% of accounts \|/)
+  assert.match(text, /\| Paid \| 0 \| people \| 0\.0% of accounts \|/)
+  assert.match(text, /never divided by app stages/)
+  assert.match(text, /Rough ratio, not a conversion rate: 10 accounts created from 52 sign-up clicks/)
+})
+
+test('funnel table says the app stages are missing when no app file is supplied', () => {
+  const text = buildFunnelSection(summarise(rows), undefined).join('\n')
+  assert.match(text, /not supplied \(pass --app-file/)
+  assert.ok(!/Rough ratio/.test(text))
+})
+
+test('app funnel includes first account and goal columns', () => {
+  const text = buildAppFunnelSection(funnel).join('\n')
+  assert.match(text, /\| Source \| Accounts \| First account added \| Goal created \| Activated \|/)
+  assert.match(text, /\| tools_fire_number \| 6 \| 4 \| 3 \| 3 \| 2 \| 1 \| 1 \| 0 \|/)
+})
+
+test('daily query is a fixed aggregate, UTC day buckets, with the same safeguards', () => {
+  const q = buildDailyQuery('paddock_events', 14)
+  assert.match(q, /^SELECT intDiv\(toUInt32\(timestamp\), 86400\) \* 86400 AS t, blob1 AS event, blob5 AS target, SUM\(_sample_interval\) AS n FROM paddock_events WHERE timestamp > NOW\(\) - INTERVAL '14' DAY GROUP BY t, event, target ORDER BY t FORMAT JSON$/)
+  assert.throws(() => buildDailyQuery('x; DROP TABLE y', 7))
+  assert.match(buildDailyQuery('paddock_events', 9999), /INTERVAL '7' DAY/)
+})
+
+test('daily section groups events by UTC day, in order, and ignores bad rows', () => {
+  const day1 = Date.UTC(2026, 10, 1) / 1000
+  const day2 = Date.UTC(2026, 10, 2) / 1000
+  const daily = [
+    { t: day2, event: 'visitor_landing', target: '', n: 5 },
+    { t: day1, event: 'visitor_landing', target: '', n: 3 },
+    { t: day1, event: 'calculator_started', target: '', n: 2 },
+    { t: day1, event: 'cta_clicked', target: 'signup', n: 1 },
+    { t: day1, event: 'cta_clicked', target: 'app_store', n: 9 },
+    { t: 'nonsense', event: 'visitor_landing', target: '', n: 99 },
+  ]
+  const days = summariseDaily(daily)
+  assert.deepEqual(days.map(([d]) => d), ['2026-11-01', '2026-11-02'])
+  assert.equal(days[0][1].signupClicks, 1) // app store clicks are not sign-up clicks
+  assert.equal(days[0][1].landings, 3)
+  assert.match(buildDailySection(daily).join('\n'), /\| 2026-11-01 \| 3 \| 2 \| 0 \| 0 \| 1 \|/)
+  assert.match(buildDailySection([]).join('\n'), /No events recorded/)
+  assert.match(buildReport(rows, { days: 7, daily }), /## Day by day \(UTC\)/)
+  assert.ok(!/Day by day/.test(buildReport(rows, { days: 7 })))
 })
 
 test('the full report says which parts were and were not measured', () => {

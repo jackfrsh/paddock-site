@@ -34,6 +34,7 @@ Unknown fields reject the whole event; there is no free-text field.
 
 | Event | Fires when | Fields |
 | --- | --- | --- |
+| `visitor_landing` | A visit began on this page: loaded from search, another site or directly, not by following a link inside the site (once per full page load; page loads, not people). Added in Phase 3 | `page`, `channel` |
 | `calculator_started` | A visitor changes a field in a calculator (once per page view) | `page`, `channel` |
 | `calculator_completed` | The calculator shows a result for the visitor's own inputs (once per page view). Submit-style calculators fire on a successful submit; live calculators (phased drawdown, retirement bridge, net worth) fire on the first edit | `page`, `channel` |
 | `cta_displayed` | A call to action is at least 60% in view (once per placement per page view) | `page`, `channel`, `location`, `target`, `variant` |
@@ -98,6 +99,10 @@ wording at a time and wait for at least 30 displays a week before judging
 | 2026-11-07 | all seven | First calculator-specific wording shipped (baseline) | Awaiting data |
 
 ## 6. Owner steps (cannot be done from the repository)
+
+**The ordered, verified version of these steps, with a proof for each, is
+`docs/phase-3-owner-actions.md`. Use that.** The list below is kept for
+reference.
 
 1. **Enable Cloudflare Web Analytics** for the Pages project: Workers & Pages →
    `paddock-site` → Metrics → enable Web Analytics. Do not choose any option that

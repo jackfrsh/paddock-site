@@ -3,7 +3,7 @@ import {
   BLOB_COLUMNS, CHANNELS, EVENTS, EVENT_NAMES, LOCATIONS, PAGES, SCHEMA_VERSION, TARGETS, VARIANTS,
   parseEvent, toDataPoint,
 } from './analyticsSchema.js'
-import { classifyReferrer, isOptedOut, trackEvent, withVisitChannel } from './analytics.js'
+import { classifyReferrer, isOptedOut, trackEvent, trackVisitorLanding, withVisitChannel } from './analytics.js'
 import { onRequest, onRequestGet, onRequestPost } from '../functions/api/e.js'
 
 let passed = 0
@@ -23,6 +23,7 @@ await test('a well-formed calculator event is accepted', () => {
 
 await test('what the client sends is accepted again by the server schema, for every event', () => {
   const samples = [
+    { event: 'visitor_landing', page: 'guide_isa_allowance_uk', channel: 'search' },
     { event: 'calculator_started', page: 'tools_fire_number', channel: 'direct' },
     { event: 'calculator_completed', page: 'tools_fire_number', channel: 'direct' },
     { event: 'cta_displayed', page: 'tools_fire_number', channel: 'direct', location: 'result', target: 'signup' },
@@ -102,8 +103,8 @@ await test('data point layout matches the documented column order', () => {
   assert.ok(Buffer.byteLength(dp.indexes[0]) <= 96)
 })
 
-await test('event catalogue is the documented four', () => {
-  assert.deepEqual([...EVENT_NAMES].sort(), ['calculator_completed', 'calculator_started', 'cta_clicked', 'cta_displayed'])
+await test('event catalogue is the documented five', () => {
+  assert.deepEqual([...EVENT_NAMES].sort(), ['calculator_completed', 'calculator_started', 'cta_clicked', 'cta_displayed', 'visitor_landing'])
   assert.ok(Object.values(EVENTS).every((spec) => spec.required.includes('page')))
 })
 
@@ -265,6 +266,84 @@ await test('GET /api/e reports whether storage is configured, and nothing else',
   assert.equal(ok.status, 200)
   assert.deepEqual(await ok.json(), { ok: true, storage: 'configured', schema: SCHEMA_VERSION })
   assert.equal(ok.headers.get('Cache-Control'), 'no-store')
+})
+
+/* ── visitor_landing ────────────────────────────────────────────────────── */
+await test('a landing is accepted for any public page and carries only page and channel', () => {
+  assert.equal(parseEvent({ event: 'visitor_landing', page: 'landing', channel: 'direct' }).ok, true)
+  assert.equal(parseEvent({ event: 'visitor_landing', page: 'tools_hub', channel: 'search' }).ok, true)
+  assert.equal(parseEvent({ event: 'visitor_landing', page: 'privacy', channel: 'social' }).ok, true)
+  for (const extra of [{ referrer: 'https://google.com/?q=x' }, { url: '/tools?pot=1' }, { country: 'GB' }, { location: 'hero' }]) {
+    const r = parseEvent({ event: 'visitor_landing', page: 'landing', channel: 'direct', ...extra })
+    assert.equal(r.ok, false)
+    assert.match(r.reason, /^unexpected_field:/)
+  }
+  assert.equal(parseEvent({ event: 'visitor_landing', page: '/pricing', channel: 'direct' }).ok, false)
+  assert.equal(parseEvent({ event: 'visitor_landing', page: 'landing' }).ok, false) // channel required
+})
+
+await test('a landing is counted once per page load, never for internal moves, never when opted out', async () => {
+  const saved = { window: globalThis.window, navigator: globalThis.navigator, document: globalThis.document, location: globalThis.location }
+  const beacons = []
+  const setEnv = (nav, referrer) => {
+    globalThis.window = { location: { hostname: 'getpaddock.com', pathname: '/' } }
+    Object.defineProperty(globalThis, 'navigator', {
+      value: { sendBeacon: (url, blob) => { beacons.push({ url, blob }); return true }, ...nav }, configurable: true,
+    })
+    globalThis.document = { referrer }
+    globalThis.location = { hostname: 'getpaddock.com' }
+  }
+  const { resetForTests } = await import('./analytics.js')
+  try {
+    // From a search engine: counted, and a repeated render does not count it twice.
+    beacons.length = 0; resetForTests(); setEnv({}, 'https://www.google.co.uk/')
+    assert.equal(trackVisitorLanding('landing'), true)
+    assert.equal(trackVisitorLanding('landing'), false)
+    assert.equal(beacons.length, 1)
+    assert.equal(beacons[0].url, '/api/e')
+    assert.deepEqual(JSON.parse(await beacons[0].blob.text()), { event: 'visitor_landing', channel: 'search', page: 'landing' })
+
+    // Direct visit: counted.
+    beacons.length = 0; resetForTests(); setEnv({}, '')
+    assert.equal(trackVisitorLanding('tools_fire_number'), true)
+    assert.equal(JSON.parse(await beacons[0].blob.text()).channel, 'direct')
+
+    // Arrived from another page of this site: not a new visit.
+    beacons.length = 0; resetForTests(); setEnv({}, 'https://getpaddock.com/tools')
+    assert.equal(trackVisitorLanding('tools_fire_number'), false)
+    assert.equal(beacons.length, 0)
+
+    // The marketing site linking from the app counts as internal too.
+    beacons.length = 0; resetForTests(); setEnv({}, 'https://app.getpaddock.com/home')
+    assert.equal(trackVisitorLanding('landing'), false)
+
+    // Opt-out signals: nothing is sent.
+    for (const nav of [{ globalPrivacyControl: true }, { doNotTrack: '1' }]) {
+      beacons.length = 0; resetForTests(); setEnv(nav, 'https://www.google.com/')
+      assert.equal(trackVisitorLanding('landing'), false)
+      assert.equal(beacons.length, 0)
+    }
+
+    // An unknown page is never sent.
+    beacons.length = 0; resetForTests(); setEnv({}, '')
+    assert.equal(trackVisitorLanding('not_a_page'), false)
+    assert.equal(trackVisitorLanding(null), false)
+    assert.equal(beacons.length, 0)
+  } finally {
+    for (const [k, v] of Object.entries(saved)) {
+      if (v === undefined) delete globalThis[k]; else Object.defineProperty(globalThis, k, { value: v, configurable: true, writable: true })
+    }
+    resetForTests()
+  }
+})
+
+await test('the function stores a landing as one aggregate data point', async () => {
+  const { written, env } = fakeEnv()
+  const res = await onRequestPost({ request: post({ event: 'visitor_landing', page: 'landing', channel: 'direct' }), env })
+  assert.equal(res.status, 204)
+  assert.equal(written.length, 1)
+  assert.deepEqual(written[0].blobs, ['visitor_landing', 'landing', 'direct', '', '', 'none', String(SCHEMA_VERSION)])
+  assert.deepEqual(written[0].indexes, ['visitor_landing'])
 })
 
 await test('other methods get 405', () => {

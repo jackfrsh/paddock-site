@@ -11,7 +11,7 @@ const WEB_ANALYTICS = {
 
 const EVENT_COUNTER = {
   strong: 'A small counter of anonymous events',
-  text: " runs on our own Cloudflare account. It records that a calculator was used or completed, or that a sign-up or App Store link was clicked, with the page it happened on and a broad category for how the visit began (search, direct, social or other). Each event is a fixed label from a short list. It contains no figures, nothing you typed and no identifier, we do not store your IP address or browser details with it, and it is not linked to any account. Events are kept for up to three months. If your browser sends Global Privacy Control or Do Not Track, this counter records nothing.",
+  text: " runs on our own Cloudflare account. It records that a visit began on a page, that a calculator was used or completed, or that a sign-up or App Store link was clicked, with the page it happened on and a broad category for how the visit began (search, direct, social or other). Each event is a fixed label from a short list. It contains no figures, nothing you typed and no identifier, we do not store your IP address or browser details with it, and it is not linked to any account. Events are kept for up to three months. If your browser sends Global Privacy Control or Do Not Track, this counter records nothing.",
 }
 
 export function websiteMeasurementCopy(status = MEASUREMENT_STATUS) {
@@ -59,7 +59,7 @@ export function websiteMeasurementCopy(status = MEASUREMENT_STATUS) {
   blocks.push({
     type: 'p',
     text: status.appRecordsSource
-      ? "Links from this website to the sign-up page include short labels naming the page you came from, such as the name of a calculator, and how your visit began (search, direct, social or other). They contain nothing you typed. When you create an account the app stores the page label once, so we can count which pages lead to accounts and subscriptions. It is kept with your account record and deleted with it."
+      ? "Links from this website to the sign-up page include short labels naming the page you came from, such as the name of a calculator, and how your visit began (search, direct, social or other). They contain nothing you typed. The app holds them in your browser tab for up to 24 hours, without a cookie. When you create an account it stores the page you first arrived from and the page you came from just before signing up, once, so we can count which pages lead to accounts and subscriptions. If your browser sends Global Privacy Control or Do Not Track, the app keeps nothing. They are kept with your account record and deleted with it."
       : 'Links from this website to the sign-up page include short labels naming the page you came from, such as the name of a calculator, and how your visit began (search, direct, social or other). They contain nothing you typed. The Paddock app does not store these labels yet, and this page will say so when it does.',
   })
 

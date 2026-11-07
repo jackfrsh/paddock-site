@@ -1,0 +1,31 @@
+# Daily check that the live site's measurement is working.
+#
+# It reads two public URLs (GET /api/e and the home page), needs no secrets and
+# sends no events. It fails only when something recorded as verified in
+# src/measurementStatus.js has stopped working; until the owner finishes
+# docs/phase-3-owner-actions.md it shows warnings instead. GitHub emails the
+# repository's watchers when a scheduled run fails.
+#
+# GitHub pauses scheduled workflows after 60 days without repository activity:
+# re-enable it from the Actions tab if that happens.
+name: Analytics health
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check live measurement
+        run: node scripts/check-analytics-health.mjs

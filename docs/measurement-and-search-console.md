@@ -43,10 +43,12 @@ Import the verified Search Console site, which needs no extra code.
 
 ### Cloudflare Web Analytics and the event counter
 
-Follow section 6 of `docs/acquisition-reporting.md`: enable Web Analytics on the
-Pages project, create the `PADDOCK_EVENTS` Analytics Engine binding, and create a
-read-only API token for the weekly report. The privacy page already describes
-both, so enable them promptly after the deploy.
+Follow `docs/phase-3-owner-actions.md` (steps 1 to 3): enable Web Analytics on
+the Pages project, create the `PADDOCK_EVENTS` Analytics Engine binding, and
+create a read-only API token for the weekly report. The privacy page only
+describes measurement whose flag in `src/measurementStatus.js` is `true`, so it
+says nothing about either until you have proved it and flipped the flag.
+`.github/workflows/analytics-health.yml` checks the live site daily.
 
 ## Metrics
 

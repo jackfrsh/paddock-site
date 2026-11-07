@@ -127,6 +127,17 @@ export function currentPageKey() {
   return pageKeyForPath(window.location.pathname)
 }
 
+/* A visit began on this page. Counted once per full page load, and only when the
+   visitor did not arrive from another page of this site (so moving around the
+   site is never counted as a new visit). The in-memory Set also stops a repeated
+   render from sending it twice. A reload counts again, as it would in any page
+   view count. */
+export function trackVisitorLanding(page = currentPageKey()) {
+  if (!page) return false
+  if (currentChannel() === 'internal') return false
+  return trackOnce(`visitor_landing:${page}`, 'visitor_landing', { page })
+}
+
 /* A calculator was touched / produced a result. Each fires once per page view. */
 export function trackCalculatorStarted(page = currentPageKey()) {
   if (!page) return false
