@@ -87,7 +87,11 @@ export function parseEvent(input) {
     return { ok: false, reason: 'not_a_calculator_page' }
   }
 
-  return { ok: true, event: { event: name, variant: 'none', ...fields } }
+  /* Only events that accept a variant get the default. The client sends this
+     normalised object to the server, which validates it again, so adding a
+     field the event does not allow would make the server reject it. */
+  const defaults = spec.optional.includes('variant') ? { variant: 'none' } : {}
+  return { ok: true, event: { event: name, ...defaults, ...fields } }
 }
 
 /* Cloudflare Workers Analytics Engine data point. Column order is part of the

@@ -18,7 +18,22 @@ const good = { event: 'calculator_completed', page: 'tools_fire_number', channel
 await test('a well-formed calculator event is accepted', () => {
   const r = parseEvent(good)
   assert.equal(r.ok, true)
-  assert.deepEqual(r.event, { ...good, variant: 'none' })
+  assert.deepEqual(r.event, good)
+})
+
+await test('what the client sends is accepted again by the server schema, for every event', () => {
+  const samples = [
+    { event: 'calculator_started', page: 'tools_fire_number', channel: 'direct' },
+    { event: 'calculator_completed', page: 'tools_fire_number', channel: 'direct' },
+    { event: 'cta_displayed', page: 'tools_fire_number', channel: 'direct', location: 'result', target: 'signup' },
+    { event: 'cta_clicked', page: 'guide_isa_allowance_uk', channel: 'search', location: 'bottom', target: 'signup' },
+  ]
+  for (const sample of samples) {
+    const first = parseEvent(sample)
+    assert.equal(first.ok, true, `${sample.event} rejected on the client`)
+    const second = parseEvent(JSON.parse(JSON.stringify(first.event)))
+    assert.equal(second.ok, true, `${sample.event} rejected on the server: ${second.reason}`)
+  }
 })
 
 await test('a well-formed cta event is accepted', () => {
