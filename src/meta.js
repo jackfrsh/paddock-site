@@ -96,7 +96,7 @@ export const PAGE_META = {
   guides_index: {
     title: 'Guides — Wealth Tracking & Planning | Paddock',
     description:
-      'Clear, practical guides on long-term wealth projections, multi-currency net worth tracking, and inflation-adjusted planning.',
+      'Practical UK guides on retirement saving, ISAs and the tax year, net worth tracking, long-term wealth projections and inflation-adjusted planning.',
     canonical: 'https://getpaddock.com/guides',
     ogType: 'website',
     jsonLd: {
@@ -105,7 +105,7 @@ export const PAGE_META = {
       name: 'Paddock Guides',
       url: 'https://getpaddock.com/guides',
       description:
-        'Clear, practical guides on long-term wealth projections, multi-currency net worth tracking, and inflation-adjusted planning.',
+        'Practical UK guides on retirement saving, ISAs and the tax year, net worth tracking, long-term wealth projections and inflation-adjusted planning.',
       isPartOf: {
         '@type': 'WebSite',
         name: 'Paddock',
@@ -606,6 +606,87 @@ export const PAGE_META = {
   },
 }
 
+/* Evidence guides added in Growth Phase 2. They share one Article shape, so it
+   is built here rather than repeated six times. dateModified and datePublished
+   are filled in below from the route's lastmod and FIRST_PUBLISHED. */
+function guideMeta({ path, title, description, headline, articleDescription }) {
+  const url = `https://getpaddock.com${path}`
+  return {
+    title,
+    description,
+    canonical: url,
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline,
+      description: articleDescription,
+      url,
+      inLanguage: 'en-GB',
+      author: { '@type': 'Organization', name: 'Paddock', url: 'https://getpaddock.com' },
+      isPartOf: { '@type': 'WebSite', name: 'Paddock', url: 'https://getpaddock.com' },
+      publisher: { '@type': 'Organization', name: 'Paddock', url: 'https://getpaddock.com' },
+    },
+  }
+}
+
+Object.assign(PAGE_META, {
+  guide_isa_allowance_uk: guideMeta({
+    path: '/guides/isa-allowance-uk',
+    title: 'ISA Allowance UK: How Much Can You Pay In? | Paddock',
+    description:
+      'The ISA allowance for the current tax year, what counts towards it, how several ISAs share it, how flexible ISAs work and what is happening to the Cash ISA limit.',
+    headline: 'ISA Allowance: How Much You Can Pay In',
+    articleDescription:
+      'How the UK ISA allowance works: the yearly total, what counts, multiple ISAs, flexible ISAs and the end of the tax year, with links to GOV.UK and HMRC.',
+  }),
+  guide_cash_vs_stocks_shares_isa: guideMeta({
+    path: '/guides/cash-isa-vs-stocks-and-shares-isa',
+    title: 'Cash ISA vs Stocks and Shares ISA: Differences Explained | Paddock',
+    description:
+      'How Cash ISAs and Stocks and Shares ISAs differ on risk, tax, protection and access, with worked illustrations. General information, not a recommendation.',
+    headline: 'Cash ISA vs Stocks and Shares ISA: The Differences',
+    articleDescription:
+      'A neutral comparison of Cash ISAs and Stocks and Shares ISAs covering risk, tax treatment, FSCS protection and access, with primary sources.',
+  }),
+  guide_lifetime_isa_rules_uk: guideMeta({
+    path: '/guides/lifetime-isa-rules-uk',
+    title: 'Lifetime ISA Rules UK: Bonus, Limits and Charges | Paddock',
+    description:
+      'The Lifetime ISA bonus, who can open one, the yearly limit, penalty-free withdrawals, the charge on other withdrawals and how it fits with early retirement.',
+    headline: 'Lifetime ISA Rules in the UK: Bonus, Limits and Charges',
+    articleDescription:
+      'How the UK Lifetime ISA works: the 25% bonus, age and payment limits, first-home and age 60 withdrawals, and the withdrawal charge, with GOV.UK and HMRC sources.',
+  }),
+  guide_end_of_tax_year_checklist_uk: guideMeta({
+    path: '/guides/end-of-tax-year-checklist-uk',
+    title: 'End of Tax Year Checklist UK: ISAs, Pensions, Savings | Paddock',
+    description:
+      'What to check before the tax year ends on 5 April: ISA allowance, Lifetime ISA bonus, pension allowances, savings interest and a year-end balance record.',
+    headline: 'End of the Tax Year Checklist for Savers and Investors',
+    articleDescription:
+      'A checklist of allowances and records to review before 5 April, with what changes on 6 April and links to GOV.UK and HMRC.',
+  }),
+  guide_net_worth_vs_investable_wealth: guideMeta({
+    path: '/guides/net-worth-vs-investable-wealth',
+    title: 'Net Worth vs Investable Wealth: What Is the Difference? | Paddock',
+    description:
+      'Net worth counts everything you own minus debts. Investable wealth counts what you could invest or spend. A worked UK household example and when to use which.',
+    headline: 'Net Worth vs Investable Wealth: What Is the Difference?',
+    articleDescription:
+      'The difference between net worth and investable wealth, with a worked example including a home, mortgage, pensions and ISAs, and ONS definitions of wealth.',
+  }),
+  guide_monthly_investment_retire_early_uk: guideMeta({
+    path: '/guides/monthly-investment-to-retire-early-uk',
+    title: 'How Much to Invest Monthly to Retire Early (UK) | Paddock',
+    description:
+      'A worked method and tables for the monthly saving that could reach a retirement pot by 55, 60 or 65, with the assumptions, the pension access age gap and limits stated.',
+    headline: 'How Much to Invest Each Month to Retire Early in the UK',
+    articleDescription:
+      'Estimate the monthly saving needed to reach a retirement pot by a chosen age, with tables at three growth rates and clear assumptions.',
+  }),
+})
+
 /* Every public page except the home page gets a BreadcrumbList, built from the
    same trail data as the visible breadcrumbs. A page that already has JSON-LD
    keeps it; the list is added to its @graph. */
@@ -630,6 +711,12 @@ const FIRST_PUBLISHED = {
   moneyhub_alternative: '2026-05',
   guide_how_much_retire_uk: '2026-11-06',
   guide_pension_drawdown_explained: '2026-11-06',
+  guide_isa_allowance_uk: '2026-11-07',
+  guide_cash_vs_stocks_shares_isa: '2026-11-07',
+  guide_lifetime_isa_rules_uk: '2026-11-07',
+  guide_end_of_tax_year_checklist_uk: '2026-11-07',
+  guide_net_worth_vs_investable_wealth: '2026-11-07',
+  guide_monthly_investment_retire_early_uk: '2026-11-07',
 }
 const routeByKey = Object.fromEntries(PUBLIC_ROUTES.map((r) => [r.key, r]))
 for (const [key, meta] of Object.entries(PAGE_META)) {

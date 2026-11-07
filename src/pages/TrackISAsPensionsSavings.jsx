@@ -231,6 +231,36 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
               <div className="line" />
               <p>Learn what to include, how often to update, and what matters most.</p>
             </a>
+
+            <a
+              href="/guides/isa-allowance-uk"
+              className="use-link-item"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/isa-allowance-uk') } }}
+            >
+              <h3>ISA allowance</h3>
+              <div className="line" />
+              <p>How much can be paid in this tax year, what counts, and how several ISAs share it.</p>
+            </a>
+
+            <a
+              href="/guides/lifetime-isa-rules-uk"
+              className="use-link-item"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/lifetime-isa-rules-uk') } }}
+            >
+              <h3>Lifetime ISA rules</h3>
+              <div className="line" />
+              <p>The bonus, the yearly limit, penalty-free withdrawals and the charge on the rest.</p>
+            </a>
+
+            <a
+              href="/guides/end-of-tax-year-checklist-uk"
+              className="use-link-item"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/end-of-tax-year-checklist-uk') } }}
+            >
+              <h3>End of tax year checklist</h3>
+              <div className="line" />
+              <p>What is worth checking before 5 April, and what changes on 6 April.</p>
+            </a>
           </div>
         </div>
       </section>

@@ -20,7 +20,9 @@ export default function GuideIndex({ navigateTo }) {
         Clear, practical guides for people who want to track wealth properly —
         across accounts, currencies, and long-term goals. Learn how multi-currency
         net worth tracking works, how long-term wealth projections work, and how
-        to think about inflation in real terms rather than headline numbers.
+        to think about inflation in real terms rather than headline numbers. The
+        retirement and ISA guides use figures from GOV.UK and HMRC, with the
+        sources and the date we checked them shown on each page.
       </p>
 
       <div className="guide-links" style={{ marginTop: 24 }}>
@@ -30,6 +32,30 @@ export default function GuideIndex({ navigateTo }) {
 
         <GuideLink to="/guides/pension-drawdown-explained" navigateTo={navigateTo}>
           Pension drawdown explained →
+        </GuideLink>
+
+        <GuideLink to="/guides/monthly-investment-to-retire-early-uk" navigateTo={navigateTo}>
+          How much to invest each month to retire early →
+        </GuideLink>
+
+        <GuideLink to="/guides/net-worth-vs-investable-wealth" navigateTo={navigateTo}>
+          Net worth vs investable wealth →
+        </GuideLink>
+
+        <GuideLink to="/guides/isa-allowance-uk" navigateTo={navigateTo}>
+          ISA allowance: how much you can pay in →
+        </GuideLink>
+
+        <GuideLink to="/guides/cash-isa-vs-stocks-and-shares-isa" navigateTo={navigateTo}>
+          Cash ISA vs Stocks and Shares ISA →
+        </GuideLink>
+
+        <GuideLink to="/guides/lifetime-isa-rules-uk" navigateTo={navigateTo}>
+          Lifetime ISA rules: bonus, limits and charges →
+        </GuideLink>
+
+        <GuideLink to="/guides/end-of-tax-year-checklist-uk" navigateTo={navigateTo}>
+          End of the tax year checklist →
         </GuideLink>
 
         <GuideLink to="/guides/multi-currency-net-worth-tracker" navigateTo={navigateTo}>

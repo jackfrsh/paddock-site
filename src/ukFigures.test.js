@@ -28,7 +28,7 @@ function test(name, fn) {
 }
 
 const clone = (rows) => rows.map((r) => ({ ...r }))
-const AS_OF = '2026-11-06'
+const AS_OF = '2026-11-07'
 
 // ─── Golden cases from the source organisations' own worked examples ────────
 

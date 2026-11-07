@@ -189,6 +189,36 @@ export default function NetWorthTracker({ navigateTo }) {
               <div className="line" />
               <p>Replace fragile financial workbooks with a clearer structured workflow.</p>
             </a>
+
+            <a
+              href="/guides/net-worth-vs-investable-wealth"
+              className="use-link-item"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/net-worth-vs-investable-wealth') } }}
+            >
+              <h3>Net worth vs investable wealth</h3>
+              <div className="line" />
+              <p>What each number includes, with a worked example, and when to use which.</p>
+            </a>
+
+            <a
+              href="/guides/end-of-tax-year-checklist-uk"
+              className="use-link-item"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/end-of-tax-year-checklist-uk') } }}
+            >
+              <h3>End of tax year checklist</h3>
+              <div className="line" />
+              <p>A year-end routine for allowances and a balance snapshot you can compare.</p>
+            </a>
+
+            <a
+              href="/guides/monthly-investment-to-retire-early-uk"
+              className="use-link-item"
+              onClick={(e) => { if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) { e.preventDefault(); navigateTo('/guides/monthly-investment-to-retire-early-uk') } }}
+            >
+              <h3>Saving to retire early</h3>
+              <div className="line" />
+              <p>Tables showing the monthly saving that could reach a retirement pot by 55, 60 or 65.</p>
+            </a>
           </div>
         </div>
       </section>

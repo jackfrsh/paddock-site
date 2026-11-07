@@ -64,6 +64,9 @@ const GOVUK_LSA = 'https://www.gov.uk/tax-on-your-private-pension/lump-sum-allow
 const GOVUK_NMPA = 'https://www.gov.uk/government/publications/increasing-normal-minimum-pension-age'
 const DWP_RATES_2026_27 =
   'https://www.gov.uk/government/publications/benefit-and-pension-rates-2026-to-2027/proposed-benefit-and-pension-rates-2026-to-2027'
+const GOVUK_SAVINGS_RATES =
+  'https://www.gov.uk/government/publications/changes-to-tax-rates-for-property-savings-dividend-income/changes-to-tax-rates-for-property-savings-dividend-income'
+const BOE_FSCS = 'https://www.bankofengland.co.uk/explainers/what-is-the-financial-services-compensation-scheme'
 const GOVUK_INCOME_TAX =
   'https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past'
 
@@ -431,6 +434,67 @@ export const FIGURES = [
     ...TY_2026_27,
     status: 'in_force',
   }),
+  entry({
+    key: 'income_tax.personal_savings_allowance_basic',
+    name: 'Personal Savings Allowance, basic rate taxpayers',
+    value: 1000,
+    unit: 'GBP',
+    sourceName: 'GOV.UK (Changes to tax rates for property, savings and dividend income)',
+    sourceUrl: GOVUK_SAVINGS_RATES,
+    ...TY_2026_27,
+    status: 'in_force',
+    lastChecked: '2026-11-07',
+    notes: 'Savings interest outside an ISA. Interest inside an ISA is tax-free and does not use it. The same GOV.UK page gives no amount for additional rate taxpayers; other sources say none, so pages say "check GOV.UK" rather than quoting a figure.',
+  }),
+  entry({
+    key: 'income_tax.personal_savings_allowance_higher',
+    name: 'Personal Savings Allowance, higher rate taxpayers',
+    value: 500,
+    unit: 'GBP',
+    sourceName: 'GOV.UK (Changes to tax rates for property, savings and dividend income)',
+    sourceUrl: GOVUK_SAVINGS_RATES,
+    ...TY_2026_27,
+    status: 'in_force',
+    lastChecked: '2026-11-07',
+  }),
+  entry({
+    key: 'income_tax.savings_rate_basic',
+    name: 'Tax rate on savings income, basic rate (from April 2027)',
+    value: 22,
+    unit: 'percent',
+    sourceName: 'GOV.UK (Changes to tax rates for property, savings and dividend income)',
+    sourceUrl: GOVUK_SAVINGS_RATES,
+    ...TY_2027_28,
+    status: 'announced',
+    lastChecked: '2026-11-07',
+    nextReview: REVIEW_AFTER_BUDGET,
+    notes: 'Up from 20%. The page describes the change from April 2027. Whether the Finance Act has received Royal Assent has not been checked, so the status stays at announced and pages say "planned".',
+  }),
+  entry({
+    key: 'income_tax.savings_rate_higher',
+    name: 'Tax rate on savings income, higher rate (from April 2027)',
+    value: 42,
+    unit: 'percent',
+    sourceName: 'GOV.UK (Changes to tax rates for property, savings and dividend income)',
+    sourceUrl: GOVUK_SAVINGS_RATES,
+    ...TY_2027_28,
+    status: 'announced',
+    lastChecked: '2026-11-07',
+    nextReview: REVIEW_AFTER_BUDGET,
+    notes: 'Up from 40%. See the basic rate row for the status caveat.',
+  }),
+  entry({
+    key: 'fscs.deposit_protection_limit',
+    name: 'FSCS deposit protection limit (per person, per authorised firm)',
+    value: 120000,
+    unit: 'GBP',
+    sourceName: 'Bank of England (What is the FSCS?)',
+    sourceUrl: BOE_FSCS,
+    effectiveFrom: '2025-12-01',
+    status: 'in_force',
+    lastChecked: '2026-11-07',
+    notes: 'Covers cash ISAs. Applies to firms that fail from 1 December 2025 (earlier failures keep the old limit). The separate investment protection limit is deliberately not held here: only secondary sources were read.',
+  }),
 ]
 
 // ── Dates ─────────────────────────────────────────────────────────────────
@@ -628,6 +692,8 @@ export function validateFigures(figures = FIGURES, asOf = new Date()) {
     'income_tax.personal_allowance',
     'state_pension.new_full_rate_weekly',
     'pension.normal_minimum_pension_age',
+    'income_tax.personal_savings_allowance_basic',
+    'fscs.deposit_protection_limit',
   ]
   for (const key of REQUIRED_TODAY) {
     if (!figureOn(key, today, { figures })) {

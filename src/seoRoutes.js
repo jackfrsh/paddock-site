@@ -15,8 +15,8 @@ export const PUBLIC_ROUTES = [
     key: 'landing',
     path: '/',
     lastmod: '2026-11-06',
-    targetKeyword: 'net worth tracker UK',
-    secondaryKeywords: ['private UK wealth tracker', 'net worth planner UK', 'manual wealth tracking'],
+    targetKeyword: 'private UK wealth tracker',
+    secondaryKeywords: ['net worth planner UK', 'manual wealth tracking', 'Paddock wealth tracker'],
     intent: 'Find a private UK wealth tracking product',
     h1: "Know where you stand. See where you're going.",
     intro:
@@ -159,7 +159,7 @@ export const PUBLIC_ROUTES = [
     h1: 'How much do I need to retire in the UK?',
     intro:
       'A step-by-step way to estimate the pot you need: income wanted, minus State Pension, divided by a withdrawal rate, with the gap before State Pension age added.',
-    links: ['/tools/retirement-age-calculator', '/tools/retirement-bridge-calculator', '/tools/fire-number-calculator', '/tools/pension-drawdown-calculator', '/guides'],
+    links: ['/tools/retirement-age-calculator', '/tools/retirement-bridge-calculator', '/tools/fire-number-calculator', '/tools/pension-drawdown-calculator', '/guides/monthly-investment-to-retire-early-uk', '/guides/net-worth-vs-investable-wealth', '/guides'],
     priority: true,
   },
   {
@@ -176,16 +176,94 @@ export const PUBLIC_ROUTES = [
     priority: true,
   },
   {
+    key: 'guide_isa_allowance_uk',
+    path: '/guides/isa-allowance-uk',
+    lastmod: '2026-11-07',
+    targetKeyword: 'ISA allowance',
+    secondaryKeywords: ['ISA allowance 2026/27', 'how much can I put in an ISA', 'multiple ISAs same type', 'flexible ISA'],
+    intent: 'Find out how much can be paid into ISAs this tax year and what counts',
+    h1: 'ISA allowance: how much you can pay in',
+    intro:
+      'The ISA allowance for the current tax year, what counts towards it, how several ISAs share it, how flexible ISAs work and whether the Cash ISA limit is changing.',
+    links: ['/guides/end-of-tax-year-checklist-uk', '/guides/cash-isa-vs-stocks-and-shares-isa', '/guides/lifetime-isa-rules-uk', '/track-isas-pensions-savings', '/tools/isa-growth-calculator', '/guides'],
+    priority: true,
+  },
+  {
+    key: 'guide_cash_vs_stocks_shares_isa',
+    path: '/guides/cash-isa-vs-stocks-and-shares-isa',
+    lastmod: '2026-11-07',
+    targetKeyword: 'cash ISA vs stocks and shares ISA',
+    secondaryKeywords: ['difference between cash ISA and stocks and shares ISA', 'cash ISA or stocks and shares ISA', 'ISA types explained'],
+    intent: 'Understand how Cash ISAs and Stocks and Shares ISAs differ',
+    h1: 'Cash ISA vs Stocks and Shares ISA: the differences',
+    intro:
+      'How Cash ISAs and Stocks and Shares ISAs differ on risk, tax, protection and access, with worked illustrations and no product recommendation.',
+    links: ['/tools/isa-growth-calculator', '/guides/isa-allowance-uk', '/guides/lifetime-isa-rules-uk', '/guides'],
+    priority: true,
+  },
+  {
+    key: 'guide_lifetime_isa_rules_uk',
+    path: '/guides/lifetime-isa-rules-uk',
+    lastmod: '2026-11-07',
+    targetKeyword: 'Lifetime ISA rules',
+    secondaryKeywords: ['LISA rules UK', 'Lifetime ISA bonus', 'Lifetime ISA withdrawal charge', 'Lifetime ISA first home'],
+    intent: 'Learn the Lifetime ISA bonus, limits, withdrawal rules and charges',
+    h1: 'Lifetime ISA rules in the UK: bonus, limits and charges',
+    intro:
+      'The Lifetime ISA bonus, who can open one, the yearly limit, penalty-free withdrawals, the charge on other withdrawals and how it fits with retirement planning.',
+    links: ['/tools/retirement-bridge-calculator', '/guides/monthly-investment-to-retire-early-uk', '/guides/isa-allowance-uk', '/guides'],
+    priority: true,
+  },
+  {
+    key: 'guide_end_of_tax_year_checklist_uk',
+    path: '/guides/end-of-tax-year-checklist-uk',
+    lastmod: '2026-11-07',
+    targetKeyword: 'end of tax year checklist UK',
+    secondaryKeywords: ['end of tax year ISA', 'use it or lose it ISA allowance', 'tax year end 5 April savers'],
+    intent: 'See what to check before the UK tax year ends on 5 April',
+    h1: 'End of the tax year checklist for savers and investors',
+    intro:
+      'What to check before 5 April: ISA allowance, Lifetime ISA bonus, pension allowances, savings interest and a year-end balance record, plus what changes on 6 April.',
+    links: ['/guides/isa-allowance-uk', '/guides/lifetime-isa-rules-uk', '/how-to-track-your-net-worth', '/guides/net-worth-vs-investable-wealth', '/guides'],
+    priority: true,
+  },
+  {
+    key: 'guide_net_worth_vs_investable_wealth',
+    path: '/guides/net-worth-vs-investable-wealth',
+    lastmod: '2026-11-07',
+    targetKeyword: 'net worth vs investable wealth',
+    secondaryKeywords: ['investable assets vs net worth', 'what counts as investable wealth', 'net worth including pension and home'],
+    intent: 'Understand the difference between net worth and investable wealth',
+    h1: 'Net worth vs investable wealth: what is the difference?',
+    intro:
+      'What net worth and investable wealth each include, with a worked UK household example and when to use which number.',
+    links: ['/tools/fire-number-calculator', '/guides/how-much-do-i-need-to-retire-uk', '/tools/retirement-bridge-calculator', '/tools/net-worth-calculator', '/how-to-track-your-net-worth', '/track-isas-pensions-savings', '/guides'],
+    priority: true,
+  },
+  {
+    key: 'guide_monthly_investment_retire_early_uk',
+    path: '/guides/monthly-investment-to-retire-early-uk',
+    lastmod: '2026-11-07',
+    targetKeyword: 'how much to invest each month to retire early UK',
+    secondaryKeywords: ['monthly saving to retire at 55', 'retire at 60 how much to save a month', 'retire early savings calculator UK'],
+    intent: 'Estimate the monthly saving needed to reach a retirement pot by a chosen age',
+    h1: 'How much to invest each month to retire early in the UK',
+    intro:
+      'A worked method and tables for the monthly saving that could reach a retirement pot by 55, 60 or 65, with the assumptions and gaps stated.',
+    links: ['/guides/how-much-do-i-need-to-retire-uk', '/tools/retirement-bridge-calculator', '/tools/retirement-age-calculator', '/guides/lifetime-isa-rules-uk', '/tools/net-worth-calculator', '/tools/fire-number-calculator', '/guides/net-worth-vs-investable-wealth', '/guides'],
+    priority: true,
+  },
+  {
     key: 'guides_index',
     path: '/guides',
-    lastmod: '2026-05-07',
+    lastmod: '2026-11-07',
     targetKeyword: 'wealth tracking guides UK',
     secondaryKeywords: ['net worth planning UK', 'long-term wealth projection', 'manual wealth tracking'],
     intent: 'Learn how to track and plan wealth over time',
     h1: 'Paddock guides',
     intro:
-      'Practical UK guides on net worth tracking, long-term projections, inflation, multi-currency accounts and privacy-first manual wealth tracking.',
-    links: ['/guides/multi-currency-net-worth-tracker', '/guides/long-term-wealth-projection', '/guides/inflation-adjusted-net-worth', '/tools'],
+      'Practical UK guides on retirement planning, ISAs and the tax year, net worth tracking, long-term projections, inflation and multi-currency accounts.',
+    links: ['/guides/how-much-do-i-need-to-retire-uk', '/guides/pension-drawdown-explained', '/guides/monthly-investment-to-retire-early-uk', '/guides/net-worth-vs-investable-wealth', '/guides/isa-allowance-uk', '/guides/cash-isa-vs-stocks-and-shares-isa', '/guides/lifetime-isa-rules-uk', '/guides/end-of-tax-year-checklist-uk', '/guides/multi-currency-net-worth-tracker', '/guides/long-term-wealth-projection', '/guides/inflation-adjusted-net-worth', '/tools'],
     priority: true,
   },
   {
@@ -247,7 +325,7 @@ export const PUBLIC_ROUTES = [
     h1: 'Track ISAs, pensions and savings together',
     intro:
       'Bring ISAs, pensions, SIPPs, savings and property into one long-term wealth view built for UK planning and manual privacy-first tracking.',
-    links: ['/net-worth-tracker', '/spreadsheet-alternative-net-worth-tracking', '/how-to-track-your-net-worth', '/moneyhub-alternative', '/tools/isa-growth-calculator'],
+    links: ['/net-worth-tracker', '/spreadsheet-alternative-net-worth-tracking', '/how-to-track-your-net-worth', '/moneyhub-alternative', '/tools/isa-growth-calculator', '/guides/isa-allowance-uk', '/guides/lifetime-isa-rules-uk', '/guides/end-of-tax-year-checklist-uk'],
   },
   {
     key: 'spreadsheet_alternative',
@@ -271,7 +349,7 @@ export const PUBLIC_ROUTES = [
     h1: 'How to track your net worth',
     intro:
       'A practical guide to tracking net worth manually, including what to include, how often to update and how to make the number useful.',
-    links: ['/net-worth-tracker', '/track-isas-pensions-savings', '/spreadsheet-alternative-net-worth-tracking', '/tools/net-worth-calculator'],
+    links: ['/net-worth-tracker', '/track-isas-pensions-savings', '/spreadsheet-alternative-net-worth-tracking', '/tools/net-worth-calculator', '/guides/net-worth-vs-investable-wealth', '/guides/end-of-tax-year-checklist-uk', '/guides/monthly-investment-to-retire-early-uk'],
   },
   {
     key: 'best_net_worth_apps_uk',

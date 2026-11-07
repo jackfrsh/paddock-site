@@ -142,6 +142,14 @@ export default function HowMuchToRetireUK({ navigateTo, goTo }) {
         <a {...link(navigateTo, '/guides/pension-drawdown-explained')}>pension drawdown</a> explains the main option.
       </P>
 
+      <P>
+        If you already know the pot you want, the next sum is how much to put away each month. Our guide to{' '}
+        <a {...link(navigateTo, '/guides/monthly-investment-to-retire-early-uk')}>saving to retire early</a> works through it for
+        retirement at 55, 60 and 65, and{' '}
+        <a {...link(navigateTo, '/guides/net-worth-vs-investable-wealth')}>net worth versus investable wealth</a> explains which of
+        your assets count towards the pot.
+      </P>
+
       <H2>Try it with your own numbers</H2>
       <P>
         The <a {...link(navigateTo, '/tools/fire-number-calculator')}>FIRE number calculator</a> turns a yearly spending figure into a
