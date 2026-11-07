@@ -47,8 +47,8 @@ export default function Privacy({ navigateTo }) {
         behalf, and you should know who they are:
       </P>
       <UL>
-        <li><strong>Supabase</strong> handles sign-in and password management for the app.</li>
-        <li><strong>Railway</strong> hosts the app and its database, where your accounts, balances, goals and planning assumptions are stored.</li>
+        <li><strong>Supabase</strong> handles sign-in and password management for the app, and hosts the database where your accounts, balances, goals and planning assumptions are stored.</li>
+        <li><strong>Google Cloud</strong> runs the app&apos;s servers and, through Firebase Hosting, delivers the app itself to your browser.</li>
         <li><strong>Stripe</strong> processes card payments for Paddock Pro bought on the web, and <strong>Apple</strong> processes payments for Paddock Pro bought through the App Store.</li>
         <li><strong>Google</strong> handles sign-in if you choose &ldquo;Continue with Google&rdquo;.</li>
       </UL>

@@ -63,7 +63,7 @@ test('the Privacy page uses this copy and makes no unqualified third-party shari
   assert.ok(page.includes('websiteMeasurementCopy'))
   assert.doesNotMatch(page, /not sold, shared\s+with third parties/)
   assert.doesNotMatch(page, /no data shared with third parties/i)
-  for (const processor of ['Supabase', 'Railway', 'Stripe', 'Apple', 'Google']) assert.ok(page.includes(processor), processor)
+  for (const processor of ['Supabase', 'Google Cloud', 'Stripe', 'Apple', 'Google']) assert.ok(page.includes(processor), processor)
 })
 
 console.log(`\n${passed} passed, ${failed} failed`)
