@@ -9,6 +9,8 @@ import { figureOn, formatDate, gbp, pensionAccessAge, taxYearOf, valueOn } from 
 const TAX_YEAR = taxYearOf().label
 const STATE_PENSION = valueOn('state_pension.new_full_rate_annual')
 const STATE_PENSION_SOURCE = figureOn('state_pension.new_full_rate_annual', new Date())
+// No weekly row exists for a tax year until DWP publishes one; the sentence then shows the annual figure only.
+const STATE_PENSION_WEEKLY = figureOn('state_pension.new_full_rate_weekly', new Date())?.value ?? null
 const NMPA = pensionAccessAge()
 
 function fmt(n) {
@@ -338,7 +340,7 @@ export default function RetirementAgeCalculator({ navigateTo, goTo }) {
 
             <h2 className="calc-guide-h2">UK figures used</h2>
             <p className="calc-guide-p">
-              The full new State Pension is {gbp(STATE_PENSION, { pence: true })} a year ({gbp(valueOn('state_pension.new_full_rate_weekly'), { pence: true })} a week) in {TAX_YEAR}.
+              The full new State Pension is {gbp(STATE_PENSION, { pence: true })} a year{STATE_PENSION_WEEKLY != null ? ` (${gbp(STATE_PENSION_WEEKLY, { pence: true })} a week)` : ''} in {TAX_YEAR}.
               You may get less if you have fewer qualifying National Insurance years, and your own State
               Pension age depends on your date of birth. The normal minimum pension age is {NMPA.now}
               {NMPA.next ? `, rising to ${NMPA.next} on ${NMPA.nextFrom}` : ''}. Source:{' '}

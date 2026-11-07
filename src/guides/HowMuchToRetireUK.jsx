@@ -9,7 +9,8 @@ export const HOW_MUCH_REVIEWED = '2026-11-06'
 
 const TAX_YEAR = taxYearOf().label
 const STATE_PENSION = valueOn('state_pension.new_full_rate_annual')
-const STATE_PENSION_WEEKLY = valueOn('state_pension.new_full_rate_weekly')
+// No weekly row exists for a tax year until DWP publishes one; the sentence then shows the annual figure only.
+const STATE_PENSION_WEEKLY = figureOn('state_pension.new_full_rate_weekly', new Date())?.value ?? null
 const PERSONAL_ALLOWANCE = valueOn('income_tax.personal_allowance')
 const LUMP_SUM_ALLOWANCE = valueOn('pension.lump_sum_allowance')
 const NMPA = pensionAccessAge()
@@ -60,7 +61,7 @@ export default function HowMuchToRetireUK({ navigateTo, goTo }) {
       <H2>The sum, step by step</H2>
       <UL>
         <li><strong>1. Pick the income you want</strong>, in today&apos;s money. The Pensions and Lifetime Savings Association publishes Retirement Living Standards that show what different spending levels buy.</li>
-        <li><strong>2. Subtract your State Pension.</strong> The full new State Pension is {gbp(STATE_PENSION_WEEKLY, { pence: true })} a week ({gbp(STATE_PENSION, { pence: true })} a year) in {TAX_YEAR}. Your own amount depends on your National Insurance record, so check your forecast on GOV.UK.</li>
+        <li><strong>2. Subtract your State Pension.</strong> The full new State Pension is {STATE_PENSION_WEEKLY != null ? `${gbp(STATE_PENSION_WEEKLY, { pence: true })} a week (${gbp(STATE_PENSION, { pence: true })} a year)` : `${gbp(STATE_PENSION, { pence: true })} a year`} in {TAX_YEAR}. Your own amount depends on your National Insurance record, so check your forecast on GOV.UK.</li>
         <li><strong>3. Divide by a withdrawal rate.</strong> At 4% the pot is 25 times the income it must provide. At 3.5% it is about 28.6 times. A lower rate is more cautious.</li>
         <li><strong>4. Add the gap if you retire early.</strong> Until State Pension age the pot has to pay the whole income, so each earlier year adds one more year of income to the pot you need.</li>
       </UL>

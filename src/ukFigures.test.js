@@ -235,5 +235,31 @@ test('Validator warns, not errors, about a missing named reviewer', () => {
   assert.ok(warnings.some((w) => /no named reviewer/.test(w)))
 })
 
+test('every figure has a row for 6 April 2027, except documented gaps that expire', () => {
+  const first = '2027-04-06'
+  const gaps = {
+    // Abandoned rule: no successor, and no page reads it.
+    'isa.cash_isa_limit_under_65': null,
+    // GOV.UK states £13,036.40 a year for 2027-28 but no weekly rate. Pages show the annual figure only
+    // until DWP publishes a weekly rate. The exception stops on 2027-03-01 so the gap is closed before April.
+    'state_pension.new_full_rate_weekly': '2027-03-01',
+  }
+  const today = new Date().toISOString().slice(0, 10)
+  const missing = []
+  for (const key of new Set(FIGURES.map((f) => f.key))) {
+    if (figureOn(key, first)) continue
+    if (key in gaps && (gaps[key] === null || today < gaps[key])) continue
+    missing.push(key)
+  }
+  assert.deepEqual(missing, [], `no row covers ${first}: ${missing.join(', ')}. Pages that read these would fail on 6 April 2027.`)
+})
+
+test('the 2027-28 State Pension annual figure is the GOV.UK value and no weekly figure is invented', () => {
+  assert.equal(valueOn('state_pension.new_full_rate_annual', '2027-05-01'), 13036.4)
+  assert.equal(figureOn('state_pension.new_full_rate_weekly', '2027-05-01'), null)
+  assert.equal(valueOn('income_tax.dividend_allowance', '2027-05-01'), 500)
+  assert.equal(valueOn('income_tax.starting_rate_for_savings_limit', '2027-05-01'), 5000)
+})
+
 console.log(`\n${passed + failed} tests: ${passed} passed, ${failed} failed\n`)
 if (failed > 0) process.exit(1)
