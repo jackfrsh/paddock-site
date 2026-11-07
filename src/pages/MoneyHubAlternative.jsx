@@ -1,7 +1,18 @@
 import React from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
+import ComparisonSources from '../components/ComparisonSources'
 import { MONEYHUB_FAQS } from '../moneyhubFaqs'
+import {
+  COMPARISON_CHECKED_ON,
+  EMMA_PRICES,
+  MONEYHUB_APP_END_DATE,
+  WEALTHVIEW_PREMIUM_PRICE,
+} from '../comparisonFacts'
+import { PRO_PRICE } from '../planFacts'
+import { formatDate } from '../ukFigures'
+
+const money = (n) => `£${Number.isInteger(n) ? n : n.toFixed(2)}`
 
 function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
@@ -12,23 +23,25 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
     <div className="landing-shell">
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 
-      {/* ── Hero ─────────────────────────────────────────────────────────── */}
+      {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="hero-copy">
-            <div className="hero-kicker">Moneyhub&apos;s consumer app closed in August 2026</div>
+            <div className="hero-kicker">Moneyhub&apos;s consumer app: end of service</div>
             <h1>
-              Moneyhub has closed — here are the best alternatives for UK investors
+              Moneyhub&apos;s consumer app was due to close in August 2026: alternatives for UK investors
             </h1>
             <p className="hero-sub">
-              Moneyhub closed its consumer app in August 2026 and now works with banks, advisers
-              and other businesses rather than individuals. If you used it to track ISAs, pensions,
-              savings or net worth, you need somewhere else to do that. This is an honest
-              comparison of the four strongest options for UK investors, and what to do if you
-              did not export your data in time.
+              Moneyhub announced that it would stop offering its app to individuals and set{' '}
+              {formatDate(MONEYHUB_APP_END_DATE)} as the date remaining consumer accounts would
+              close. That date has passed. The review site Smart Money People now lists the app
+              as discontinued, although Moneyhub&apos;s own announcement still calls it a target
+              date and we found no later statement from Moneyhub. If you used it to track ISAs,
+              pensions, savings or net worth, this is an honest comparison of the strongest
+              options for UK investors, and what to do about your data.
             </p>
             <p className="hero-foot" style={{ marginTop: 16 }}>
-              First published May 2026 · Updated 6 November 2026, after the closure
+              First published May 2026 · Facts rechecked {formatDate(COMPARISON_CHECKED_ON)}
             </p>
             <div className="hero-tags" style={{ marginTop: 24 }}>
               <span>ISAs &amp; SIPPs</span>
@@ -49,17 +62,17 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
             Moneyhub was one of the UK&apos;s longest-running open banking aggregation platforms. It
             let users connect bank accounts, pensions, investments and property in one view, and
             was used both by consumers directly and by financial advisers through its B2B
-            platform. For many UK investors it was the only tool that offered a reasonably
+            platform. For many UK investors it was one of the few tools that gave a reasonably
             comprehensive picture of total wealth — ISAs, SIPPs, current accounts and mortgages
             in one place.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
             Moneyhub said it was concentrating on the business channels where it works with
-            financial institutions, so it stopped taking new consumer customers and building new
-            features for the app, then closed it. Apps that depend on automatic bank connections
-            are also costly to run: the connections need re-authorising regularly and can break.
-            Whatever the mix of reasons, the consumer product is gone, and its users have had to
-            choose a replacement.
+            financial institutions, so it stopped offering the app to new consumer users and
+            building new features for it. Its announcement gave {formatDate(MONEYHUB_APP_END_DATE)}{' '}
+            as the target date for closing all remaining accounts and said personal data would be
+            deleted once the app closed. It did not recommend other providers, and said it had
+            no commercial or migration arrangements with them.
           </p>
         </div>
       </section>
@@ -122,65 +135,63 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
               <tbody>
                 <tr>
                   <td>Price</td>
-                  <td className="cmp-col-paddock">Free tier + subscription</td>
-                  <td>Free</td>
-                  <td>One-time purchase</td>
-                  <td>Free tier + Pro</td>
+                  <td className="cmp-col-paddock">
+                    Free plan; Pro {money(PRO_PRICE.monthly)} a month or {money(PRO_PRICE.annual)} a year
+                  </td>
+                  <td>Free tier; paid Pro tier</td>
+                  <td>Free; {money(WEALTHVIEW_PREMIUM_PRICE)} one-time Premium unlock</td>
+                  <td>Free plan; paid plans from {money(EMMA_PRICES.plusMonthly)} a month</td>
                 </tr>
                 <tr>
-                  <td>Privacy</td>
-                  <td className="cmp-col-paddock">No bank linking, no data sold</td>
-                  <td>Self-hosted option</td>
-                  <td>On-device storage</td>
-                  <td>Data used for product</td>
+                  <td>How accounts are added</td>
+                  <td className="cmp-col-paddock">Manual entry</td>
+                  <td>Manual entry; site says no bank linking</td>
+                  <td>Manual entry; no account or logins</td>
+                  <td>Open banking; manual accounts on paid plans</td>
                 </tr>
                 <tr>
-                  <td>UK tax wrappers (ISA / SIPP)</td>
-                  <td className="cmp-col-paddock">Yes — built in, UK-first</td>
-                  <td>Yes — with tax tools</td>
-                  <td>Partial</td>
-                  <td>Limited — budgeting focus</td>
+                  <td>Where your data lives</td>
+                  <td className="cmp-col-paddock">In your Paddock account, not on your device only</td>
+                  <td>In your WealthR account (not checked in detail)</td>
+                  <td>On your device, per its App Store listing</td>
+                  <td>Emma&apos;s servers; policy says data is used to improve the service</td>
                 </tr>
                 <tr>
-                  <td>Platform</td>
-                  <td className="cmp-col-paddock">Web + iOS</td>
-                  <td>Web (PWA)</td>
-                  <td>iOS only</td>
-                  <td>iOS + Android</td>
-                </tr>
-                <tr>
-                  <td>Bank linking</td>
-                  <td className="cmp-col-paddock">No — manual entry only</td>
-                  <td>No — manual entry only</td>
-                  <td>No — manual entry only</td>
-                  <td>Yes — open banking</td>
+                  <td>UK wrappers (ISA / pension)</td>
+                  <td className="cmp-col-paddock">UK account types built in</td>
+                  <td>ISA, SIPP and defined benefit pension tracking, plus UK tax calculators</td>
+                  <td>ISA and pension allowance tracking; State Pension and UK tax rules</td>
+                  <td>Balances only; no wrapper-specific tools found</td>
                 </tr>
                 <tr>
                   <td>Long-term projections</td>
-                  <td className="cmp-col-paddock">Yes — 5–40 year outlook</td>
-                  <td>Yes — FIRE tools included</td>
-                  <td>Basic</td>
-                  <td>No</td>
+                  <td className="cmp-col-paddock">1 year on the free plan; 5–40 years with Pro</td>
+                  <td>FIRE, Monte Carlo and stress-test tools, in the free tier per its site</td>
+                  <td>Retirement modeller; full controls need Premium</td>
+                  <td>Not found in its plan descriptions</td>
+                </tr>
+                <tr>
+                  <td>Platforms</td>
+                  <td className="cmp-col-paddock">Web and iOS</td>
+                  <td>Web app, installable on iOS and Android as a PWA</td>
+                  <td>iOS (App Store); also listed on Google Play</td>
+                  <td>iOS and Android</td>
                 </tr>
                 <tr>
                   <td>Native iOS app</td>
                   <td className="cmp-col-paddock">Yes</td>
-                  <td>No — PWA only</td>
+                  <td>No — PWA</td>
                   <td>Yes</td>
                   <td>Yes</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
           <p className="cmp-note">
-            Paddock publishes this page and is one of the products compared. The descriptions of
-            other products reflect their public positioning and feature set when this page was
-            first published in May 2026; the Moneyhub closure details were checked on 6 November
-            2026. We have not re-checked every other provider since, so plans, prices and
-            features may have changed. Check each provider&apos;s own site before deciding. Not
-            financial advice.
+            Paddock publishes this page and is one of the products compared. It is not
+            financial advice, and none of these tools gives personal recommendations.
           </p>
+          <ComparisonSources vendors={['wealthr', 'wealthview', 'emma', 'moneyhub']} />
         </div>
       </section>
 
@@ -200,15 +211,15 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
             The result is something that feels more like a deliberate financial journal than a
             live dashboard. ISAs, Stocks and Shares ISAs, SIPPs, cash savings and property all
             have first-class support — not generic asset fields. Multi-currency accounts are
-            handled with daily FX rates built in. Long-term projections run from 5 to 40 years,
-            giving a meaningful view of where your wealth is actually headed.
+            handled with daily FX rates built in. Long-term projections run from 5 to 40 years
+            with Pro; the free plan shows one year ahead.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
-            Paddock works on both web and iOS, with a native iPhone app that has been well-
-            reviewed for its design quality. There is a free tier to start, with a subscription
-            unlocking projections and additional account capacity. The privacy model is clear:
-            no bank credentials are ever shared, no data is sold, and no third-party aggregator
-            sits between you and your accounts.
+            Paddock works on both web and iOS, with a native iPhone app. There is a free plan to
+            start, with a Pro subscription unlocking longer projections and unlimited accounts.
+            The privacy model is simple: no bank credentials are shared, no data is sold, and no
+            third-party aggregator sits between you and your accounts. Your balances are stored
+            in your Paddock account, not only on your device.
           </p>
 
           <div className="faq-grid" style={{ marginTop: 32 }}>
@@ -217,16 +228,16 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
               <p>
                 Privacy-first with no bank linking and no data sold. ISA and SIPP awareness built
                 in from the start. Multi-currency with daily FX rates. Long-term projections on
-                web and native iOS. Closest thing to a Moneyhub replacement for wealth tracking
-                rather than spending.
+                web and native iOS. Built for tracking wealth rather than spending.
               </p>
             </div>
             <div className="faq-card">
               <h3>Where it falls short</h3>
               <p>
                 Manual entry only — no automatic sync. Not designed for day-to-day spending or
-                budgeting. No Android app. Full feature set requires a subscription. If automatic
-                bank linking is your primary need, a different tool will suit you better.
+                budgeting. No Android app. Longer projections and unlimited accounts need Pro. Data
+                is held in your Paddock account rather than only on your device. If automatic bank
+                linking is your primary need, a different tool will suit you better.
               </p>
             </div>
           </div>
@@ -239,39 +250,40 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
           <SectionLabel>Alternative 2</SectionLabel>
           <h2>WealthR</h2>
           <p className="section-copy">
-            WealthR is a free, web-based wealth tracker with a strong emphasis on UK tax tools
-            and FIRE (Financial Independence, Retire Early) planning. It is built as a
-            progressive web app rather than a native application — it runs in the browser and
-            can be added to your home screen, but it is not distributed through the App Store.
+            WealthR (wealthr.co.uk) is a UK-built wealth tracker and retirement planner that runs
+            in the browser and can be added to a phone&apos;s home screen as a progressive web app.
+            Its site describes a free tier that includes net worth tracking, ISA and SIPP tracking
+            and FIRE (Financial Independence, Retire Early) planning, with a paid Pro tier for more
+            advanced planning, and says there is no bank linking. It is not the same product as
+            the similarly named getwealthr.com.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
-            The tax calculator tools are a genuine differentiator. WealthR can model ISA
-            allowance usage, capital gains estimates and pension contribution headroom in ways
-            that most apps do not attempt. For users who care about FIRE numbers, the safe
-            withdrawal rate and coast-FIRE tools are useful and clearly presented. The price —
-            free — makes it easy to try alongside whatever else you are considering.
+            The strength is UK tax and retirement modelling. WealthR offers a free UK income tax
+            calculator and a range of standalone calculators, such as capital gains tax, pension
+            carry forward and Bed and ISA, alongside Monte Carlo retirement simulation and a
+            sequence-of-returns stress test. For people focused on FIRE numbers or drawing down
+            a pension, that is a lot to get without paying.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
-            The main trade-off is the PWA format. On mobile it is functional, but it lacks the
-            polish and reliability of a native app. There is no iOS App Store distribution, no
-            Face ID, no widget support. For users who primarily work on desktop or laptop, that
-            matters much less. For anyone who wants a strong mobile experience, it is a real
-            limitation to weigh.
+            Two things to weigh. It is a web-first app rather than a native one, so it is not in
+            the App Store. And its Pro price is quoted differently across WealthR&apos;s own pages
+            (we saw monthly prices of £4.99 and £5.99, and yearly prices of £39.99 and £49.99),
+            so check its pricing page for the current figure.
           </p>
-
           <div className="faq-grid" style={{ marginTop: 32 }}>
             <div className="faq-card">
               <h3>Where it wins</h3>
               <p>
-                Completely free. Strong UK tax calculator tools including ISA, CGT and pension
-                allowance modelling. Good FIRE planning features. UK-aware account types.
+                A permanent free tier that includes net worth tracking and FIRE tools. No bank
+                linking. Strong UK tax and retirement calculators. Installable on iOS and
+                Android.
               </p>
             </div>
             <div className="faq-card">
               <h3>Where it falls short</h3>
               <p>
-                PWA only — no native iOS app. Mobile experience is limited compared to native
-                apps. Smaller product team. No multi-currency support built in.
+                No native app. Pro pricing is inconsistent between its own pages. We did not
+                assess how it handles multiple currencies or where it stores data.
               </p>
             </div>
           </div>
@@ -284,39 +296,41 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
           <SectionLabel>Alternative 3</SectionLabel>
           <h2>WealthView</h2>
           <p className="section-copy">
-            WealthView takes a straightforward proposition: a one-time purchase price, all data
-            stored on your device, no subscription. For users who are wary of recurring fees or
-            cloud storage of financial data, that combination is genuinely appealing. The app is
-            clean, quick to set up and well-rated on the App Store.
+            WealthView is a UK-focused app for net worth tracking and retirement planning. Its App
+            Store listing says all data stays on your device and no account is required. It is free
+            to download, with a one-time {money(WEALTHVIEW_PREMIUM_PRICE)} Premium unlock rather than a
+            subscription, which suits anyone wary of recurring fees.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
-            The significant limitation is platform: WealthView is iOS only, with no web access
-            and no Android support. If you want to check your portfolio on a laptop or share it
-            across devices not on iCloud, there is no path in. Syncing is handled through
-            iCloud, which works well if you are fully inside the Apple ecosystem — and is a
-            friction point if you are not.
+            The free version covers unlimited accounts, net worth history, ISA and pension
+            allowance tracking, a retirement readiness score and a short retirement preview.
+            Premium adds the full retirement modeller, scenario and stress-test tools, unlimited
+            snapshot history and inheritance tax and capital gains tax sections, according to
+            the listing. It also covers State Pension and defined benefit pensions, which many
+            simple trackers leave out.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
-            UK tax wrapper support is partial. ISA and SIPP accounts can be set up, but the app
-            does not model allowances, contribution rules or withdrawal scenarios with the same
-            depth as Paddock or WealthR. It is better suited to clean, private net worth
-            tracking than to active tax or retirement planning. A reasonable choice if you want
-            a simple iOS ledger and never need web access.
+            The trade-offs follow from keeping everything on the device. Its listings describe a
+            phone and tablet app with data stored locally, and we did not find a web version, so
+            there is nothing to open on a laptop. We have not checked how backup or moving to a
+            new phone works. A Google Play listing also appeared in our searches; check that
+            before assuming it is iOS only.
           </p>
 
           <div className="faq-grid" style={{ marginTop: 32 }}>
             <div className="faq-card">
               <h3>Where it wins</h3>
               <p>
-                One-time price — no subscription. All data stays on your device. Clean, fast
-                iOS experience. No account required to use.
+                One-time price rather than a subscription. Data stays on the device, with no
+                account. Retirement modelling, State Pension and defined benefit pensions, and UK
+                tax rules built in.
               </p>
             </div>
             <div className="faq-card">
               <h3>Where it falls short</h3>
               <p>
-                iOS only — no web access, no Android. iCloud sync only. Limited UK wrapper
-                depth. No meaningful projections or retirement planning tools.
+                The fuller planning tools sit behind the Premium unlock. No web version found.
+                We have not assessed backup or multi-currency support.
               </p>
             </div>
           </div>
@@ -329,42 +343,42 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
           <SectionLabel>Alternative 4</SectionLabel>
           <h2>Emma</h2>
           <p className="section-copy">
-            Emma is the most Moneyhub-like option on this list in one important sense: it links
-            to your bank accounts automatically via open banking. If the reason you used Moneyhub
-            was the automatic sync — waking up to an updated view of everything without manual
-            input — Emma is the closest like-for-like replacement on that dimension.
+            Emma is a budgeting and money-management app that links to UK bank accounts through
+            open banking. If what you liked about Moneyhub was the automatic sync — waking up to
+            an updated view of everything without typing anything in — Emma is the closest option
+            here on that dimension.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
-            It is primarily a budgeting and spending tool. Emma excels at helping you see where
-            your money goes, identify subscriptions and track spending categories. Its wealth
-            tracking features are less developed — the focus is on transactions and budgets, not
-            long-term trajectory or ISA and pension planning. For Moneyhub users who mainly cared
-            about total wealth across wrappers, Emma will feel like a step down in that regard.
+            Emma does track net worth, but its plan structure puts that on the paid plans, along
+            with manual accounts and data export, according to third-party reviews. On its UK App
+            Store listing at our check, Plus was {money(EMMA_PRICES.plusMonthly)} a month, Pro
+            {' '}{money(EMMA_PRICES.proMonthly)} a month or {money(EMMA_PRICES.proAnnual)} a year, and
+            Ultimate {money(EMMA_PRICES.ultimateMonthly)} a month. Reviews report that the free plan
+            allows only a small number of bank connections. In our checks we found no ISA, SIPP or
+            long-term projection tools in its descriptions, so it is a spending-first app that also
+            shows net worth, rather than a planning tool.
           </p>
           <p className="section-copy" style={{ marginTop: 16 }}>
-            A practical note: Emma's version 3 rollout received a significant volume of user
-            complaints around feature removals and pricing changes. Some features from earlier
-            versions were moved behind paywalls. It is worth reading recent App Store reviews
-            before committing. Emma also uses financial data to improve and personalise the
-            product — standard for open banking apps, but worth being clear about if privacy is
-            a priority for you.
+            On privacy, Emma&apos;s privacy policy says personal data is used to improve and
+            customise its services, and that its credit-score features involve sharing data with
+            TransUnion and with the US provider iovation. That is not unusual for an open banking
+            app, but it is worth knowing if privacy is a priority.
           </p>
 
           <div className="faq-grid" style={{ marginTop: 32 }}>
             <div className="faq-card">
               <h3>Where it wins</h3>
               <p>
-                Automatic bank linking via open banking. Strong budgeting and spending tools.
-                Free tier available. Works on iOS and Android. Large, active team with regular
-                updates.
+                Automatic bank syncing through open banking. Budgeting, subscription tracking and
+                spending categories. A free plan to start. iOS and Android.
               </p>
             </div>
             <div className="faq-card">
               <h3>Where it falls short</h3>
               <p>
-                Financial data is used for product improvement. v3 attracted significant user
-                complaints around feature changes and new paywalls. Limited ISA, SIPP and
-                long-term wealth planning depth. Not designed for wealth tracking.
+                Net worth tracking and manual accounts need a paid plan. We found no wrapper-specific
+                or long-term planning tools in its descriptions. Open banking is needed for
+                automatic sync, and its privacy policy says data is used to improve the service.
               </p>
             </div>
           </div>

@@ -1,6 +1,12 @@
 import React from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
+import ComparisonSources from '../components/ComparisonSources'
+import { COMPARISON_CHECKED_ON, EMMA_PRICES, WEALTHVIEW_PREMIUM_PRICE } from '../comparisonFacts'
+import { PRO_PRICE } from '../planFacts'
+import { formatDate } from '../ukFigures'
+
+const money = (n) => `£${Number.isInteger(n) ? n : n.toFixed(2)}`
 
 function SectionLabel({ children }) {
   return <div className="section-label">{children}</div>
@@ -27,7 +33,8 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
             <p className="hero-foot" style={{ marginTop: 16 }}>
               This comparison focuses on long-term wealth tracking, not day-to-day budgeting.
               The tools listed are the most relevant options for UK users building a durable
-              picture of their total wealth.
+              picture of their total wealth. Facts about other products were checked on{' '}
+              {formatDate(COMPARISON_CHECKED_ON)}, and Paddock publishes this page.
             </p>
             <div className="hero-tags" style={{ marginTop: 24 }}>
               <span>ISAs &amp; pensions</span>
@@ -47,7 +54,9 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
           <p className="section-copy narrow">
             Each tool takes a meaningfully different approach. The right choice depends on
             whether automatic syncing or deliberate, private tracking is a better fit
-            for how you manage your finances.
+            for how you manage your finances. How we chose: UK availability, whether it tracks
+            net worth across ISAs and pensions, how accounts are added, where the data is held,
+            and what it costs.
           </p>
 
           <div className="cmp-table-wrap">
@@ -56,71 +65,100 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
                 <tr>
                   <th></th>
                   <th className="cmp-col-paddock">Paddock</th>
+                  <th>WealthR</th>
+                  <th>WealthView</th>
                   <th>Emma</th>
-                  <th>Moneyhub (closed)</th>
                   <th>Spreadsheet</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Entry method</td>
+                  <td>Price</td>
+                  <td className="cmp-col-paddock">
+                    Free plan; Pro {money(PRO_PRICE.monthly)} a month or {money(PRO_PRICE.annual)} a year
+                  </td>
+                  <td>Free tier; paid Pro tier</td>
+                  <td>Free; {money(WEALTHVIEW_PREMIUM_PRICE)} one-time Premium unlock</td>
+                  <td>Free plan; paid plans from {money(EMMA_PRICES.plusMonthly)} a month</td>
+                  <td>Free to build</td>
+                </tr>
+                <tr>
+                  <td>How accounts are added</td>
                   <td className="cmp-col-paddock">Manual — you enter balances</td>
-                  <td>Automatic via open banking</td>
-                  <td>Automatic via open banking</td>
+                  <td>Manual; its site says no bank linking</td>
+                  <td>Manual; no account or logins</td>
+                  <td>Open banking; manual accounts on paid plans</td>
                   <td>Manual — you build it yourself</td>
                 </tr>
                 <tr>
-                  <td>Primary focus</td>
-                  <td className="cmp-col-paddock">Total wealth &amp; long-term planning</td>
-                  <td>Budgeting &amp; spending tracking</td>
-                  <td>Broad account aggregation</td>
-                  <td>Whatever you design it for</td>
+                  <td>Net worth tracking</td>
+                  <td className="cmp-col-paddock">Yes — up to 5 accounts free</td>
+                  <td>Yes — in the free tier</td>
+                  <td>Yes — unlimited accounts free</td>
+                  <td>On paid plans (Pro {money(EMMA_PRICES.proMonthly)} a month)</td>
+                  <td>If you build it</td>
                 </tr>
                 <tr>
                   <td>ISAs, SIPPs &amp; UK wrappers</td>
                   <td className="cmp-col-paddock">Yes — designed for UK wealth accounts</td>
-                  <td>Bank &amp; card accounts primarily</td>
-                  <td>Broad account types supported</td>
-                  <td>Manual — any account you add</td>
-                </tr>
-                <tr>
-                  <td>Multi-currency</td>
-                  <td className="cmp-col-paddock">Yes — daily FX rates built in</td>
-                  <td>UK-focused</td>
-                  <td>Yes</td>
-                  <td>Manual FX setup required</td>
+                  <td>ISA, SIPP and defined benefit pension tracking</td>
+                  <td>ISA and pension allowance tracking</td>
+                  <td>Balances only; no wrapper-specific tools found</td>
+                  <td>Any account you add</td>
                 </tr>
                 <tr>
                   <td>Long-term projections</td>
-                  <td className="cmp-col-paddock">Yes — 5–40 year outlook</td>
-                  <td>No</td>
-                  <td>Limited</td>
+                  <td className="cmp-col-paddock">1 year free; 5–40 years with Pro</td>
+                  <td>FIRE, Monte Carlo and stress-test tools</td>
+                  <td>Retirement modeller; full controls need Premium</td>
+                  <td>Not found in its plan descriptions</td>
                   <td>Build your own</td>
                 </tr>
                 <tr>
-                  <td>Privacy / bank linking</td>
-                  <td className="cmp-col-paddock">No bank credentials shared</td>
-                  <td>Open banking required</td>
-                  <td>Open banking required</td>
-                  <td>Local — you control everything</td>
+                  <td>Where your data lives</td>
+                  <td className="cmp-col-paddock">In your Paddock account</td>
+                  <td>Not checked in detail</td>
+                  <td>On your device, per its App Store listing</td>
+                  <td>Emma&apos;s servers; policy says data is used to improve the service</td>
+                  <td>Wherever you save the file</td>
+                </tr>
+                <tr>
+                  <td>Platforms</td>
+                  <td className="cmp-col-paddock">Web and iOS</td>
+                  <td>Web app, installable on iOS and Android</td>
+                  <td>iOS; also listed on Google Play</td>
+                  <td>iOS and Android</td>
+                  <td>Desktop and mobile spreadsheet apps</td>
                 </tr>
                 <tr>
                   <td>Best for</td>
                   <td className="cmp-col-paddock">Private, deliberate wealth tracking</td>
+                  <td>Free UK tax and FIRE planning</td>
+                  <td>One-off purchase, data kept on your phone</td>
                   <td>Automatic spending overview</td>
-                  <td>Consumer app closed in August 2026</td>
                   <td>Spreadsheet-native users</td>
                 </tr>
               </tbody>
             </table>
           </div>
-
           <p className="cmp-note">
-            Paddock publishes this page and is one of the products compared. Descriptions of other
-            products reflect their public positioning and feature set and have not been
-            re-checked line by line recently, so check each provider's own site for current plans,
-            prices and features. Not financial advice.
+            Paddock publishes this page and is one of the products compared. It is not financial
+            advice. Moneyhub, which many people used for this, announced the end of its consumer
+            app; our{' '}
+            <a
+              href="/moneyhub-alternative"
+              onClick={(e) => {
+                if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                  e.preventDefault()
+                  navigateTo('/moneyhub-alternative')
+                }
+              }}
+            >
+              Moneyhub alternatives page
+            </a>{' '}
+            covers it.
           </p>
+          <ComparisonSources vendors={['wealthr', 'wealthview', 'emma']} />
         </div>
       </section>
 
@@ -136,7 +174,7 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
 
           <div className="faq-grid">
             <div className="faq-card">
-              <h3>Paddock — best for private wealth tracking</h3>
+              <h3>Paddock — private wealth tracking</h3>
               <p>
                 If you want to track ISAs, pensions, savings, property, and multi-currency
                 accounts in one deliberate view — without sharing bank credentials — Paddock
@@ -144,29 +182,33 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
                 over the long term, not a live feed of transactions. No open banking required.
               </p>
             </div>
-
             <div className="faq-card">
-              <h3>Emma — best for automatic spending overview</h3>
+              <h3>WealthR — free UK tax and FIRE planning</h3>
+              <p>
+                If you want a free web app with UK tax calculators and FIRE and retirement
+                modelling, WealthR&apos;s free tier covers a lot. It has no bank linking and runs
+                in the browser. Pro adds more planning tools, so check its pricing page.
+              </p>
+            </div>
+            <div className="faq-card">
+              <h3>WealthView — a one-off price, data on your phone</h3>
+              <p>
+                If you would rather pay once than subscribe and keep everything on your device,
+                WealthView offers net worth tracking and retirement modelling for a one-time
+                unlock. The fuller planning tools sit behind that unlock.
+              </p>
+            </div>
+            <div className="faq-card">
+              <h3>Emma — automatic spending overview</h3>
               <p>
                 If your primary goal is to see spending, subscriptions, and bank balances
                 automatically without manual entry, Emma is designed around that need.
                 It uses open banking to sync your accounts and focuses on budgeting and
-                spending awareness rather than long-term wealth tracking.
+                spending awareness; net worth tracking is on its paid plans.
               </p>
             </div>
-
             <div className="faq-card">
-              <h3>Moneyhub — consumer app closed in August 2026</h3>
-              <p>
-                Moneyhub was the broadest automatic aggregator of the group, but it closed
-                its consumer app in August 2026 and now works with banks and advisers
-                instead. If you used it, our Moneyhub alternatives page compares the
-                replacements.
-              </p>
-            </div>
-
-            <div className="faq-card">
-              <h3>Spreadsheet — best for full manual control</h3>
+              <h3>Spreadsheet — full manual control</h3>
               <p>
                 If you are technically comfortable and already have your own models,
                 a spreadsheet gives you maximum flexibility at zero cost. The main
@@ -215,8 +257,9 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
               <div className="line" />
               <p>
                 No bank credentials are shared with Paddock. No third-party aggregator
-                sits between you and your accounts. For wealth tracking — where the
-                numbers are larger and more sensitive — that matters.
+                sits between you and your accounts. Paddock holds only the balances and
+                assumptions you choose to enter, in your Paddock account. For wealth tracking —
+                where the numbers are larger and more sensitive — that matters.
               </p>
             </div>
           </div>
@@ -354,12 +397,14 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
             <div className="faq-card">
               <h3>Are manual net worth trackers better for privacy?</h3>
               <p>
-                Generally, yes. Open banking tools require you to share credentials or
-                grant access to your financial accounts, which means a third party can
-                see your transaction history. With a manual tracker like Paddock,
-                nothing is shared — you enter numbers yourself, and the data stays
-                in the app. For wealth tracking, where balances and account types are
-                sensitive, that is a meaningful difference.
+                They can be, but it depends on the product. Open banking apps normally let
+                you approve access at your own bank without handing over your password,
+                but they do receive your account data and transactions. A manual tracker
+                only holds what you type in. Paddock never asks for bank credentials or
+                connects to your accounts, so the data it holds is the balances and
+                assumptions you choose to enter, stored in your Paddock account. Some manual
+                apps, such as WealthView, keep everything on your device instead. Which suits
+                you depends on where you are comfortable keeping that data.
               </p>
             </div>
 

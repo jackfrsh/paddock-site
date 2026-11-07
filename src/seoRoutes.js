@@ -276,26 +276,26 @@ export const PUBLIC_ROUTES = [
   {
     key: 'best_net_worth_apps_uk',
     path: '/best-net-worth-tracking-apps-uk',
-    lastmod: '2026-11-06',
+    lastmod: '2026-11-07',
     targetKeyword: 'best net worth tracking app UK',
     secondaryKeywords: ['Emma alternative UK', 'Moneyhub alternative', 'best finance app without bank linking'],
     intent: 'Compare UK net worth tracking app options',
     h1: 'Best net worth tracking apps UK',
     intro:
-      'An honest comparison of Paddock, Emma and spreadsheets for UK users tracking ISAs, pensions, savings and multi-currency wealth.',
+      'An honest comparison of Paddock, WealthR, WealthView, Emma and spreadsheets for UK users tracking ISAs, pensions, savings and multi-currency wealth.',
     links: ['/net-worth-tracker', '/moneyhub-alternative', '/why-i-track-wealth-manually-instead-of-using-open-banking-apps', '/tools/net-worth-calculator'],
     priority: true,
   },
   {
     key: 'moneyhub_alternative',
     path: '/moneyhub-alternative',
-    lastmod: '2026-11-06',
+    lastmod: '2026-11-07',
     targetKeyword: 'Moneyhub alternative UK',
     secondaryKeywords: ['Moneyhub closed', 'best Moneyhub replacement', 'UK wealth tracker app comparison'],
-    intent: 'Find a replacement for Moneyhub after its consumer app closed in August 2026',
-    h1: 'Moneyhub has closed — here are the best alternatives for UK investors',
+    intent: 'Find a replacement for Moneyhub after its consumer app was due to close in August 2026',
+    h1: "Moneyhub's consumer app was due to close in August 2026: alternatives for UK investors",
     intro:
-      'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who used Moneyhub, whose consumer app closed in August 2026.',
+      'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who used Moneyhub, whose consumer app was due to close in August 2026.',
     links: [
       '/best-net-worth-tracking-apps-uk',
       '/why-i-track-wealth-manually-instead-of-using-open-banking-apps',

@@ -338,7 +338,7 @@ export const PAGE_META = {
   best_net_worth_apps_uk: {
     title: 'Best Net Worth Tracking Apps UK | Manual Wealth Tracking | Paddock',
     description:
-      'Compare UK net worth tracking apps including Paddock, Emma and spreadsheets for ISAs, pensions, savings and multi-currency wealth.',
+      'Compare UK net worth tracking apps including Paddock, WealthR, WealthView, Emma and spreadsheets for ISAs, pensions, savings and multi-currency wealth. Facts checked 7 November 2026.',
     canonical: 'https://getpaddock.com/best-net-worth-tracking-apps-uk',
     ogType: 'article',
     jsonLd: {
@@ -375,7 +375,7 @@ export const PAGE_META = {
             {
               '@type': 'Question',
               name: 'Are manual net worth trackers better for privacy?',
-              acceptedAnswer: { '@type': 'Answer', text: 'Generally, yes. Open banking tools require you to share credentials or grant access to your financial accounts. With a manual tracker like Paddock, nothing is shared — you enter numbers yourself, and the data stays in the app.' },
+              acceptedAnswer: { '@type': 'Answer', text: 'They can be, but it depends on the product. Open banking apps normally let you approve access at your own bank without handing over your password, but they do receive your account data and transactions. A manual tracker only holds what you type in. Paddock never asks for bank credentials or connects to your accounts, so the data it holds is the balances and assumptions you choose to enter, stored in your Paddock account. Some manual apps, such as WealthView, keep everything on your device instead. Which suits you depends on where you are comfortable keeping that data.' },
             },
             {
               '@type': 'Question',
@@ -524,7 +524,7 @@ export const PAGE_META = {
   moneyhub_alternative: {
     title: 'Moneyhub Alternatives (2026): UK Wealth Trackers Compared',
     description:
-      'Moneyhub\'s consumer app has closed. Compare the best UK alternatives for tracking ISAs, SIPPs and net worth: Paddock, WealthR, WealthView and Emma.',
+      'Moneyhub\'s consumer app was due to close on 14 August 2026. Compare UK alternatives for tracking ISAs, SIPPs and net worth: Paddock, WealthR, WealthView and Emma.',
     canonical: 'https://getpaddock.com/moneyhub-alternative',
     ogType: 'article',
     jsonLd: {
@@ -532,9 +532,9 @@ export const PAGE_META = {
       '@graph': [
         {
           '@type': 'Article',
-          headline: 'Moneyhub has closed — here are the best alternatives for UK investors',
+          headline: 'Moneyhub\'s consumer app was due to close in August 2026: alternatives for UK investors',
           description:
-            'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who used Moneyhub, whose consumer app closed in August 2026.',
+            'An honest comparison of Paddock, WealthR, WealthView and Emma for UK users who used Moneyhub, whose consumer app was due to close in August 2026. Facts rechecked on 7 November 2026.',
           url: 'https://getpaddock.com/moneyhub-alternative',
           dateModified: '2026-11-06',
           inLanguage: 'en-GB',

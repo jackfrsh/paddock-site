@@ -1,17 +1,21 @@
 # Measurement and Search Console
 
-Nothing in the site sends analytics anywhere today. That is deliberate, and the
-privacy page says "no tracking pixels". This file sets out what to measure, how
-to do it without breaking that promise, and the owner steps that cannot be done
-from the repository.
+Measurement is built into the code but **not collecting yet**: it needs the
+owner steps below and in `docs/acquisition-reporting.md`, which is the full
+specification (event catalogue, privacy design, weekly workflow, troubleshooting).
 
-## What is already true in the code
+The privacy page describes this measurement in its "This website" section. Keep
+it in step with the code.
+
+## What is true in the code
 
 - Calculators run in the browser. Inputs are never put in URLs, stored, or sent.
-- Calculators and the result call-to-action dispatch a DOM event
-  (`paddock:calc`) that carries only an event name and a source name, such as
-  `result_cta_click` and `retirement_age`. Nothing listens to it yet.
-- Sign-up links carry no query data from calculators.
+- The site sends four anonymous, allowlisted events (calculator started and
+  completed, call to action displayed and clicked) to its own Cloudflare Pages
+  Function, which writes aggregate data points. No cookies, no browser storage, no
+  identifiers, no values. It honours Global Privacy Control and Do Not Track.
+- Sign-up links carry `src=<page key>`, a coarse label for the page. The app
+  ignores it today (see `docs/app-instrumentation-plan.md`).
 
 ## Owner steps (cannot be done from the repo)
 
@@ -37,11 +41,12 @@ has been submitted or verified yet.
 
 Import the verified Search Console site, which needs no extra code.
 
-### Cloudflare Web Analytics (optional, needs a wording decision)
+### Cloudflare Web Analytics and the event counter
 
-It is cookieless and can be switched on for the Pages project without adding
-cookies. It would still be a script on the site, so decide first whether the
-privacy page needs a line saying so. Do not enable it without updating the page.
+Follow section 6 of `docs/acquisition-reporting.md`: enable Web Analytics on the
+Pages project, create the `PADDOCK_EVENTS` Analytics Engine binding, and create a
+read-only API token for the weekly report. The privacy page already describes
+both, so enable them promptly after the deploy.
 
 ## Metrics
 
@@ -50,8 +55,8 @@ privacy page needs a line saying so. Do not enable it without updating the page.
 | Visibility | Impressions, clicks, average position, by page and query | Search Console |
 | Indexing | Indexed vs submitted pages, excluded reasons | Search Console |
 | Engagement | Visits per page, calculator page share of visits | Cloudflare Web Analytics, if enabled |
-| Calculator use | Completed calculations per calculator | Not measured yet. Needs the `paddock:calc` event to be counted without inputs |
-| Conversion | Result call-to-action clicks, sign-up page visits | Same event, then the app's own sign-up count |
+| Calculator use | Started and completed per calculator | First-party event counter (`scripts/acquisition-report.mjs`) |
+| Conversion | Result call-to-action displays and clicks, sign-up link clicks by page | Same counter; then the app's own sign-up count by `src` once recorded |
 | Activation | Sign-ups that add a first balance | The app (separate repo), outside this site |
 
 Report calculator and conversion numbers as counts and rates only. Never log what

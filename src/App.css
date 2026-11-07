@@ -2614,6 +2614,24 @@ h3 {
   line-height: 1.65;
 }
 
+.cmp-sources-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.cmp-sources-list li {
+  margin-bottom: 6px;
+}
+
+.cmp-sources-list a {
+  color: var(--text-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .cmp-tradeoff {
   margin-top: 28px;
   padding: 22px 24px;
