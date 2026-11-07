@@ -66,6 +66,12 @@ const DWP_RATES_2026_27 =
   'https://www.gov.uk/government/publications/benefit-and-pension-rates-2026-to-2027/proposed-benefit-and-pension-rates-2026-to-2027'
 const GOVUK_SAVINGS_RATES =
   'https://www.gov.uk/government/publications/changes-to-tax-rates-for-property-savings-dividend-income/changes-to-tax-rates-for-property-savings-dividend-income'
+// Budget 2026 (28 October 2026): savings rates rise a further 2 points for 2027-28 (24% / 44% / 49%).
+// This supersedes the Budget 2025 note above (22% / 42% / 47%), which is no longer the figure to quote.
+const GOVUK_BUDGET_2026_SAVINGS_RATES =
+  'https://www.gov.uk/government/publications/income-tax-changes-to-tax-rates-for-property-and-savings-income/income-tax-changes-to-tax-rates-for-property-and-savings-income'
+const GOVUK_BUDGET_2026_ANNEX_A =
+  'https://www.gov.uk/government/publications/budget-2026-overview-of-tax-legislation-and-rates-ootlar/annex-a-rates-and-allowances'
 const BOE_FSCS = 'https://www.bankofengland.co.uk/explainers/what-is-the-financial-services-compensation-scheme'
 const GOVUK_INCOME_TAX =
   'https://www.gov.uk/government/publications/rates-and-allowances-income-tax/income-tax-rates-and-allowances-current-and-past'
@@ -439,8 +445,8 @@ export const FIGURES = [
     name: 'Personal Savings Allowance, basic rate taxpayers',
     value: 1000,
     unit: 'GBP',
-    sourceName: 'GOV.UK (Changes to tax rates for property, savings and dividend income)',
-    sourceUrl: GOVUK_SAVINGS_RATES,
+    sourceName: 'GOV.UK (Budget 2026: rates and allowances, Annex A)',
+    sourceUrl: GOVUK_BUDGET_2026_ANNEX_A,
     ...TY_2026_27,
     status: 'in_force',
     lastChecked: '2026-11-07',
@@ -451,8 +457,8 @@ export const FIGURES = [
     name: 'Personal Savings Allowance, higher rate taxpayers',
     value: 500,
     unit: 'GBP',
-    sourceName: 'GOV.UK (Changes to tax rates for property, savings and dividend income)',
-    sourceUrl: GOVUK_SAVINGS_RATES,
+    sourceName: 'GOV.UK (Budget 2026: rates and allowances, Annex A)',
+    sourceUrl: GOVUK_BUDGET_2026_ANNEX_A,
     ...TY_2026_27,
     status: 'in_force',
     lastChecked: '2026-11-07',
@@ -460,28 +466,28 @@ export const FIGURES = [
   entry({
     key: 'income_tax.savings_rate_basic',
     name: 'Tax rate on savings income, basic rate (from April 2027)',
-    value: 22,
+    value: 24,
     unit: 'percent',
-    sourceName: 'GOV.UK (Changes to tax rates for property, savings and dividend income)',
-    sourceUrl: GOVUK_SAVINGS_RATES,
+    sourceName: 'GOV.UK (Income Tax: changes to tax rates for property and savings income, Budget 2026) and HMRC tax-free savings newsletter 24',
+    sourceUrl: GOVUK_BUDGET_2026_SAVINGS_RATES,
     ...TY_2027_28,
     status: 'announced',
     lastChecked: '2026-11-07',
     nextReview: REVIEW_AFTER_BUDGET,
-    notes: 'Up from 20%. The page describes the change from April 2027. Whether the Finance Act has received Royal Assent has not been checked, so the status stays at announced and pages say "planned".',
+    notes: 'Up from 20%. Budget 2025 set 22% (Finance Act 2026, section 5); Budget 2026 on 28 October 2026 adds a further 2 percentage points, to be legislated in Finance Bill 2026-27, so it is not yet law. The status stays at announced and pages say "planned". Additional rate would be 49%; the site does not quote it.',
   }),
   entry({
     key: 'income_tax.savings_rate_higher',
     name: 'Tax rate on savings income, higher rate (from April 2027)',
-    value: 42,
+    value: 44,
     unit: 'percent',
-    sourceName: 'GOV.UK (Changes to tax rates for property, savings and dividend income)',
-    sourceUrl: GOVUK_SAVINGS_RATES,
+    sourceName: 'GOV.UK (Income Tax: changes to tax rates for property and savings income, Budget 2026) and HMRC tax-free savings newsletter 24',
+    sourceUrl: GOVUK_BUDGET_2026_SAVINGS_RATES,
     ...TY_2027_28,
     status: 'announced',
     lastChecked: '2026-11-07',
     nextReview: REVIEW_AFTER_BUDGET,
-    notes: 'Up from 40%. See the basic rate row for the status caveat.',
+    notes: 'Up from 40%. Budget 2025 set 42%; Budget 2026 adds a further 2 points. See the basic rate row for the status caveat.',
   }),
   entry({
     key: 'fscs.deposit_protection_limit',

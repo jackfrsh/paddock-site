@@ -23,7 +23,8 @@ const grow = (amount, rate, years) => amount * Math.pow(1 + rate, years)
 export default function CashVsStocksSharesIsa({ navigateTo, goTo }) {
   const sources = [
     { title: 'Individual Savings Accounts (ISAs)', org: 'GOV.UK', url: 'https://www.gov.uk/individual-savings-accounts' },
-    { title: 'Changes to tax rates for property, savings and dividend income', org: 'GOV.UK', url: figureOn('income_tax.personal_savings_allowance_basic', new Date()).sourceUrl },
+    { title: 'Budget 2026: rates and allowances (Annex A)', org: 'GOV.UK', url: figureOn('income_tax.personal_savings_allowance_basic', new Date()).sourceUrl },
+    { title: 'Income Tax: changes to tax rates for property and savings income', org: 'GOV.UK', url: figureOn('income_tax.savings_rate_basic', '2027-05-01').sourceUrl },
     { title: 'What is the Financial Services Compensation Scheme?', org: 'Bank of England', url: figureOn('fscs.deposit_protection_limit', new Date()).sourceUrl },
     { title: 'What FSCS protects: investments and the investment limit', org: 'Financial Services Compensation Scheme', url: 'https://www.fscs.org.uk' },
     { title: 'Free, impartial money guidance', org: 'MoneyHelper', url: 'https://www.moneyhelper.org.uk' },
