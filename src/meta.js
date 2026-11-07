@@ -5,6 +5,7 @@ import { MONEYHUB_FAQS } from './moneyhubFaqs.js'
 import { HOWTO_FAQS } from './pageContent/howToTrackNetWorth.js'
 import { NWT_FAQS } from './pageContent/netWorthTracker.js'
 import { SHEET_FAQS } from './pageContent/spreadsheetAlternative.js'
+import { PRO_FAQS } from './pageContent/paddockPro.js'
 import { TRACK_ISAS_FAQS } from './pageContent/trackIsas.js'
 
 const faqPage = (faqs) => ({
@@ -251,6 +252,15 @@ export const PAGE_META = {
     canonical: 'https://getpaddock.com/how-to-track-your-net-worth',
     ogType: 'website',
     jsonLd: faqPage(HOWTO_FAQS),
+  },
+
+  paddock_pro: {
+    title: 'Paddock Pro: What It Includes and Costs | Paddock',
+    description:
+      'See what Paddock Pro adds to the free UK net worth tracker: 5 to 40 year projections, a freedom timeline and scenario comparison. £6 a month or £60 a year.',
+    canonical: 'https://getpaddock.com/paddock-pro',
+    ogType: 'website',
+    jsonLd: faqPage(PRO_FAQS),
   },
 
   tools_hub: {

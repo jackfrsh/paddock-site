@@ -35,6 +35,19 @@ export const PUBLIC_ROUTES = [
     priority: true,
   },
   {
+    key: 'paddock_pro',
+    path: '/paddock-pro',
+    lastmod: '2026-11-07',
+    targetKeyword: 'Paddock Pro',
+    secondaryKeywords: ['net worth planner UK', 'long-term wealth projection app', 'Paddock pricing'],
+    intent: 'Understand what Paddock Pro includes, who it suits and what it costs',
+    h1: 'See when your plan gets you there.',
+    intro:
+      'Paddock Pro adds 5 to 40 year projections, a freedom timeline and scenario comparison to a private UK net worth tracker. Free for up to five accounts; Pro is £6 a month or £60 a year.',
+    links: ['/net-worth-tracker', '/best-net-worth-tracking-apps-uk', '/guides/how-much-do-i-need-to-retire-uk', '/privacy', '/security', '/tools'],
+    priority: true,
+  },
+  {
     key: 'tools_hub',
     path: '/tools',
     lastmod: '2026-05-07',

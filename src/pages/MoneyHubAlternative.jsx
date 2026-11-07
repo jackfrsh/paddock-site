@@ -516,7 +516,7 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={() => goTo('signup')}
+              onClick={() => goTo('signup', 'bottom')}
             >
               Create your free account
             </button>

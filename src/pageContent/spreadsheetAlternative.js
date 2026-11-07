@@ -1,10 +1,12 @@
 import { HOME_FAQS } from '../homeFaqs.js'
 import { pickFaq } from './format.js'
+import { PLAN_FACTS_VERIFIED_ON, planSummary } from '../planFacts.js'
+import { formatDate } from '../ukFigures.js'
 
 export const SHEET_QUICK_ANSWER =
   'A spreadsheet works for tracking net worth until the tabs, formulas and manual checks become the job. Paddock keeps the monthly-update habit but replaces the maintenance with UK account types, built-in projections and no bank logins.'
 
-export const SHEET_PRICING_CHECKED = '6 November 2026'
+export const SHEET_PRICING_CHECKED = formatDate(PLAN_FACTS_VERIFIED_ON)
 
 export const SHEET_COMPARISON = {
   label: 'Side by side',
@@ -41,10 +43,10 @@ export const SHEET_COMPARISON = {
     [
       'Cost',
       'Free.',
-      'A free plan for up to 3 accounts, or Pro at £6 a month or £60 a year.',
+      planSummary(),
     ],
   ],
-  note: `Paddock pricing as shown on getpaddock.com on ${SHEET_PRICING_CHECKED}.`,
+  note: `Paddock plan details checked against the app on ${SHEET_PRICING_CHECKED}.`,
 }
 
 export const SHEET_MAPPING = {

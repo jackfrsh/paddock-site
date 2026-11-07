@@ -4,20 +4,10 @@ import SiteFooter from '../components/SiteFooter'
 import { calculateFire } from './fireCalc'
 import { gbp, taxYearOf, valueOn } from '../ukFigures'
 import ResultCta from '../components/ResultCta'
+import { trackCalculatorCompleted, trackCalculatorStarted } from '../analytics'
 
 const STATE_PENSION_ANNUAL = gbp(valueOn('state_pension.new_full_rate_annual'))
 const TAX_YEAR = taxYearOf().label
-
-// ─── Analytics ───────────────────────────────────────────────────────────────
-function track(event, data = {}) {
-  try {
-    window.dispatchEvent(
-      new CustomEvent('paddock:calc', { detail: { event, ...data } })
-    )
-  } catch {
-    /* Analytics is optional. */
-  }
-}
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function fmt(n) {
@@ -181,7 +171,7 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
     const result = runCalculation()
     if (result.ok) {
       setHasCalculated(true)
-      track('fire_calculate', { withdrawalRate: form.withdrawalRate })
+      trackCalculatorCompleted()
       if (window.innerWidth < 900) {
         setTimeout(() => {
           document.getElementById('fire-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -223,7 +213,7 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
           <div className="calc-layout">
 
             {/* ── Form ── */}
-            <form className="calc-form-card" onSubmit={handleSubmit} noValidate>
+            <form className="calc-form-card" onSubmit={handleSubmit} onChange={() => trackCalculatorStarted()} noValidate>
 
               {/* Group 1: Spending */}
               <div className="calc-group">
@@ -644,8 +634,7 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
                   type="button"
                   className="btn btn-primary"
                   onClick={() => {
-                    goTo('signup')
-                    track('fire_cta_click', { location: 'bottom_cta' })
+                    goTo('signup', 'bottom')
                   }}
                 >
                   Start planning — it&apos;s free

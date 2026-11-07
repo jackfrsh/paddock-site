@@ -156,9 +156,9 @@ export default function LongTermProjectionGuide({ navigateTo, goTo }) {
         long term.
       </P>
       <P>
-        When you want to turn that projection into action, Paddock also includes
-        decision support around ISA strategy, mortgage overpayment, and where the next
-        pounds should go, so planning and action stay connected.
+        Paddock also includes decision tools for modelling ISA, mortgage-overpayment
+        and contribution scenarios, so you can test a change against your own plan
+        before you make it.
       </P>
       <P>
         If you track accounts in multiple currencies, Paddock converts everything
@@ -177,9 +177,9 @@ export default function LongTermProjectionGuide({ navigateTo, goTo }) {
         </a>.
       </P>
 
-      <GuideCTA onClick={() => goTo('signup')}>
-        Model your future wealth with clear assumptions, then decide what to do next
-        with ISA, mortgage, and contribution tools inside Paddock.
+      <GuideCTA onClick={() => goTo('signup', 'bottom')}>
+        Model your future wealth with clear assumptions, then explore ISA, mortgage
+        and contribution scenarios inside Paddock.
       </GuideCTA>
 
       <H2>Next steps</H2>

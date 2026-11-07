@@ -170,9 +170,9 @@ export default function InflationAdjustedGuide({ navigateTo, goTo }) {
         </a>.
       </P>
       <P>
-        When you are ready to act on that plan, Paddock also helps with practical
-        decisions like ISA strategy, mortgage overpayment, and where the next pounds
-        should go.
+        Paddock also has decision tools for modelling ISA, mortgage-overpayment and
+        contribution scenarios before you commit to anything, so you can see the
+        effect of a change on your own plan.
       </P>
       <P>
         If you also hold assets across currencies, Paddock calculates projections
@@ -191,7 +191,7 @@ export default function InflationAdjustedGuide({ navigateTo, goTo }) {
         </a>.
       </P>
 
-      <GuideCTA onClick={() => goTo('signup')}>
+      <GuideCTA onClick={() => goTo('signup', 'bottom')}>
         See your future wealth in real terms, then make clearer ISA, mortgage, and
         contribution decisions in Paddock.
       </GuideCTA>

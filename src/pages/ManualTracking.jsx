@@ -247,7 +247,7 @@ export default function ManualTracking({ navigateTo, goTo }) {
       </P>
 
       <GuideCTA
-        onClick={() => goTo('signup')}
+        onClick={() => goTo('signup', 'bottom')}
         buttonText="Try Paddock — it's free"
       >
         Private, manual-entry wealth tracking for ISAs, pensions, savings, property,

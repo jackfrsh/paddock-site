@@ -9,6 +9,7 @@ const FOOTER_COLUMNS = [
       { href: '/guides', label: 'Guides' },
       { href: '/net-worth-tracker', label: 'Net worth tracker' },
       { href: '/track-isas-pensions-savings', label: 'Track ISAs & pensions' },
+      { href: '/paddock-pro', label: 'Paddock Pro' },
     ],
   },
   {
@@ -54,7 +55,7 @@ export default function SiteFooter({ navigateTo }) {
             <p className="footer-tagline">
               Private UK wealth tracking. No bank linking. No ads. No data selling.
             </p>
-            <AppStoreBadgeLink className="app-store-badge-footer" />
+            <AppStoreBadgeLink className="app-store-badge-footer" location="footer" />
           </div>
 
           <nav className="footer-cols" aria-label="Footer">

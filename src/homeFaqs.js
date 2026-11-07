@@ -31,7 +31,7 @@ export const HOME_FAQS = [
   },
   {
     q: 'What happens if I cancel?',
-    a: 'You keep your account. Cancelling drops you back to the free plan at the end of your billing period — you lose the Pro features, not your data. Billing is handled by Stripe and can be cancelled in a couple of clicks.',
+    a: 'You keep your account. Cancelling drops you back to the free plan at the end of your billing period — you lose the Pro features, not your data. On the web, billing is handled by Stripe and can be cancelled in a couple of clicks; on iOS, the subscription is managed in your App Store settings.',
   },
   {
     q: 'Can I export my data?',

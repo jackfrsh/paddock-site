@@ -5,6 +5,7 @@ import { calculateIsa } from './isaCalc'
 import { ISA_RULES, gbp } from '../isaRules'
 import { pensionAccessAge, valueOn } from '../ukFigures'
 import ResultCta from '../components/ResultCta'
+import { trackCalculatorCompleted, trackCalculatorStarted } from '../analytics'
 
 const ALLOWANCE = gbp(ISA_RULES.overallAllowance)
 const LISA_LIMIT = gbp(valueOn('isa.lifetime_isa.annual_limit'))
@@ -13,17 +14,6 @@ const NMPA = pensionAccessAge()
 const SIPP_ACCESS = NMPA.next
   ? `from age ${NMPA.now} (rising to ${NMPA.next} on ${NMPA.nextFrom})`
   : `from age ${NMPA.now}`
-
-// ─── Analytics ───────────────────────────────────────────────────────────────
-function track(event, data = {}) {
-  try {
-    window.dispatchEvent(
-      new CustomEvent('paddock:calc', { detail: { event, ...data } })
-    )
-  } catch {
-    /* Analytics is optional. */
-  }
-}
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function fmt(n) {
@@ -176,7 +166,7 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
     const result = runCalculation()
     if (result.ok) {
       setHasCalculated(true)
-      track('isa_calculate', { years: form.years, annualReturn: form.annualReturn })
+      trackCalculatorCompleted()
       if (window.innerWidth < 900) {
         setTimeout(() => {
           document.getElementById('isa-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -213,7 +203,7 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
           <div className="calc-layout">
 
             {/* ── Form ── */}
-            <form className="calc-form-card" onSubmit={handleSubmit} noValidate>
+            <form className="calc-form-card" onSubmit={handleSubmit} onChange={() => trackCalculatorStarted()} noValidate>
 
               {/* Group 1: Your ISA */}
               <div className="calc-group">
@@ -628,8 +618,7 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
                   type="button"
                   className="btn btn-primary"
                   onClick={() => {
-                    goTo('signup')
-                    track('isa_cta_click', { location: 'bottom_cta' })
+                    goTo('signup', 'bottom')
                   }}
                 >
                   Start tracking — it&apos;s free

@@ -120,7 +120,7 @@ export default function PensionDrawdownExplained({ navigateTo, goTo }) {
         predictions, because returns are not guaranteed.
       </P>
 
-      <GuideCTA onClick={() => goTo('signup')} buttonText="Create a free account">
+      <GuideCTA onClick={() => goTo('signup', 'bottom')} buttonText="Create a free account">
         Keep your pensions, ISAs and savings in one private place and watch your balances over time. No bank access required.
       </GuideCTA>
 

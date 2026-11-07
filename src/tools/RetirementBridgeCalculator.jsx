@@ -5,6 +5,7 @@ import SiteFooter from '../components/SiteFooter'
 import { calculateRetirementBridge } from './retirementBridgeCalc'
 import { pensionAccessAge } from '../ukFigures'
 import ResultCta from '../components/ResultCta'
+import { trackCalculatorCompleted, trackCalculatorStarted } from '../analytics'
 
 const NMPA = pensionAccessAge()
 const NMPA_SHORT = NMPA.next
@@ -14,14 +15,6 @@ const NMPA_LONG = `${NMPA_SHORT} Protected pension ages and scheme rules can dif
 const NMPA_HINT = NMPA.next
   ? `Most people will be able to access private pensions from ${NMPA.next} from ${NMPA.nextFrom}, though protected pension ages and scheme rules can differ.`
   : `The normal minimum pension age is ${NMPA.now}, though protected pension ages and scheme rules can differ.`
-
-function track(event, data = {}) {
-  try {
-    window.dispatchEvent(new CustomEvent('paddock:calc', { detail: { event, ...data } }))
-  } catch {
-    /* Analytics is optional. */
-  }
-}
 
 function fmt(n) {
   if (!Number.isFinite(n)) return '—'
@@ -269,6 +262,9 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
   const currentAge = cleanNumber(form.currentAge)
 
   const setField = (key) => (value) => {
+    // Results are live, so the first edit is both "started" and "completed".
+    trackCalculatorStarted()
+    trackCalculatorCompleted()
     setForm((current) => {
       const next = { ...current, [key]: value }
       if (key === 'currentAge') {
@@ -440,8 +436,7 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  goTo('signup')
-                  track('retirement_bridge_cta_click', { location: 'mid_cta' })
+                  goTo('signup', 'mid')
                 }}
               >
                 Save this projection in Paddock

@@ -31,6 +31,7 @@ const PAGE_LABELS = {
   '/best-net-worth-tracking-apps-uk': 'Best net worth tracking apps (UK)',
   '/moneyhub-alternative': 'Moneyhub alternatives',
   '/why-i-track-wealth-manually-instead-of-using-open-banking-apps': 'Why track wealth manually',
+  '/paddock-pro': 'Paddock Pro',
   '/privacy': 'Privacy',
   '/security': 'Security',
   '/support': 'Support',

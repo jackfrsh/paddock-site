@@ -180,7 +180,7 @@ export default function MultiCurrencyGuide({ navigateTo, goTo }) {
       </P>
 
       <GuideCTA
-        onClick={() => goTo('signup')}
+        onClick={() => goTo('signup', 'inline')}
         buttonText="Start tracking — it's free"
       >
         Track your portfolio and net worth across currencies in one private
@@ -298,7 +298,7 @@ export default function MultiCurrencyGuide({ navigateTo, goTo }) {
       </div>
 
       <GuideCTA
-        onClick={() => goTo('signup')}
+        onClick={() => goTo('signup', 'bottom')}
         buttonText="Create your free account"
       >
         Track your portfolio and net worth across currencies — privately, clearly,

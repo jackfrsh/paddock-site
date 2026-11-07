@@ -1,7 +1,8 @@
-import React, { useState, useMemo, useRef, useCallback } from 'react'
+import React, { useState, useMemo, useEffect, useCallback } from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import ResultCta from '../components/ResultCta'
+import { trackCalculatorCompleted, trackCalculatorStarted } from '../analytics'
 import {
   CURRENCIES,
   CURRENCY_SYMBOLS,
@@ -9,17 +10,6 @@ import {
   LIABILITY_ROWS,
   calculateNetWorth,
 } from './netWorthCalc'
-
-// ─── Analytics ───────────────────────────────────────────────────────────────
-function track(event, data = {}) {
-  try {
-    window.dispatchEvent(
-      new CustomEvent('paddock:calc', { detail: { event, ...data } })
-    )
-  } catch {
-    /* Analytics is optional. */
-  }
-}
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function fmt(n, currency = 'GBP') {
@@ -132,9 +122,9 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
   const [baseCurrency, setBaseCurrency] = useState('GBP')
   const [showMultiCurrency, setShowMultiCurrency] = useState(false)
   const [rows, setRows] = useState(() => makeDefaultRows('GBP'))
-  const hasTracked = useRef(false)
 
   const handleRowChange = useCallback((key, field, val) => {
+    trackCalculatorStarted()
     setRows((prev) => ({
       ...prev,
       [key]: { ...prev[key], [field]: val },
@@ -143,12 +133,10 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
 
   const handleBaseCurrencyChange = useCallback((newBase) => {
     setBaseCurrency(newBase)
-    track('nw_base_currency_change', { currency: newBase })
   }, [])
 
   const handleMultiCurrencyToggle = useCallback((checked) => {
     setShowMultiCurrency(checked)
-    if (checked) track('nw_multi_currency_enable')
   }, [])
 
   // Live calculation — always runs
@@ -156,13 +144,11 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
     return calculateNetWorth({ baseCurrency, rows })
   }, [baseCurrency, rows])
 
-  // Track first meaningful result
-  useMemo(() => {
-    if (!hasTracked.current && !results.isEmpty) {
-      hasTracked.current = true
-      track('nw_first_result', { baseCurrency })
-    }
-  }, [results.isEmpty, baseCurrency])
+  // The first time the visitor's own figures produce a result. Only the fact
+  // is recorded, never the figures.
+  useEffect(() => {
+    if (!results.isEmpty) trackCalculatorCompleted()
+  }, [results.isEmpty])
 
   const netWorthClass = results.netWorth > 0
     ? 'nw-positive'
@@ -590,8 +576,7 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
                   type="button"
                   className="btn btn-primary"
                   onClick={() => {
-                    goTo('signup')
-                    track('nw_cta_click', { location: 'bottom_cta' })
+                    goTo('signup', 'bottom')
                   }}
                 >
                   Start tracking — it&apos;s free

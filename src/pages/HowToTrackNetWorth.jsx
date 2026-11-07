@@ -1,4 +1,5 @@
 import React from 'react'
+import SignupLink from '../components/SignupLink'
 import Breadcrumbs from '../components/Breadcrumbs'
 import SiteFooter from '../components/SiteFooter'
 import { ExampleSection, FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
@@ -52,9 +53,9 @@ export default function NetWorthTracker({ navigateTo }) {
             </p>
 
             <div className="hero-actions">
-              <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
+              <SignupLink location="hero">
                 Try Paddock
-              </a>
+              </SignupLink>
 
               <a
                 href="/net-worth-tracker"
@@ -203,9 +204,9 @@ export default function NetWorthTracker({ navigateTo }) {
           </p>
 
           <div className="hero-actions center">
-            <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
+            <SignupLink location="bottom">
               Try Paddock
-            </a>
+            </SignupLink>
             <a
               href="/net-worth-tracker"
               className="btn btn-secondary"

@@ -5,16 +5,9 @@ import SiteFooter from '../components/SiteFooter'
 import { calculatePhasedDrawdown, LATE_PHASE_AGE } from './phasedDrawdownCalc'
 import { gbp, taxYearOf, valueOn } from '../ukFigures'
 import ResultCta from '../components/ResultCta'
+import { trackCalculatorCompleted, trackCalculatorStarted } from '../analytics'
 
 const STATE_PENSION_HINT = `Full new State Pension is ${gbp(valueOn('state_pension.new_full_rate_annual'))} a year in ${taxYearOf().label}.`
-
-function track(event, data = {}) {
-  try {
-    window.dispatchEvent(new CustomEvent('paddock:calc', { detail: { event, ...data } }))
-  } catch {
-    /* Analytics is optional. */
-  }
-}
 
 function fmt(n) {
   if (!Number.isFinite(n)) return '—'
@@ -388,6 +381,9 @@ export default function PhasedDrawdownCalculator({ navigateTo, goTo }) {
   const retirementAge = cleanNumber(form.retirementAge)
 
   const setField = (key) => (value) => {
+    // Results are live, so the first edit is both "started" and "completed".
+    trackCalculatorStarted()
+    trackCalculatorCompleted()
     setForm((current) => {
       const next = { ...current, [key]: value }
       // Gently keep retirement age at/after current age, and planning age after retirement.
@@ -547,8 +543,7 @@ export default function PhasedDrawdownCalculator({ navigateTo, goTo }) {
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  goTo('signup')
-                  track('phased_drawdown_cta_click', { location: 'mid_cta' })
+                  goTo('signup', 'mid')
                 }}
               >
                 Save this retirement plan in Paddock

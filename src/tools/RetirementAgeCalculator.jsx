@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import ResultCta from '../components/ResultCta'
+import { trackCalculatorCompleted, trackCalculatorStarted } from '../analytics'
 import { calculateRetirementAge, MAX_AGE } from './retirementAgeCalc'
 import { figureOn, formatDate, gbp, pensionAccessAge, taxYearOf, valueOn } from '../ukFigures'
 
@@ -9,14 +10,6 @@ const TAX_YEAR = taxYearOf().label
 const STATE_PENSION = valueOn('state_pension.new_full_rate_annual')
 const STATE_PENSION_SOURCE = figureOn('state_pension.new_full_rate_annual', new Date())
 const NMPA = pensionAccessAge()
-
-function track(event, data = {}) {
-  try {
-    window.dispatchEvent(new CustomEvent('paddock:calc', { detail: { event, ...data } }))
-  } catch {
-    /* Analytics is optional. */
-  }
-}
 
 function fmt(n) {
   if (!Number.isFinite(n)) return '—'
@@ -124,7 +117,7 @@ export default function RetirementAgeCalculator({ navigateTo, goTo }) {
     const result = runCalculation()
     if (result.ok) {
       setHasCalculated(true)
-      track('retirement_age_calculate')
+      trackCalculatorCompleted()
       if (window.innerWidth < 900) {
         setTimeout(() => {
           document.getElementById('retirement-age-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -159,7 +152,7 @@ export default function RetirementAgeCalculator({ navigateTo, goTo }) {
       <section className="calc-section">
         <div className="container">
           <div className="calc-layout">
-            <form className="calc-form-card" onSubmit={handleSubmit} noValidate>
+            <form className="calc-form-card" onSubmit={handleSubmit} onChange={() => trackCalculatorStarted()} noValidate>
               <div className="calc-group">
                 <div className="calc-group-title">About you</div>
                 <div className="calc-fields calc-fields-2">

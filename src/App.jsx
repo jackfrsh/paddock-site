@@ -20,10 +20,12 @@ import AppStoreBadgeLink from './components/AppStoreBadgeLink'
 import SkipLink from './components/SkipLink'
 import IsaAllowanceCard from './components/IsaAllowanceCard'
 import { ISA_RULES, gbp } from './isaRules'
+import { APP_STORE_URL, authUrl } from './links'
+import { trackCtaClicked } from './analytics'
+import {
+  ANNUAL_MONTHS_FREE, FREE_FEATURES, PRO_FEATURES, PRO_PRICE, TRIAL,
+} from './planFacts'
 
-const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
-const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
-const APP_STORE_URL = 'https://apps.apple.com/gb/app/paddock-wealth/id6761938898'
 const ROUTE_BY_PATH = Object.fromEntries(PUBLIC_ROUTES.map((route) => [route.path, route.key]))
 
 /* Every route except the landing page is code-split. The landing page is the
@@ -36,6 +38,7 @@ const ROUTE_COMPONENTS = {
   guide_inflation_adjusted: lazy(() => import('./guides/InflationAdjusted')),
   guide_how_much_retire_uk: lazy(() => import('./guides/HowMuchToRetireUK')),
   guide_pension_drawdown_explained: lazy(() => import('./guides/PensionDrawdownExplained')),
+  paddock_pro: lazy(() => import('./pages/PaddockPro')),
   privacy: lazy(() => import('./pages/Privacy')),
   security: lazy(() => import('./pages/Security')),
   terms: lazy(() => import('./pages/Terms')),
@@ -261,11 +264,15 @@ export default function App({ initialPath } = {}) {
   const [toolsMobileOpen, setToolsMobileOpen] = useState(false)
   const [pageVisible, setPageVisible] = useState(true)
 
-  const goTo = (kind) => {
+  /* Opens the app's sign-in or sign-up page. `location` says which call to
+     action was used (see LOCATIONS in src/analyticsSchema.js). The click is
+     counted anonymously and the sign-up link carries this page's route key. */
+  const goTo = (kind, location = 'other') => {
     if (pending) return
     setPending(kind)
 
-    const url = kind === 'signup' ? SIGNUP_URL : SIGNIN_URL
+    trackCtaClicked({ page: route, location, target: kind })
+    const url = authUrl(kind, route)
 
     window.setTimeout(() => {
       window.location.href = url
@@ -438,7 +445,7 @@ export default function App({ initialPath } = {}) {
 
             <button
               type="button"
-              onClick={() => goTo('signin')}
+              onClick={() => goTo('signin', 'header')}
               className="nav-link"
               disabled={!!pending}
             >
@@ -447,7 +454,7 @@ export default function App({ initialPath } = {}) {
 
             <button
               type="button"
-              onClick={() => goTo('signup')}
+              onClick={() => goTo('signup', 'header')}
               className="btn btn-primary nav-cta"
               disabled={!!pending}
             >
@@ -458,7 +465,7 @@ export default function App({ initialPath } = {}) {
           <div className="nav-mobile">
             <button
               type="button"
-              onClick={() => goTo('signup')}
+              onClick={() => goTo('signup', 'header')}
               className="btn btn-primary nav-cta"
               disabled={!!pending}
             >
@@ -630,7 +637,7 @@ export default function App({ initialPath } = {}) {
 
             <button
               type="button"
-              onClick={() => { goTo('signin'); setMenuOpen(false) }}
+              onClick={() => { goTo('signin', 'header'); setMenuOpen(false) }}
               disabled={!!pending}
             >
               {pending === 'signin' ? 'Opening…' : 'Sign in'}
@@ -662,13 +669,13 @@ export default function App({ initialPath } = {}) {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => goTo('signup')}
+                onClick={() => goTo('signup', 'hero')}
                 disabled={!!pending}
               >
                 {pending === 'signup' ? 'Opening…' : 'Start free on the web'}
               </button>
 
-              <a className="btn btn-secondary" href={APP_STORE_URL} target="_blank" rel="noreferrer">
+              <a className="btn btn-secondary" href={APP_STORE_URL} target="_blank" rel="noreferrer" onClick={() => trackCtaClicked({ page: route, location: 'hero', target: 'app_store' })}>
                 Download on the App Store
               </a>
             </div>
@@ -930,7 +937,7 @@ export default function App({ initialPath } = {}) {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={() => goTo('signup')}
+                  onClick={() => goTo('signup', 'inline')}
                   disabled={!!pending}
                 >
                   {pending === 'signup' ? 'Opening…' : 'Start free on the web'}
@@ -1026,7 +1033,7 @@ export default function App({ initialPath } = {}) {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => goTo('signup')}
+                onClick={() => goTo('signup', 'inline')}
                 disabled={!!pending}
               >
                 {pending === 'signup' ? 'Opening…' : 'Replace your spreadsheet'}
@@ -1166,19 +1173,15 @@ export default function App({ initialPath } = {}) {
               <p className="price-copy price-copy-meta">Private by design. Most people update once after payday.</p>
 
               <div className="price-list">
-                <p>Net worth dashboard</p>
-                <p>Snapshots + milestones</p>
-                <p>Multi-currency accounts</p>
-                <p>Daily FX checking</p>
-                <p>Monthly what-if contribution modelling</p>
-                <p>1-year projection</p>
-                <p>Up to 3 accounts</p>
+                {FREE_FEATURES.map((feature) => (
+                  <p key={feature}>{feature}</p>
+                ))}
               </div>
 
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => goTo('signup')}
+                onClick={() => goTo('signup', 'pricing')}
                 disabled={!!pending}
               >
                 {pending === 'signup' ? 'Opening…' : 'Create account'}
@@ -1192,39 +1195,53 @@ export default function App({ initialPath } = {}) {
               </div>
 
               <div className="price-row">
-                <div className="price-value">£6</div>
+                <div className="price-value">£{PRO_PRICE.monthly}</div>
                 <div className="price-suffix">/month</div>
               </div>
 
-              <p className="price-copy price-copy-meta">£60/year (2 months free) · Includes a 7-day trial</p>
-              <p className="price-copy price-copy-strong">See the path, the gap, and what to do next.</p>
+              <p className="price-copy price-copy-meta">
+                £{PRO_PRICE.annual}/year ({ANNUAL_MONTHS_FREE === 2 ? 'two months free' : 'a saving on monthly'}).
+                The annual plan starts with a {TRIAL.annualDays}-day trial for new subscribers; monthly has no trial.
+              </p>
+              <p className="price-copy price-copy-strong">See when your plan gets you there.</p>
               <p className="price-copy">
-                Plan 5–40 years ahead, compare scenarios, and make clearer ISA, mortgage, and
-                contribution decisions.
+                Plan up to 40 years ahead, compare scenarios and model one-off deposits, with a
+                freedom timeline that shows when your plan could get you there.
               </p>
 
               <div className="price-list">
-                <p>Unlimited accounts</p>
-                <p>5–40 year projections</p>
-                <p>Full trajectory chart: projected vs required path</p>
-                <p>Inflation-adjusted (real terms) view</p>
-                <p>Scenario comparisons</p>
-                <p>ISA strategy support</p>
-                <p>Mortgage overpayment and next-pounds decision support</p>
+                {PRO_FEATURES.map((feature) => (
+                  <p key={feature}>{feature}</p>
+                ))}
               </div>
 
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => goTo('signup')}
+                onClick={() => goTo('signup', 'pricing')}
                 disabled={!!pending}
               >
-                {pending === 'signup' ? 'Opening…' : 'Start free trial'}
+                {pending === 'signup' ? 'Opening…' : 'Create account to try Pro'}
               </button>
             </div>
           </Reveal>
 
           <Reveal>
+            <p className="pricing-more">
+              <a
+                href="/paddock-pro"
+                className="guide-inline-link"
+                onClick={(e) => {
+                  trackCtaClicked({ page: route, location: 'pricing', target: 'pro_page' })
+                  if (!e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey && e.button === 0) {
+                    e.preventDefault()
+                    navigateTo('/paddock-pro')
+                  }
+                }}
+              >
+                See exactly what Paddock Pro includes →
+              </a>
+            </p>
             <p className="pricing-trust">
               Unlike free finance apps, Paddock&apos;s business model is simple: you pay for the
               product, and your data stays yours.
@@ -1284,13 +1301,13 @@ export default function App({ initialPath } = {}) {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => goTo('signup')}
+                onClick={() => goTo('signup', 'bottom')}
                 disabled={!!pending}
               >
                 {pending === 'signup' ? 'Opening…' : 'Start free on the web'}
               </button>
 
-              <a className="btn btn-secondary" href={APP_STORE_URL} target="_blank" rel="noreferrer">
+              <a className="btn btn-secondary" href={APP_STORE_URL} target="_blank" rel="noreferrer" onClick={() => trackCtaClicked({ page: route, location: 'bottom', target: 'app_store' })}>
                 Download on the App Store
               </a>
             </div>

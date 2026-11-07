@@ -149,7 +149,7 @@ export default function HowMuchToRetireUK({ navigateTo, goTo }) {
         a pot could last. Both run in your browser and send nothing anywhere.
       </P>
 
-      <GuideCTA onClick={() => goTo('signup')} buttonText="Create a free account">
+      <GuideCTA onClick={() => goTo('signup', 'bottom')} buttonText="Create a free account">
         Track your real progress against your target. Enter your actual balances in Paddock and see how you are doing over time.
         No bank access required.
       </GuideCTA>

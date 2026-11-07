@@ -1,4 +1,5 @@
 import React from 'react'
+import SignupLink from '../components/SignupLink'
 import Breadcrumbs from '../components/Breadcrumbs'
 import SiteFooter from '../components/SiteFooter'
 import IsaAllowanceCard from '../components/IsaAllowanceCard'
@@ -53,9 +54,9 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
 </p>
 
             <div className="hero-actions">
-              <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
+              <SignupLink location="hero">
                 Start tracking
-              </a>
+              </SignupLink>
               <a
                 href="/"
                 className="btn btn-secondary"
@@ -246,9 +247,9 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
           </p>
 
           <div className="hero-actions center">
-            <a href="https://app.getpaddock.com/auth?mode=signup" className="btn btn-primary">
+            <SignupLink location="bottom">
               Start tracking
-            </a>
+            </SignupLink>
             <a
               href="/net-worth-tracker"
               className="btn btn-secondary"

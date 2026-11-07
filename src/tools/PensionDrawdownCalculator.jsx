@@ -3,18 +3,7 @@ import SiteHeader from '../components/SiteHeader'
 import SiteFooter from '../components/SiteFooter'
 import { calculateDrawdown } from './pensionCalc'
 import ResultCta from '../components/ResultCta'
-
-// ─── Analytics ───────────────────────────────────────────────────────────────
-// Dispatches a DOM event — a no-op until the site wires an analytics listener.
-function track(event, data = {}) {
-  try {
-    window.dispatchEvent(
-      new CustomEvent('paddock:calc', { detail: { event, ...data } })
-    )
-  } catch {
-    /* Analytics is optional. */
-  }
-}
+import { trackCalculatorCompleted, trackCalculatorStarted } from '../analytics'
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 function fmt(n) {
@@ -119,7 +108,6 @@ function ModeToggle({ value, onChange }) {
         className={`calc-mode-btn${value === 'percentage' ? ' active' : ''}`}
         onClick={() => {
           onChange('percentage')
-          track('mode_switch', { mode: 'percentage' })
         }}
         aria-pressed={value === 'percentage'}
       >
@@ -130,7 +118,6 @@ function ModeToggle({ value, onChange }) {
         className={`calc-mode-btn${value === 'fixed' ? ' active' : ''}`}
         onClick={() => {
           onChange('fixed')
-          track('mode_switch', { mode: 'fixed' })
         }}
         aria-pressed={value === 'fixed'}
       >
@@ -223,11 +210,7 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
     const result = runCalculation()
     if (result.ok) {
       setHasCalculated(true)
-      track('calculate', {
-        mode: form.withdrawalMode,
-        retirementAge: form.retirementAge,
-        withdrawalRate: form.withdrawalMode === 'percentage' ? form.annualWithdrawalPct : null,
-      })
+      trackCalculatorCompleted()
       // Scroll to results on mobile
       if (window.innerWidth < 900) {
         setTimeout(() => {
@@ -265,7 +248,7 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
           <div className="calc-layout">
 
             {/* ── Form ── */}
-            <form className="calc-form-card" onSubmit={handleSubmit} noValidate>
+            <form className="calc-form-card" onSubmit={handleSubmit} onChange={() => trackCalculatorStarted()} noValidate>
 
               {/* Group 1 */}
               <div className="calc-group">
@@ -780,8 +763,7 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
                   type="button"
                   className="btn btn-primary"
                   onClick={() => {
-                    goTo('signup')
-                    track('cta_click', { location: 'bottom_cta' })
+                    goTo('signup', 'bottom')
                   }}
                 >
                   Start planning — it&apos;s free

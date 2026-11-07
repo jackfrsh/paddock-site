@@ -145,7 +145,7 @@ export default function ToolsHub({ navigateTo, goTo }) {
               <button
                 type="button"
                 className="btn btn-primary"
-                onClick={() => goTo('signup')}
+                onClick={() => goTo('signup', 'bottom')}
               >
                 Start planning — it&apos;s free
               </button>

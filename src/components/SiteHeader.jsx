@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import ToolsDropdown from './ToolsDropdown'
 import SkipLink from './SkipLink'
 import Breadcrumbs from './Breadcrumbs'
+import { authUrl } from '../links'
+import { currentPageKey, trackCtaClicked } from '../analytics'
 
-const SIGNIN_URL = 'https://app.getpaddock.com/auth?mode=signin'
-const SIGNUP_URL = 'https://app.getpaddock.com/auth?mode=signup'
 
 /**
  * Shared sticky header for non-landing pages (tool pages, hub pages).
@@ -42,10 +42,12 @@ export default function SiteHeader({ navigateTo, goTo: parentGoTo }) {
     setPending(kind)
     // Delegate to parent handler if provided, otherwise navigate directly
     if (parentGoTo) {
-      parentGoTo(kind)
+      parentGoTo(kind, 'header')
     } else {
+      const page = currentPageKey()
+      trackCtaClicked({ page, location: 'header', target: kind })
       window.setTimeout(() => {
-        window.location.href = kind === 'signup' ? SIGNUP_URL : SIGNIN_URL
+        window.location.href = authUrl(kind, page)
       }, 180)
     }
   }
