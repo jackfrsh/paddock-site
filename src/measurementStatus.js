@@ -17,7 +17,7 @@
 
 export const MEASUREMENT_STATUS = Object.freeze({
   webAnalytics: false,
-  eventStorage: false,
-  appRecordsSource: false,
-  lastVerified: null, // ISO date a person last checked all three, or null
+  eventStorage: true,
+  appRecordsSource: true,
+  lastVerified: '2026-11-08', // ISO date a person last checked the flags that are on, or null
 })
