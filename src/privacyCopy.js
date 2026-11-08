@@ -14,6 +14,50 @@ const EVENT_COUNTER = {
   text: " runs on our own Cloudflare account. It records that a visit began on a page, that a calculator was used or completed, or that a sign-up or App Store link was clicked, with the page it happened on and a broad category for how the visit began (search, direct, social or other). Each event is a fixed label from a short list. It contains no figures, nothing you typed and no identifier, we do not store your IP address or browser details with it, and it is not linked to any account. Events are kept for up to three months. If your browser sends Global Privacy Control or Do Not Track, this counter records nothing.",
 }
 
+/* Wording for "Deleting your account". Every statement here matches what the app
+   does when DELETE /api/auth/account runs (backend/app/routers/auth.py in the app
+   repo) and the scheduled backup workflow (14-day artifact retention). If either
+   changes, change this and its test. */
+export const BACKUP_RETENTION_DAYS = 14
+
+export function accountDeletionCopy() {
+  return [
+    {
+      type: 'p',
+      text: 'You can delete your account yourself, at any time, on the web. Open Settings in the app, choose Delete account and type DELETE to confirm. You do not need to contact us.',
+    },
+    {
+      type: 'p',
+      text: 'Deleting your account permanently removes your sign-in and everything stored with it: your accounts, balances and payments, goals, projections, monthly closes, history, settings, the usage events linked to you, and the record of the page you first arrived from. It cannot be undone.',
+    },
+    {
+      type: 'p',
+      text: 'If you pay for Paddock Pro by card, your subscription is cancelled for you as part of deleting the account, with no refund for the current period. If you subscribed through the App Store, Apple manages that subscription: cancel it in your Apple ID settings first, because deleting your account does not cancel it.',
+    },
+    {
+      type: 'p',
+      text: 'A few copies sit outside the app and follow their own rules:',
+    },
+    {
+      type: 'ul',
+      items: [
+        {
+          strong: 'Payment records.',
+          text: ' Stripe keeps its own records of card payments, such as invoices and the billing email, and Apple keeps its own records of App Store purchases. Deleting your Paddock account cancels a card subscription but does not remove these.',
+        },
+        {
+          strong: 'Backups.',
+          text: ` Our encrypted database backups are not edited when you delete your account. Each one is removed when it reaches the end of its retention period, and our scheduled daily backups are kept for ${BACKUP_RETENTION_DAYS} days.`,
+        },
+        {
+          strong: 'Anonymous counts.',
+          text: ' Counts that were never linked to your account cannot be tied back to you, so they are not affected.',
+        },
+      ],
+    },
+  ]
+}
+
 export function websiteMeasurementCopy(status = MEASUREMENT_STATUS) {
   const blocks = []
 

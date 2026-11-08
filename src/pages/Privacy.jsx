@@ -1,6 +1,18 @@
 import React from 'react'
 import { GuideShell, H2, P, UL } from '../components/GuideLayout'
-import { websiteMeasurementCopy } from '../privacyCopy'
+import { accountDeletionCopy, websiteMeasurementCopy } from '../privacyCopy'
+
+function Blocks({ blocks }) {
+  return blocks.map((block, i) => (
+    block.type === 'ul' ? (
+      <UL key={i}>
+        {block.items.map((item) => (
+          <li key={item.strong}><strong>{item.strong}</strong>{item.text}</li>
+        ))}
+      </UL>
+    ) : <P key={i}>{block.text}</P>
+  ))
+}
 
 export default function Privacy({ navigateTo }) {
   return (
@@ -65,16 +77,11 @@ export default function Privacy({ navigateTo }) {
         account removes it from the app.
       </P>
 
+      <H2>Deleting your account</H2>
+      <Blocks blocks={accountDeletionCopy()} />
+
       <H2>This website</H2>
-      {websiteMeasurementCopy().map((block, i) => (
-        block.type === 'ul' ? (
-          <UL key={i}>
-            {block.items.map((item) => (
-              <li key={item.strong}><strong>{item.strong}</strong>{item.text}</li>
-            ))}
-          </UL>
-        ) : <P key={i}>{block.text}</P>
-      ))}
+      <Blocks blocks={websiteMeasurementCopy()} />
 
       <H2>Contact</H2>
       <P>

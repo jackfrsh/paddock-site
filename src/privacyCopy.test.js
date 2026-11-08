@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { MEASUREMENT_STATUS } from './measurementStatus.js'
-import { websiteMeasurementCopy } from './privacyCopy.js'
+import { BACKUP_RETENTION_DAYS, accountDeletionCopy, websiteMeasurementCopy } from './privacyCopy.js'
 
 let passed = 0
 let failed = 0
@@ -78,6 +78,45 @@ test('trust pages agree with the live setup: Stripe on the web, Apple on iOS, Go
   for (const f of ['./tools/IsaGrowthCalculator.jsx', './tools/NetWorthCalculator.jsx', './tools/FireNumberCalculator.jsx', './tools/PensionDrawdownCalculator.jsx', './pages/ToolsHub.jsx']) {
     assert.doesNotMatch(read(f), /under 2 minutes/i, f)
   }
+})
+
+const deletionText = () => accountDeletionCopy()
+  .flatMap((b) => (b.type === 'ul' ? b.items.map((i) => i.strong + i.text) : [b.text])).join('\n')
+
+test('account deletion wording says how to delete, and what happens to a subscription', () => {
+  const t = deletionText()
+  assert.match(t, /Settings/)
+  assert.match(t, /Delete account/)
+  assert.match(t, /type DELETE/)
+  assert.match(t, /card, your subscription is cancelled for you/)
+  assert.match(t, /no refund for the current period/)
+  assert.match(t, /App Store/)
+  assert.match(t, /cancel it in your Apple ID settings first/)
+  assert.match(t, /cannot be undone/)
+})
+
+test('account deletion wording is honest about what is kept: Stripe and Apple records, backups, anonymous counts', () => {
+  const t = deletionText()
+  assert.match(t, /Stripe keeps its own records/)
+  assert.match(t, /Apple keeps its own records/)
+  assert.match(t, /not edited when you delete your account/)
+  assert.match(t, /Anonymous counts/)
+  // No claim that every copy disappears at once.
+  assert.doesNotMatch(t, /all (copies|traces|data) (is|are) (removed|deleted|erased)/i)
+  assert.doesNotMatch(t, /immediately (removed|erased)/i)
+})
+
+test('the stated backup retention is a real whole number of days and appears in the wording', () => {
+  assert.ok(Number.isInteger(BACKUP_RETENTION_DAYS) && BACKUP_RETENTION_DAYS > 0)
+  assert.ok(deletionText().includes(`kept for ${BACKUP_RETENTION_DAYS} days`))
+})
+
+test('the Privacy page shows the account deletion section before the website section', () => {
+  const page = readFileSync(new URL('./pages/Privacy.jsx', import.meta.url), 'utf8')
+  assert.ok(page.includes('accountDeletionCopy'))
+  const del = page.indexOf('<H2>Deleting your account</H2>')
+  const web = page.indexOf('<H2>This website</H2>')
+  assert.ok(del > -1 && web > -1 && del < web)
 })
 
 console.log(`\n${passed} passed, ${failed} failed`)
