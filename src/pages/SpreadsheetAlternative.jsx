@@ -2,6 +2,7 @@ import React from 'react'
 import SignupLink from '../components/SignupLink'
 import Breadcrumbs from '../components/Breadcrumbs'
 import SiteFooter from '../components/SiteFooter'
+import SkipLink from '../components/SkipLink'
 import { FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
 import {
   SHEET_COMPARISON,
@@ -17,6 +18,8 @@ function SectionLabel({ children }) {
 export default function NetWorthTracker({ navigateTo }) {
   return (
     <div className="landing-shell">
+      <SkipLink />
+      <main id="main-content" tabIndex={-1}>
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="page-topbar">
@@ -219,6 +222,7 @@ export default function NetWorthTracker({ navigateTo }) {
         </div>
       </section>
 
+      </main>
       <SiteFooter navigateTo={navigateTo} />
     </div>
   )

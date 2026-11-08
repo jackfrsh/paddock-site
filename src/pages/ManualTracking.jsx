@@ -222,8 +222,8 @@ export default function ManualTracking({ navigateTo, goTo }) {
 
       <H2>The honest trade-off</H2>
       <P>
-        Manual entry takes time. Not a lot — for most people, twenty minutes a month is
-        enough to update a complete wealth picture. But it is not zero. If frictionless,
+        Manual entry takes time. Not a lot — twenty minutes a month can be enough to
+        update a complete wealth picture. But it is not zero. If frictionless,
         fully automatic sync is what you need above all else, there are better tools for
         that, and you should use them.
       </P>

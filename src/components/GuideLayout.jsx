@@ -1,6 +1,7 @@
 import React from 'react'
 import SiteFooter from './SiteFooter'
 import Breadcrumbs from './Breadcrumbs'
+import SkipLink from './SkipLink'
 
 function isModifiedEvent(e) {
   return e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0
@@ -87,6 +88,7 @@ export function GuideShell({
 
   return (
     <div className="landing-shell">
+      <SkipLink />
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="guide-page-header">
@@ -115,9 +117,9 @@ export function GuideShell({
         </div>
       </section>
 
-      <section className="container section guide-page-section">
+      <main id="main-content" tabIndex={-1} className="container section guide-page-section">
         <article className="guide-article">{children}</article>
-      </section>
+      </main>
 
       <SiteFooter navigateTo={navigateTo} />
     </div>

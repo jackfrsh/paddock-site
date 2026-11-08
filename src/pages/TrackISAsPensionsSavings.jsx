@@ -2,6 +2,7 @@ import React from 'react'
 import SignupLink from '../components/SignupLink'
 import Breadcrumbs from '../components/Breadcrumbs'
 import SiteFooter from '../components/SiteFooter'
+import SkipLink from '../components/SkipLink'
 import IsaAllowanceCard from '../components/IsaAllowanceCard'
 import { ISA_RULES, gbp } from '../isaRules'
 import { ExampleSection, FaqSection, QuickAnswer, TableSection } from '../components/PageSections'
@@ -19,6 +20,8 @@ function SectionLabel({ children }) {
 export default function TrackISAsPensionsSavings({ navigateTo }) {
   return (
     <div className="landing-shell">
+      <SkipLink />
+      <main id="main-content" tabIndex={-1}>
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="page-topbar">
@@ -291,6 +294,7 @@ export default function TrackISAsPensionsSavings({ navigateTo }) {
         </div>
       </section>
 
+      </main>
       <SiteFooter navigateTo={navigateTo} />
     </div>
   )

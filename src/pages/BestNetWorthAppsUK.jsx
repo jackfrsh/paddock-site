@@ -18,6 +18,7 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
+      <main id="main-content" tabIndex={-1}>
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="hero-copy">
@@ -464,6 +465,7 @@ export default function BestNetWorthAppsUK({ navigateTo, goTo }) {
         </div>
       </section>
 
+      </main>
       <SiteFooter navigateTo={navigateTo} />
     </div>
   )

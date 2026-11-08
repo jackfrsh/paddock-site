@@ -294,6 +294,7 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
 
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 
+      <main id="main-content" tabIndex={-1}>
       <section className="calc-hero">
         <div className="container">
           <div className="hero-kicker">Retirement bridge calculator</div>
@@ -602,6 +603,7 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
         </div>
       </section>
 
+      </main>
       <SiteFooter navigateTo={navigateTo} />
     </div>
   )

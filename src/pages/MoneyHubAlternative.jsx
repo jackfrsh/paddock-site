@@ -24,6 +24,7 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
+      <main id="main-content" tabIndex={-1}>
       <section className="hero-section hero-section-guide">
         <div className="container">
           <div className="hero-copy">
@@ -523,7 +524,7 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
           <p className="section-copy center narrow-center">
             Paddock gives you one place to see ISAs, pensions, savings, property and
             multi-currency accounts together — with long-term projections and no open banking
-            required. Free to start, setup takes under two minutes.
+            required. Free to start.
           </p>
 
           <div className="hero-actions center">
@@ -547,6 +548,7 @@ export default function MoneyHubAlternative({ navigateTo, goTo }) {
         </div>
       </section>
 
+      </main>
       <SiteFooter navigateTo={navigateTo} />
     </div>
   )
