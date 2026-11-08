@@ -35,7 +35,7 @@ test('each measurement is described only when its flag is on', () => {
 
 test('when everything is on, the page names every measurement and the source label', () => {
   const t = text(all)
-  for (const phrase of ['Cloudflare Web Analytics', 'anonymous events', 'Global Privacy Control', 'stores the page label once', 'deleted with it']) {
+  for (const phrase of ['Cloudflare Web Analytics', 'anonymous events', 'a visit began on a page', 'Global Privacy Control', 'page you first arrived from', 'up to 24 hours', 'deleted with it']) {
     assert.ok(t.includes(phrase), phrase)
   }
 })

@@ -46,6 +46,12 @@ const ENUMS = { page: PAGES, channel: CHANNELS, location: LOCATIONS, target: TAR
 
 /* For each event: the fields it requires. Anything else is rejected. */
 export const EVENTS = Object.freeze({
+  /* A visit began on this page: the page was loaded from a search result, a
+     link on another site, or directly, rather than by following a link from
+     elsewhere on getpaddock.com. Fires once per full page load. Page views,
+     not people. Added in Phase 3 so landing pages can be joined to calculator
+     and sign-up events; Cloudflare Web Analytics alone cannot do that join. */
+  visitor_landing: { required: ['page', 'channel'], optional: [] },
   /* A visitor changed a field in a calculator. Fires once per page view. */
   calculator_started: { required: ['page', 'channel'], optional: [], calculatorOnly: true },
   /* A calculator produced a result. Fires once per page view. */

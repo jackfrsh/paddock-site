@@ -21,7 +21,7 @@ import SkipLink from './components/SkipLink'
 import IsaAllowanceCard from './components/IsaAllowanceCard'
 import { ISA_RULES, gbp } from './isaRules'
 import { APP_STORE_URL, authUrl } from './links'
-import { trackCtaClicked, withVisitChannel } from './analytics'
+import { trackCtaClicked, trackVisitorLanding, withVisitChannel } from './analytics'
 import {
   ANNUAL_MONTHS_FREE, FREE_FEATURES, PRO_FEATURES, PRO_PRICE, TRIAL,
 } from './planFacts'
@@ -367,6 +367,13 @@ export default function App({ initialPath } = {}) {
       if (ld) ld.remove()
     }
   }, [route])
+
+  /* One anonymous "a visit began here" count per full page load (see
+     trackVisitorLanding). Runs in the browser only, never during prerender. */
+  useEffect(() => {
+    trackVisitorLanding(route)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const resetPending = () => setPending(null)

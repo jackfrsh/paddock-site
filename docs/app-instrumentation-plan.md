@@ -1,9 +1,15 @@
 # App-side instrumentation plan (separate repositories)
 
-Written 7 November 2026. **Nothing in the app repositories has been changed.**
-This is a plan for the owner to approve and for a later change in `wealthapp`
-(web app and API) and `paddock-ios`. It exists so the site's acquisition numbers
-can be followed through registration, activation and upgrade.
+Written 7 November 2026 as a plan.
+
+**Status after Phase 3.** Changes 1 and 3 below are implemented in the
+`wealthapp` repository on branch `phase-3-attribution` (pull request pending
+review; nothing is live until it is merged and deployed): the source label is
+stored write-once against new accounts, and an admin acquisition report counts
+registration, activation, upgrade and subscription by source. See
+`wealthapp/docs/phase-3-attribution.md` and `docs/phase-3-event-taxonomy.md`.
+**Change 2 (iOS) is not done.** The text below is kept as the original
+reasoning and is otherwise unchanged.
 
 ## Why
 
