@@ -659,6 +659,7 @@ export default function App({ initialPath } = {}) {
         )}
       </header>
 
+      <main id="main-content" tabIndex={-1}>
       {/* ── 1. Hero ─────────────────────────────────────────────────────── */}
       <section className="hero-section">
         <div className="container hero-grid">
@@ -769,8 +770,9 @@ export default function App({ initialPath } = {}) {
             </div>
 
             <p className="trust-honest">
-              Yes, you update balances yourself. Most users can do it once a month in under five
-              minutes. That&apos;s the trade: a few minutes for total privacy and control.
+              Yes, you update balances yourself. Once a month is enough, because long-term wealth
+              does not move minute to minute. That&apos;s the trade: a little of your time for
+              total privacy and control.
             </p>
 
             <div className="pill-links section-top-gap-sm">
@@ -1335,6 +1337,7 @@ export default function App({ initialPath } = {}) {
         </div>
       </section>
 
+      </main>
       <SiteFooter navigateTo={navigateTo} />
     </div>
   )

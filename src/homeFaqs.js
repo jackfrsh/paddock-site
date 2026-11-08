@@ -7,7 +7,7 @@ export const HOME_FAQS = [
   },
   {
     q: 'Is manual entry a pain?',
-    a: 'Less than you would expect. Most users update their balances once a month in under five minutes — a short, deliberate ritual, a bit like the monthly spreadsheet update but without the formulas. Long-term wealth does not move minute to minute, so a monthly rhythm is genuinely enough.',
+    a: 'Less than you would expect. A monthly update is all it takes — a short, deliberate ritual, a bit like the monthly spreadsheet update but without the formulas. Long-term wealth does not move minute to minute, so a monthly rhythm is genuinely enough.',
   },
   {
     q: 'Can Paddock see my bank accounts?',
@@ -23,7 +23,7 @@ export const HOME_FAQS = [
   },
   {
     q: 'Can I import from a spreadsheet?',
-    a: 'Moving in is simpler than an import. Add each account once, enter its current balance, and you are tracking — most people move a full spreadsheet into Paddock in ten to fifteen minutes, then keep the old sheet as an archive.',
+    a: 'Moving in is simpler than an import. Add each account once, enter its current balance, and you are tracking. You can keep the old sheet as an archive.',
   },
   {
     q: 'What if I do not know my exact balances?',

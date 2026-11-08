@@ -183,6 +183,7 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 
       {/* ── Hero ────────────────────────────────────────────────────────── */}
+      <main id="main-content" tabIndex={-1}>
       <section className="calc-hero">
         <div className="container">
           <div className="hero-kicker">ISA planning tool</div>
@@ -637,6 +638,7 @@ export default function IsaGrowthCalculator({ navigateTo, goTo }) {
         </div>
       </section>
 
+      </main>
       <SiteFooter navigateTo={navigateTo} />
     </div>
   )

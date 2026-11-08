@@ -228,6 +228,7 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
       <SiteHeader navigateTo={navigateTo} goTo={goTo} />
 
       {/* ── Hero ────────────────────────────────────────────────────────── */}
+      <main id="main-content" tabIndex={-1}>
       <section className="calc-hero">
         <div className="container">
           <div className="hero-kicker">Pension planning tool</div>
@@ -782,6 +783,7 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
         </div>
       </section>
 
+      </main>
       <SiteFooter navigateTo={navigateTo} />
     </div>
   )
