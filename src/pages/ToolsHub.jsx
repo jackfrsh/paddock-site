@@ -136,10 +136,10 @@ export default function ToolsHub({ navigateTo, goTo }) {
       <section className="section-border">
         <div className="container section">
           <div className="calc-cta-block">
-            <h2 className="calc-cta-h2">Save your projections and track your full wealth.</h2>
+            <h2 className="calc-cta-h2">Track your full wealth in one private place.</h2>
             <p className="calc-cta-sub">
               Paddock gives you a private dashboard for ISAs, pensions, savings, property and
-              multi-currency accounts — with long-term projections and decision support.
+              multi-currency accounts — with projections that look ahead.
               No bank connection required.
             </p>
             <div className="hero-actions">

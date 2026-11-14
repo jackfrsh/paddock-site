@@ -567,7 +567,7 @@ export default function NetWorthCalculator({ navigateTo, goTo }) {
         <div className="container section">
           <div className="calc-cta-block">
             <div className="calc-cta-copy">
-              <h2 className="calc-cta-h2">Save and track your net worth over time with Paddock.</h2>
+              <h2 className="calc-cta-h2">Track your net worth over time with Paddock.</h2>
               <p className="calc-cta-sub">
                 Track ISAs, pensions, savings, property, and more in one private dashboard —
                 no bank connection required. See how your wealth changes month by month.

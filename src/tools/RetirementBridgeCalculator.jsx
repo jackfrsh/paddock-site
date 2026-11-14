@@ -427,7 +427,7 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
       <section className="section-border">
         <div className="container section">
           <div className="calc-cta-block">
-            <h2 className="calc-cta-h2">Save this projection in Paddock.</h2>
+            <h2 className="calc-cta-h2">Track the pots behind this projection.</h2>
             <p className="calc-cta-sub">
               Track your ISA, pension, cash, investments, and long-term retirement goal in one
               calm wealth dashboard.
@@ -440,7 +440,7 @@ export default function RetirementBridgeCalculator({ navigateTo, goTo }) {
                   goTo('signup', 'mid')
                 }}
               >
-                Save this projection in Paddock
+                Track my accessible savings
               </button>
               <a
                 href="/"

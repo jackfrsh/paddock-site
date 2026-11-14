@@ -754,7 +754,7 @@ export default function PensionDrawdownCalculator({ navigateTo, goTo }) {
         <div className="container section">
           <div className="calc-cta-block">
             <div className="calc-cta-copy">
-              <h2 className="calc-cta-h2">Save this projection and track it over time.</h2>
+              <h2 className="calc-cta-h2">Follow your real pension pot over time, not just the scenario.</h2>
               <p className="calc-cta-sub">
                 Track your wider wealth, model future outcomes, and keep your data
                 private — no bank connection required.
