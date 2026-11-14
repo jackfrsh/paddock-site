@@ -547,7 +547,7 @@ export default function PhasedDrawdownCalculator({ navigateTo, goTo }) {
                   goTo('signup', 'mid')
                 }}
               >
-                Save this retirement plan in Paddock
+                Track the pots behind this plan
               </button>
               <a
                 href="/"

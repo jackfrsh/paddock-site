@@ -625,7 +625,7 @@ export default function FireNumberCalculator({ navigateTo, goTo }) {
         <div className="container section">
           <div className="calc-cta-block">
             <div className="calc-cta-copy">
-              <h2 className="calc-cta-h2">Save your FIRE target and track your progress with Paddock.</h2>
+              <h2 className="calc-cta-h2">Track your real progress towards your FIRE number.</h2>
               <p className="calc-cta-sub">
                 Track your wider wealth, model future outcomes, and keep your data
                 private — no bank connection required.
