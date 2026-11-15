@@ -81,6 +81,14 @@ export default function ToolsHub({ navigateTo, goTo }) {
               ctaText="Estimate my bridge"
             />
             <ToolCard
+              href="/tools/mortgage-overpayment-calculator"
+              onClick={() => navigateTo('/tools/mortgage-overpayment-calculator')}
+              title="Mortgage overpayment calculator UK"
+              description="See how much interest and time overpaying your mortgage could save, from a monthly amount or a lump sum, and whether you stay inside your lender's yearly limit."
+              tags={['Free', 'No login required', 'UK']}
+              ctaText="Estimate my saving"
+            />
+            <ToolCard
               href="/tools/fire-number-calculator"
               onClick={() => navigateTo('/tools/fire-number-calculator')}
               title="FIRE number calculator UK"

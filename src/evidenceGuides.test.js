@@ -30,6 +30,7 @@ const NEW_GUIDES = [
   { key: 'guide_end_of_tax_year_checklist_uk', path: '/guides/end-of-tax-year-checklist-uk', file: 'guides/EndOfTaxYearChecklistUK.jsx' },
   { key: 'guide_net_worth_vs_investable_wealth', path: '/guides/net-worth-vs-investable-wealth', file: 'guides/NetWorthVsInvestableWealth.jsx' },
   { key: 'guide_monthly_investment_retire_early_uk', path: '/guides/monthly-investment-to-retire-early-uk', file: 'guides/MonthlyInvestmentToRetireEarlyUK.jsx' },
+  { key: 'guide_overpay_mortgage_or_invest_uk', path: '/guides/overpay-mortgage-or-invest-uk', file: 'guides/OverpayMortgageOrInvestUK.jsx' },
 ]
 
 console.log('▶ src/evidenceGuides.test.js')

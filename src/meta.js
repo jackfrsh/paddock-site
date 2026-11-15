@@ -307,6 +307,28 @@ export const PAGE_META = {
     },
   },
 
+  tools_mortgage_overpayment: {
+    title: 'Mortgage Overpayment Calculator UK | Paddock',
+    description:
+      'See how much interest and time overpaying your mortgage could save, from a monthly overpayment or a lump sum, with a check against your lender\'s yearly limit.',
+    canonical: 'https://getpaddock.com/tools/mortgage-overpayment-calculator',
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: 'Mortgage Overpayment Calculator UK',
+      url: 'https://getpaddock.com/tools/mortgage-overpayment-calculator',
+      description:
+        'See how much interest and time overpaying your mortgage could save, from a monthly overpayment or a lump sum, with a check against your lender\'s yearly limit.',
+      inLanguage: 'en-GB',
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'Paddock',
+        url: 'https://getpaddock.com',
+      },
+    },
+  },
+
   founder_manual_tracking: {
     title: 'Why I Track Wealth Manually, Not Open Banking Apps | Paddock',
     description:
@@ -685,6 +707,15 @@ Object.assign(PAGE_META, {
     articleDescription:
       'Estimate the monthly saving needed to reach a retirement pot by a chosen age, with tables at three growth rates and clear assumptions.',
   }),
+  guide_overpay_mortgage_or_invest_uk: guideMeta({
+    path: '/guides/overpay-mortgage-or-invest-uk',
+    title: 'Overpay Your Mortgage or Invest? A UK Guide | Paddock',
+    description:
+      'How to compare overpaying a UK mortgage with investing or saving: the rate-against-rate test, overpayment limits and charges, and what the numbers leave out.',
+    headline: 'Should You Overpay Your Mortgage or Invest? A UK Guide',
+    articleDescription:
+      'How to compare overpaying a mortgage with investing or saving, with worked tables for the interest saved and the rate-against-rate test, and the limits that change the answer.',
+  }),
 })
 
 /* Every public page except the home page gets a BreadcrumbList, built from the
@@ -717,6 +748,7 @@ const FIRST_PUBLISHED = {
   guide_end_of_tax_year_checklist_uk: '2026-11-07',
   guide_net_worth_vs_investable_wealth: '2026-11-07',
   guide_monthly_investment_retire_early_uk: '2026-11-07',
+  guide_overpay_mortgage_or_invest_uk: '2026-11-15',
 }
 const routeByKey = Object.fromEntries(PUBLIC_ROUTES.map((r) => [r.key, r]))
 for (const [key, meta] of Object.entries(PAGE_META)) {
