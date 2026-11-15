@@ -30,6 +30,7 @@ const savedBy = (rate) => {
   }
 }
 
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`
 const grown = (rate, years = 10) => Math.round(SUM * Math.pow(1 + rate / 100, years))
 
 export default function OverpayMortgageOrInvestUK({ navigateTo, goTo }) {
@@ -83,7 +84,7 @@ export default function OverpayMortgageOrInvestUK({ navigateTo, goTo }) {
                 <tr key={rate}>
                   <td>{rate}%</td>
                   <td>{gbp(Math.round(s.interest / 100) * 100)}</td>
-                  <td>{s.years} years {s.months} months</td>
+                  <td>{plural(s.years, 'year')} {plural(s.months, 'month')}</td>
                   <td>{gbp(Math.round(s.paidIn / 100) * 100)}</td>
                 </tr>
               )
