@@ -110,7 +110,7 @@ test('figures added for the new guides carry a source and the right values', () 
   assert.equal(valueOn('income_tax.savings_rate_higher', '2027-05-01'), 44, 'Budget 2026 raised 42% to 44%')
   for (const key of ['income_tax.personal_savings_allowance_basic', 'income_tax.savings_rate_basic', 'fscs.deposit_protection_limit']) {
     const row = FIGURES.find((f) => f.key === key)
-    assert.ok(row.sourceUrl.startsWith('https://www.gov.uk/') || row.sourceUrl.startsWith('https://www.bankofengland.co.uk/'))
+    assert.ok(row.sourceUrl.startsWith('https://www.gov.uk/') || row.sourceUrl.startsWith('https://www.bankofengland.co.uk/') || row.sourceUrl.startsWith('https://www.fscs.org.uk/'))
     assert.equal(row.verification, 'source_page_read')
   }
 })

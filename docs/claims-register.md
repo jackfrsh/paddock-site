@@ -88,7 +88,8 @@ after that person has agreed to keep the claim true.
 | Savings income tax rates of 24% (basic) and 44% (higher) from April 2027, described as planned | GOV.UK "Income Tax: changes to tax rates for property and savings income" (Budget 2026). Not yet law; Finance Bill 2026-27. Phase 2 had 22% and 42% from the Budget 2025 note. | Site owner | 2026-11-07 | Corrected |
 | Cash ISA allowance stays £20,000 from April 2027; the £12,000 under-65 cap is dropped | HMRC tax-free savings newsletter 24, read 2026-11-07 | Site owner | 2026-11-07 | Verified (primary source) |
 | Lifetime ISA charge 25%, or 20% for first-home purchases above £450,000 on or after 29 October 2026 | GOV.UK / HMRC, read 2026-11-07 | Site owner | 2026-11-07 | Verified (primary source) |
-| FSCS deposit protection £120,000 from 1 December 2025 | Bank of England. Not re-read in Phase 3. | Site owner | 2026-11-07 (Phase 2) | Verified in Phase 2 |
+| FSCS deposit protection £120,000 from 1 December 2025 | FSCS deposit-limit page; limit is per eligible person, per authorised firm. Re-read 15 November 2026. | Site owner | 2026-11-15 | Verified (primary source) |
+| Premium Bonds: £25 minimum, £50,000 maximum holding per person | NS&I Premium Bonds page. Prize fund rate and odds are deliberately not stated on the site. Re-read 15 November 2026. | Site owner | 2026-11-15 | Verified (primary source) |
 | All other tax, pension, ISA and State Pension figures | `src/ukFigures.js`, 36 rows. Annex A of the Budget 2026 rates and allowances page was read on 2026-11-07 and agrees with the rows for 2027-28 listed in `docs/figures-review-2026-11.md`. | Site owner | 2026-11-07 | Verified; 35 rows have no named reviewer |
 
 ## 2. Findings that need an owner decision or an engineering change

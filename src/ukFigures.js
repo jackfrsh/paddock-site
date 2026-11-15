@@ -224,6 +224,7 @@ export const FIGURES = [
     sourceUrl: NSI_PB,
     effectiveFrom: '2026-04-06',
     status: 'in_force',
+    lastChecked: '2026-11-15',
     notes: 'Prize fund rates and odds are deliberately not stored: they change without notice. Link to NS&I instead.',
   }),
   entry({
@@ -235,6 +236,7 @@ export const FIGURES = [
     sourceUrl: NSI_PB,
     effectiveFrom: '2026-04-06',
     status: 'in_force',
+    lastChecked: '2026-11-15',
   }),
 
   // ── Pensions ────────────────────────────────────────────────────────────
@@ -492,12 +494,12 @@ export const FIGURES = [
     name: 'FSCS deposit protection limit (per person, per authorised firm)',
     value: 120000,
     unit: 'GBP',
-    sourceName: 'Bank of England (What is the FSCS?)',
-    sourceUrl: BOE_FSCS,
+    sourceName: 'FSCS (Deposit protection limit)',
+    sourceUrl: 'https://www.fscs.org.uk/what-we-cover/banks-building-societies-credit-unions/deposit-limit/',
     effectiveFrom: '2025-12-01',
     status: 'in_force',
-    lastChecked: '2026-11-07',
-    notes: 'Covers cash ISAs. Applies to firms that fail from 1 December 2025 (earlier failures keep the old limit). The separate investment protection limit is deliberately not held here: only secondary sources were read.',
+    lastChecked: '2026-11-15',
+    notes: 'Covers cash ISAs. Re-read on the FSCS site on 15 November 2026 (Bank of England explainer was the earlier source). Applies to firms that fail from 1 December 2025 (earlier failures keep the old limit). The separate investment protection limit is deliberately not held here: only secondary sources were read.',
   }),
   // ── 2027-28 rows read from primary sources on 2026-11-07 ───────────────────
   // Added so pages that read these keys keep working on 6 April 2027. Values that
