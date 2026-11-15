@@ -30,6 +30,7 @@ const NEW_GUIDES = [
   { key: 'guide_end_of_tax_year_checklist_uk', path: '/guides/end-of-tax-year-checklist-uk', file: 'guides/EndOfTaxYearChecklistUK.jsx' },
   { key: 'guide_net_worth_vs_investable_wealth', path: '/guides/net-worth-vs-investable-wealth', file: 'guides/NetWorthVsInvestableWealth.jsx' },
   { key: 'guide_monthly_investment_retire_early_uk', path: '/guides/monthly-investment-to-retire-early-uk', file: 'guides/MonthlyInvestmentToRetireEarlyUK.jsx' },
+  { key: 'guide_overpay_mortgage_or_invest_uk', path: '/guides/overpay-mortgage-or-invest-uk', file: 'guides/OverpayMortgageOrInvestUK.jsx' },
 ]
 
 console.log('▶ src/evidenceGuides.test.js')
@@ -110,7 +111,7 @@ test('figures added for the new guides carry a source and the right values', () 
   assert.equal(valueOn('income_tax.savings_rate_higher', '2027-05-01'), 44, 'Budget 2026 raised 42% to 44%')
   for (const key of ['income_tax.personal_savings_allowance_basic', 'income_tax.savings_rate_basic', 'fscs.deposit_protection_limit']) {
     const row = FIGURES.find((f) => f.key === key)
-    assert.ok(row.sourceUrl.startsWith('https://www.gov.uk/') || row.sourceUrl.startsWith('https://www.bankofengland.co.uk/'))
+    assert.ok(row.sourceUrl.startsWith('https://www.gov.uk/') || row.sourceUrl.startsWith('https://www.bankofengland.co.uk/') || row.sourceUrl.startsWith('https://www.fscs.org.uk/'))
     assert.equal(row.verification, 'source_page_read')
   }
 })

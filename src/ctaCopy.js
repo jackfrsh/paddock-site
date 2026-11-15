@@ -50,6 +50,11 @@ export const RESULT_CTA = Object.freeze({
     body: 'Add your real ISA, pension and savings balances to Paddock and see how they are progressing towards the amount this estimate suggests you may need before pension income starts.',
     button: 'Track my accessible savings',
   },
+  mortgage_overpayment: {
+    headline: 'Watch your mortgage fall next to your savings.',
+    body: 'Record your mortgage balance in Paddock alongside your ISAs, pensions and savings, and see your net worth change as you pay it down. You enter the numbers yourself; there is no bank login.',
+    button: 'Track my mortgage and savings',
+  },
 })
 
 export const DEFAULT_RESULT_CTA = Object.freeze({

@@ -112,6 +112,19 @@ export const PUBLIC_ROUTES = [
     links: ['/tools/phased-drawdown-calculator', '/tools/pension-drawdown-calculator', '/tools/fire-number-calculator', '/track-isas-pensions-savings'],
   },
   {
+    key: 'tools_mortgage_overpayment',
+    path: '/tools/mortgage-overpayment-calculator',
+    lastmod: '2026-11-15',
+    targetKeyword: 'mortgage overpayment calculator UK',
+    secondaryKeywords: ['overpay mortgage calculator', 'how much interest will I save overpaying my mortgage', 'mortgage lump sum overpayment calculator'],
+    intent: 'Estimate the interest and time saved by overpaying a repayment mortgage',
+    h1: 'Mortgage overpayment calculator UK',
+    intro:
+      'Estimate the interest and time saved by overpaying a repayment mortgage monthly or with a lump sum, with a check against your lender\'s yearly overpayment limit.',
+    links: ['/guides/overpay-mortgage-or-invest-uk', '/tools/net-worth-calculator', '/guides/net-worth-vs-investable-wealth', '/tools'],
+    priority: true,
+  },
+  {
     key: 'tools_fire_number',
     path: '/tools/fire-number-calculator',
     lastmod: '2026-11-06',
@@ -251,6 +264,19 @@ export const PUBLIC_ROUTES = [
     intro:
       'A worked method and tables for the monthly saving that could reach a retirement pot by 55, 60 or 65, with the assumptions and gaps stated.',
     links: ['/guides/how-much-do-i-need-to-retire-uk', '/tools/retirement-bridge-calculator', '/tools/retirement-age-calculator', '/guides/lifetime-isa-rules-uk', '/tools/net-worth-calculator', '/tools/fire-number-calculator', '/guides/net-worth-vs-investable-wealth', '/guides'],
+    priority: true,
+  },
+  {
+    key: 'guide_overpay_mortgage_or_invest_uk',
+    path: '/guides/overpay-mortgage-or-invest-uk',
+    lastmod: '2026-11-15',
+    targetKeyword: 'should I overpay my mortgage or invest UK',
+    secondaryKeywords: ['overpay mortgage vs invest', 'overpay mortgage or save', 'is it better to overpay mortgage or invest in an ISA'],
+    intent: 'Understand how to compare overpaying a mortgage with investing or saving',
+    h1: 'Should you overpay your mortgage or invest? A UK guide',
+    intro:
+      'How to compare overpaying a mortgage with investing or saving: the rate-against-rate test, the limits and charges that change the answer, and what the numbers leave out.',
+    links: ['/tools/mortgage-overpayment-calculator', '/tools/net-worth-calculator', '/guides/net-worth-vs-investable-wealth', '/guides/isa-allowance-uk', '/guides'],
     priority: true,
   },
   {

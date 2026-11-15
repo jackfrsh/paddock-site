@@ -122,7 +122,7 @@ export default function NetWorthVsInvestableWealth({ navigateTo, goTo }) {
       <H2>Common mistakes</H2>
       <UL>
         <li><strong>Counting the home as a retirement fund.</strong> It only becomes spendable if you sell or borrow against it.</li>
-        <li><strong>Forgetting debts.</strong> Credit cards, loans and student loans belong in net worth. A mortgage belongs there too.</li>
+        <li><strong>Forgetting debts.</strong> Credit cards, loans and student loans belong in net worth. A mortgage belongs there too, and paying it down raises your net worth; see <a {...inlineLink(navigateTo, '/guides/overpay-mortgage-or-invest-uk')}>should you overpay your mortgage or invest?</a> for how to weigh that against investing.</li>
         <li><strong>Mixing the two without saying.</strong> A figure of &quot;£250,000&quot; means very different things depending on what is inside it.</li>
         <li><strong>Treating valuations as certain.</strong> A home value is an estimate, and a car loses value. Update them on a schedule rather than daily.</li>
       </UL>

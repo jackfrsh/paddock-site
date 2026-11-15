@@ -58,6 +58,10 @@ export default function GuideIndex({ navigateTo }) {
           End of the tax year checklist →
         </GuideLink>
 
+        <GuideLink to="/guides/overpay-mortgage-or-invest-uk" navigateTo={navigateTo}>
+          Should you overpay your mortgage or invest? →
+        </GuideLink>
+
         <GuideLink to="/guides/multi-currency-net-worth-tracker" navigateTo={navigateTo}>
           Multi-currency net worth tracker guide →
         </GuideLink>

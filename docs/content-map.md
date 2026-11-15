@@ -23,6 +23,7 @@ worked example that the code computes. Everything else gets a link from an exist
 | Track wealth without a bank connection | `/net-worth-tracker`, `/why-i-track-wealth-manually-instead-of-using-open-banking-apps` | Existing. Not duplicated. |
 | Progress to financial independence | `/tools/fire-number-calculator`, `/tools/retirement-age-calculator` | Existing calculators, now linked from the new guides. |
 | Pension pot at 40 / 45 / 50 / 55 | none | **Not built.** See below. |
+| Overpay a mortgage or invest (Phase 3, 15 November 2026) | `/tools/mortgage-overpayment-calculator`, `/guides/overpay-mortgage-or-invest-uk` | **New**. The calculator is `src/tools/mortgageCalc.js`, tested against MoneyHelper's published examples. The guide neither recommends overpaying nor investing; it explains the rate-against-rate test and what changes it. |
 
 ### Priority B: ISAs and the tax year
 
@@ -63,6 +64,7 @@ worked example that the code computes. Everything else gets a link from an exist
 | `/guides/isa-allowance-uk` vs `/track-isas-pensions-savings` | The guide answers "how much can I pay in". The tracking page answers "how do I keep a view of all my accounts". They link to each other. |
 | `/guides/net-worth-vs-investable-wealth` vs `/how-to-track-your-net-worth` | Definition and when to use which number vs a routine for recording it. Cross-linked. |
 | `/guides/monthly-investment-to-retire-early-uk` vs `/guides/how-much-do-i-need-to-retire-uk` | Pot size vs monthly saving to reach it. The earlier guide links to the new one as the next step. |
+| `/tools/mortgage-overpayment-calculator` vs `/guides/overpay-mortgage-or-invest-uk` | The tool answers "how much would I save". The guide answers "how do I compare that with investing". They target different phrases and link to each other. |
 
 `src/evidenceGuides.test.js` fails if two public pages share a target keyword.
 

@@ -44,6 +44,7 @@ const ROUTE_COMPONENTS = {
   guide_end_of_tax_year_checklist_uk: lazy(() => import('./guides/EndOfTaxYearChecklistUK')),
   guide_net_worth_vs_investable_wealth: lazy(() => import('./guides/NetWorthVsInvestableWealth')),
   guide_monthly_investment_retire_early_uk: lazy(() => import('./guides/MonthlyInvestmentToRetireEarlyUK')),
+  guide_overpay_mortgage_or_invest_uk: lazy(() => import('./guides/OverpayMortgageOrInvestUK')),
   paddock_pro: lazy(() => import('./pages/PaddockPro')),
   privacy: lazy(() => import('./pages/Privacy')),
   security: lazy(() => import('./pages/Security')),
@@ -63,6 +64,7 @@ const ROUTE_COMPONENTS = {
   tools_isa_growth: lazy(() => import('./tools/IsaGrowthCalculator')),
   tools_retirement_age: lazy(() => import('./tools/RetirementAgeCalculator')),
   tools_net_worth: lazy(() => import('./tools/NetWorthCalculator')),
+  tools_mortgage_overpayment: lazy(() => import('./tools/MortgageOverpaymentCalculator')),
   tools_hub: lazy(() => import('./pages/ToolsHub')),
 }
 
